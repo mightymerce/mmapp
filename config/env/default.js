@@ -7,7 +7,7 @@ module.exports = {
     keywords: 'mongodb, express, angularjs, node.js, mongoose, passport',
     googleAnalyticsTrackingID: process.env.googleAnalyticsTrackingID || 'GOOGLE_ANALYTICS_TRACKING_ID'
   },
-  port: process.env.PORT || 3001,
+  port: process.env.PORT || 3000,
   templateEngine: 'swig',
   // Session Cookie settings
   sessionCookie: {
