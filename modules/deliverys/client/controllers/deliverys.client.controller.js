@@ -80,7 +80,7 @@ angular.module('deliverys').controller('DeliverysController', ['$scope', '$state
     // Find a list of Deliverys
     $scope.find = function () {
       $scope.deliverys = Deliverys.query(
-      { user:$scope.authentication.user._id }
+      { 'user': $scope.authentication.user._id }
       );
     };
 

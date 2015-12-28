@@ -46,7 +46,7 @@
                 <tbody>
                 <tr>
                   <td><span>Privacy Policy</span></td>
-                  <td><span data-ng-bind="legal.legalPrivacyPolicy"></span></td>
+                  <td><span data-ng-bind="legalPrivacyPolicy"></span></td>
                   <td class="text-right">
                     <div class="btn-group">
                       <a class="btn-warning btn-xs" ui-sref="legals.edit({legalId: legal._id})">
@@ -93,7 +93,7 @@
                   <td><span data-ng-bind="legal.legalCopyright"></span></td>
                   <td class="text-right">
                     <div class="btn-group">
-                      <a class="btn-warning btn-xs" ui-sref="legals.edit({legalId: legal._id})">
+                      <a class="btn-warning btn-xs" ui-sref="legals.edit({legalId: _id})">
                         <i class="fa fa-cogs"></i> Edit
                       </a>
                     </div>

@@ -63,12 +63,11 @@ angular.module('legals').controller('LegalsController', ['$scope', '$stateParams
 
       var legal = $scope.legal;
 
-      legal.legalTitle = $scope.legal.legalTitle;
-      legal.legalTime = $scope.legal.legalTime;
-      legal.legalCountry = $scope.legal.legalCountry;
-      legal.legalCost = $scope.legal.legalCost;
-
-      console.log('legal.client.controller - update - scope deliver object: ' +$scope.legal.legalTitle);
+      legal.legalPrivacyPolicy = $scope.legal.legalPrivacyPolicy;
+      legal.legalReturnPolicy = $scope.legal.legalReturnPolicy;
+      legal.legalTermsandConditions = $scope.legal.legalTermsandConditions;
+      legal.legalImprint = $scope.legal.legalImprint;
+      legal.legalCopyright = $scope.legal.legalCopyright;
 
       legal.$update(function () {
         $scope.success = 'You successfully updated your legal option.';
@@ -79,9 +78,12 @@ angular.module('legals').controller('LegalsController', ['$scope', '$stateParams
 
     // Find a list of Legals
     $scope.find = function () {
-      $scope.legals = Legals.query(
-      { user:$scope.authentication.user._id }
+      console.log('legals.client.controller - find - user id: ' +$scope.authentication.user._id);
+      $scope.legal = Legals.query({
+        'user': $scope.authentication.user._id
+      }
       );
+      console.log('legals.client.controller - find - legal: ' +$scope.legal);
     };
 
     // Find existing Legal

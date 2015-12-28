@@ -49,7 +49,7 @@
               <tbody data-ng-repeat="product in products">
               <tr>
                 <td><img ng-src="{{product.productMainImageURL}}" class="header-profile-image"></td>
-                <td><span data-ng-bind="product.productId"></span></td>
+                <td><span ng-bind="product.productId"></span></td>
                 <td><span ng-bind="product.productTitle"></span></td>
                 <td class="text-right">
                   <div>
@@ -61,6 +61,11 @@
               </tr>
               </tbody>
             </table>
+            <div class="alert alert-danger text-center" ng-if="products.$resolved && !products.length">
+              You have no produtcs entered. Before you post your first product create it here!<a class="btn-white btn-xs" ui-sref="products.create">
+              <i class="fa fa-cloud-upload"></i> Create post
+            </a>
+            </div>
           </div>
         </div>
       </div>

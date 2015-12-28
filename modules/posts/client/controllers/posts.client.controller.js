@@ -90,8 +90,7 @@ angular.module('posts').controller('PostsController', ['$scope', '$state', '$sta
       }
       else {
         console.log('posts.client.controller - find - authenticated user: ' +$scope.authentication.user._id);
-        $scope.posts = Posts.query({ user: $scope.authentication.user._id });
-
+        $scope.posts = Posts.query({ 'user': $scope.authentication.user._id });
       }
     };
 

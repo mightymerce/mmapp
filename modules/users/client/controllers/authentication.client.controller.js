@@ -26,6 +26,12 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
         // If successful we assign the response to the global user model
         $scope.authentication.user = response;
 
+        // Create empty legal object
+        $http.post('/api/legals', $scope.credentials).success(function (response) {
+        }).error(function (response) {
+          $scope.error = response.message;
+        });
+
         // And redirect to the previous or home page
         $state.go($state.previous.state.name || 'home', $state.previous.params);
 

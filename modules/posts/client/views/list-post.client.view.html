@@ -47,6 +47,9 @@
                     </tr>
                   </tbody>
                 </table>
+                <div class="alert alert-danger text-center" ng-if="posts.$resolved && !posts.length">
+                  You have no posts yet. Create your first product post!
+                </div>
                 <button type="button" class="btn btn-w-m btn-warning" ui-sref="posts.create">Add a post  <i class="fa fa-angle-double-right"></i></button>
               </div>
             </div>

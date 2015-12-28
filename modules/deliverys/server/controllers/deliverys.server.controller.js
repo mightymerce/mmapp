@@ -79,7 +79,7 @@ exports.delete = function (req, res) {
  * List of Deliverys
  */
 exports.list = function (req, res) {
-  Delivery.find().sort('-created').populate('user', 'displayName').exec(function (err, deliverys) {
+  Delivery.find(({ user: { $eq: req.query.user } })).sort('-created').populate('user', 'displayName').exec(function (err, deliverys) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

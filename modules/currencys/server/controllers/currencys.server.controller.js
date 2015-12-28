@@ -74,7 +74,7 @@ exports.delete = function (req, res) {
  * List of Currencys
  */
 exports.list = function (req, res) {
-  Currency.find().sort('-created').populate('user', 'displayName').exec(function (err, currencys) {
+  Currency.find(({ user: { $eq: req.query.user } })).sort('-created').populate('user', 'displayName').exec(function (err, currencys) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

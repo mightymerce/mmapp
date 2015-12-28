@@ -12,7 +12,10 @@ angular.module('legals').config(['$stateProvider',
       })
       .state('legals.list', {
         url: '',
-        templateUrl: 'modules/legals/client/views/list-legals.client.view.html'
+        templateUrl: 'modules/legals/client/views/list-legals.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
       })
       .state('legals.create', {
         url: '/create',
@@ -23,7 +26,10 @@ angular.module('legals').config(['$stateProvider',
       })
       .state('legals.view', {
         url: '/:legalId',
-        templateUrl: 'modules/legals/client/views/view-legal.client.view.html'
+        templateUrl: 'modules/legals/client/views/view-legal.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
       })
       .state('legals.edit', {
         url: '/:legalId/edit',

@@ -72,7 +72,7 @@ angular.module('currencys').controller('CurrencysController', ['$scope', '$state
     // Find a list of Currencys
     $scope.find = function () {
       $scope.currencys = Currencys.query({
-        'user._id': $scope.authentication.user._id
+        'user': $scope.authentication.user._id
       });
     };
 

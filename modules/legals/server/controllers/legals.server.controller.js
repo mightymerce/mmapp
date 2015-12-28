@@ -42,10 +42,11 @@ exports.update = function (req, res) {
 
   var legal = req.legal;
 
-  legal.legalTitle = req.body.legalTitle;
-  legal.legalTime = req.body.legalTime;
-  legal.legalCountry = req.body.legalCountry;
-  legal.legalCost = req.body.legalCost;
+  legal.legalPrivacyPolicy = req.body.legalPrivacyPolicy;
+  legal.legalReturnPolicy = req.body.legalReturnPolicy;
+  legal.legalTermsandConditions = req.body.legalTermsandConditions;
+  legal.legalImprint = req.body.legalImprint;
+  legal.legalCopyright = req.body.legalCopyright;
 
   legal.save(function (err) {
     if (err) {
@@ -79,7 +80,7 @@ exports.delete = function (req, res) {
  * List of Legals
  */
 exports.list = function (req, res) {
-  Legal.find().sort('-created').populate('user', 'displayName').exec(function (err, legals) {
+  Legal.find(({ user: { $eq: req.query.user } })).sort('-created').populate('user', 'displayName').exec(function (err, legals) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
