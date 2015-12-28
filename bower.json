@@ -1,7 +1,7 @@
 {
   "name": "meanjs",
-  "description": "Fullstack JavaScript with MongoDB, Express, AngularJS, and Node.js.",
-  "homepage": "http://meanjs.org/",
+  "description": "convert followers into customers.",
+  "homepage": "http://www.mightymerce.com/",
   "license": "MIT",
   "dependencies": {
     "bootstrap": "~3.3.6",
