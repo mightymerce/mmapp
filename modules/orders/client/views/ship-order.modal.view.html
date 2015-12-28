@@ -1,0 +1,32 @@
+<section data-ng-controller="OrdersController">
+  <div class="inmodal">
+    <div>
+      <div class="modal-content">
+        <form name="orderUpdateForm" class="form-horizontal" ng-submit="update(orderUpdateForm.$valid)" novalidate>
+          <div class="modal-header">
+            <button type="button" class="close" ng-click="$dismiss()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <i class="fa fa-cogs modal-icon"></i>
+            <h4 class="modal-title">Ship order</h4>
+          </div>
+          <div class="modal-body-white">
+            <p>Tracking ID or Link (optional) </p>
+            <input ng-model="orderTrackingNo" id="orderTrackingNo" class="form-control" placeholder="">
+          </div>
+          <div class="modal-body-white">
+            <p>Add an individual message for the customer (optional) </p>
+            <textarea rows="3" ng-model="ordereMailCustomerShipMessage" id="ordereMailCustomerShipMessage" class="form-control" placeholder=""></textarea>
+            <br>
+          </div>
+          <div class="modal-body">
+            <span>Please note: By shipping the order, your customer will automatically receive a standard shipping confirmation.</span>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-white" ng-click="$dismiss()">Cancel</button>
+            <button type="submit" class="btn btn-primary">Yes, ship order</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+

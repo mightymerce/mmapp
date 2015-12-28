@@ -1,0 +1,20 @@
+<section ng-controller="CheckoutsController" ng-init="find()">
+  <div class="page-header">
+    <h1>Checkouts</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="checkout in checkouts" ui-sref="checkouts.view({checkoutId: checkout._id})" class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="checkout.created | date:'mediumDate'"></span>
+        by
+        <span ng-bind="checkout.user.displayName"></span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="checkout.title"></h4>
+      <p class="list-group-item-text" ng-bind="checkout.content"></p>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="checkouts.$resolved && !checkouts.length">
+    No checkouts yet, why don't you <a ui-sref="checkouts.create">create one</a>?
+  </div>
+</section>

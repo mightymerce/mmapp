@@ -1,0 +1,15 @@
+---
+declared-services: 
+  mean-mongo: 
+    label: mongolab 
+    plan: sandbox 
+applications:
+- name: meanjsmm
+  host: meanjsmm
+  memory: 256M
+  instances: 1
+  domain: eu-gb.mybluemix.net
+  services:
+  - mean-mongo
+  env:
+    NODE_ENV: cloud-foundry

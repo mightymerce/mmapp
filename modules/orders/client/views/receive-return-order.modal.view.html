@@ -1,0 +1,28 @@
+<section data-ng-controller="OrdersController">
+  <div class="inmodal">
+    <div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" ng-click="$dismiss()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <i class="fa fa-exchange modal-icon"></i>
+          <h4 class="modal-title">Receive return</h4>
+        </div>
+        <div class="modal-body-white">
+          <p>Add an individual message for the customer (optional) </p>
+          <textarea rows="3" id="cancelOrderMessage" class="form-control" placeholder=""></textarea>
+          <br>
+        </div>
+        <div class="modal-body">
+          <span>Please note: Make sure to refund paid items manually upon receipt of a return. You will find the payment information on the detail page of this order.</span>
+          <br>
+          <span>By receiving the return, your customer will automatically receive a standard return confirmation </span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-white" ng-click="$dismiss()">Cancel</button>
+          <button type="button" class="btn btn-primary" ng-click="cancelOrder()">Yes, receive return</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

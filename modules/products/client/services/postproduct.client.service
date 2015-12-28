@@ -1,0 +1,47 @@
+'use strict';
+
+angular.module('products.post').factory('PostFacebookService', ['$q',
+    function ($q, Facebook){
+
+        return {
+            loginFacebook: function() {
+                Facebook.login(function(response){
+                    if (response.status === 'connected') {
+                        var token = response.authResponse.accessToken;
+                        console.log('AccessToken: ' +token);
+                        return response;
+                    }
+                },{ scope: 'publish_actions' });
+            },
+
+            postProcessFacebook: function(product) {
+                var deferred = $q.defer();
+
+            },
+
+            postToWall: function (product) {
+
+                var deferred = $q.defer();
+                var params = {};
+
+                params.message = 'Visit Mightymerce! - http://www.mightymerce.com' +product.productTitle;
+                params.name = 'Eureka!';
+                params.link = 'http://www.mightymerce.com';
+                params.picture = 'http://www.mightymerce.com/wp-content/uploads/2015/10/MM_Logo-1-e1444836423584.png';
+                params.description = 'The new way of social posting - coming soon.';
+
+                // Make post to facebook and wait for answer
+                Facebook.api('/me/feed', 'post', params, function(response)
+                {
+                    if (!response || response.error) {
+                        console.log('Error occured' +response.error.message);
+                        deferred.reject('Error occured');
+                    } else {
+                        console.log('Post ID: ' + response.id);
+                        deferred.resolve(response.id);
+                    }
+                });
+                return deferred.promise;
+            }
+        };
+    }]);

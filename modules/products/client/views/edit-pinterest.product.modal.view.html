@@ -1,0 +1,388 @@
+<section>
+<div class="inmodal" ng-controller="ProductsController">
+  <div>
+    <div class="modal-content">
+      <form name="postForm" class="form-horizontal" ng-submit="postPost(postForm.$valid)" novalidate>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" data-ng-click="ok()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title">Maintain data for Pinterest</h4>
+          <br>
+          <div>
+            <i class="fa fa-pinterest modal-icon"></i>
+          </div>
+        </div>
+        <div class="modal-body-white">
+          <div class="modal-body">
+            <span>Select related products</span>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                  <table class="table table-hover">
+                    <thead>
+                    <tr>
+                      <th data-toggle="true"></th>
+                      <th data-toggle="true">Image</th>
+                      <th data-toggle="true">Product number</th>
+                      <th data-hide="phone">Product title</th>
+                      <th class="text-right" data-sort-ignore="true"></th>
+                      <th class="text-right" data-sort-ignore="true"></th>
+                    </tr>
+                    </thead>
+                    <tbody data-ng-repeat="product in products">
+                    <tr>
+                      <td><input type="checkbox" checked class="i-checks" name="input[]"></td>
+                      <td><img ng-src=""></td>
+                      <td><span data-ng-bind="product.productId"></span></td>
+                      <td><span ng-bind="product.productTitle"></span></td>
+                      <td class="text-right">
+                        <div class="btn-group">
+                          <a class="btn-white btn-xs" ui-sref="products.edit({productId: product._id})">
+                            <i class="fa fa-cogs"></i> Edit product
+                          </a>
+                        </div>
+                      </td>
+                      <td class="text-right">
+                        <div>
+                          <a class="btn-white btn-xs" ui-sref="products.view({productId: product._id})">
+                            <i class="fa fa-cloud-upload"></i> Create post
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-body">
+            <span>Main Image</span>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="image-crop">
+                <img src="../../../../modules/products/client/img/photo_not_available.png">
+              </div>
+              <div class="btn-group">
+                <button class="btn btn-white" id="zoomIn" type="button">Zoom In</button>
+                <button class="btn btn-white" id="zoomOut" type="button">Zoom Out</button>
+                <button class="btn btn-white" id="rotateLeft" type="button">Rotate Left</button>
+                <button class="btn btn-white" id="rotateRight" type="button">Rotate Right</button>
+                <button class="btn btn-primary" id="setDrag" type="button">New crop</button>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div>
+                <h4>Preview image</h4>
+                <br>
+              </div>
+              <div class="img-preview img-preview-sm"></div>
+              <div class="form-group">
+                <br>
+                <div class="col-sm-2"><label class="control-label">Alt Text*</label></div>
+                <div class="col-sm-8"><input type="text" name="productMainImageAlt" ng-model="productMainImageAlt" id="productMainImageAlt" class="form-control" placeholder="" required></div>
+                <div ng-messages="productForm.productMainImageAlt.$error" role="alert">
+                  <p class="help-block error-text" ng-message="required">Alt Text is required</p>
+                </div>
+                <div class="col-sm-2">
+                  <div class="tooltip-demo">
+                    <button type="button" class="btn btn-default" tooltip-placement="top" tooltip="Give a brief description of the image. This is important as the text is displayed if the image may not be loaded is relevant to partially sighted visitors to get an idea of what is displayed will be considered by search engines">i</button>
+                  </div>
+                </div>
+              </div>
+              <div><br><br></div>
+              <p>
+                Please select your main product image by clicking on "Select Image". There will be the possibility to zoom and rotate image and finally crop image based on your favorite view.
+              </p>
+              <div class="form-group" ng-hide="uploader.queue.length">
+                <div class="col-sm-6">
+                  <label title="Upload image file" for="inputImage" class="btn btn-warning btn-file">
+                    Select Image <input type="file" accept="image/*" name="file" id="inputImage" class="hide" nv-file-select uploader="uploader">
+                  </label>
+                  <label title="Donload image" id="download" class="btn btn-default">Download</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-9">
+              <div><br><br></div>
+              <table class="table">
+                <thead>
+                <tr>
+                  <th width="50%">Name</th>
+                  <th ng-show="uploader.isHTML5">Size</th>
+                  <th ng-show="uploader.isHTML5">Progress</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in uploader.queue">
+                  <td>
+                    <strong>{{ item.file.name }}</strong>
+                    <!-- Image preview -->
+                    <!--auto height-->
+                    <!--<div ng-thumb="{ file: item.file, width: 100 }"></div>-->
+                    <!--auto width-->
+                    <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                    <!--fixed width and height -->
+                    <!--<div ng-thumb="{ file: item.file, width: 100, height: 100 }"></div>-->
+                  </td>
+                  <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                  <td ng-show="uploader.isHTML5">
+                    <div class="progress" style="margin-bottom: 0;">
+                      <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                    <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                    <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                  </td>
+                  <td nowrap>
+                    <button type="button" class="btn btn-success btn-xs" ng-click="uploadProductMainPicture(item)" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                      <span class="glyphicon glyphicon-upload"></span> Upload
+                    </button>
+                    <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                      <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                    </button>
+                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                      <span class="glyphicon glyphicon-trash"></span> Remove
+                    </button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+
+              <div ng-show="success" class="text-center text-success">
+                <strong>Main product image uploaded successfully.</strong>
+              </div>
+              <div ng-show="error" class="text-center text-danger">
+                <strong ng-bind="error"></strong>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <br><br><br>
+            </div>
+          </div>
+          <div class="modal-body">
+            <span>Further  images as maintained on the product level</span>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="image-crop">
+                <img src="../../../../modules/products/client/img/photo_not_available.png">
+              </div>
+              <div class="btn-group">
+                <button class="btn btn-white" id="zoomIn" type="button">Zoom In</button>
+                <button class="btn btn-white" id="zoomOut" type="button">Zoom Out</button>
+                <button class="btn btn-white" id="rotateLeft" type="button">Rotate Left</button>
+                <button class="btn btn-white" id="rotateRight" type="button">Rotate Right</button>
+                <button class="btn btn-primary" id="setDrag" type="button">New crop</button>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div>
+                <h4>Preview image</h4>
+                <br>
+              </div>
+              <div class="img-preview img-preview-sm"></div>
+              <div class="form-group">
+                <br>
+                <div class="col-sm-2"><label class="control-label">Alt Text*</label></div>
+                <div class="col-sm-8"><input type="text" name="productMainImageAlt" ng-model="productMainImageAlt" id="productMainImageAlt" class="form-control" placeholder="" required></div>
+                <div ng-messages="productForm.productMainImageAlt.$error" role="alert">
+                  <p class="help-block error-text" ng-message="required">Alt Text is required</p>
+                </div>
+                <div class="col-sm-2">
+                  <div class="tooltip-demo">
+                    <button type="button" class="btn btn-default" tooltip-placement="top" tooltip="Give a brief description of the image. This is important as the text is displayed if the image may not be loaded is relevant to partially sighted visitors to get an idea of what is displayed will be considered by search engines">i</button>
+                  </div>
+                </div>
+              </div>
+              <div><br><br></div>
+              <p>
+                Please select your main product image by clicking on "Select Image". There will be the possibility to zoom and rotate image and finally crop image based on your favorite view.
+              </p>
+              <div class="form-group" ng-hide="uploader.queue.length">
+                <div class="col-sm-6">
+                  <label title="Upload image file" for="inputImage" class="btn btn-warning btn-file">
+                    Select Image <input type="file" accept="image/*" name="file" id="inputImage" class="hide" nv-file-select uploader="uploader">
+                  </label>
+                  <label title="Donload image" id="download" class="btn btn-default">Download</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-9">
+              <div><br><br></div>
+              <table class="table">
+                <thead>
+                <tr>
+                  <th width="50%">Name</th>
+                  <th ng-show="uploader.isHTML5">Size</th>
+                  <th ng-show="uploader.isHTML5">Progress</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in uploader.queue">
+                  <td>
+                    <strong>{{ item.file.name }}</strong>
+                    <!-- Image preview -->
+                    <!--auto height-->
+                    <!--<div ng-thumb="{ file: item.file, width: 100 }"></div>-->
+                    <!--auto width-->
+                    <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                    <!--fixed width and height -->
+                    <!--<div ng-thumb="{ file: item.file, width: 100, height: 100 }"></div>-->
+                  </td>
+                  <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                  <td ng-show="uploader.isHTML5">
+                    <div class="progress" style="margin-bottom: 0;">
+                      <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                    <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                    <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                  </td>
+                  <td nowrap>
+                    <button type="button" class="btn btn-success btn-xs" ng-click="uploadProductMainPicture(item)" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                      <span class="glyphicon glyphicon-upload"></span> Upload
+                    </button>
+                    <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                      <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                    </button>
+                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                      <span class="glyphicon glyphicon-trash"></span> Remove
+                    </button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+
+              <div ng-show="success" class="text-center text-success">
+                <strong>Main product image uploaded successfully.</strong>
+              </div>
+              <div ng-show="error" class="text-center text-danger">
+                <strong ng-bind="error"></strong>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <br><br><br>
+            </div>
+          </div>
+          <div ng-show="error" class="alert alert-success">
+            <strong ng-bind="error"></strong>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div>
+            <div class="row">
+              <div class="col-sm-4" align="left">
+                <button type="button" class="btn btn-white" data-dismiss="modal" data-ng-click="ok()">Close</button>
+              </div>
+              <div class="col-sm-8">
+                <button type="button" class="btn btn-warning" data-ng-click="postPostPinterest">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</section>
+
+<script type="text/javascript">
+  (function(d){
+    var f = d.getElementsByTagName('SCRIPT')[0], p = d.createElement('SCRIPT');
+    p.type = 'text/javascript';
+    p.async = true;
+    p.src = '//assets.pinterest.com/js/pinit.js';
+    f.parentNode.insertBefore(p, f);
+  }(document));
+
+  $(document).ready(function(){
+
+    var $image = $(".image-crop > img")
+    $($image).cropper({
+      aspectRatio: 1.618,
+      preview: ".img-preview",
+      done: function(data) {
+        // Output the result data for cropping image.
+      }
+    });
+
+    var $inputImage = $("#inputImage");
+    if (window.FileReader) {
+      $inputImage.change(function() {
+        var fileReader = new FileReader(),
+          files = this.files,
+          file;
+
+        if (!files.length) {
+          return;
+        }
+
+        file = files[0];
+
+        if (/^image\/\w+$/.test(file.type)) {
+          fileReader.readAsDataURL(file);
+          fileReader.onload = function () {
+            $inputImage.val("");
+            $image.cropper("reset", true).cropper("replace", this.result);
+          };
+        } else {
+          showMessage("Please choose an image file.");
+        }
+      });
+    } else {
+      $inputImage.addClass("hide");
+    }
+
+    $("#download").click(function() {
+      window.open($image.cropper("getDataURL"));
+    });
+
+    $("#zoomIn").click(function() {
+      $image.cropper("zoom", 0.1);
+    });
+
+    $("#zoomOut").click(function() {
+      $image.cropper("zoom", -0.1);
+    });
+
+    $("#rotateLeft").click(function() {
+      $image.cropper("rotate", 45);
+    });
+
+    $("#rotateRight").click(function() {
+      $image.cropper("rotate", -45);
+    });
+
+    $("#setDrag").click(function() {
+      $image.cropper("setDragMode", "crop");
+    });
+
+  });
+
+</script>
+

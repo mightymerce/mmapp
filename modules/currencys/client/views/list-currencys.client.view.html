@@ -1,0 +1,85 @@
+<section ng-controller="CurrencysController" ng-init="find()">
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+      <h2>Shop Settings</h2>
+      <ol class="breadcrumb">
+        <li>
+          <a href="index.html">Home</a>
+        </li>
+        <li>
+          <strong>Settings</strong>
+        </li>
+        <li class="active">
+          <strong>Currency</strong>
+        </li>
+      </ol>
+    </div>
+    <div class="col-lg-2"></div>
+  </div>
+
+  <form name="currencyForm" class="form-horizontal" ng-submit="updateCurrencyDetails(currencyForm.$valid)">
+
+    <div class="row">
+      <div class="wrapper wrapper-content">
+        <div class="col-lg-12">
+          <div ng-show="error" class="alert alert-danger">
+            <p ng-bind="error"></p>
+          </div>
+          <div ng-show="success" class="alert alert-success">
+            <p ng-bind="success"></p>
+          </div>
+          <div class="ibox float-e-margins">
+            <div class="ibox-title">
+              <h5>Currency rows</h5>
+              <div class="ibox-tools"></div>
+            </div>
+            <div class="ibox-content">
+              <div>
+                <p class="">NOTE: You will be able to add more currencies soon. At that point of time only EUR is available.
+                </p>
+              </div>
+              <table class="table table-hover">
+                <thead>
+                <tr>
+                  <th data-toggle="true">Code</th>
+                  <th data-toggle="true">Value</th>
+                </tr>
+                </thead>
+                <tbody data-ng-repeat="currency in currencys">
+                <tr>
+                  <td><span data-ng-bind="currency.currencyCode"></span></td>
+                  <td><span data-ng-bind="currency.currencyValue"></span></td>
+                </tr>
+                </tbody>
+              </table>
+              <div class="alert alert-warning text-center" ng-if="currencys.$resolved && !currencys.length">
+                No currency yet, why don't you <a ui-sref="currencys.create">create one</a>?
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="wrapper wrapper-content animated fadeInRight ecommerce">
+        <div class="col-lg-12">
+          <div class="ibox float-e-margins">
+            <div class="col-sm-8">
+            </div>
+            <div class="col-sm-3">
+
+            </div>
+            <div class="col-sm-1">
+            </div>
+            <div ng-show="error" class="text-danger">
+              <strong ng-bind="error"></strong>
+            </div>
+          </div>
+        </div>
+        <br>
+      </div>
+    </div>
+
+  </form>
+</section>

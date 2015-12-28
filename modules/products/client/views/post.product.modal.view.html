@@ -1,0 +1,122 @@
+<section>
+<div class="inmodal" ng-controller="ProductsController">
+  <div>
+    <div class="modal-content">
+      <form name="postForm" class="form-horizontal" ng-submit="postPost(postForm.$valid)" novalidate>
+        <div class="modal-header">
+          <button type="button" class="close" ng-click="$dismiss()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title">Your post to</h4>
+          <div ng-show="varPostChannel === 'Facebook'">
+            <i class="fa fa-facebook modal-icon"></i>
+          </div>
+          <div ng-show="varPostChannel === 'Pinterest'">
+            <i class="fa fa-pinterest modal-icon"></i>
+          </div>
+          <div ng-show="varPostChannel === 'Etsy'">
+            <i class="">Etsy</i>
+          </div>
+        </div>
+        <div ng-show="varPostStatus === 'Active'">
+          <div class="modal-body-green">
+            <p><strong><span>Status post: </span></strong><span ng-bind="varPostStatus"></span></p>
+            <p><strong><span>Posted on: </span></strong><span ng-bind="varPostPublicationDate"></span></p>
+          </div>
+        </div>
+        <div ng-show="varPostStatus === 'Wait'">
+          <div class="modal-body-yellow">
+            <p><strong><span>Status post: </span></strong><span ng-bind="varPostStatus"></span></p>
+            <p><strong><span>Posted on: </span></strong><span ng-bind="varPostPublicationDate"></span></p>
+          </div>
+        </div>
+        <div ng-show="varPostStatus === 'Error'">
+          <div class="modal-body-red">
+            <p><strong><span>Status post: </span></strong><span ng-bind="varPostStatus"></span></p>
+            <p><strong><span>Posted on: </span></strong><span ng-bind="varPostPublicationDate"></span></p>
+          </div>
+        </div>
+        <div class="modal-body-white">
+          <p><strong><span ng-bind="product.productTitle"></span></strong> </p>
+          <p><span ng-bind="product.productId"></span></p>
+          <img ng-src="{{product.productMainImageURL}}" class="product-images-list">
+        </div>
+        <div class="modal-body">
+          <div ng-show="varPostChannel === 'Facebook' && varPostStatus === 'Wait'">
+            <span>Please note: There is currently no update functionality available for Facebook posts.</span>
+          </div>
+          <div ng-show="varPostChannel === 'Facebook' && varPostStatus === 'Error'">
+            <span>Your access token has expired. Please log in to your account and try again to post your product.</span>
+          </div>
+          <div ng-show="varPostChannel === 'Facebook' && varPostStatus === 'Active'">
+            <span>Please note: There is currently no update functionality available for Facebook posts.</span>
+          </div>
+          <div ng-show="varPostChannel === 'Facebook' && varPostStatus === 'New'">
+            <span>Please note: Posts to Facebook may not be updated after the post.</span>
+          </div>
+          <div ng-show="varPostChannel === 'Pinterest'  && varPostStatus === 'Wait'">
+            <span>Please note: TBD.</span>
+          </div>
+          <div ng-show="varPostChannel === 'Pinterest'  && varPostStatus === 'Error'">
+            <span>TBD</span>
+          </div>
+          <div ng-show="varPostChannel === 'Pinterest'  && varPostStatus === 'Active'">
+            <span>Please note: The post will automatically be updated, if you edit the product after the post. You may cancel a post, which removes the product from the channel.</span>
+          </div>
+          <div ng-show="varPostChannel === 'Pinterest'  && varPostStatus === 'New'">
+            <span>Please note: The post will automatically be updated, if you edit the product after the post.</span>
+          </div>
+          <div ng-show="varPostChannel === 'Etsy' && varPostStatus === 'Wait'">
+            <span>Please note: TBD.</span>
+          </div>
+          <div ng-show="varPostChannel === 'Etsy' && varPostStatus === 'Error'">
+            <span>TBD</span>
+          </div>
+          <div ng-show="varPostChannel === 'Etsy'  && varPostStatus === 'Active'">
+            <span>Please note: The post will automatically be updated, if you edit the product after the post. You may cancel a post, which removes the product from the channel.</span>
+          </div>
+          <div ng-show="varPostChannel === 'Etsy'  && varPostStatus === 'New'">
+            <span>Please note: The post will automatically be updated, if you edit the product after the post.</span>
+          </div>
+          <br>
+          <div ng-show="error" class="alert alert-success">
+            <strong ng-bind="error"></strong>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div ng-show="varPostStatus === 'Error'">
+            <button type="button" class="btn btn-white" ng-click="$dismiss()">Close</button>
+            <button type="submit" class="btn btn-warning">Try post again</button>
+          </div>
+          <div ng-show="varPostStatus === 'Wait' || varPostStatus === 'Active'">
+            <button type="button" class="btn btn-white" ng-click="$dismiss()">Close</button>
+            <button type="submit" class="btn btn-warning">Try post again</button>
+          </div>
+          <div ng-show="varPostChannel === 'Facebook' && varPostStatus === 'New'">
+            <button type="button" class="btn btn-white" ng-click="$dismiss()">Close</button>
+            <button type="submit" class="btn btn-warning">Post Product to Facebook</button>
+          </div>
+          <div ng-show="varPostChannel === 'Pinterest' && varPostStatus === 'New'">
+            <button type="button" class="btn btn-white" ng-click="$dismiss()">Close</button>
+            <button type="button" class="btn btn-warning" data-ng-click="postPostPinterest">Post Product to Pinterest</button>
+            <a data-pin-do="buttonPin" href="https://www.pinterest.com/pin/create/button/?url=http://localhost:3001/checkouts/{{ product._id }}&media={{ product.productMainImageURL }}&description={{ product.productDescription }}" data-pin-height="28"></a>
+          </div>
+          <div ng-show="varPostChannel === 'Etsy' && varPostStatus === 'New'">
+            <button type="button" class="btn btn-white" ng-click="$dismiss()">Close</button>
+            <button type="submit" class="btn btn-warning">Post Product to Etsy</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</section>
+
+<script type="text/javascript">
+  (function(d){
+    var f = d.getElementsByTagName('SCRIPT')[0], p = d.createElement('SCRIPT');
+    p.type = 'text/javascript';
+    p.async = true;
+    p.src = '//assets.pinterest.com/js/pinit.js';
+    f.parentNode.insertBefore(p, f);
+  }(document));
+</script>
+

@@ -1,0 +1,165 @@
+<section ng-controller="CheckoutsController" ng-init="loadSuccess()">
+<div class="app app-dock">
+
+  <!-- content -->
+  <div id="content" class="app-content m-l-none" role="main">
+    <div class="app-content-body ">
+
+      <!-- main -->
+      <div class="col">
+        <div class="wrapper-md">
+          <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+              <div class="panel b-a">
+
+                <div class="bg-light lter b-b wrapper-md wrapper-p5" id="belowpicture">
+                  <span class="text-muted step-headline">Summary</span>
+                </div>
+
+                <div class="panel-body wrapper-md">
+
+                  <div class="confirmation">
+                    <div class="col-lg-8 col-lg-offset-2">
+
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <div class="panel b-a text-center agreement">
+                            <p><strong>Thank you for your order {{PAYMENTREQUEST_0_INVNUM}}! A confirmation of your order will be sent to {{ordereMail}}</strong></p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                          <h3>Billing address</h3>
+                          <div class="review-billling-name"></div>
+                          <div class="review-billing-address"></div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 shipping-address" style="display:none">
+                          <h3>Shipping address</h3>
+                          <div class="review-shipping-name">{{paypal.PAYMENTREQUEST_0_SHIPTONAME}}</div>
+                          <div class="review-shipping-address">{{paypal.PAYMENTREQUEST_0_SHIPTOSTREET}}</div>
+                          <div class="review-shipping-address">{{paypal.PAYMENTREQUEST_0_SHIPTOZIP}}</div>
+                          <div class="review-shipping-address">{{paypal.PAYMENTREQUEST_0_SHIPTOCITY}}</div>
+                          <div class="review-shipping-address">{{paypal.PAYMENTREQUEST_0_SHIPTOSTATE}}</div>
+                          <div class="review-shipping-address">{{paypal.PAYMENTREQUEST_0_SHIPTOCOUNTRYNAME}}</div>
+                        </div>
+                      </div>
+                      <h3>Shipping option</h3>
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <div class="review-shipping-option"></div>
+                        </div>
+                      </div>
+
+                      <h3 class="js-headline topline">{{productTitle}}</h3>
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <p class="js-content">{{productDescription}}</p>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="table-responsive col-xs-12 m-t-md m-b-md">
+                          <table class="table b-light">
+                            <tbody>
+                            <tr>
+                              <td>Quantity</td>
+                              <td><span class="lbl-quantity">{{orderProductQuantity}}</span></td>
+                            </tr>
+                            <tr>
+                              <td>Price per item</td>
+                              <td><span class="lbl-priceperitem">{{PAYMENTREQUEST_0_ITEMAMT}} {{orderShipToCurrencyCode}}</span></td>
+                            </tr>
+                            <tr>
+                              <td>Subtotal</td>
+                              <td><span class="lbl-subtotal"></span></td>
+                            </tr>
+                            <tr>
+                              <td>Shipping (Standard)</td>
+                              <td><span class="lbl-shipping" data-value="4.9">{{PAYMENTREQUEST_0_SHIPPINGAMT}}</span></td>
+                            </tr>
+                            <tr class="total">
+                              <td>Total</td>
+                              <td><span class="lbl-total"></span>{{orderShipToTotalAmount}}</td>
+                            </tr>
+                            <tr class="small">
+                              <td>incl. VAT</td>
+                              <td><span class="lbl-vat"></span></td>
+                            </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /confirmation -->
+
+                </div>
+                <!-- / panel body -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- / main -->
+  </div>
+  <!-- / content -->
+
+  <!-- footer -->
+  <footer id="footer" class="app-footer m-l-none" role="footer">
+    <div class="wrapper-lg b-t bg-light text-center clearfix">
+      <p>&copy; <span ng-bind="displayName"></span><br/><p>
+      <a ng-href="{{merchantURL}}"><span ng-bind="merchantURLText"></span></a></p>
+
+      <div id="footer-nav" role="tablist" aria-multiselectable="true">
+        <ul class="navbar-nav nav">
+          <li><a role="button" data-toggle="collapse" href="#accordion-footer-imprint" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-imprint">Imprint</a></li>
+          <li><a role="button" data-toggle="collapse" href="#accordion-footer-terms" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-terms">Terms &amp; Conditions</a></li>
+          <li><a role="button" data-toggle="collapse" href="#accordion-footer-privacy" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-privacy">Privacy Policy</a></li>
+          <li><a role="button" data-toggle="collapse" href="#accordion-footer-return" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-return">Return Policy</a></li>
+        </ul>
+
+        <div class="panel m-b-none">
+          <div class="collapse" id="accordion-footer-imprint" role="tabpanel">
+            <h4>Imprint</h4>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla placerat libero nec arcu ultricies, eget tempus ligula pellentesque. In hac habitasse platea dictumst. Cras dolor mauris, blandit id accumsan ut, congue sed sem. Curabitur eu tellus sodales, fermentum quam a, hendrerit magna. Suspendisse urna erat, tristique at sapien lacinia, ornare fringilla orci. Duis at feugiat turpis, eu dapibus purus. Nulla ornare nisi eu pellentesque vestibulum. Nam vulputate magna vel luctus mollis. Nulla vitae elit et est lobortis laoreet in non nisl.</div>
+        </div>
+
+        <div class="panel m-b-none">
+          <div class="collapse" id="accordion-footer-terms" role="tabpanel">
+            <h4>Terms and Conditions</h4>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla placerat libero nec arcu ultricies, eget tempus ligula pellentesque. In hac habitasse platea dictumst. Cras dolor mauris, blandit id accumsan ut, congue sed sem. Curabitur eu tellus sodales, fermentum quam a, hendrerit magna. Suspendisse urna erat, tristique at sapien lacinia, ornare fringilla orci. Duis at feugiat turpis, eu dapibus purus. Nulla ornare nisi eu pellentesque vestibulum. Nam vulputate magna vel luctus mollis. Nulla vitae elit et est lobortis laoreet in non nisl.</div>
+        </div>
+
+        <div class="panel m-b-none">
+          <div class="collapse" id="accordion-footer-privacy" role="tabpanel">
+            <h4>Privacy Policy</h4>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla placerat libero nec arcu ultricies, eget tempus ligula pellentesque. In hac habitasse platea dictumst. Cras dolor mauris, blandit id accumsan ut, congue sed sem. Curabitur eu tellus sodales, fermentum quam a, hendrerit magna. Suspendisse urna erat, tristique at sapien lacinia, ornare fringilla orci. Duis at feugiat turpis, eu dapibus purus. Nulla ornare nisi eu pellentesque vestibulum. Nam vulputate magna vel luctus mollis. Nulla vitae elit et est lobortis laoreet in non nisl.</div>
+        </div>
+
+        <div class="panel m-b-none">
+          <div class="collapse" id="accordion-footer-return" role="tabpanel">
+            <h4>Return Policy</h4>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla placerat libero nec arcu ultricies, eget tempus ligula pellentesque. In hac habitasse platea dictumst. Cras dolor mauris, blandit id accumsan ut, congue sed sem. Curabitur eu tellus sodales, fermentum quam a, hendrerit magna. Suspendisse urna erat, tristique at sapien lacinia, ornare fringilla orci. Duis at feugiat turpis, eu dapibus purus. Nulla ornare nisi eu pellentesque vestibulum. Nam vulputate magna vel luctus mollis. Nulla vitae elit et est lobortis laoreet in non nisl.</div>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper b-t bg-dark text-center">
+      Powered by <a href="www.mightymerce.com">MightyMerce - www.mightymerce.com - convert followers into customers</a>.
+    </div>
+  </footer>
+  <!-- / footer -->
+
+</div>
+<script type="text/javascript">
+  window.paypalCheckoutReady = function () {
+    paypal.checkout.setup('Your merchant email id', {
+      container: 'myContainer', //{String|HTMLElement|Array} where you want the PayPal button to reside
+      environment: 'sandbox' //or 'production' depending on your environment
+    });
+  };
+</script>
+<script src="//www.paypalobjects.com/api/checkout.js" async="async"></script>
+</section>

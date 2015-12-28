@@ -1,0 +1,294 @@
+<section>
+  <div class="inmodal" ng-controller="ProductsController">
+    <div>
+      <div class="modal-content">
+        <form name="postForm" class="form-horizontal" ng-submit="postPost(postForm.$valid)" novalidate>
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="ok()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">Maintain your image no.2</h4>
+            <br>
+            <div>
+              <i class="fa fa-gear modal-icon"></i>
+            </div>
+          </div>
+          <div class="modal-body-white">
+            <div class="modal-body">
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <div class="form-group" ng-hide="uploader.queue.length"><span>Please select your main product no.2 images by clicking on "Select Image". There will be the possibility to zoom and rotate image and finally crop image based on your favorite view.</span></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-8">
+                  <div class="tabs-container">
+                    <ul class="nav nav-tabs">
+                      <li class="active"><a data-toggle="tab" href="#tab-3"> <i class="fa fa-facebook-f fa-3"></i></a></li>
+                      <li class=""><a data-toggle="tab" href="#tab-4"><i class="fa fa-pinterest-p"></i></a></li>
+                      <li class=""><a data-toggle="tab" href="#tab-5"><i class="fa fa-code"></i></a></li>
+                    </ul>
+                    <div class="tab-content">
+                      <div id="tab-3" class="tab-pane active">
+                        <div class="panel-body">
+                          <div class="row">
+                            <div class="col-sm-8">
+                              <div class="cropper_Facebook">
+                                <img src="../../../../modules/products/client/img/photo_not_available.png">
+                              </div>
+                              <div class="col-sm-8">
+                                <button class="btn btn-primary" id="setDrag" type="button">New crop</button>
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div>
+                                <h4>Preview image</h4>
+                                <br>
+                              </div>
+                              <div class="img-preview img-preview-sm"></div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div id="tab-4" class="tab-pane active">
+                        <div class="panel-body">
+                          <div class="row">
+                            <div class="col-sm-8">
+                              <div class="cropper_Pinterest">
+                                <img src="../../../../modules/products/client/img/photo_not_available.png">
+                              </div>
+                              <div class="btn-group">
+                                <button class="btn btn-primary" id="setDrag" type="button">New crop</button>
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div>
+                                <h4>Preview image</h4>
+                                <br>
+                              </div>
+                              <div class="img-preview img-preview-sm"></div>
+                              <div class="form-group">
+                                <br>
+                                <div><label class="control-label">Alt Text*</label></div>
+                                <div class="col-sm-8"><input type="text" name="productMainImageAlt" ng-model="productMainImageAlt" id="productMainImageAlt" class="form-control" placeholder="" required></div>
+                                <div ng-messages="productForm.productMainImageAlt.$error" role="alert">
+                                  <p class="help-block error-text" ng-message="required">Alt Text is required</p>
+                                </div>
+                                <div class="col-sm-2">
+                                  <div class="tooltip-demo">
+                                    <button type="button" class="btn btn-default" tooltip-placement="top" tooltip="Give a brief description of the image. This is important as the text is displayed if the image may not be loaded is relevant to partially sighted visitors to get an idea of what is displayed will be considered by search engines">i</button>
+                                  </div>
+                                </div>
+                              </div>
+                              <div><br><br></div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div id="tab-5" class="tab-pane active">
+                        <div class="panel-body">
+                          <div class="row">
+                            <div class="col-sm-8">
+                              <div class="cropper_Code">
+                                <img src="../../../../modules/products/client/img/photo_not_available.png">
+                              </div>
+                              <div class="btn-group">
+                                <button class="btn btn-primary" id="setDrag" type="button">New crop</button>
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div>
+                                <h4>Preview image</h4>
+                                <br>
+                              </div>
+                              <div class="img-preview img-preview-sm"></div>
+                              <div class="form-group">
+                                <br>
+                                <div><label class="control-label">Alt Text*</label></div>
+                                <div class="col-sm-8"><input type="text" name="productMainImageAlt" ng-model="productMainImageAlt" id="productMainImageAlt" class="form-control" placeholder="" required></div>
+                                <div ng-messages="productForm.productMainImageAlt.$error" role="alert">
+                                  <p class="help-block error-text" ng-message="required">Alt Text is required</p>
+                                </div>
+                                <div class="col-sm-2">
+                                  <div class="tooltip-demo">
+                                    <button type="button" class="btn btn-default" tooltip-placement="top" tooltip="Give a brief description of the image. This is important as the text is displayed if the image may not be loaded is relevant to partially sighted visitors to get an idea of what is displayed will be considered by search engines">i</button>
+                                  </div>
+                                </div>
+                              </div>
+                              <div><br><br></div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div ng-show="error" class="alert alert-success">
+                      <strong ng-bind="error"></strong>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div>
+              <div class="row">
+                <div class="col-sm-4" align="left">
+                  <button type="button" class="btn btn-white" data-dismiss="modal" data-ng-click="ok()">Close</button>
+                </div>
+                <div class="col-sm-8">
+                  <button type="button" class="btn btn-warning" data-ng-click="postPostPinterest">Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    $(document).ready(function () {
+
+      // Add slimscroll to element
+      $('.scroll_content').slimscroll({
+        height: '200px'
+      })
+
+    });
+
+    $(document).ready(function(){
+
+      var $image = $(".image-crop > img");
+      $($image).cropper({
+        aspectRatio: 1200/627,
+        autoCropArea: 1,
+        strict: false,
+        guides: true,
+        highlight: true,
+        dragCrop: true,
+        cropBoxMovable: false,
+        cropBoxResizable: false,
+        built: function ()
+        {
+          $(this).cropper('crop');
+        }
+        preview: ".img-preview",
+        done: function(data) {
+          // Output the result data for cropping image.
+        }
+      });
+
+      $('.cropper_Facebook > img').cropper({
+        aspectRatio: 1200/627,
+        autoCropArea: 1,
+        strict: false,
+        guides: true,
+        highlight: true,
+        dragCrop: true,
+        cropBoxMovable: false,
+        cropBoxResizable: false,
+        built: function ()
+        {
+          $(this).cropper('crop');
+        }
+      });
+
+      $('.cropper_Pinterest > img').cropper({
+        aspectRatio: 736/1104,
+        autoCropArea: 1,
+        strict: false,
+        guides: true,
+        highlight: true,
+        dragCrop: false,
+        cropBoxMovable: false,
+        cropBoxResizable: false,
+        built: function ()
+        {
+          $(this).cropper('crop');
+        }
+      });
+
+      $('.cropper_Code > img').cropper({
+        aspectRatio: 1000/796,
+        autoCropArea: 1,
+        strict: false,
+        guides: true,
+        highlight: true,
+        dragCrop: false,
+        cropBoxMovable: false,
+        cropBoxResizable: false,
+        built: function ()
+        {
+          $(this).cropper('crop');
+        }
+      });
+
+      var $inputImage = $("#inputImage");
+      if (window.FileReader) {
+        $inputImage.change(function() {
+          var fileReader = new FileReader(),
+            files = this.files,
+            file;
+
+          if (!files.length) {
+            return;
+          }
+
+          file = files[0];
+
+          if (/^image\/\w+$/.test(file.type)) {
+            fileReader.readAsDataURL(file);
+            fileReader.onload = function () {
+              $inputImage.val("");
+              $image.cropper("reset", true).cropper("replace", this.result);
+            };
+          } else {
+            showMessage("Please choose an image file.");
+          }
+        });
+      } else {
+        $inputImage.addClass("hide");
+      }
+
+      $("#download").click(function() {
+        window.open($image.cropper("getDataURL"));
+      });
+
+      $("#zoomIn").click(function() {
+        $image.cropper("zoom", 0.1);
+      });
+
+      $("#zoomOut").click(function() {
+        $image.cropper("zoom", -0.1);
+      });
+
+      $("#rotateLeft").click(function() {
+        $image.cropper("rotate", 45);
+      });
+
+      $("#rotateRight").click(function() {
+        $image.cropper("rotate", -45);
+      });
+
+      $("#setDrag").click(function() {
+        $image.cropper("setDragMode", "crop");
+      });
+    });
+  </script>
+
+  <script>
+    $(document).ready(function () {
+      $('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
+      });
+    });
+  </script>
+
+</section>
+
+

@@ -1,0 +1,57 @@
+<section data-ng-controller="PostsController" ng-init="find()">
+
+
+  <div class="row wrapper bpost-bottom white-bg page-heading">
+    <div class="col-lg-10">
+      <h2>Your Posts</h2>
+      <ol class="breadcrumb">
+        <li>
+          <a href="index.html">Home</a>
+        </li>
+        <li class="active">
+          <strong>Posts</strong>
+        </li>
+      </ol>
+    </div>
+    <div class="col-lg-2"></div>
+  </div>
+
+
+    <!-- <div class="pull-right" ng-show="authentication.user._id == post.user._id"> -->
+      <div class="wrapper wrapper-content animated fadeInRight ecommerce">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+              <div class="ibox-title">
+                <h5>Your Posts</h5>
+                <div class="ibox-tools"></div>
+              </div>
+              <div class="ibox-content">
+                <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                  <thead>
+                    <tr>
+                      <th data-toggle="true">Post Channel</th>
+                      <th data-hide="phone">Publication Date</th>
+                      <th data-hide="phone">Post Status</th>
+                      <th data-hide="phone">Product</th>
+                      <th class="text-right" data-sort-ignore="true"></th>
+                    </tr>
+                  </thead>
+                  <tbody data-ng-repeat="post in posts" ui-sref="posts.view({postId: post._id})">
+                    <tr>
+                      <td><span ng-bind="post.postChannel"></span></td>
+                      <td><span ng-bind="post.postPublicationDate"></span></td>
+                      <td><span ng-bind="post.postStatus"></span></td>
+                      <td><span ng-bind="post.product"></span></td>
+                      <td><button type="button" class="btn btn-primary btn-xs" ui-sref="posts.edit({postId: post._id})">Edit Post</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <button type="button" class="btn btn-w-m btn-warning" ui-sref="posts.create">Add a post  <i class="fa fa-angle-double-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- </div> -->
+</section>
