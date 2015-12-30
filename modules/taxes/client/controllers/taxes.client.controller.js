@@ -77,7 +77,7 @@ angular.module('taxes').controller('TaxesController', ['$scope', '$stateParams',
     // Find a list of Taxes
     $scope.find = function () {
       $scope.taxes = Taxes.query({
-        'user._id': $scope.authentication.user._id
+        'user': $scope.authentication.user._id
       });
     };
 

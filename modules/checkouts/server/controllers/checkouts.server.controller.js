@@ -15,8 +15,8 @@ var uuid = require('node-uuid');
 var PayPal = require('../../../../index');
 
 // TODO: Put your PayPal settings here:
-var returnUrl = 'http://localhost:3001/checkouts/review/review';
-var cancelUrl = 'http://localhost:3001/checkouts/cancel/cancel';
+var returnUrl = 'http://localhost:3000/checkouts/review/review';
+var cancelUrl = 'http://localhost:3000/checkouts/cancel/cancel';
 
 /**
  * Create a checkout

@@ -75,7 +75,7 @@ exports.delete = function (req, res) {
  * List of Taxes
  */
 exports.list = function (req, res) {
-  Taxe.find().sort('-created').populate('user', 'displayName').exec(function (err, taxes) {
+  Taxe.find(({ user: { $eq: req.query.user } })).sort('-created').populate('user', 'displayName').exec(function (err, taxes) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

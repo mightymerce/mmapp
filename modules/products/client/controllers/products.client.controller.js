@@ -5,7 +5,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
   function ($rootScope, $scope, $state, $http, $timeout, $window, $stateParams, $location, Authentication, Products, $modal, Posts, ProductsServices, FileUploader, Taxes, Currencys, Deliverys) {
 
     $scope.authentication = Authentication;
-    var FB = $window.FB;
+
     var PDK = $window.PDK;
 
     // If user is signed in then redirect back home
@@ -23,13 +23,8 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
         // Facebook connect
         var FBConnectStatus = '';
         $scope.varFBConnected = false;
-        console.log('products.client.controller - modalupdateProductPost - Facebook connected: ' + $scope.varFBConnected);
 
         var FB = $window.FB;
-        var PDK = $window.PDK;
-
-        console.log('products.client.controller - modalupdateProductPost - FB Object: ' + FB);
-
         if(FB) {
           console.log('products.client.controller - modalupdateProductPost - call getLoginStatus()');
           FB.getLoginStatus(function (response) {

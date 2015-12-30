@@ -27,11 +27,11 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
 
         // Get Merchant legal information
         $scope.legal = Legals.query({
-          'user': $scope.product.user._id
+          'user': $scope.product.user
         });
 
       });
-      console.log('checkouts.client.controller - findOne - start');
+      console.log('checkouts.client.controller - findOne - end');
     };
 
 
@@ -144,55 +144,63 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
       if($location.search().token)
       {
         console.log('checkouts.client.controller - getExpressDetails route params: ' +$location.search().token);
-        PaypalServicesGetExpressCheckoutDetails.query({
-          USER: $scope.user.paypalUser,
-          PWD: $scope.user.paypalPwd,
-          SIGNATURE: $scope.user.paypalSignature,
-          token: $location.search().token,
-          doPayment: false
 
-        }, function(data) {
-          $scope.paypal = data;
-          $scope.paypaltoken = $location.search().token;
-          $scope.profileImageURL = $cookieStore.get('paypal.user.profileImageURL');
-          $scope.productMainImageURL = $cookieStore.get('paypal.product.productMainImageURL');
-          $scope.displayName = $cookieStore.get('paypal.user.displayName');
-          $scope.merchantURLText = $cookieStore.get('paypal.user.merchantURLText');
-          $scope.productTitle = $cookieStore.get('paypal.product.productTitle');
-          $scope.productDescription = $cookieStore.get('paypal.product.productDescription');
+        // Get Merchant information for product
+        ChoutServices.getUser($cookieStore.get('paypal.user.userId')).then(function (Users){
+          $scope.user = Users;
 
-          // Put values to store in next step to cookieStore
-          $cookieStore.put('paypal.data', data);
-          $cookieStore.put('paypal.data.token', $location.search().token);
-          $cookieStore.put('paypal.PAYMENTREQUEST_0_NOTETEXT', data.PAYMENTREQUEST_0_NOTETEXT);
-          $cookieStore.put('paypal.PAYMENTREQUEST_0_TRANSACTIONID', data.PAYMENTREQUEST_0_TRANSACTIONID);
-          $cookieStore.put('paypal.PAYMENTREQUEST_0_INVNUM', data.PAYMENTREQUEST_0_INVNUM);
-          $cookieStore.put('paypal.PAYMENTREQUEST_0_HANDLINGAMT', data.PAYMENTREQUEST_0_HANDLINGAMT);
-          $cookieStore.put('paypal.PAYMENTREQUEST_0_SHIPPINGAMT', data.PAYMENTREQUEST_0_SHIPPINGAMT);
-          $cookieStore.put('paypal.PAYMENTREQUEST_0_ITEMAMT', data.PAYMENTREQUEST_0_ITEMAMT);
-          $cookieStore.put('paypal.PAYMENTREQUEST_0_CURRENCYCODE', data.PAYMENTREQUEST_0_CURRENCYCODE);
-          $cookieStore.put('paypal.PAYMENTREQUEST_0_AMT', data.PAYMENTREQUEST_0_AMT);
-          $cookieStore.put('paypal.L_PAYMENTREQUEST_0_QTY0', data.L_PAYMENTREQUEST_0_QTY0);
+          console.log('checkouts.client.controller - getExpressDetails - user (Merchant): ' +$scope.user.username);
 
-          // Payer Information
-          $cookieStore.put('paypal.EMAIL', data.EMAIL);
-          $cookieStore.put('paypal.PAYERID', data.PAYERID);
-          $cookieStore.put('paypal.PAYERSTATUS', data.PAYERSTATUS);
-          $cookieStore.put('paypal.COUNTRYCODE', data.COUNTRYCODE);
-          $cookieStore.put('paypal.FIRSTNAME', data.FIRSTNAME);
-          $cookieStore.put('paypal.LASTNAME', data.LASTNAME);
+          PaypalServicesGetExpressCheckoutDetails.query({
+            USER: $scope.user.paypalUser,
+            PWD: $scope.user.paypalPwd,
+            SIGNATURE: $scope.user.paypalSignature,
+            token: $location.search().token,
+            doPayment: false
+
+          }, function(data) {
+            $scope.paypal = data;
+            $scope.paypaltoken = $location.search().token;
+            $scope.profileImageURL = $cookieStore.get('paypal.user.profileImageURL');
+            $scope.productMainImageURL = $cookieStore.get('paypal.product.productMainImageURL');
+            $scope.displayName = $cookieStore.get('paypal.user.displayName');
+            $scope.merchantURLText = $cookieStore.get('paypal.user.merchantURLText');
+            $scope.productTitle = $cookieStore.get('paypal.product.productTitle');
+            $scope.productDescription = $cookieStore.get('paypal.product.productDescription');
+
+            // Put values to store in next step to cookieStore
+            $cookieStore.put('paypal.data', data);
+            $cookieStore.put('paypal.data.token', $location.search().token);
+            $cookieStore.put('paypal.PAYMENTREQUEST_0_NOTETEXT', data.PAYMENTREQUEST_0_NOTETEXT);
+            $cookieStore.put('paypal.PAYMENTREQUEST_0_TRANSACTIONID', data.PAYMENTREQUEST_0_TRANSACTIONID);
+            $cookieStore.put('paypal.PAYMENTREQUEST_0_INVNUM', data.PAYMENTREQUEST_0_INVNUM);
+            $cookieStore.put('paypal.PAYMENTREQUEST_0_HANDLINGAMT', data.PAYMENTREQUEST_0_HANDLINGAMT);
+            $cookieStore.put('paypal.PAYMENTREQUEST_0_SHIPPINGAMT', data.PAYMENTREQUEST_0_SHIPPINGAMT);
+            $cookieStore.put('paypal.PAYMENTREQUEST_0_ITEMAMT', data.PAYMENTREQUEST_0_ITEMAMT);
+            $cookieStore.put('paypal.PAYMENTREQUEST_0_CURRENCYCODE', data.PAYMENTREQUEST_0_CURRENCYCODE);
+            $cookieStore.put('paypal.PAYMENTREQUEST_0_AMT', data.PAYMENTREQUEST_0_AMT);
+            $cookieStore.put('paypal.L_PAYMENTREQUEST_0_QTY0', data.L_PAYMENTREQUEST_0_QTY0);
+
+            // Payer Information
+            $cookieStore.put('paypal.EMAIL', data.EMAIL);
+            $cookieStore.put('paypal.PAYERID', data.PAYERID);
+            $cookieStore.put('paypal.PAYERSTATUS', data.PAYERSTATUS);
+            $cookieStore.put('paypal.COUNTRYCODE', data.COUNTRYCODE);
+            $cookieStore.put('paypal.FIRSTNAME', data.FIRSTNAME);
+            $cookieStore.put('paypal.LASTNAME', data.LASTNAME);
 
 
-          $cookieStore.put('paypal.PAYMENTREQUEST_0_SHIPTONAME', data.PAYMENTREQUEST_0_SHIPTONAME);
-          $cookieStore.put('paypal.PAYMENTREQUEST_0_SHIPTOSTREET', data.PAYMENTREQUEST_0_SHIPTOSTREET);
-          $cookieStore.put('paypal.PAYMENTREQUEST_0_SHIPTOCITY', data.PAYMENTREQUEST_0_SHIPTOCITY);
-          $cookieStore.put('paypal.PAYMENTREQUEST_0_SHIPTOSTATE', data.PAYMENTREQUEST_0_SHIPTOSTATE);
-          $cookieStore.put('paypal.PAYMENTREQUEST_0_SHIPTOZIP', data.PAYMENTREQUEST_0_SHIPTOZIP);
-          $cookieStore.put('paypal.PAYMENTREQUEST_0_SHIPTOCOUNTRYNAME', data.PAYMENTREQUEST_0_SHIPTOCOUNTRYNAME);
-          $cookieStore.put('paypal.PAYMENTREQUEST_0_SHIPTOPHONENUM', data.PAYMENTREQUEST_0_SHIPTOPHONENUM);
-          $cookieStore.put('paypal.PAYMENTREQUEST_0_ADDRESSSTATUS', data.PAYMENTREQUEST_0_ADDRESSSTATUS);
-          $cookieStore.put('paypal.PAYMENTREQUEST_0_SHIPPINGAMT', data.PAYMENTREQUEST_0_SHIPPINGAMT);
+            $cookieStore.put('paypal.PAYMENTREQUEST_0_SHIPTONAME', data.PAYMENTREQUEST_0_SHIPTONAME);
+            $cookieStore.put('paypal.PAYMENTREQUEST_0_SHIPTOSTREET', data.PAYMENTREQUEST_0_SHIPTOSTREET);
+            $cookieStore.put('paypal.PAYMENTREQUEST_0_SHIPTOCITY', data.PAYMENTREQUEST_0_SHIPTOCITY);
+            $cookieStore.put('paypal.PAYMENTREQUEST_0_SHIPTOSTATE', data.PAYMENTREQUEST_0_SHIPTOSTATE);
+            $cookieStore.put('paypal.PAYMENTREQUEST_0_SHIPTOZIP', data.PAYMENTREQUEST_0_SHIPTOZIP);
+            $cookieStore.put('paypal.PAYMENTREQUEST_0_SHIPTOCOUNTRYNAME', data.PAYMENTREQUEST_0_SHIPTOCOUNTRYNAME);
+            $cookieStore.put('paypal.PAYMENTREQUEST_0_SHIPTOPHONENUM', data.PAYMENTREQUEST_0_SHIPTOPHONENUM);
+            $cookieStore.put('paypal.PAYMENTREQUEST_0_ADDRESSSTATUS', data.PAYMENTREQUEST_0_ADDRESSSTATUS);
+            $cookieStore.put('paypal.PAYMENTREQUEST_0_SHIPPINGAMT', data.PAYMENTREQUEST_0_SHIPPINGAMT);
 
+          });
         });
       }
       else{
