@@ -17,10 +17,11 @@ angular.module('legals').controller('LegalsController', ['$scope', '$stateParams
 
       // Create new Legal object
       var legal = new Legals({
-        legalTitle: this.legalTitle,
-        legalTime: this.legalTime,
-        legalCountry: this.legalCountry,
-        legalCost: this.legalCost
+        legalPrivacyPolicy: this.legalPrivacyPolicy,
+        legalReturnPolicy: this.legalReturnPolicy,
+        legalTermsandConditions: this.legalTermsandConditions,
+        legalImprint: this.legalImprint,
+        legalCopyright: this.legalCopyright,
       });
 
       // Redirect after save
@@ -79,11 +80,11 @@ angular.module('legals').controller('LegalsController', ['$scope', '$stateParams
     // Find a list of Legals
     $scope.find = function () {
       console.log('legals.client.controller - find - user id: ' +$scope.authentication.user._id);
-      $scope.legal = Legals.query({
+      $scope.legals = Legals.query({
         'user': $scope.authentication.user._id
-      }
-      );
-      console.log('legals.client.controller - find - legal: ' +$scope.legal);
+      });
+      console.log('legals.client.controller - find - legalCopyright: ' +$scope.legalCopyright);
+      console.log('legals.client.controller - find - legal.legalCopyright: ' +$scope.legals.legalCopyright);
     };
 
     // Find existing Legal

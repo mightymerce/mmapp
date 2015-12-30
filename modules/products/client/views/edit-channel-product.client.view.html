@@ -68,6 +68,9 @@
                 </tr>
                 </tbody>
               </table>
+              <div class="alert alert-warning text-center" ng-if="products.$resolved && !products.length">
+                You have no other products created to link to the selected product. You can create more products here:  <a ui-sref="products.create">create one</a>?
+              </div>
             </div>
           </div>
         </div>

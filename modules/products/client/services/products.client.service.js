@@ -18,14 +18,14 @@ angular.module('products').factory('Products', ['$resource',
 angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', '$window',
   function ($http, $q, Posts, $window) {
     return {
-      getPosts: function getPosts(id) {
+      getPosts: function getPosts(userid, id) {
         var promise = $http({
           method: 'GET',
-          url: '/api/posts?product=' +id
+          url: '/api/posts?user=' + userid + '&product=' +id
         }).then(function successCallback(response) {
           // this callback will be called asynchronously
           // when the response is available
-          console.log('products.client.service.js - GetPosts for Id: ' +id);
+          console.log('products.client.service.js - GetPosts for ProductId: ' +id);
           // The return value gets picked up by the then in the controller.
           return response.data;
         }, function errorCallback(response) {

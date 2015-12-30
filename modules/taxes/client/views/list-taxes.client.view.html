@@ -38,7 +38,7 @@
                 <tbody data-ng-repeat="taxe in taxes">
                 <tr>
                   <td><span data-ng-bind="taxe.taxCountry"></span></td>
-                  <td><span data-ng-bind="taxe.taxRate"> %</span></td>
+                  <td><span data-ng-bind="taxe.taxRate"></span> %</td>
                   <td class="text-right">
                     <div class="btn-group">
                       <a class="btn-white btn-xs" ui-sref="taxes.edit({taxesId: taxe._id})">

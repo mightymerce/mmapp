@@ -19,6 +19,12 @@ angular.module('products').controller('ProductsChannelController', ['$rootScope'
       $scope.products = Products.query({
         'user': $scope.authentication.user._id
       });
+
+      $scope.product = Products.get({
+        productId: $stateParams.productId
+      });
+
+      $scope.productSelectId = $stateParams.productId;
     };
 
 

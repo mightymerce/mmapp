@@ -1,8 +1,8 @@
 'use strict';
 
 // Checkouts controller
-angular.module('checkouts').controller('CheckoutsController', ['$window', '$scope', '$stateParams', '$location', '$http', 'Authentication', 'Checkouts', 'ChoutServices', 'PaypalServicesSetExpressCheckout', 'PaypalServicesGetExpressCheckoutDetails', 'Products', 'Users', 'Orders', '$cookieStore',
-  function ($window, $scope, $stateParams, $location, $http, Authentication, Checkouts, ChoutServices, PaypalServicesSetExpressCheckout, PaypalServicesGetExpressCheckoutDetails, Products, Users, Orders, $cookieStore) {
+angular.module('checkouts').controller('CheckoutsController', ['$window', '$scope', '$stateParams', '$location', '$http', 'Authentication', 'Checkouts', 'ChoutServices', 'PaypalServicesSetExpressCheckout', 'PaypalServicesGetExpressCheckoutDetails', 'Products', 'Users', 'Orders', 'Legals', '$cookieStore',
+  function ($window, $scope, $stateParams, $location, $http, Authentication, Checkouts, ChoutServices, PaypalServicesSetExpressCheckout, PaypalServicesGetExpressCheckoutDetails, Products, Users, Orders, Legals, $cookieStore) {
     $scope.authentication = Authentication;
 
     // Find existing Checkout Product
@@ -22,8 +22,12 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
 
         // Get Merchant information for product
         ChoutServices.getUser($scope.product.user._id).then(function (Users){
-          console.log('ImageURL: ' +Users.profileImageURL);
           $scope.user = Users;
+        });
+
+        // Get Merchant legal information
+        $scope.legal = Legals.query({
+          'user': $scope.product.user._id
         });
 
       });

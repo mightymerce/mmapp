@@ -111,8 +111,8 @@
               </div>
               <div class="form-group"><label class="col-sm-2 control-label">Tax*</label>
                 <div class="col-sm-8">
-                  <select class="form-control" name="productTax" id="productTax" ng-model="productTax.selectedOption" required>
-                    <option ng-repeat="option in productTax.availableOptions" value="{{option.id}}">{{option.name}}</option>
+                  <select class="form-control" name="productTax" id="productTax" ng-model="productTax" required>
+                    <option ng-repeat="option in productTax" value="{{option._id}}">{{option.taxRate}}</option>
                   </select>
                 </div>
                 <div ng-messages="productForm.productTax.$error" role="alert">
@@ -122,9 +122,12 @@
               </div>
               <div class="form-group"><label class="col-sm-2 control-label">Currency*</label>
                 <div class="col-sm-8">
-                  <select class="form-control" name="productCurrency" id="productCurrency" ng-model="productCurrency.selectedOption" required>
-                    <option ng-repeat="option in productCurrency.availableOptions" value="{{option.id}}">{{option.name}}</option>
+                  <select class="form-control" name="productCurrency" id="productCurrency" ng-model="productCurrency" required>
+                    <option ng-repeat="option in productCurrency" value="{{option._id}}">{{option.currencyCode}}</option>
                   </select>
+                </div>
+                <div ng-messages="productForm.productCurrency.$error" role="alert">
+                  <p class="help-block error-text" ng-message="required">Products currency is required.</p>
                 </div>
               </div>
               <div class="form-group" ng-show="false"><label class="col-sm-2 control-label">Sale Price</label>
@@ -160,12 +163,12 @@
               <fieldset class="form-horizontal">
                 <div class="form-group"><label class="col-sm-2 control-label">Shipping Option*</label>
                   <div class="col-sm-8">
-                    <select class="form-control" name="productShippingoption" id="productShippingoption" ng-model="productShippingoption.selectedOption" required>
-                      <option ng-repeat="option in productShippingoption.availableOptions" value="{{option.id}}">{{option.name}}</option>
+                    <select class="form-control" name="productShippingoption" id="productShippingoption" ng-model="productShippingoption" required>
+                      <option ng-repeat="option in productShippingoption" value="{{option._id}}">{{option.deliveryTitle}} - {{option.deliveryTime}}</option>
                     </select>
                   </div>
                   <div ng-messages="productForm.productShippingoption.$error" role="alert">
-                    <p class="help-block error-text" ng-message="required">Products tax is required.</p>
+                    <p class="help-block error-text" ng-message="required">Products Shipping option is required.</p>
                   </div>
                   <div class="col-sm-4"></div>
                 </div>

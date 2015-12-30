@@ -41,6 +41,7 @@ exports.read = function (req, res) {
 exports.update = function (req, res) {
   var product = req.product;
 
+  product.productId = req.body.productId;
   product.productTitle = req.body.productTitle;
   product.productDescription = req.body.productDescription;
   product.productPrice = req.body.productPrice;

@@ -1,8 +1,8 @@
 'use strict';
 
 // Products controller
-angular.module('products').controller('ProductsController', ['$rootScope','$scope', '$state', '$http', '$timeout', '$window', '$stateParams', '$location', 'Authentication', 'Products', '$modal', 'Posts', 'ProductsServices', 'FileUploader',
-  function ($rootScope, $scope, $state, $http, $timeout, $window, $stateParams, $location, Authentication, Products, $modal, Posts, ProductsServices, FileUploader) {
+angular.module('products').controller('ProductsController', ['$rootScope','$scope', '$state', '$http', '$timeout', '$window', '$stateParams', '$location', 'Authentication', 'Products', '$modal', 'Posts', 'ProductsServices', 'FileUploader', 'Taxes', 'Currencys', 'Deliverys',
+  function ($rootScope, $scope, $state, $http, $timeout, $window, $stateParams, $location, Authentication, Products, $modal, Posts, ProductsServices, FileUploader, Taxes, Currencys, Deliverys) {
 
     $scope.authentication = Authentication;
     var FB = $window.FB;
@@ -25,49 +25,62 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
         $scope.varFBConnected = false;
         console.log('products.client.controller - modalupdateProductPost - Facebook connected: ' + $scope.varFBConnected);
 
+        var FB = $window.FB;
+        var PDK = $window.PDK;
 
-        FB.getLoginStatus(function(response){
-          if (response.status === 'connected') {
-            // Logged into your app and Facebook.
-            $scope.varFBConnected = true;
+        console.log('products.client.controller - modalupdateProductPost - FB Object: ' + FB);
 
-            console.log('products.client.controller - modalupdateProductPost - Facebook connected open modal');
+        if(FB) {
+          console.log('products.client.controller - modalupdateProductPost - call getLoginStatus()');
+          FB.getLoginStatus(function (response) {
+            console.log('products.client.controller - modalupdateProductPost - call getLoginStatus() - response: ' +response.status);
+            if (response.status === 'connected') {
+              // Logged into your app and Facebook.
+              $scope.varFBConnected = true;
 
-            // OPEN MODAL
-            $scope.modalInstance = $modal.open({
-              //animation: $scope.animationsEnabled,
-              templateUrl: 'modules/products/client/views/post.product.modal.view.html',
-              controller: function ($scope, $modalInstance, product) {
-                $scope.product = product;
-                $scope.varPostStatus = postStatus;
-                $scope.varPostPublicationDate = postPublicationDate;
-                $scope.varPostChannel = postChannel;
-              },
-              size: size,
-              resolve: {
-                product: function () {
-                  return selectedProduct;
+              console.log('products.client.controller - modalupdateProductPost - Facebook connected open modal');
+
+              // OPEN MODAL
+              $scope.modalInstance = $modal.open({
+                //animation: $scope.animationsEnabled,
+                templateUrl: 'modules/products/client/views/post.product.modal.view.html',
+                controller: function ($scope, $modalInstance, product) {
+                  $scope.product = product;
+                  $scope.varPostStatus = postStatus;
+                  $scope.varPostPublicationDate = postPublicationDate;
+                  $scope.varPostChannel = postChannel;
+                },
+                size: size,
+                resolve: {
+                  product: function () {
+                    return selectedProduct;
+                  }
                 }
-              }
-            });
-            var uid = response.authResponse.userID;
-            var accessToken = response.authResponse.accessToken;
+              });
+              var uid = response.authResponse.userID;
+              var accessToken = response.authResponse.accessToken;
 
-          } else if (response.status === 'not_authorized') {
-            // The person is logged into Facebook, but not your app.
-            // TODO Error message that user has not the necessary authorization given
-            $scope.error = 'The user you are currently logged in to facebook is not authorized for Mightymerce. Please switch to your authorized user or log off from facebook and click again on "Create Post" to authorize your current facebook user.';
+            } else if (response.status === 'not_authorized') {
+              // The person is logged into Facebook, but not your app.
+              // TODO Error message that user has not the necessary authorization given
+              console.log('products.client.controller - modalupdateProductPost - Not authorized');
+              $scope.error = 'The user you are currently logged in to facebook is not authorized for Mightymerce. Please switch to your authorized user or log off from facebook and click again on "Create Post" to authorize your current facebook user.';
 
-          }
-          else {
-            // Note: The call will only work if you accept the permission request
-            ProductsServices.loginFacebook();
-            // TODO - work with promise to show error message
-            // $scope.error = 'You are now connected to facebook! Please click on "Create Post again"!';
-            $scope.varFBConnected = true;
-            $scope.errorsuccess = 'You are now connected to facebook! Please click on "Create Post again"!';
-          }
-        });
+            }
+            else {
+              // Note: The call will only work if you accept the permission request
+              console.log('products.client.controller - modalupdateProductPost - call login Facebook');
+              ProductsServices.loginFacebook();
+              // TODO - work with promise to show error message
+              // $scope.error = 'You are now connected to facebook! Please click on "Create Post again"!';
+              $scope.varFBConnected = true;
+              $scope.success = 'You are now connected to facebook! Please click on "Create Post again"!';
+            }
+
+          });
+        } else {
+          console.log('products.client.controller - modalupdateProductPost - Facebook is not init');
+        }
 
 
       }
@@ -108,6 +121,19 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       }
     };
 
+    $scope.productCurrency = Currencys.query({
+      'user': $scope.authentication.user._id
+    });
+
+    $scope.productTax = Taxes.query({
+      'user._id': $scope.authentication.user._id
+    });
+
+    $scope.productShippingoption = Deliverys.query({
+      'user': $scope.authentication.user._id
+    });
+
+    /*
     $scope.productTax = {
       repeatSelect: null,
       availableOptions: [
@@ -116,6 +142,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
         { id: '3', name: '7%' }
       ]
     };
+
 
     $scope.productCurrency = {
       repeatSelect: null,
@@ -133,6 +160,8 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
         { id: '2', name: '' }
       ]
     };
+
+    */
 
 
     // Create new Product
@@ -258,6 +287,8 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
       var product = $scope.product;
 
+      console.log('products.client.controller - update - product.productId: ' +product.productId);
+
       product.$update(function () {
         $location.path('products/' + product._id + '/edit');
         $scope.success = 'You successfully updated your product data.';
@@ -303,7 +334,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       var varPinterestPosts = 0;
       var varCodeSnippetPosts = 0;
 
-      ProductsServices.getPosts($stateParams.productId).then(function (Posts) {
+      ProductsServices.getPosts($scope.authentication.user._id,$stateParams.productId).then(function (Posts) {
         $scope.posts = Posts;
         for (var i in Posts) {
           if (Posts[i].product === $stateParams.productId && Posts[i].postChannel === 'Facebook') {
@@ -319,7 +350,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
             $scope.codeSnippetPostsAvailable = true;
           }
         }
-        console.log('varFacebookPosts: ' +varFacebookPosts);
+        console.log('products.client.controller - findone() - varFacebookPosts: ' +varFacebookPosts);
 
         $scope.facebookPostsNo = varFacebookPosts;
         $scope.pinterestPostsNo = varPinterestPosts;
