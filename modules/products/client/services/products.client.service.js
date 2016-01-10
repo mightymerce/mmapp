@@ -136,7 +136,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
         var deferred = $q.defer();
         var params = {};
 
-        params.message = product.productTitle + ' für ' +product.productPrice + ' ' +product.productCurrency.selectedOption.name ;
+        params.message = product.productTitle + ' für ' +product.productPrice + ' ' +product.productCurrency;
         params.name = product.productTitle;
         params.link = 'http://localhost:3000/checkouts/' +product._id + '?channel=facebook';
         params.picture = product.productMainImageURL;
