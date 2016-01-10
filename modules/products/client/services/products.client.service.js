@@ -138,7 +138,10 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
 
         params.message = product.productTitle + ' für ' +product.productPrice + ' ' +product.productCurrency;
         params.name = product.productTitle;
-        params.link = 'http://localhost:3000/checkouts/' +product._id + '?channel=facebook';
+        // Production environment
+        params.link = 'http://ec2-54-85-218-20.compute-1.amazonaws.com/checkouts/' +product._id + '?channel=facebook';
+        // Development environment
+        //params.link = 'http://localhost:3000/checkouts/' +product._id + '?channel=facebook';
         params.picture = product.productMainImageURL;
         params.description = product.productDescription;
 
