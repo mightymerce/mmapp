@@ -152,8 +152,8 @@ exports.paypalSetExpressCheckout = function (req, res) {
       req.params.cartAmount,
       req.params.productDescription,
       req.params.productCurrency,
-      returnUrl,
-      cancelUrl,
+      req.params.returnUrl,
+      req.params.cancelUrl,
       false,
       function(err, data) {
         if (err) {

@@ -17,10 +17,12 @@ angular.module('checkouts').factory('Checkouts', ['$resource',
 
 angular.module('checkouts').factory('PaypalServicesSetExpressCheckout', ['$resource',
   function($resource) {
-    return $resource('api/paypal/paypalSetExpressCheckout/:USER/:PWD/:SIGNATURE/:brandName/:brandLogoUrl/:productName/:productDescription/:productQuantity/:cartAmount/:buyerMail/:productCurrency', {
+    return $resource('api/paypal/paypalSetExpressCheckout/:USER/:PWD/:SIGNATURE/:returnUrl/:cancelUrl/:brandName/:brandLogoUrl/:productName/:productDescription/:productQuantity/:cartAmount/:buyerMail/:productCurrency', {
       USER: '',
       PWD: '',
       SIGNATURE: '',
+      returnUrl: '',
+      cancelUrl: '',
       brandName: '',
       brandLogoUrl: '',
       productName: '',

@@ -118,10 +118,26 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
       }
       else
       {
+        var returnUrl = $location.protocol() + '://' + $location.host();
+        if($location.host() === 'localhost'){
+          returnUrl = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '//checkouts/review/review';
+        } else {
+          returnUrl = $location.protocol() + '://' + $location.host() + '//checkouts/review/review';
+        }
+
+        var cancelUrl = $location.protocol() + '://' + $location.host();
+        if($location.host() === 'localhost'){
+          cancelUrl = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '//checkouts/cancel/cancel';
+        } else {
+          cancelUrl = $location.protocol() + '://' + $location.host() + '//checkouts/cancel/cancel';
+        }
+
         PaypalServicesSetExpressCheckout.query({
           USER: $scope.user.paypalUser,
           PWD: $scope.user.paypalPwd,
           SIGNATURE: $scope.user.paypalSignature,
+          returnUrl: returnUrl,
+          cancelUrl: cancelUrl,
           brandName: $scope.user.displayName,
           brandLogoUrl: $scope.user.profileImageURL,
           productName: $scope.product.productTitle.substring(0,120),

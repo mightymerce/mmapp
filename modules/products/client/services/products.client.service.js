@@ -15,8 +15,8 @@ angular.module('products').factory('Products', ['$resource',
 
 
 //Service to retrieve posts per product
-angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', '$window',
-  function ($http, $q, Posts, $window) {
+angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', '$window', '$location',
+  function ($http, $q, Posts, $window, $location) {
     return {
       getPosts: function getPosts(userid, id) {
         var promise = $http({
@@ -133,15 +133,21 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
       postToWall: function (product) {
 
         console.log('product.client.service - postToWall - start post to Facebook!');
+        var linkUrl = $location.protocol() + '://' + $location.host();
+        if($location.host() === 'localhost'){
+          linkUrl = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/checkouts/';
+        } else {
+          linkUrl = $location.protocol() + '://' + $location.host() + '/checkouts/';
+        }
+
+
+        console.log('product.client.service - postToWall - linkURL: ' +linkUrl);
         var deferred = $q.defer();
         var params = {};
 
         params.message = product.productTitle + ' für ' +product.productPrice + ' ' +product.productCurrency;
         params.name = product.productTitle;
-        // Production environment
-        params.link = 'http://ec2-54-85-218-20.compute-1.amazonaws.com/checkouts/' +product._id + '?channel=facebook';
-        // Development environment
-        //params.link = 'http://localhost:3000/checkouts/' +product._id + '?channel=facebook';
+        params.link = linkUrl +product._id + '?channel=facebook';
         params.picture = product.productMainImageURL;
         params.description = product.productDescription;
 
