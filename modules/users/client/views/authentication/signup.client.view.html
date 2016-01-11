@@ -5,10 +5,9 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-8 col-sm-offset-2 text">
-            <h1 class="h1-login"><strong>Join Mightymerce!</strong> </h1>
+            <h1 class="h1-login"><strong>Mightymerce Registrierung</strong> </h1>
             <div class="description">
               <p>
-                Start converting followers in customers. Fill in the form below to get instant access:
               </p>
             </div>
           </div>
@@ -17,7 +16,7 @@
           <div class="col-sm-6 col-sm-offset-3 form-box">
             <div class="form-top">
               <div class="form-top-left">
-                <h2>Start enlarge your sales channels by using social media and marketplaces! </h2>
+                <h2>Verkaufe deine Produkte ganz einfach über die sozialen Kanäle und Marktplätze. Und das alles über eine zentrale Stelle. Ganz einfach. Versprochen. </h2>
                 <h3></h3>
               </div>
               <div class="form-top-right">
@@ -28,29 +27,29 @@
               <form name="userForm" ng-submit="signup(userForm.$valid)" novalidate autocomplete="off" class="registration-form">
                 <fieldset>
                   <div class="form-group" show-errors>
-                    <input type="text" id="username" name="username" class="form-control" ng-model="credentials.username" placeholder="Company name" lowercase required>
+                    <input type="text" id="username" name="username" class="form-control" ng-model="credentials.username" placeholder="Firma" lowercase required>
                     <div ng-messages="userForm.username.$error" role="alert">
-                      <p class="help-block error-text" ng-message="required">Company name is required.</p>
+                      <p class="help-block error-text" ng-message="required">Eingabe Firma notwendig.</p>
                     </div>
                   </div>
                   <div class="form-group" show-errors>
-                    <input type="text" name="email" placeholder="Email address" class="form-email form-control" id="email" ng-model="credentials.email" lowercase required>
+                    <input type="text" name="email" placeholder="Email" class="form-email form-control" id="email" ng-model="credentials.email" lowercase required>
                     <div ng-messages="userForm.email.$error" role="alert">
-                      <p class="help-block error-text" ng-message="required">Email address is required.</p>
-                      <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
+                      <p class="help-block error-text" ng-message="required">Eingabe Email notwendig.</p>
+                      <p class="help-block error-text" ng-message="email">Eingabe Email ungültig.</p>
                     </div>
                   </div>
                   <div class="form-group" show-errors>
                     <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="password" popover="{{popoverMsg}}" popover-trigger="focus" password-validator required>
                     <div ng-messages="userForm.password.$error" role="alert">
-                      <p class="help-block error-text" ng-message="required">Password is required.</p>
+                      <p class="help-block error-text" ng-message="required">Eingabe Password wird benötigt.</p>
                       <div ng-repeat="passwordError in passwordErrors">
                         <p class="help-block error-text" ng-show="userForm.password.$error.requirements">{{passwordError}}</p>
                       </div>
                     </div>
                   </div>
                   <div class="form-group" ng-show="!userForm.password.$error.required">
-                    <label>Password Requirements</label>
+                    <label>Password Vorraussetzungen</label>
                     <progressbar value="requirementsProgress" type="{{requirementsColor}}"><span style="color:white; white-space:nowrap;">{{requirementsProgress}}%</span></progressbar>
                   </div>
                   <div class="text-center form-group">
@@ -63,17 +62,6 @@
                   </div>
                 </fieldset>
               </form>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-8 col-sm-offset-2 text">
-            <br><br>
-            <p><strong>Mightymerce - Mache deine Follower zu Kunden</strong> </p>
-            <div class="description">
-              <p>
-                Werde Teil des Social Commerce. Mightymerce wird deine Steuerzentrale für modernes Verkaufen über die sozialen Kanäle. Erschließe völlig neue Möglichkeiten deine Produkte zu präsentieren und zu verkaufen. Und das alles über eine zentrale Stelle. Ganz einfach. Versprochen.
-              </p>
             </div>
           </div>
         </div>

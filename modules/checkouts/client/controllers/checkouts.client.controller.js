@@ -110,32 +110,40 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
       // ToDo get user paypal Details
 
       console.log('checkouts.client.controller - paypalSetExpressCheckout - start');
-      PaypalServicesSetExpressCheckout.query({
-        USER: $scope.user.paypalUser,
-        PWD: $scope.user.paypalPwd,
-        SIGNATURE: $scope.user.paypalSignature,
-        brandName: $scope.user.displayName,
-        brandLogoUrl: $scope.user.profileImageURL,
-        productName: $scope.product.productTitle.substring(0,120),
-        productDescription: $scope.product.productDescription.substring(0,120),
-        productQuantity: 1,
-        cartAmount: 125.27,
-        buyerMail: '@',
-        productCurrency: 'EUR'
-      }, function(data) {
-        console.log('checkouts.client.controller - paypalSetExpressCheckout and open Paypal window URL: ' +data.redirectUrl);
-        $cookieStore.put('paypal.user.profileImageURL', $scope.user.profileImageURL);
-        $cookieStore.put('paypal.product.productMainImageURL', $scope.product.productMainImageURL);
-        $cookieStore.put('paypal.product.productId', $scope.product._id);
-        $cookieStore.put('paypal.user.displayName', $scope.user.displayName);
-        $cookieStore.put('paypal.user.merchantURLText', $scope.user.merchantURLText);
-        $cookieStore.put('paypal.user.merchantURL', $scope.user.merchantURL);
-        $cookieStore.put('paypal.user.userId', $scope.user._id);
-        $cookieStore.put('paypal.product.productTitle', $scope.product.productTitle);
-        $cookieStore.put('paypal.product.productDescription', $scope.product.productDescription);
-        console.log('checkouts.client.controller - paypalSetExpressCheckout - profileImageURL: ' +$scope.user.profileImageURL);
-        $window.open(data.redirectUrl);
-      });
+      if(!$scope.user.paypalUser || !$scope.user.paypalPwd || $scope.user.paypalSignature)
+      {
+        $scope.error = 'The merchant has not provided necessary Paypal information. ';
+        console.log('checkouts.client.controller - paypalSetExpressCheckout - error no Merchant Paypal information');
+      }
+      else
+      {
+        PaypalServicesSetExpressCheckout.query({
+          USER: $scope.user.paypalUser,
+          PWD: $scope.user.paypalPwd,
+          SIGNATURE: $scope.user.paypalSignature,
+          brandName: $scope.user.displayName,
+          brandLogoUrl: $scope.user.profileImageURL,
+          productName: $scope.product.productTitle.substring(0,120),
+          productDescription: $scope.product.productDescription.substring(0,120),
+          productQuantity: 1,
+          cartAmount: 125.27,
+          buyerMail: '@',
+          productCurrency: 'EUR'
+        }, function(data) {
+          console.log('checkouts.client.controller - paypalSetExpressCheckout and open Paypal window URL: ' +data.redirectUrl);
+          $cookieStore.put('paypal.user.profileImageURL', $scope.user.profileImageURL);
+          $cookieStore.put('paypal.product.productMainImageURL', $scope.product.productMainImageURL);
+          $cookieStore.put('paypal.product.productId', $scope.product._id);
+          $cookieStore.put('paypal.user.displayName', $scope.user.displayName);
+          $cookieStore.put('paypal.user.merchantURLText', $scope.user.merchantURLText);
+          $cookieStore.put('paypal.user.merchantURL', $scope.user.merchantURL);
+          $cookieStore.put('paypal.user.userId', $scope.user._id);
+          $cookieStore.put('paypal.product.productTitle', $scope.product.productTitle);
+          $cookieStore.put('paypal.product.productDescription', $scope.product.productDescription);
+          console.log('checkouts.client.controller - paypalSetExpressCheckout - profileImageURL: ' +$scope.user.profileImageURL);
+          $window.open(data.redirectUrl);
+        });
+      }
     };
 
     // Call Paypal

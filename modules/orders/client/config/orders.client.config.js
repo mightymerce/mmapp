@@ -6,8 +6,7 @@ angular.module('orders').run(['Menus',
     // Add the Orders dropdown item
     Menus.addMenuItem('topbar', {
       title: 'Orders',
-      state: 'orders',
-      type: 'dropdown',
+      state: 'orders.list',
       roles: ['user']
     });
 
@@ -15,7 +14,7 @@ angular.module('orders').run(['Menus',
     Menus.addSubMenuItem('topbar', 'orders', {
       title: 'List Orders',
       state: 'orders.list',
-      roles: ['user']
+      roles: ['admin']
     });
 
   }

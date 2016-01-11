@@ -2,16 +2,19 @@
 
   <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-4">
-      <h2>Products</h2>
+      <h2>Edit product</h2>
       <ol class="breadcrumb">
         <li>
-          <a href="index.html">Home</a>
+          <a href="dashboard">Home</a>
         </li>
         <li>
-          <strong>Products</strong>
+          <a href="products">Products</a>
+        </li>
+        <li>
+          <a href="">Edit product</a>
         </li>
         <li class="active">
-          <strong>Edit media</strong>
+          <strong>Images</strong>
         </li>
       </ol>
     </div>
@@ -19,16 +22,16 @@
       <h2>I</h2>
       <div align="right">
         <button class="btn btn-primary" type="button" ui-sref="products.edit({productId: product._id})">
-          <i class="fa fa-edit"> </i> product details
+          <i class="fa fa-edit"> </i> Main data
         </button>
         <button type="button" class="btn btn-default" ui-sref="products.editmedia({productId: product._id})">
-          <i class="fa fa-edit"> </i> product media
+          <i class="fa fa-edit"> </i> Images
         </button>
         <button type="button" class="btn btn-primary" ui-sref="products.editchannel({productId: product._id})">
-          <i class="fa fa-edit"> </i> product channels
+          <i class="fa fa-edit"> </i> Sales channel data
         </button>
         <button type="button" class="btn btn-primary" ui-sref="products.view({productId: product._id})">
-          <i class="fa fa-edit"> </i> product posts
+          <i class="fa fa-edit"> </i> Posts
         </button>
       </div>
     </div>

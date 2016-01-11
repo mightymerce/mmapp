@@ -13,7 +13,7 @@ angular.module('deliverys').run(['Menus',
 
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'settings', {
-      title: 'List Deliverys',
+      title: 'Deliverys',
       state: 'deliverys.list',
       roles: ['user']
     });

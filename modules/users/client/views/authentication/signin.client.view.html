@@ -5,10 +5,9 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-8 col-sm-offset-2 text">
-            <h1 class="h1-login"><strong>Mightymerce</strong> Login Form</h1>
+            <h1 class="h1-login"><strong>Mightymerce Login</strong></h1>
             <div class="description">
               <p>
-                Welcome back! Just sign in again to follow up on your products, postings and orders.
               </p>
             </div>
           </div>
@@ -17,8 +16,8 @@
           <div class="col-sm-6 col-sm-offset-3 form-box">
             <div class="form-top">
               <div class="form-top-left">
-                <h3 class="h3-login">Login to our site</h3>
-                <p>Enter your username and password to log on:</p>
+                <h3 class="h3-login">Willkommen zurück! Log dich ein und sieh nach deinen Produkten, Posts und Bestellungen.</h3>
+                <p></p>
               </div>
               <div class="form-top-right">
                 <i class="fa fa-lock"></i>
@@ -28,10 +27,10 @@
               <form name="userForm" ng-submit="signin(userForm.$valid)" class="signin" novalidate autocomplete="off">
                 <fieldset>
                   <div class="form-group" show-errors>
-                    <label class="sr-only" for="username">Username</label>
+                    <label class="sr-only" for="username">Email</label>
                     <input type="text" name="username" ng-model="credentials.username" placeholder="Username..." class="form-username form-control" id="username" lowercase required>
                     <div ng-messages="userForm.username.$error" role="alert">
-                      <p class="help-block error-text" ng-message="required">Username is required.</p>
+                      <p class="help-block error-text" ng-message="required">Email is required.</p>
                     </div>
                   </div>
                   <div class="form-group" show-errors>

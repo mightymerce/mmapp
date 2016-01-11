@@ -13,7 +13,7 @@ angular.module('taxes').run(['Menus',
 
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'settings', {
-      title: 'List Taxes',
+      title: 'Taxes',
       state: 'taxes.list',
       roles: ['user']
     });

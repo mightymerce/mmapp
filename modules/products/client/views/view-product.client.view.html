@@ -1,13 +1,19 @@
 <section ng-controller="ProductsController" ng-init="findOne()">
   <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-4">
-      <h2>View Posts</h2>
+      <h2>Edit product</h2>
       <ol class="breadcrumb">
         <li>
           <a href="dashboard">Home</a>
         </li>
+        <li>
+          <a href="products">Products</a>
+        </li>
+        <li>
+          <a href="">Edit product</a>
+        </li>
         <li class="active">
-          <strong>View your Posts for selected product</strong>
+          <strong>Posts</strong>
         </li>
       </ol>
     </div>
@@ -15,16 +21,16 @@
       <h2>I</h2>
       <div align="right">
         <button class="btn btn-primary" type="button" ui-sref="products.edit({productId: product._id})">
-          <i class="fa fa-edit"> </i> product details
+          <i class="fa fa-edit"> </i> Main data
         </button>
         <button type="button" class="btn btn-primary" ui-sref="products.editmedia({productId: product._id})">
-          <i class="fa fa-edit"> </i> product media
+          <i class="fa fa-edit"> </i> Images
         </button>
         <button type="button" class="btn btn-primary" ui-sref="products.editchannel({productId: product._id})">
-          <i class="fa fa-edit"> </i> product channels
+          <i class="fa fa-edit"> </i> Sales channel data
         </button>
         <button type="button" class="btn btn-default" ui-sref="products.view">
-          <i class="fa fa-edit"> </i> product posts
+          <i class="fa fa-edit"> </i> Posts
         </button>
       </div>
     </div>
@@ -49,7 +55,6 @@
                   <th data-toggle="true">Image</th>
                   <th data-toggle="true">Product number</th>
                   <th data-hide="phone">Product title</th>
-                  <th class="text-right" data-sort-ignore="true"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -57,13 +62,6 @@
                   <td><img ng-src="{{product.productMainImageURL}}" class="product-images-list"></td>
                   <td><span data-ng-bind="product.productId"></span></td>
                   <td><span ng-bind="product.productTitle"></span></td>
-                  <td class="text-right">
-                    <div class="btn-group">
-                      <a class="btn-white btn-xs" ui-sref="products.edit({productId: product._id})">
-                        <i class="fa fa-cogs"></i> Edit product
-                      </a>
-                    </div>
-                  </td>
                 </tr>
                 </tbody>
               </table>

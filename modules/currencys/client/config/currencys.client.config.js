@@ -5,7 +5,7 @@ angular.module('currencys').run(['Menus',
   function (Menus) {
     // Add the currencys dropdown item
     Menus.addMenuItem('topbar', {
-      title: 'Settings',
+      title: 'Account Settings',
       state: 'settings',
       type: 'dropdown',
       roles: ['user']
@@ -13,7 +13,7 @@ angular.module('currencys').run(['Menus',
 
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'settings', {
-      title: 'List Currencys',
+      title: 'Currencys',
       state: 'currencys.list',
       roles: ['user']
     });

@@ -6,8 +6,7 @@ angular.module('posts').run(['Menus',
     // Add the Posts dropdown item
     Menus.addMenuItem('topbar', {
       title: 'Posts',
-      state: 'posts',
-      type: 'dropdown',
+      state: 'posts.list',
       roles: ['user']
     });
 
@@ -15,14 +14,14 @@ angular.module('posts').run(['Menus',
     Menus.addSubMenuItem('topbar', 'posts', {
       title: 'List Posts',
       state: 'posts.list',
-      roles: ['user']
+      roles: ['admin']
     });
 
     // Add the dropdown create item
     Menus.addSubMenuItem('topbar', 'posts', {
       title: 'Create Posts',
       state: 'products.list',
-      roles: ['user']
+      roles: ['admin']
     });
 
   }

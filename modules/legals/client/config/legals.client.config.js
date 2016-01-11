@@ -13,7 +13,7 @@ angular.module('legals').run(['Menus',
 
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'settings', {
-      title: 'List Legals',
+      title: 'Legals',
       state: 'legals.list',
       roles: ['user']
     });
