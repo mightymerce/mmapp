@@ -111,7 +111,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
 
       console.log('checkouts.client.controller - paypalSetExpressCheckout - start');
       console.log('PaypalUser: ' +$scope.user.paypalUser);
-      if(!$scope.user.paypalUser || !$scope.user.paypalPwd || $scope.user.paypalSignature)
+      if(!$scope.user.paypalUser || !$scope.user.paypalPwd || !$scope.user.paypalSignature)
       {
         $scope.error = 'The merchant has not provided necessary Paypal information. ';
         console.log('checkouts.client.controller - paypalSetExpressCheckout - error no Merchant Paypal information');
