@@ -121,7 +121,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
     });
 
     $scope.productTax = Taxes.query({
-      'user._id': $scope.authentication.user._id
+      'user': $scope.authentication.user._id
     });
 
     $scope.productShippingoption = Deliverys.query({

@@ -110,7 +110,6 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
       // ToDo get user paypal Details
 
       console.log('checkouts.client.controller - paypalSetExpressCheckout - start');
-      console.log('PaypalUser: ' +$scope.user.paypalUser);
       if(!$scope.user.paypalUser || !$scope.user.paypalPwd || !$scope.user.paypalSignature)
       {
         $scope.error = 'The merchant has not provided necessary Paypal information. ';
@@ -120,16 +119,16 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
       {
         var returnUrl = $location.protocol() + '://' + $location.host();
         if($location.host() === 'localhost'){
-          returnUrl = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '//checkouts/review/review';
+          returnUrl = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/checkouts/review/review';
         } else {
-          returnUrl = $location.protocol() + '://' + $location.host() + '//checkouts/review/review';
+          returnUrl = $location.protocol() + '://' + $location.host() + '/checkouts/review/review';
         }
 
         var cancelUrl = $location.protocol() + '://' + $location.host();
         if($location.host() === 'localhost'){
-          cancelUrl = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '//checkouts/cancel/cancel';
+          cancelUrl = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/checkouts/cancel/cancel';
         } else {
-          cancelUrl = $location.protocol() + '://' + $location.host() + '//checkouts/cancel/cancel';
+          cancelUrl = $location.protocol() + '://' + $location.host() + '/checkouts/cancel/cancel';
         }
 
         PaypalServicesSetExpressCheckout.query({

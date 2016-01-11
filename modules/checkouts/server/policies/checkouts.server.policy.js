@@ -45,7 +45,7 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/checkouts/:checkoutId',
       permissions: ['get']
     }, {
-      resources: '/api/paypal/paypalSetExpressCheckout/:USER/:PWD/:SIGNATURE/:brandName/:brandLogoUrl/:productName/:productDescription/:productQuantity/:cartAmount/:buyerMail/:productCurrency',
+      resources: '/api/paypal/paypalSetExpressCheckout/:USER/:PWD/:SIGNATURE/:returnUrl/:cancelUrl/:brandName/:brandLogoUrl/:productName/:productDescription/:productQuantity/:cartAmount/:buyerMail/:productCurrency',
       permissions: ['get', 'post']
     }, {
       resources: '/api/paypal/paypalGetExpressCheckoutDetails/:USER/:PWD/:SIGNATURE/:token/:doPayment',

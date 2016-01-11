@@ -15,8 +15,8 @@ angular.module('products').factory('Products', ['$resource',
 
 
 //Service to retrieve posts per product
-angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', '$window', '$location',
-  function ($http, $q, Posts, $window, $location) {
+angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', '$window', '$location', 'Currencys',
+  function ($http, $q, Posts, $window, $location, Currencys) {
     return {
       getPosts: function getPosts(userid, id) {
         var promise = $http({
@@ -140,50 +140,55 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
           linkUrl = $location.protocol() + '://' + $location.host() + '/checkouts/';
         }
 
-
-        console.log('product.client.service - postToWall - linkURL: ' +linkUrl);
         var deferred = $q.defer();
         var params = {};
 
-        params.message = product.productTitle + ' für ' +product.productPrice + ' ' +product.productCurrency;
-        params.name = product.productTitle;
-        params.link = linkUrl +product._id + '?channel=facebook';
-        params.picture = product.productMainImageURL;
-        params.description = product.productDescription;
+        $http.get('/api/currencys/' +product.productCurrency)
 
-        var FB = $window.FB;
+          .success(function (response) {
+            // this callback will be called asynchronously
+            // when the response is available
 
-        // Make post to facebook and wait for answer
-        FB.api('/me/feed', 'post', params, function(response)
-        {
-          if (!response || response.error) {
-            console.log('product.client.service - postToWall - error occured post to Facebook' +response.error.message);
-            deferred.reject('Error occured');
-          } else {
-            // Create new Post object
-            var post = new Posts({
-              product: product._id,
-              channel: '563c7fab09f30c482f304273',
-              postChannel: 'Facebook',
-              postId: response.id,
-              postStatus: 'Active',
-              postPublicationDate: new Date(),
-              postExternalPostKey: response.id
+            params.message = product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode;
+            console.log('product.client.service - postToWall - currency: ' + response.currencyCode);
+
+            params.name = product.productTitle;
+            params.link = linkUrl + product._id + '?channel=facebook';
+            params.picture = product.productMainImageURL;
+            params.description = product.productDescription;
+
+            var FB = $window.FB;
+
+            // Make post to facebook and wait for answer
+            FB.api('/me/feed', 'post', params, function (response) {
+              if (!response || response.error) {
+                console.log('product.client.service - postToWall - error occured post to Facebook' + response.error.message);
+                deferred.reject('Error occured');
+              } else {
+                // Create new Post object
+                var post = new Posts({
+                  product: product._id,
+                  channel: '563c7fab09f30c482f304273',
+                  postChannel: 'Facebook',
+                  postId: response.id,
+                  postStatus: 'Active',
+                  postPublicationDate: new Date(),
+                  postExternalPostKey: response.id
+                });
+
+                // Save post to MM
+                post.$save(function (response) {
+                  console.log('product.client.service - postToWall - save post on MM success Post ID: ' + response.id);
+                }, function (errorResponse) {
+                  console.log('product.client.service - postToWall - save post on MM error: ' + errorResponse);
+                });
+                deferred.resolve(response.id);
+              }
             });
+          })
+            .error(function(msg,code) {
 
-            // Save post to MM
-            post.$save(function (response) {
-              console.log('product.client.service - postToWall - save post on MM success!');
-            }, function (errorResponse) {
-              console.log('product.client.service - postToWall - save post on MM error: ' +errorResponse);
-            });
-            deferred.resolve(response.id);
-            console.log('Success post to Facebook postToWall - Post ID: ' + response.id);
-          }
-        });
-
-
-
+          });
         return deferred.promise;
       },
 
