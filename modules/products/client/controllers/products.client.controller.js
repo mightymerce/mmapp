@@ -82,36 +82,45 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
       if (postChannel === 'Pinterest') {
         // Pinterest connect
-        //$scope.varFBConnected = false;
-        var session = ProductsServices.getPinterestSession();
-        if (!session) {
-          alert('No session has been set.');
-          $scope.error = ProductsServices.getPinterestLogin();
+
+        console.log('products.client.controller - modalupdateProductPost - start');
+        var loginResponse = ''; // ProductsServices.getPinterestLogin();
+
+        if (loginResponse === 'cancel') {
+          $scope.success = 'You did not grant access to your Pinterest board. Please try again to post products to your Pinterest board.';
         } else {
-          // save session to server
-          var response = ProductsServices.setPinterestSession();
-          if (!response || !response.session) {
-            $scope.error = 'Session was not set. Did you provide a valid session?';
+          // get access token
+          $scope.pinAccessToken = loginResponse;
+          console.log('products.client.controller - modalupdateProductPost - Pinterest user access token: ' +loginResponse);
+
+          // get welcome message
+          var meResponse = ProductsServices.getPinterestMe();
+
+          if (meResponse === 'error') {
+            $scope.error = 'Oops, there was a problem getting your information';
           } else {
-            // session has been set
-            // OPEN MODAL
-            $scope.modalInstance = $modal.open({
-              //animation: $scope.animationsEnabled,
-              templateUrl: 'modules/products/client/views/post.product.modal.view.html',
-              controller: function ($scope, $modalInstance, product) {
-                $scope.product = product;
-                $scope.varPostStatus = postStatus;
-                $scope.varPostPublicationDate = postPublicationDate;
-                $scope.varPostChannel = postChannel;
-              },
-              size: size,
-              resolve: {
-                product: function () {
-                  return selectedProduct;
-                }
-              }
-            });
+            $scope.success = meResponse;
           }
+
+          // session has been set
+          // OPEN MODAL
+          console.log('');
+          $scope.modalInstance = $modal.open({
+            //animation: $scope.animationsEnabled,
+            templateUrl: 'modules/products/client/views/post.product.modal.view.html',
+            controller: function ($scope, $modalInstance, product) {
+              $scope.product = product;
+              $scope.varPostStatus = postStatus;
+              $scope.varPostPublicationDate = postPublicationDate;
+              $scope.varPostChannel = postChannel;
+            },
+            size: size,
+            resolve: {
+              product: function () {
+                return selectedProduct;
+              }
+            }
+          });
         }
       }
     };
@@ -127,37 +136,6 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
     $scope.productShippingoption = Deliverys.query({
       'user': $scope.authentication.user._id
     });
-
-    /*
-    $scope.productTax = {
-      repeatSelect: null,
-      availableOptions: [
-        { id: '1', name: '19%' },
-        { id: '2', name: '10%' },
-        { id: '3', name: '7%' }
-      ]
-    };
-
-
-    $scope.productCurrency = {
-      repeatSelect: null,
-      availableOptions: [
-        { id: '1', name: 'EUR' },
-        { id: '2', name: 'USD' },
-        { id: '3', name: 'CHF' }
-      ]
-    };
-
-    $scope.productShippingoption = {
-      repeatSelect: null,
-      availableOptions: [
-        { id: '1', name: 'Standard Delivery. 2-3 business days' },
-        { id: '2', name: '' }
-      ]
-    };
-
-    */
-
 
     // Create new Product
     $scope.create = function (isValid) {
@@ -591,6 +569,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       $scope.imageURL = $scope.user.profileImageURL;
     };
 
+    /*
 
     $scope.loginFacebook = function (response) {
 
@@ -656,6 +635,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       }
     };
 
+*/
 
     // ************************************
     // **                                **
@@ -664,56 +644,16 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
     // ************************************
     //
     $scope.postPost = function (isValid) {
-      /*
-      //FB.getMyLastName()
-        .then(function(response) {
-          console.log('Response Last.Name: ' +response.last_name);
-        }
-      );
-      */
 
       console.log('product.client.controller - Start posting to Facebook');
-      var postFacebookID = ProductsServices.postToWall($scope.product);
+      $scope.success = ProductsServices.postToWall($scope.product);
 
-      var getPostFacebookID = function () {
-        return ProductsServices.postToWall($scope.product)
-          .then(function (response) {
-            return function () {
+      // Close modal
+      //$scope.modalInstance.close();
 
-
-              // Create new Post object
-              var post = new Posts({
-                product: $scope.product._id,
-                channel: $scope.varPostChannel,
-                postChannel: 'Facebook',
-                postId: response.id,
-                postStatus: 'Active',
-                postPublicationDate: '',
-                postExternalPostKey: response.id
-              });
-
-              // Save post to MM
-              post.$save(function (response) {
-                console.log('product.client.controller - save post on MM success!');
-                // Redirect or not?
-                $location.path('posts/' + response._id);
-                // Close modal
-                $scope.modalInstance.close();
-              }, function (errorResponse) {
-                console.log('product.client.controller - save post on MM error: ' +errorResponse);
-                $scope.error = errorResponse.data.message;
-              });
-
-
-            };
-          });
-      };
-      $scope.error = 'Success posting to Facebook!';
-      // Redirect or not?
-      //$location.path('posts/' + response._id);
     };
 
-    /*
+
     // ************************************
     // **                                **
     // **        POST to PINTEREST       **
@@ -721,23 +661,13 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
     // ************************************
     //
     $scope.postPostPinterest = function (isValid) {
-      facebookService.getMyLastName()
-       .then(function(response) {
-       console.log('Response Last.Name: ' +response.last_name);
-       }
-       );*!/
 
-      console.log('Start posting Post Pinterest');
-      var postFacebookID = ProductsServices.postToPinterest($scope.product);
+      console.log('products.client.controller - postPostPinterest - Start');
+      $scope.success = ProductsServices.postToPinterest($scope.product);
 
-      console.log('Save Post on MM success!');
-      // Redirect or not?
-      // $location.path('posts/' + response._id);
-
-      $scope.error = 'Success posting to Facebook!';
     };
 
-    */
+
 
     // Close Modal
     $scope.cancelModal = function () {

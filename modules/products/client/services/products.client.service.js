@@ -178,17 +178,16 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
 
                 // Save post to MM
                 post.$save(function (response) {
-                  console.log('product.client.service - postToWall - save post on MM success Post ID: ' + response.id);
+                  console.log('product.client.service - postToWall - save post on MM success Post ID: ' + response._id);
+                  deferred.resolve('Success posting to Facebook! - Mightymerce Post-Id: ' +response._id);
                 }, function (errorResponse) {
                   console.log('product.client.service - postToWall - save post on MM error: ' + errorResponse);
                 });
-                deferred.resolve(response.id);
               }
             });
           })
             .error(function(msg,code) {
-
-          });
+            });
         return deferred.promise;
       },
 
@@ -203,7 +202,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
 
       getPinterestSession: function() {
         var PDK = $window.PDK;
-        PDK.getSession()(function(response){
+        PDK.getSession (function(response){
           return response;
         });
       },
@@ -215,19 +214,27 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
 
         PDK.login({ scope : 'read_public, write_public' }, function(session) {
           if (!session) {
-            varReturnMessage = 'The user choose not to grant permissions or closed the pop-up';
+            console.log('products.client.service - getPinterestLogin - user did not grant permission');
+            varReturnMessage = 'cancel';
             return varReturnMessage;
           } else {
-            console.log('Thanks for authenticating. Getting your information...');
-            PDK.me(function(response) {
-              if (!response || response.error) {
-                varReturnMessage = 'Oops, there was a problem getting your information';
-                return varReturnMessage;
-              } else {
-                varReturnMessage = 'Welcome,  ' + response.data.first_name + '! You are now connected to Pinterest! Please click on "Create Post again"!';
-                return varReturnMessage;
-              }
-            });
+            console.log('products.client.service - getPinterestLogin - user did authenticate');
+            return session;
+          }
+        });
+      },
+
+      getPinterestMe: function() {
+        var varReturnMessage = '';
+        var PDK = $window.PDK;
+
+        PDK.me(function(response) {
+          if (!response || response.error) {
+            varReturnMessage = 'error';
+            return varReturnMessage;
+          } else {
+            varReturnMessage = 'Welcome,  ' + response.data.first_name + '! You are now connected to Pinterest! Please click on "Create Post again"!';
+            return varReturnMessage;
           }
         });
       },
@@ -244,40 +251,51 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
         console.log('Start post to Pinterest postToPinterest!');
         var deferred = $q.defer();
 
+        var linkUrl = $location.protocol() + 's://' + $location.host();
+        if($location.host() === 'localhost'){
+          linkUrl = $location.protocol() + 's://' + $location.host() + ':' + $location.port() + '/checkouts/';
+        } else {
+          linkUrl = $location.protocol() + 's://' + $location.host() + '/checkouts/';
+        }
 
-        var link = 'http://localhost:3001/checkouts/' +product._id;
-        var image_url = product.productMainImageURL;
-        var note = product.productTitle + ' für ' +product.productPrice + ' ' +product.productCurrency.selectedOption.name + ' ' + product.productDescription;
+        $http.get('/api/currencys/' +product.productCurrency)
+          .success(function (response) {
+            // this callback will be called asynchronously
+            // when the response is available
 
-        var PDK = $window.PDK;
-        // Make post to facebook and wait for answer
-        PDK.pin(image_url, note, link, function(response) {
-          // do something
-          // Create new Post object
-          var post = new Posts({
-            product: product._id,
-            channel: '563c7fab09f30c482f304273',
-            postChannel: 'Pinterest',
-            postId: response.id,
-            postStatus: 'Active',
-            postPublicationDate: new Date(),
-            postExternalPostKey: response.id
+            var link = linkUrl +product._id;
+            var image_url = product.productMainImageURL;
+            var note = product.productTitle + ' für ' +product.productPrice + ' ' +response.currencyCode + ' ' + product.productDescription;
+
+            var PDK = $window.PDK;
+            // Make post to facebook and wait for answer
+            PDK.pin(image_url, note, link, function(response) {
+              // do something
+              // Create new Post object
+              var post = new Posts({
+                product: product._id,
+                channel: '563c7fab09f30c482f304273',
+                postChannel: 'Pinterest',
+                postId: response.id,
+                postStatus: 'Active',
+                postPublicationDate: new Date(),
+                postExternalPostKey: response.id
+              });
+
+              // Save post to MM
+              post.$save(function (response) {
+                console.log('Save Post on MM success!');
+              }, function (errorResponse) {
+                console.log('Save Post on MM error: ' +errorResponse);
+              });
+              deferred.resolve(response.id);
+            });
+          })
+          .error(function(msg,code) {
+
           });
-
-          // Save post to MM
-          post.$save(function (response) {
-            console.log('Save Post on MM success!');
-          }, function (errorResponse) {
-            console.log('Save Post on MM error: ' +errorResponse);
-          });
-          deferred.resolve(response.id);
-        });
-
         return deferred.promise;
       }
-
-
-
     };
   }
 ]);

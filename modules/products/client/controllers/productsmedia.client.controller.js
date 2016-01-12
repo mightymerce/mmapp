@@ -147,13 +147,27 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
           $scope.productMainImageURL = response;
         }
 
-
-
         console.log('products.client.controller - image uploader - ImageURL: ' +$scope.productMainImageURL);
+
+        // Update product Main ImageURL
+        var product = $scope.product;
+
+        product.productMainImageURL = response;
+        product.productMainImageURLFacebook = response;
+        product.productMainImageURLPinterest = response;
+        product.productMainImageURLCode = response;
+        product.productMainImageAlt = $scope.productMainImageAlt;
+
+        product.$update(function () {
+          $scope.success = 'Successfully changed data';
+        }, function (errorResponse) {
+          $scope.error = errorResponse.data.message;
+        });
+        console.log('products.client.controller - update - end');
+
 
         // Show success message
         $scope.successpicture = true;
-
         //$location.path('products/' + product._id + '/edit');
 
       },
@@ -174,7 +188,6 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
         //$location.path('products/' + product._id + '/edit');
 
       }
-      // fileFormDataName
     });
 
     console.log('New instance FileUploader!');
@@ -197,7 +210,7 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
       if ($window.FileReader) {
 
         var fileExtension = '.' + fileItem.file.name.split('.').pop();
-        fileItem.file.name = 'SuperHeroFile' + fileExtension;
+        fileItem.file.name = fileItem.file.name + fileExtension;
         //Math.random().toString(36).substring(7) + new Date().getTime()
 
         var fileReader = new FileReader();
@@ -228,10 +241,15 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
     };
 
     // ******* Main Function being called to save picture
-    // Change user profile picture
+    //
     $scope.uploadProductMainPicture = function (fileItem) {
       console.log('products.client.controller - image uploader - Start uploadProductMainPicture');
+
+      // Set scope for kind of Image
+      $scope.uploadMainImage = true;
+
       fileItem.upload();
+
       console.log('products.client.controller - image uploader - End uploadProductMainPicture');
     };
 
@@ -239,6 +257,10 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
     $scope.cancelUpload = function () {
       $scope.uploader.clearQueue();
       $scope.imageURL = $scope.user.profileImageURL;
+    };
+
+    $scope.showMainImageFunction = function () {
+      $scope.showMainImage = true;
     };
   }
 ]);
