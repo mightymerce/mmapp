@@ -286,32 +286,29 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
 
             var PDK = $window.PDK;
             // Make post to facebook and wait for answer
-            PDK.pin(image_url, note, link)
-              .success(function(response) {
-                console.log('products.client.service - postToPinterest - post to Pinterest success - response: ' +response);
-                // do something
-                // Create new Post object
-                var post = new Posts({
-                  product: product._id,
-                  channel: '563c7fab09f30c482f304273',
-                  postChannel: 'Pinterest',
-                  postId: '', //response.id,
-                  postStatus: 'Active',
-                  postPublicationDate: new Date(),
-                  postExternalPostKey: '' //response.id
-                });
-
-                // Save post to MM
-                post.$save(function (response) {
-                  console.log('products.client.service - postToPinterest - Save Post on MM success!');
-                }, function (errorResponse) {
-                  console.log('products.client.service - postToPinterest - Save Post on MM error: ' +errorResponse);
-                });
-                deferred.resolve(response.id);
-              })
-              .error(function(msg,code) {
-
+            PDK.pin(image_url, note, link, function(response) {
+              console.log('products.client.service - postToPinterest - post to Pinterest success - response: ' +response);
+              // do something
+              // Create new Post object
+              var post = new Posts({
+                product: product._id,
+                channel: '563c7fab09f30c482f304273',
+                postChannel: 'Pinterest',
+                postId: '', //response.id,
+                postStatus: 'Active',
+                postPublicationDate: new Date(),
+                postExternalPostKey: '' //response.id
               });
+
+              // Save post to MM
+              post.$save(function (response) {
+                console.log('products.client.service - postToPinterest - Save Post on MM success!');
+              }, function (errorResponse) {
+                console.log('products.client.service - postToPinterest - Save Post on MM error: ' +errorResponse);
+              });
+
+              deferred.resolve(response.id);
+            });
           })
           .error(function(msg,code) {
 
@@ -321,39 +318,3 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
     };
   }
 ]);
-
-
-
-
-/*angular.module('products').factory('facebookService', function($q, Facebook) {
-  return {
-    loginFacebook: function() {
-      Facebook.login(function(response){
-        if (response.status === 'connected') {
-          var token = response.authResponse.accessToken;
-          console.log('AccessToken: ' +token);
-          return response;
-        }
-      },{ scope: 'publish_actions' });
-    },
-
-
-    getMyLastName: function() {
-      console.log('Facebook: GetMyLastName ');
-      var deferred = $q.defer();
-      console.log('FB Object: ' +Facebook);
-      Facebook.api('/me', {
-        fields: 'last_name'
-      }, function(response) {
-        if (!response || response.error) {
-          console.log('Error: ' +response.error);
-          deferred.reject('Error occured');
-        } else {
-          console.log('Success: ' +response);
-          deferred.resolve(response);
-        }
-      });
-      return deferred.promise;
-    }
-  };
-});*/
