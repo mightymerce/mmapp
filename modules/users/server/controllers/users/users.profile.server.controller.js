@@ -115,7 +115,7 @@ exports.uploadProductImage = function (req, res) {
       crypto.pseudoRandomBytes(16, function (err, raw) {
         if (err)
           return cb(err);
-          cb(null, 'product' + raw.toString('hex') + path.extname(file.originalname));
+        cb(null, 'product' + raw.toString('hex') + path.extname(file.originalname));
       });
     }
   });

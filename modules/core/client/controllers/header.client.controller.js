@@ -3,8 +3,6 @@
 angular.module('core').controller('HeaderController', ['$http', '$scope', '$state', '$location', 'Authentication', 'Menus', 'Orders',
   function ($http, $scope, $state, $location, Authentication, Menus, Orders) {
 
-
-
     // Expose view variables
     $scope.$state = $state;
     $scope.authentication = Authentication;

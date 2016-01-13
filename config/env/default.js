@@ -71,7 +71,7 @@ module.exports = {
 
         // Cropper
         'public/lib/cropper/assets/css/font-awesome.min.css',
-        'public/lib/cropper/assets/css/bootstrap.min.css',
+        //'public/lib/cropper/assets/css/bootstrap.min.css',
         //'public/lib/cropper/assets/css/tooltip.min.css',
         'public/lib/cropper/dist/cropper.css',
         'public/lib/cropper/main.css'
@@ -107,6 +107,7 @@ module.exports = {
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
         'public/lib/angular-route/angular-route.js',
+        'public/lib/angular-css/angular-css.min.js',
 
         // Bootstrap
         'public/lib/bootstrap/dist/js/bootstrap.js',

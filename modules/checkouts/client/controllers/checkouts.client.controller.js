@@ -5,12 +5,12 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
   function ($window, $scope, $stateParams, $location, $http, Authentication, Checkouts, ChoutServices, PaypalServicesSetExpressCheckout, PaypalServicesGetExpressCheckoutDetails, Products, Users, Orders, Legals, $cookieStore) {
     $scope.authentication = Authentication;
 
+    // set the default bootswatch name
+    $scope.css = 'modules/checkouts/client/css/style-min.css';
+
     // Find existing Checkout Product
     $scope.findOne = function () {
       console.log('checkouts.client.controller - findOne - start');
-
-      // set the default bootswatch name
-      $scope.layout = 'style-min';
 
       // Call getSelected Product service
       var searchObject = $stateParams.checkoutId;
@@ -27,7 +27,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
 
         // Get Merchant legal information
         $scope.legal = Legals.query({
-          'user': $scope.product.user
+          user: $scope.product.user
         });
 
       });
