@@ -258,7 +258,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
 
       postToPinterest: function (product) {
 
-        console.log('Start post to Pinterest postToPinterest!');
+        console.log('products.client.service - postToPinterest - Start post to Pinterest');
         var deferred = $q.defer();
 
         var linkUrl = $location.protocol() + 's://' + $location.host();
@@ -286,27 +286,32 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
 
             var PDK = $window.PDK;
             // Make post to facebook and wait for answer
-            PDK.pin(image_url, note, link, function(response) {
-              // do something
-              // Create new Post object
-              var post = new Posts({
-                product: product._id,
-                channel: '563c7fab09f30c482f304273',
-                postChannel: 'Pinterest',
-                postId: response.id,
-                postStatus: 'Active',
-                postPublicationDate: new Date(),
-                postExternalPostKey: response.id
-              });
+            PDK.pin(image_url, note, link)
+              .success(function(response) {
+                console.log('products.client.service - postToPinterest - post to Pinterest success - response: ' +response);
+                // do something
+                // Create new Post object
+                var post = new Posts({
+                  product: product._id,
+                  channel: '563c7fab09f30c482f304273',
+                  postChannel: 'Pinterest',
+                  postId: '', //response.id,
+                  postStatus: 'Active',
+                  postPublicationDate: new Date(),
+                  postExternalPostKey: '' //response.id
+                });
 
-              // Save post to MM
-              post.$save(function (response) {
-                console.log('Save Post on MM success!');
-              }, function (errorResponse) {
-                console.log('Save Post on MM error: ' +errorResponse);
+                // Save post to MM
+                post.$save(function (response) {
+                  console.log('products.client.service - postToPinterest - Save Post on MM success!');
+                }, function (errorResponse) {
+                  console.log('products.client.service - postToPinterest - Save Post on MM error: ' +errorResponse);
+                });
+                deferred.resolve(response.id);
+              })
+              .error(function(msg,code) {
+
               });
-              deferred.resolve(response.id);
-            });
           })
           .error(function(msg,code) {
 
