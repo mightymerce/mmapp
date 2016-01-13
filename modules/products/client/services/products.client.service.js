@@ -294,7 +294,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                 product: product._id,
                 channel: '563c7fab09f30c482f304273',
                 postChannel: 'Pinterest',
-                postId: '', //response.id,
+                postId: 'xxx', //response.id,
                 postStatus: 'Active',
                 postPublicationDate: new Date(),
                 postExternalPostKey: '' //response.id
