@@ -36,6 +36,8 @@ module.exports = {
         fileSize: 1024*1024 // Max file size in bytes (1 MB)
       }
     },
+
+    // currently not used - maintained in users.profile.server.controller.js
     productImageUpload: {
       dest: './modules/products/client/img/products/uploads/', // Product main Image
       limits: {

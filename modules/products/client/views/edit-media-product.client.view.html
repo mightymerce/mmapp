@@ -83,31 +83,31 @@
                           <td><div><img ng-src="{{product.productMainImageURL}}" class="product-images-list"></div></td>
                           <td><div><img ng-src="{{product.productMainImageURLFacebook}}" class="product-images-list"></div></td>
                           <td><div><img ng-src="{{product.productMainImageURLPinterest}}" class="product-images-list"></div></td>
-                          <td><div><i class="fa fa-remove modal-icon"></i></div></td>
-                          <td><div><i class="fa fa-remove modal-icon"></i></div></td>
-                          <td><div><i class="fa fa-remove modal-icon"></i></div></td>
+                          <td><div><i class="fa fa-remove modal-icon fa-2x"></i></div></td>
+                          <td><div><i class="fa fa-remove modal-icon fa-2x"></i></div></td>
+                          <td><div><i class="fa fa-remove modal-icon fa-2x"></i></div></td>
                           <td><div><img ng-src="{{productMainImageURLCode}}" style="margin:auto;"></div></td>
                           <td><div><a class="btn btn-white btn-bitbucket"><i class="fa fa-trash"></i></a></div></td>
                         </tr>
                         <tr>
-                          <td><a class="btn btn-w-m btn-warning btn-outline" ng-click="modaladdImages('lg', 'one')"> Add image 1</a></td>
+                          <td><a class="btn btn-w-m btn-warning btn-outline" ng-click="showFurtherImage1Function()"> Add image 1</a></td>
                           <td><div><img ng-src="{{product.productFurtherImage1URL}}" class="product-images-list"></div></td>
                           <td><div><img ng-src="{{product.productFurtherImage1URLFacebook}}" class="product-images-list"></div></td>
                           <td><div><img ng-src="{{product.productFurtherImage1URLPinterest}}" class="product-images-list"></div></td>
-                          <td><div><i class="fa fa-remove modal-icon"></i></div></td>
-                          <td><div><i class="fa fa-remove modal-icon"></i></div></td>
-                          <td><div><i class="fa fa-remove modal-icon"></i></div></td>
+                          <td><div><i class="fa fa-remove modal-icon fa-2x"></i></div></td>
+                          <td><div><i class="fa fa-remove modal-icon fa-2x"></i></div></td>
+                          <td><div><i class="fa fa-remove modal-icon fa-2x"></i></div></td>
                           <td><div><img ng-src="{{productFurtherImage1URLCode}}" style="margin:auto;"></div></td>
                           <td><div><a class="btn btn-white btn-bitbucket"><i class="fa fa-trash"></i></a></div></td>
                         </tr>
                         <tr>
-                          <td><a class="btn btn-w-m btn-warning btn-outline" ng-click="modaladdImages('lg', 'two')"> Add image 2</a></td>
-                          <td><div><img ng-src="{{productFurtherImage2URL}}" style="margin:auto;"></div></td>
-                          <td><div><img ng-src="{{productFurtherImage2URLFacebook}}" style="margin:auto;"></div></td>
-                          <td><div><img ng-src="{{productFurtherImage2URLPinterest}}" style="margin:auto;"></div></td>
-                          <td><div><i class="fa fa-remove modal-icon"></i></div></td>
-                          <td><div><i class="fa fa-remove modal-icon"></i></div></td>
-                          <td><div><i class="fa fa-remove modal-icon"></i></div></td>
+                          <td><a class="btn btn-w-m btn-warning btn-outline" ng-click="showFurtherImage2Function()"> Add image 2</a></td>
+                          <td><div><img ng-src="{{product.productFurtherImage2URL}}" class="product-images-list"></div></td>
+                          <td><div><img ng-src="{{product.productFurtherImage2URLFacebook}}" class="product-images-list"></div></td>
+                          <td><div><img ng-src="{{product.productFurtherImage2URLPinterest}}" class="product-images-list"></div></td>
+                          <td><div><i class="fa fa-remove modal-icon fa-2x"></i></div></td>
+                          <td><div><i class="fa fa-remove modal-icon fa-2x"></i></div></td>
+                          <td><div><i class="fa fa-remove modal-icon fa-2x"></i></div></td>
                           <td><div><img ng-src="{{productFurtherImage2URLCode}}" style="margin:auto;"></div></td>
                           <td><div><a class="btn btn-white btn-bitbucket"><i class="fa fa-trash"></i></a></div></td>
                         </tr>
@@ -254,14 +254,9 @@
                             </div>
                           </div>
                         </div>
-                        <div ng-show="error" class="alert alert-success">
-                          <strong ng-bind="error"></strong>
-                        </div>
                       </div>
                     </div>
                   </div>
-
-
 
                   <div class="row">
                     <div class="col-sm-12">
@@ -269,7 +264,7 @@
                       <table class="table">
                         <thead>
                         <tr>
-                          <th width="50%">Name</th>
+                          <th width="50%">Original File Name</th>
                           <th ng-show="uploader.isHTML5">Size</th>
                           <th ng-show="uploader.isHTML5">Progress</th>
                           <th>Status</th>
@@ -314,10 +309,10 @@
                         </tbody>
                       </table>
 
-                      <div ng-show="successpicture" class="text-center text-success">
-                        <strong>Main product image uploaded successfully.</strong>
+                      <div ng-show="successpicture" class="alert alert-success">
+                        <strong ng-bind="successpicturemsg"></strong>
                       </div>
-                      <div ng-show="errorpicture" class="text-center text-danger">
+                      <div ng-show="errorpicture" class="alert alert-danger">
                         <strong ng-bind="errorpicture"></strong>
                       </div>
                     </div>
@@ -332,6 +327,8 @@
                   </div>
 
                 </div>
+
+
 
               </div>
 

@@ -424,151 +424,6 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       });
     };
 
-
-    // ************************************
-    // **                                **
-    // **             Image              **
-    // **            cropper             **
-    // **                                **
-    // ************************************
-    //
-
-    $scope.user = Authentication.user;
-    $scope.imageURL = $scope.user.profileImageURL;
-
-    /*$scope.uploader = new FileUploader({
-      url: $scope.uploadUrl,
-      removeAfterUpload: true,
-      onBeforeUploadItem: function (item) {
-        var stuff = {
-          profiles: [1426, 1427, 1428],
-          profiles_groups: '',
-          upload_type: 'BROWSER',
-          username: $scope.username,
-          file_name: $scope.uploader.queue[0].file.name,
-          file_size: $scope.uploader.queue[0].file.size,
-          file_type: $scope.uploader.queue[0].file.type,
-          file_created_date: 135479928,
-        }
-        item.formData.push(stuff);
-      },
-      onSuccessItem: function (item, response, status, headers) {
-
-      },
-      queueLimit: 1,
-    });*/
-
-    // Create file uploader instance
-    var uploader = $scope.uploader = new FileUploader({
-      url: 'api/users/productpicture',
-      alias: 'productImageMainUpload',
-      onSuccessItem: function (item, response, status, headers) {
-        $scope.successpicture = false;
-        console.log('products.client.controller - image uploader - onSuccessItem');
-
-        if($scope.product)
-        {
-          $scope.product.productMainImageURL = response;
-        } else {
-          $scope.productMainImageURL = response;
-        }
-
-
-
-        console.log('products.client.controller - image uploader - ImageURL: ' +$scope.productMainImageURL);
-
-        // Show success message
-        $scope.successpicture = true;
-
-        //$location.path('products/' + product._id + '/edit');
-
-      },
-
-      // fileFormDataName
-      onCompleteItem: function (item, response, status, headers) {
-        $scope.successpicture = false;
-        console.log('products.client.controller - image uploader - onCompleteItem');
-
-
-        $scope.productMainImageURL = response;
-
-        console.log('products.client.controller - image uploader - ImageURL: ' +$scope.productMainImageURL);
-
-        // Show success message
-        $scope.successpicture = true;
-
-        //$location.path('products/' + product._id + '/edit');
-
-      }
-      // fileFormDataName
-    });
-
-    console.log('New instance FileUploader!');
-
-    // Set file uploader image filter
-    uploader.filters.push({
-      name: 'imageFilter',
-      fn: function (item, options) {
-        var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-        return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-      }
-    });
-
-    // Called after the user selected a new picture file
-    uploader.onAfterAddingFile = function (fileItem) {
-      console.log('products.client.controller - image uploader - onAfterAddingFile start ');
-      $scope.successpicture = false;
-      $scope.file = fileItem;
-
-      if ($window.FileReader) {
-
-        var fileExtension = '.' + fileItem.file.name.split('.').pop();
-        fileItem.file.name = 'SuperHeroFile' + fileExtension;
-        //Math.random().toString(36).substring(7) + new Date().getTime()
-
-        var fileReader = new FileReader();
-        fileReader.readAsDataURL(fileItem._file);
-
-        fileReader.onload = function (fileReaderEvent) {
-          $timeout(function () {
-            $scope.imageURL = fileReaderEvent.target.result;
-          }, 0);
-        };
-      }
-
-
-
-      console.log('products.client.controller - image uploader - onAfterAddingFile end ');
-
-      //console.log('products.client.controller - image uploader - Start uploadProductMainPicture');
-      //fileItem.upload();
-      //console.log('products.client.controller - image uploader - End uploadProductMainPicture');
-    };
-
-
-    // Called after the user has failed to uploaded a new picture
-    uploader.onErrorItem = function (fileItem, response, status, headers) {
-      // Clear upload buttons
-      $scope.cancelUpload();
-
-      // Show error message
-      $scope.errorpicture = response.message;
-    };
-
-    // ******* Main Function being called to save picture
-    // Change user profile picture
-    $scope.uploadProductMainPicture = function (fileItem) {
-      console.log('products.client.controller - image uploader - Start uploadProductMainPicture');
-      fileItem.upload();
-      console.log('products.client.controller - image uploader - End uploadProductMainPicture');
-    };
-
-    // Cancel the upload process
-    $scope.cancelUpload = function () {
-      $scope.uploader.clearQueue();
-      $scope.imageURL = $scope.user.profileImageURL;
-    };
-
     /*
 
     $scope.loginFacebook = function (response) {
@@ -646,7 +501,9 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
     $scope.postPost = function (isValid) {
 
       console.log('product.client.controller - Start posting to Facebook');
-      $scope.success = ProductsServices.postToWall($scope.product);
+      ProductsServices.postToWall($scope.product).then(function(promise) {
+        $scope.success = promise;
+      });
 
       // Close modal
       //$scope.modalInstance.close();
@@ -663,8 +520,9 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
     $scope.postPostPinterest = function (isValid) {
 
       console.log('products.client.controller - postPostPinterest - Start');
-      $scope.success = ProductsServices.postToPinterest($scope.product);
-
+      ProductsServices.postToPinterest($scope.product).then(function(promise) {
+        $scope.success = promise;
+      });
     };
 
 

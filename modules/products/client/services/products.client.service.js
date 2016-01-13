@@ -140,6 +140,13 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
           linkUrl = $location.protocol() + '://' + $location.host() + '/checkouts/';
         }
 
+        var linkMainImageUrl = $location.protocol() + '://' + $location.host();
+        if($location.host() === 'localhost'){
+          linkMainImageUrl = $location.protocol() + '://' + $location.host() + ':' + $location.port();
+        } else {
+          linkMainImageUrl = $location.protocol() + '://' + $location.host();
+        }
+
         var deferred = $q.defer();
         var params = {};
 
@@ -154,8 +161,10 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
 
             params.name = product.productTitle;
             params.link = linkUrl + product._id + '?channel=facebook';
-            params.picture = product.productMainImageURL;
+            params.picture = linkMainImageUrl + product.productMainImageURL.substring(1);
             params.description = product.productDescription;
+
+            console.log('product.client.service - postToWall - productMainImageURL ' + params.picture);
 
             var FB = $window.FB;
 
@@ -163,7 +172,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
             FB.api('/me/feed', 'post', params, function (response) {
               if (!response || response.error) {
                 console.log('product.client.service - postToWall - error occured post to Facebook' + response.error.message);
-                deferred.reject('Error occured');
+                deferred.reject(response.error.message);
               } else {
                 // Create new Post object
                 var post = new Posts({
@@ -182,6 +191,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                   deferred.resolve('Success posting to Facebook! - Mightymerce Post-Id: ' +response._id);
                 }, function (errorResponse) {
                   console.log('product.client.service - postToWall - save post on MM error: ' + errorResponse);
+                  deferred.reject(errorResponse);
                 });
               }
             });
@@ -258,13 +268,20 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
           linkUrl = $location.protocol() + 's://' + $location.host() + '/checkouts/';
         }
 
+        var linkMainImageUrl = $location.protocol() + '://' + $location.host();
+        if($location.host() === 'localhost'){
+          linkMainImageUrl = $location.protocol() + '://' + $location.host() + ':' + $location.port();
+        } else {
+          linkMainImageUrl = $location.protocol() + '://' + $location.host();
+        }
+
         $http.get('/api/currencys/' +product.productCurrency)
           .success(function (response) {
             // this callback will be called asynchronously
             // when the response is available
 
             var link = linkUrl +product._id;
-            var image_url = product.productMainImageURL;
+            var image_url = linkMainImageUrl + product.productMainImageURL.substring(1);
             var note = product.productTitle + ' für ' +product.productPrice + ' ' +response.currencyCode + ' ' + product.productDescription;
 
             var PDK = $window.PDK;

@@ -9,6 +9,7 @@ var _ = require('lodash'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   mongoose = require('mongoose'),
   multer = require('multer'),
+  crypto = require('crypto'),
   config = require(path.resolve('./config/config')),
   User = mongoose.model('User'),
   Delivery = mongoose.model('Delivery');
@@ -107,7 +108,23 @@ exports.changeProfilePicture = function (req, res) {
 exports.uploadProductImage = function (req, res) {
   var user = req.user;
   var message = null;
-  var upload = multer(config.uploads.productImageUpload).single('productImageMainUpload');
+
+  var storage = multer.diskStorage({
+    destination: './modules/products/client/img/products/uploads/',
+    filename: function (req, file, cb) {
+      crypto.pseudoRandomBytes(16, function (err, raw) {
+        if (err)
+          return cb(err);
+          cb(null, 'product' + raw.toString('hex') + path.extname(file.originalname));
+      });
+    }
+  });
+
+  var upload = multer({ storage: storage }).single('productImageMainUpload');
+
+  // Original:
+  // var upload = multer(config.uploads.productImageUpload).single('productImageMainUpload');
+
   var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
 
   // Filtering to upload only images

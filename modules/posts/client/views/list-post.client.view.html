@@ -40,7 +40,7 @@
                   <tbody data-ng-repeat="post in posts" ui-sref="posts.view({postId: post._id})">
                     <tr>
                       <td><span ng-bind="post.postChannel"></span></td>
-                      <td><span ng-bind="post.postPublicationDate"></span></td>
+                      <td><span ng-bind="post.postPublicationDate | date:'mediumDate'"></span></td>
                       <td><span ng-bind="post.postStatus"></span></td>
                       <td><span ng-bind="post.product"></span></td>
                       <td><button type="button" class="btn btn-primary btn-xs" ui-sref="posts.edit({postId: post._id})">Edit Post</button></td>
