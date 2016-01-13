@@ -261,11 +261,11 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
         console.log('products.client.service - postToPinterest - Start post to Pinterest');
         var deferred = $q.defer();
 
-        var linkUrl = $location.protocol() + 's://' + $location.host();
+        var linkUrl = $location.protocol() + '://' + $location.host();
         if($location.host() === 'localhost'){
-          linkUrl = $location.protocol() + 's://' + $location.host() + ':' + $location.port() + '/checkouts/';
+          linkUrl = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/checkouts/';
         } else {
-          linkUrl = $location.protocol() + 's://' + $location.host() + '/checkouts/';
+          linkUrl = $location.protocol() + '://' + $location.host() + '/checkouts/';
         }
 
         var linkMainImageUrl = $location.protocol() + '://' + $location.host();
@@ -280,7 +280,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
             // this callback will be called asynchronously
             // when the response is available
 
-            var link = linkUrl +product._id;
+            var link = linkUrl +product._id + '?channel=pinterest';
             var image_url = linkMainImageUrl + product.productMainImageURL.substring(1);
             var note = product.productTitle + ' für ' +product.productPrice + ' ' +response.currencyCode + ' ' + product.productDescription;
 
@@ -303,8 +303,10 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
               // Save post to MM
               post.$save(function (response) {
                 console.log('products.client.service - postToPinterest - Save Post on MM success!');
+                deferred.resolve('Success posting to Pinterest! - Mightymerce Post-Id: ' +response._id);
               }, function (errorResponse) {
                 console.log('products.client.service - postToPinterest - Save Post on MM error: ' +errorResponse);
+                deferred.reject(errorResponse);
               });
 
               deferred.resolve(response.id);
