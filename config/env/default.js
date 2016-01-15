@@ -81,9 +81,9 @@ module.exports = {
       js: [
         // JQuery
         'public/lib/jquery/dist/jquery.min.js',
-        'public/lib/jquery/jquery-2.1.1.min.js',
         'public/lib/jquery/jquery-ui.custom.min.js',
         'public/lib/jquery/jquery-ui/jquery-ui.min.js',
+        'public/lib/jquery/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js',
 
         // Inspinia
         'public/inspinia.js',
@@ -127,11 +127,10 @@ module.exports = {
         'public/lib/css/plugins/footable/angular-footable.js',
 
         // Cropper
-        'public/lib/cropper/assets/js/jquery.min.js',
+        //'public/lib/plugin/cropper/assets/js/jquery.min.js',
         //'public/lib/cropper/assets/js/tooltip.min.js',
-        'public/lib/cropper/assets/js/bootstrap.min.js',
-        'public/lib/cropper/dist/cropper.js',
-        'public/lib/cropper/main.js',
+        //'public/lib/plugin/cropper/assets/js/bootstrap.min.js',
+        'public/lib/plugin/cropper/dist/cropper.js',
 
         // OWASP password
         'public/lib/plugin/owasp-password-strength-test/owasp-password-strength-test.js',
@@ -150,8 +149,36 @@ module.exports = {
         'public/openfb-angular.js',
 
         // Image cropper
-        'public/lib/plugin/cropper/cropper.min.js'
+        'public/lib/plugin/cropper/cropper.min.js',
 
+        // Angular SOAP
+        'public/lib/plugin/angular-soap/soapclient.js',
+        'public/lib/plugin/angular-soap/angular.soap.js',
+
+        // iCheck
+        'public/lib/plugin/iCheck/icheck.min.js',
+
+        'public/lib/angular-file-upload/dist/angular-file-upload.min.js',
+
+        // Flot
+        //'public/lib/plugin/flot/jquery.flot.js',
+        //'public/lib/plugin/flot/jquery.flot.tooltip.min.js',
+        //'public/lib/plugin/flot/jquery.flot.resize.js',
+        //'public/lib/plugin/flot/jquery.flot.pie.js',
+
+        // ChartJS
+        'public/lib/plugin/chartJs/Chart.min.js',
+
+        // ngTouchspin
+        'public/lib/ngTouchSpin/src/js/ngTouchSpin.js',
+
+        // Checkout
+        'public/lib/plugin/jsnumberformatter/jsnumberformatter.js',
+        'public/lib/plugin/jsnumberformatter/jsnumberformatter.locale.js',
+        'public/lib/plugin/jsnumberformatter/jsnumberformatter.locale.decimal.superset.js',
+        'public/lib/plugin/checkout/jquery.shorten.js',
+        'public/lib/plugin/checkout/validator.min.js',
+        'public/lib/plugin/checkout/script.js'
 
       ]
     },

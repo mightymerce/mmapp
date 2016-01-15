@@ -54,11 +54,11 @@
                                   </tr>
                                   <tr>
                                     <td>Shipping (Standard)</td>
-                                    <td><span class="lbl-shipping" data-ng-bind="product.productShippingoption.selectedOption" data-value={{product.productShippingoption.selectedOption}}"></span></td>
+                                    <td><span class="lbl-shipping" data-ng-bind="delivery.deliveryCost" data-value="{{delivery.deliveryCost}}"></span></td>
                                   </tr>
                                   <tr class="total">
                                     <td>Total</td>
-                                    <td><span class="lbl-total"></span></td>
+                                    <td><span class="lbl-total"></span><span> €</span></td>
                                   </tr>
                                   <tr class="small">
                                     <td>incl. VAT</td>
@@ -70,6 +70,10 @@
                             </div>
 
                             <img ng-click="checkoutPaypal()" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" />
+
+                            <input type="text" value="0" class="form-control lbl-total-PP" />
+                            <input type="text" value="0" class="form-control lbl-shipping-PP" />
+                            <input type="text" value="0" class="form-control lbl-itemprice-PP" />
 
                           </aside>
                         </div>
@@ -137,16 +141,6 @@
 
   </div>
   <script src="https://www.paypalobjects.com/api/checkout.js" async="async"></script>
-  <!--
-  <script src="../../../../public/lib/jquery/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
-  <script src="../../../../public/lib/plugin/jsnumberformatter/jsnumberformatter.js"></script>
-  <script src="../../../../public/lib/plugin/jsnumberformatter/jsnumberformatter.locale.js"></script>
-  <script src="../../../../public/lib/plugin/jsnumberformatter/jsnumberformatter.locale.decimal.superset.js"></script>
-  <script src="../../../../public/lib/plugin/checkout/jquery.shorten.js"></script>
-  <script src="../../../../public/lib/plugin/checkout/validator.min.js"></script>
-  <script src="../../../../public/lib/plugin/checkout/script.js"></script>
-  <script src="../../../../public/lib/jquery/bootstrap/dist/js/bootstrap.js"></script>
 
-  -->
 
 </section>

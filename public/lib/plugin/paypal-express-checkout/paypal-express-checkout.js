@@ -148,6 +148,18 @@ Paypal.prototype.getItemsParams = function() {
 		if(this.products[i].quantity) {
 			params['L_PAYMENTREQUEST_0_QTY' + i] = this.products[i].quantity;	
 		}
+
+		if(this.products[i].category) {
+			params['L_PAYMENTREQUEST_0_ITEMCATEGORY' + i] = this.products[i].category;
+		}
+
+		if(this.products[i].no) {
+			params['L_PAYMENTREQUEST_0_NUMBER' + i] = this.products[i].no;
+		}
+
+		if(this.products[i].no) {
+			params['L_PAYMENTREQUEST_0_CURRENCYCODE' + i] = this.products[i].currency;
+		}
 	}
 
 	return params;
@@ -160,10 +172,12 @@ Paypal.prototype.getItemsParams = function() {
  * @param  {Number}   amount         [description]
  * @param  {String}   description   [description]
  * @param  {String}   currency      EUR, USD
+ * @param  {Number}   cartshipping      [description]
+ * @param  {Number}   itemamount      [description]
  * @param  {Function} callback      [description]
  * @return {PayPal}                 [description]
  */
-Paypal.prototype.setExpressCheckoutPayment = function(email, invoiceNumber, amount, description, currency, returnUrl, cancelUrl, onlyPayPalUsers, callback) {
+Paypal.prototype.setExpressCheckoutPayment = function(email, invoiceNumber, amount, description, currency, cartshipping, itemamount, returnUrl, cancelUrl, onlyPayPalUsers, callback) {
 	var self = this;
 	var params = self.params();
 	if (email) {
@@ -177,7 +191,8 @@ Paypal.prototype.setExpressCheckoutPayment = function(email, invoiceNumber, amou
 	params.PAYMENTREQUEST_0_INVNUM = invoiceNumber;
 	params.PAYMENTREQUEST_0_CUSTOM = invoiceNumber + '|' + params.PAYMENTREQUEST_0_AMT + '|' + currency;
 	params.PAYMENTREQUEST_0_PAYMENTACTION = 'Sale';
-	params.PAYMENTREQUEST_0_ITEMAMT = prepareNumber(amount);
+	params.PAYMENTREQUEST_0_ITEMAMT = prepareNumber(itemamount);
+	params.PAYMENTREQUEST_0_SHIPPINGAMT = cartshipping;
 
 	params = _.extend(params, this.getItemsParams());
 

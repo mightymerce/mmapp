@@ -19,7 +19,7 @@ module.exports = function (app) {
     .delete(checkouts.delete);
 
   // Paypal checkout routes
-  app.route('/api/paypal/paypalSetExpressCheckout/:USER/:PWD/:SIGNATURE/:returnUrl/:cancelUrl/:brandName/:brandLogoUrl/:productName/:productDescription/:productQuantity/:cartAmount/:buyerMail/:productCurrency').all(checkoutsPolicy.isAllowed)
+  app.route('/api/paypal/paypalSetExpressCheckout/:USER/:PWD/:SIGNATURE/:returnUrl/:cancelUrl/:brandName/:brandLogoUrl/:productName/:productDescription/:productQuantity/:cartAmount/:buyerMail/:productCurrency/:cartShippingAmount/:productItemAmount/:productNo').all(checkoutsPolicy.isAllowed)
     .get(checkouts.paypalSetExpressCheckout);
 
   app.route('/api/paypal/paypalGetExpressCheckoutDetails/:USER/:PWD/:SIGNATURE/:token/:doPayment').all(checkoutsPolicy.isAllowed)

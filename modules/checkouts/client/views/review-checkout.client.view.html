@@ -52,7 +52,7 @@
                         <div class="row">
                           <div class="col-xs-12">
                             <div class="panel b-a text-center agreement" id="agreement" role="tablist" aria-multiselectable="true">
-                              <p>By placing the order I agree to Dr. Goergs
+                              <p>By placing the order I agree to {{user.displayName}}
                                 <a role="button" data-toggle="collapse" href="#accordion-terms" aria-expanded="false" data-parent="#agreement"  aria-controls="accordion-terms">Terms and Conditions</a>.
                                 I have acknowledged the
                                 <a role="button" data-toggle="collapse" href="#accordion-withdrawal" aria-expanded="false" data-parent="#agreement" aria-controls="accordion-withdrawal">withdrawal conditions</a>.
@@ -61,13 +61,13 @@
                               <div class="panel">
                                 <div class="collapse topline" id="accordion-terms" role="tabpanel">
                                   <h4>Terms and Conditions</h4>
-                                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla placerat libero nec arcu ultricies, eget tempus ligula pellentesque. In hac habitasse platea dictumst. Cras dolor mauris, blandit id accumsan ut, congue sed sem. Curabitur eu tellus sodales, fermentum quam a, hendrerit magna. Suspendisse urna erat, tristique at sapien lacinia, ornare fringilla orci. Duis at feugiat turpis, eu dapibus purus. Nulla ornare nisi eu pellentesque vestibulum. Nam vulputate magna vel luctus mollis. Nulla vitae elit et est lobortis laoreet in non nisl.</div>
+                                  {{legal.legalTermsandConditions}}</div>
                               </div>
 
                               <div class="panel">
                                 <div class="collapse topline" id="accordion-withdrawal" role="tabpanel">
                                   <h4>Withdrawal Conditions</h4>
-                                  Aliquam erat volutpat. In quis metus vel risus hendrerit scelerisque quis a ipsum. Maecenas venenatis turpis vitae sapien auctor rhoncus. Duis et ante neque. Cras nunc sem, sollicitudin ac tellus placerat, tempor dignissim neque. Cras magna massa, porta sed ligula ut, consequat ultricies neque. Phasellus eget efficitur nunc. Fusce venenatis a est sit amet euismod. Cras bibendum augue eget nisi fringilla sodales.</div>
+                                  {{legal.legalReturnPolicy}}</div>
                               </div>
                             </div>
                           </div>
@@ -86,11 +86,11 @@
                               <tbody>
                               <tr>
                                 <td>Quantity</td>
-                                <td><span class="lbl-quantity">{{paypal.L_PAYMENTREQUEST_0_QTY0}}</span></td>
+                                <td><span class="lbl-quantity"></span></td>
                               </tr>
                               <tr>
                                 <td>Price per item</td>
-                                <td><span class="lbl-priceperitem">{{paypal.PAYMENTREQUEST_0_ITEMAMT}} {{paypal.PAYMENTREQUEST_0_CURRENCYCODE}}</span></td>
+                                <td><span class="lbl-priceperitem"></span></td>
                               </tr>
                               <tr>
                                 <td>Subtotal</td>
@@ -98,11 +98,11 @@
                               </tr>
                               <tr>
                                 <td>Shipping (Standard)</td>
-                                <td><span class="lbl-shipping" data-value="4.9">{{paypal.PAYMENTREQUEST_0_SHIPPINGAMT}}</span></td>
+                                <td><span class="lbl-shipping"></span></td>
                               </tr>
                               <tr class="total">
                                 <td>Total</td>
-                                <td><span class="lbl-total"></span>{{paypal.PAYMENTREQUEST_0_AMT}}</td>
+                                <td><span class="lbl-total"></span><span> €</span></td>
                               </tr>
                               <tr class="small">
                                 <td>incl. VAT</td>
@@ -156,25 +156,25 @@
           <div class="panel m-b-none">
             <div class="collapse" id="accordion-footer-imprint" role="tabpanel">
               <h4>Imprint</h4>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla placerat libero nec arcu ultricies, eget tempus ligula pellentesque. In hac habitasse platea dictumst. Cras dolor mauris, blandit id accumsan ut, congue sed sem. Curabitur eu tellus sodales, fermentum quam a, hendrerit magna. Suspendisse urna erat, tristique at sapien lacinia, ornare fringilla orci. Duis at feugiat turpis, eu dapibus purus. Nulla ornare nisi eu pellentesque vestibulum. Nam vulputate magna vel luctus mollis. Nulla vitae elit et est lobortis laoreet in non nisl.</div>
+              {{legal.legalImprint}}</div>
           </div>
 
           <div class="panel m-b-none">
             <div class="collapse" id="accordion-footer-terms" role="tabpanel">
               <h4>Terms and Conditions</h4>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla placerat libero nec arcu ultricies, eget tempus ligula pellentesque. In hac habitasse platea dictumst. Cras dolor mauris, blandit id accumsan ut, congue sed sem. Curabitur eu tellus sodales, fermentum quam a, hendrerit magna. Suspendisse urna erat, tristique at sapien lacinia, ornare fringilla orci. Duis at feugiat turpis, eu dapibus purus. Nulla ornare nisi eu pellentesque vestibulum. Nam vulputate magna vel luctus mollis. Nulla vitae elit et est lobortis laoreet in non nisl.</div>
+              {{legal.legalTermsandConditions}}</div>
           </div>
 
           <div class="panel m-b-none">
             <div class="collapse" id="accordion-footer-privacy" role="tabpanel">
               <h4>Privacy Policy</h4>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla placerat libero nec arcu ultricies, eget tempus ligula pellentesque. In hac habitasse platea dictumst. Cras dolor mauris, blandit id accumsan ut, congue sed sem. Curabitur eu tellus sodales, fermentum quam a, hendrerit magna. Suspendisse urna erat, tristique at sapien lacinia, ornare fringilla orci. Duis at feugiat turpis, eu dapibus purus. Nulla ornare nisi eu pellentesque vestibulum. Nam vulputate magna vel luctus mollis. Nulla vitae elit et est lobortis laoreet in non nisl.</div>
+              {{legal.legalPrivacyPolicy}}</div>
           </div>
 
           <div class="panel m-b-none">
             <div class="collapse" id="accordion-footer-return" role="tabpanel">
               <h4>Return Policy</h4>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla placerat libero nec arcu ultricies, eget tempus ligula pellentesque. In hac habitasse platea dictumst. Cras dolor mauris, blandit id accumsan ut, congue sed sem. Curabitur eu tellus sodales, fermentum quam a, hendrerit magna. Suspendisse urna erat, tristique at sapien lacinia, ornare fringilla orci. Duis at feugiat turpis, eu dapibus purus. Nulla ornare nisi eu pellentesque vestibulum. Nam vulputate magna vel luctus mollis. Nulla vitae elit et est lobortis laoreet in non nisl.</div>
+              {{legal.legalReturnPolicy}}</div>
           </div>
         </div>
       </div>

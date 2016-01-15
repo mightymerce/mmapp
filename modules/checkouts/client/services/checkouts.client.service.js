@@ -17,7 +17,7 @@ angular.module('checkouts').factory('Checkouts', ['$resource',
 
 angular.module('checkouts').factory('PaypalServicesSetExpressCheckout', ['$resource',
   function($resource) {
-    return $resource('api/paypal/paypalSetExpressCheckout/:USER/:PWD/:SIGNATURE/:returnUrl/:cancelUrl/:brandName/:brandLogoUrl/:productName/:productDescription/:productQuantity/:cartAmount/:buyerMail/:productCurrency', {
+    return $resource('api/paypal/paypalSetExpressCheckout/:USER/:PWD/:SIGNATURE/:returnUrl/:cancelUrl/:brandName/:brandLogoUrl/:productName/:productDescription/:productQuantity/:cartAmount/:buyerMail/:productCurrency/:cartShippingAmount/:productItemAmount/:productNo', {
       USER: '',
       PWD: '',
       SIGNATURE: '',
@@ -30,7 +30,10 @@ angular.module('checkouts').factory('PaypalServicesSetExpressCheckout', ['$resou
       productQuantity: null,
       cartAmount: null,
       buyerMail: '',
-      productCurrency: ''
+      productCurrency: '',
+      cartShippingAmount: '',
+      productNo: '',
+      productItemAmount: ''
 
     }, {
       query: { method: 'GET', isArray: false }
@@ -96,6 +99,24 @@ angular.module('checkouts').factory('ChoutServices', ['$http', '$q',
           // this callback will be called asynchronously
           // when the response is available
           console.log('checkouts.client.service.js - GetUser - Success');
+          console.log(response);
+          // The return value gets picked up by the then in the controller.
+          return response.data;
+        }, function errorCallback(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+        });
+        return promise;
+      },
+      getDelivery: function getDelivery(id) {
+        console.log('checkouts.client.service.js - GetDelivery - Deliveryid: ' +id);
+        var promise = $http({
+          method: 'GET',
+          url: '/api/deliverys/' +id
+        }).then(function successCallback(response) {
+          // this callback will be called asynchronously
+          // when the response is available
+          console.log('checkouts.client.service.js - GetDelivery - Success');
           console.log(response);
           // The return value gets picked up by the then in the controller.
           return response.data;

@@ -1,0 +1,31 @@
+{
+  "name": "ngTouchSpin",
+  "homepage": "https://github.com/jkuri/ngTouchSpin",
+  "authors": [
+    "Jan Kuri <jkuri88@gmail.com>"
+  ],
+  "description": "AngularJS Bootstrap Touchspin Implementation",
+  "main": "src/js/ngTouchSpin.js",
+  "keywords": [
+    "Bootstrap",
+    "Touchspin"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "28100f1630",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "28100f16300ecdf50493b72ce7c10bea6e1f8819"
+  },
+  "_source": "git://github.com/jkuri/ngTouchSpin.git",
+  "_target": "*",
+  "_originalSource": "ngTouchSpin",
+  "_direct": true
+}

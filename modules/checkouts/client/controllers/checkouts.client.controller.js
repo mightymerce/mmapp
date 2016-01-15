@@ -4,6 +4,7 @@
 angular.module('checkouts').controller('CheckoutsController', ['$window', '$scope', '$stateParams', '$location', '$http', 'Authentication', 'Checkouts', 'ChoutServices', 'PaypalServicesSetExpressCheckout', 'PaypalServicesGetExpressCheckoutDetails', 'Products', 'Users', 'Orders', 'Legals', '$cookieStore',
   function ($window, $scope, $stateParams, $location, $http, Authentication, Checkouts, ChoutServices, PaypalServicesSetExpressCheckout, PaypalServicesGetExpressCheckoutDetails, Products, Users, Orders, Legals, $cookieStore) {
     $scope.authentication = Authentication;
+    $scope.totalPrice = '';
 
     // set the default bootswatch name
     $scope.css = 'modules/checkouts/client/css/style-min.css';
@@ -23,6 +24,11 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
         // Get Merchant information for product
         ChoutServices.getUser($scope.product.user._id).then(function (Users){
           $scope.user = Users;
+        });
+
+        // Get Delivery option information for product
+        ChoutServices.getDelivery($scope.product.productShippingoption).then(function (Delivery){
+          $scope.delivery = Delivery;
         });
 
         // Get Merchant legal information
@@ -131,6 +137,9 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
           cancelUrl = $location.protocol() + '://' + $location.host() + '/checkouts/cancel/cancel';
         }
 
+        console.log('checkouts.client.controller - paypalSetExpressCheckout shippingAmount: ' +$('.lbl-shipping-PP').val());
+        console.log('checkouts.client.controller - paypalSetExpressCheckout productPrice: ' +$scope.product.productPrice);
+
         PaypalServicesSetExpressCheckout.query({
           USER: $scope.user.paypalUser,
           PWD: $scope.user.paypalPwd,
@@ -141,8 +150,11 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
           brandLogoUrl: $scope.user.profileImageURL,
           productName: $scope.product.productTitle.substring(0,120),
           productDescription: $scope.product.productDescription.substring(0,120),
-          productQuantity: 1,
-          cartAmount: 125.27,
+          productNo: $scope.product.productId,
+          productQuantity: $('.amount').val(),
+          cartAmount: $('.lbl-total-PP').val(),
+          cartShippingAmount: $('.lbl-shipping-PP').val(),
+          productItemAmount: $('.lbl-itemprice-PP').val(),
           buyerMail: '@',
           productCurrency: 'EUR'
         }, function(data) {
@@ -156,6 +168,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
           $cookieStore.put('paypal.user.userId', $scope.user._id);
           $cookieStore.put('paypal.product.productTitle', $scope.product.productTitle);
           $cookieStore.put('paypal.product.productDescription', $scope.product.productDescription);
+          $cookieStore.put('paypal.product.productPrice', $scope.product.productPrice);
           console.log('checkouts.client.controller - paypalSetExpressCheckout - profileImageURL: ' +$scope.user.profileImageURL);
           $window.open(data.redirectUrl);
         });
@@ -183,6 +196,9 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
             doPayment: false
 
           }, function(data) {
+
+            console.log('checkouts.client.controller - getExpressDetails - response data-object: ' +data);
+
             $scope.paypal = data;
             $scope.paypaltoken = $location.search().token;
             $scope.profileImageURL = $cookieStore.get('paypal.user.profileImageURL');
@@ -191,6 +207,24 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
             $scope.merchantURLText = $cookieStore.get('paypal.user.merchantURLText');
             $scope.productTitle = $cookieStore.get('paypal.product.productTitle');
             $scope.productDescription = $cookieStore.get('paypal.product.productDescription');
+
+            $scope.paypal.PAYMENTREQUEST_0_ITEMAMT = data.PAYMENTREQUEST_0_AMT;
+            $scope.paypal.PAYMENTREQUEST_0_AMT = data.PAYMENTREQUEST_0_AMT;
+            $scope.paypal.L_PAYMENTREQUEST_0_QTY0 = data.L_PAYMENTREQUEST_0_QTY0;
+            $scope.paypal.PAYMENTREQUEST_0_SHIPPINGAMT = data.PAYMENTREQUEST_0_SHIPPINGAMT;
+            console.log(data.PAYMENTREQUEST_0_AMT);
+
+            $('.lbl-total').text(data.PAYMENTREQUEST_0_AMT);
+            $('.lbl-priceperitem').text($cookieStore.get('paypal.product.productPrice'));
+            $('.lbl-quantity').text(1);
+            $('.lbl-shipping').text('2,5');
+
+            $cookieStore.put('paypal.PAYMENTREQUEST_0_HANDLINGAMT', data.PAYMENTREQUEST_0_HANDLINGAMT);
+            $cookieStore.put('paypal.PAYMENTREQUEST_0_SHIPPINGAMT', data.PAYMENTREQUEST_0_SHIPPINGAMT);
+            $cookieStore.put('paypal.PAYMENTREQUEST_0_ITEMAMT', data.PAYMENTREQUEST_0_ITEMAMT);
+            $cookieStore.put('paypal.PAYMENTREQUEST_0_CURRENCYCODE', data.PAYMENTREQUEST_0_CURRENCYCODE);
+            $cookieStore.put('paypal.PAYMENTREQUEST_0_AMT', data.PAYMENTREQUEST_0_AMT);
+            $cookieStore.put('paypal.L_PAYMENTREQUEST_0_QTY0', data.L_PAYMENTREQUEST_0_QTY0);
 
             // Put values to store in next step to cookieStore
             $cookieStore.put('paypal.data', data);

@@ -1,21 +1,27 @@
 /*
 *   FUNCTIONS
 */
-/*
+
 function parseCurrency(number) {
+
     var options = new JsNumberFormatter.locales.formatOptions('de')
                     .specifyDecimalMask('00');
     number = JsNumberFormatter.formatNumber(number, options, true);
+
     return number;
+
 }
 
 function parseCurrencyForPP(number) {
+
     var options = new JsNumberFormatter.locales.formatOptions('us')
                     .specifyDecimalMask('00');
     number = JsNumberFormatter.formatNumber(number, options, true);
+
     return number;
+
 }
-*/
+
 function calculatePrices() {
 
     var singlePriceData = $('.single-price').data('value');
@@ -42,6 +48,10 @@ function calculatePrices() {
     var subtotal = amount * singlePrice;
     var total = subtotal + shipping;
     var vat = total * 19 / 100;
+    console.log('Amount: ' +amount);
+    console.log('Subtotal: ' +subtotal);
+    console.log('Total: ' +total);
+
 
     $('.single-price').text(parseCurrency(singlePrice) + ' €');
     $('.highlight-price').text(parseCurrency(singlePrice) + ' €');
@@ -50,8 +60,10 @@ function calculatePrices() {
     $('.lbl-shipping').text(parseCurrency(shipping) + ' €');
     $('.lbl-subtotal').text(parseCurrency(subtotal) + ' €');
     $('#PAYMENTREQUEST_0_ITEMAMT').val(parseCurrencyForPP(subtotal));
-    $('.lbl-total').text(parseCurrency(total) + ' €');
-    $('#PAYMENTREQUEST_0_AMT').val(parseCurrencyForPP(total));
+    $('.lbl-total').text(parseCurrency(total));
+    $('.lbl-total-PP').val(parseCurrencyForPP(total));
+    $('.lbl-shipping-PP').val(parseCurrencyForPP(shipping));
+    $('.lbl-itemprice-PP').val(parseCurrencyForPP(singlePrice));
     $('.lbl-vat').text(parseCurrency(vat) + ' €');
 }
 
@@ -99,16 +111,20 @@ $("input.amount").TouchSpin({
 });
 
 $(document).ready(".bootstrap-touchspin-up").click(function() {
+    setTimeout(function(){
       calculatePrices();
+    }, 1000);
 });
 
 $(document).ready(function() {
-      calculatePrices();
-      trimString('.js-headline', 70);
-      $('.js-content').shorten({
+    setTimeout(function(){
+        calculatePrices();
+        trimString('.js-headline', 70);
+        $('.js-content').shorten({
             moreText: '(read more)',
             lessText: '(read less)'
         });
+    }, 2000);
 });
 
 
@@ -126,9 +142,9 @@ $('.address-identical').change(function() {
 });
 
 
-//$('#details-form').validator();
+$('#details-form').validator();
 
-/*$('#details-form').validator().on('submit', function (e) {
+$('#details-form').validator().on('submit', function (e) {
   if (e.isDefaultPrevented()) {
     scrollToDiv('#belowpicture', 0);
   } else {
@@ -157,4 +173,4 @@ $('.address-identical').change(function() {
     scrollToDiv('#belowpicture', 0);
   }
 });
-*/
+
