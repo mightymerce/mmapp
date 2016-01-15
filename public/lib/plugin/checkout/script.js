@@ -52,8 +52,6 @@ function calculatePrices() {
     console.log('Subtotal: ' +subtotal);
     console.log('Total: ' +total);
 
-    alert('single-price: ' +singlePrice + ' amount: ' +amount);
-
 
     $('.single-price').text(parseCurrency(singlePrice) + ' €');
     $('.highlight-price').text(parseCurrency(singlePrice) + ' €');
