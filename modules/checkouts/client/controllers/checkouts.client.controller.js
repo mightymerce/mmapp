@@ -137,9 +137,6 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
           cancelUrl = $location.protocol() + '://' + $location.host() + '/checkouts/cancel/cancel';
         }
 
-        console.log('checkouts.client.controller - paypalSetExpressCheckout shippingAmount: ' +$('.lbl-shipping-PP').val());
-        console.log('checkouts.client.controller - paypalSetExpressCheckout productPrice: ' +$scope.product.productPrice);
-
         PaypalServicesSetExpressCheckout.query({
           USER: $scope.user.paypalUser,
           PWD: $scope.user.paypalPwd,
@@ -155,6 +152,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
           cartAmount: $('.lbl-total-PP').val(),
           cartShippingAmount: $('.lbl-shipping-PP').val(),
           productItemAmount: $('.lbl-itemprice-PP').val(),
+          cartSubtotalAmount: $('.lbl-subtotal-PP').val(),
           buyerMail: '@',
           productCurrency: 'EUR'
         }, function(data) {
@@ -208,16 +206,16 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
             $scope.productTitle = $cookieStore.get('paypal.product.productTitle');
             $scope.productDescription = $cookieStore.get('paypal.product.productDescription');
 
-            $scope.paypal.PAYMENTREQUEST_0_ITEMAMT = data.PAYMENTREQUEST_0_AMT;
-            $scope.paypal.PAYMENTREQUEST_0_AMT = data.PAYMENTREQUEST_0_AMT;
-            $scope.paypal.L_PAYMENTREQUEST_0_QTY0 = data.L_PAYMENTREQUEST_0_QTY0;
-            $scope.paypal.PAYMENTREQUEST_0_SHIPPINGAMT = data.PAYMENTREQUEST_0_SHIPPINGAMT;
             console.log(data.PAYMENTREQUEST_0_AMT);
 
+            $('.single-price').text(data.L_PAYMENTREQUEST_0_AMT0);
             $('.lbl-total').text(data.PAYMENTREQUEST_0_AMT);
-            $('.lbl-priceperitem').text($cookieStore.get('paypal.product.productPrice'));
-            $('.lbl-quantity').text(1);
-            $('.lbl-shipping').text('2,5');
+            $('.lbl-priceperitem').text(data.L_PAYMENTREQUEST_0_AMT0);
+            $('.lbl-quantity').text(data.L_PAYMENTREQUEST_0_QTY0);
+            $('.amount').text(data.L_PAYMENTREQUEST_0_QTY0);
+            $('.lbl-shipping').text(data.PAYMENTREQUEST_0_SHIPPINGAMT);
+            $('.lbl-subtotal').text(data.PAYMENTREQUEST_0_ITEMAMT);
+
 
             $cookieStore.put('paypal.PAYMENTREQUEST_0_HANDLINGAMT', data.PAYMENTREQUEST_0_HANDLINGAMT);
             $cookieStore.put('paypal.PAYMENTREQUEST_0_SHIPPINGAMT', data.PAYMENTREQUEST_0_SHIPPINGAMT);

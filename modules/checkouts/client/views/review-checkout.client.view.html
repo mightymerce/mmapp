@@ -17,7 +17,7 @@
                     </a>
                   </div>
                   <img ng-src="{{productMainImageURL}}" class="teaser-img" />
-                  <button class="btn m-b-xs w-xs btn-info single-price" ng-bind="paypal.PAYMENTREQUEST_0_AMT" data-value="{{paypal.PAYMENTREQUEST_0_AMT}}"></button>
+                  <button class="btn m-b-xs w-xs btn-info single-price" ></button>
 
                   <div class="bg-light lter b-b wrapper-md wrapper-p5" id="belowpicture">
                     <span class="text-muted step-headline">Review your order</span>
@@ -86,7 +86,7 @@
                               <tbody>
                               <tr>
                                 <td>Quantity</td>
-                                <td><span class="lbl-quantity"></span></td>
+                                <td><span class="lbl-quantity"></span><span class="amount" hidden></span></td>
                               </tr>
                               <tr>
                                 <td>Price per item</td>

@@ -52,6 +52,8 @@ function calculatePrices() {
     console.log('Subtotal: ' +subtotal);
     console.log('Total: ' +total);
 
+    alert('single-price: ' +singlePrice + ' amount: ' +amount);
+
 
     $('.single-price').text(parseCurrency(singlePrice) + ' €');
     $('.highlight-price').text(parseCurrency(singlePrice) + ' €');
@@ -64,6 +66,7 @@ function calculatePrices() {
     $('.lbl-total-PP').val(parseCurrencyForPP(total));
     $('.lbl-shipping-PP').val(parseCurrencyForPP(shipping));
     $('.lbl-itemprice-PP').val(parseCurrencyForPP(singlePrice));
+    $('.lbl-subtotal-PP').val(parseCurrencyForPP(subtotal));
     $('.lbl-vat').text(parseCurrency(vat) + ' €');
 }
 
@@ -124,7 +127,7 @@ $(document).ready(function() {
             moreText: '(read more)',
             lessText: '(read less)'
         });
-    }, 2000);
+    }, 5000);
 });
 
 

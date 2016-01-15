@@ -144,6 +144,13 @@ exports.paypalSetExpressCheckout = function (req, res) {
     category: 'Physical'
   }]);
 
+  console.log('checkout.server.controller - paypalSetExpressCheckout - productDescription: ' +req.params.productDescription);
+
+  console.log('shippingamount: ' +req.params.cartShippingAmount);
+  console.log('itemamount: ' +req.params.productItemAmount);
+  console.log('quantity: ' +req.params.productQuantity);
+  console.log('cart amount: ' +req.params.cartAmount);
+
   // Invoice must be unique.
   var invoice = uuid.v4();
   paypal.setExpressCheckoutPayment(
@@ -154,6 +161,7 @@ exports.paypalSetExpressCheckout = function (req, res) {
       req.params.productCurrency,
       req.params.cartShippingAmount,
       req.params.productItemAmount,
+      req.params.cartSubtotalAmount,
       req.params.returnUrl,
       req.params.cancelUrl,
       false,

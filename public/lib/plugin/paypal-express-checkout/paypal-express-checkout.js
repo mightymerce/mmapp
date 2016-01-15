@@ -174,10 +174,11 @@ Paypal.prototype.getItemsParams = function() {
  * @param  {String}   currency      EUR, USD
  * @param  {Number}   cartshipping      [description]
  * @param  {Number}   itemamount      [description]
+ * @param  {Number}   cartSubtotalAmount    [description]
  * @param  {Function} callback      [description]
  * @return {PayPal}                 [description]
  */
-Paypal.prototype.setExpressCheckoutPayment = function(email, invoiceNumber, amount, description, currency, cartshipping, itemamount, returnUrl, cancelUrl, onlyPayPalUsers, callback) {
+Paypal.prototype.setExpressCheckoutPayment = function(email, invoiceNumber, amount, description, currency, cartshipping, itemamount, cartSubtotalAmount, returnUrl, cancelUrl, onlyPayPalUsers, callback) {
 	var self = this;
 	var params = self.params();
 	if (email) {
@@ -191,7 +192,7 @@ Paypal.prototype.setExpressCheckoutPayment = function(email, invoiceNumber, amou
 	params.PAYMENTREQUEST_0_INVNUM = invoiceNumber;
 	params.PAYMENTREQUEST_0_CUSTOM = invoiceNumber + '|' + params.PAYMENTREQUEST_0_AMT + '|' + currency;
 	params.PAYMENTREQUEST_0_PAYMENTACTION = 'Sale';
-	params.PAYMENTREQUEST_0_ITEMAMT = prepareNumber(itemamount);
+	params.PAYMENTREQUEST_0_ITEMAMT = prepareNumber(cartSubtotalAmount);
 	params.PAYMENTREQUEST_0_SHIPPINGAMT = cartshipping;
 
 	params = _.extend(params, this.getItemsParams());

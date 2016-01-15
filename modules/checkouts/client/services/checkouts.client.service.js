@@ -17,7 +17,7 @@ angular.module('checkouts').factory('Checkouts', ['$resource',
 
 angular.module('checkouts').factory('PaypalServicesSetExpressCheckout', ['$resource',
   function($resource) {
-    return $resource('api/paypal/paypalSetExpressCheckout/:USER/:PWD/:SIGNATURE/:returnUrl/:cancelUrl/:brandName/:brandLogoUrl/:productName/:productDescription/:productQuantity/:cartAmount/:buyerMail/:productCurrency/:cartShippingAmount/:productItemAmount/:productNo', {
+    return $resource('api/paypal/paypalSetExpressCheckout/:USER/:PWD/:SIGNATURE/:returnUrl/:cancelUrl/:brandName/:brandLogoUrl/:productName/:productDescription/:productQuantity/:cartAmount/:buyerMail/:productCurrency/:cartShippingAmount/:productItemAmount/:productNo/:cartSubtotalAmount', {
       USER: '',
       PWD: '',
       SIGNATURE: '',
@@ -33,7 +33,8 @@ angular.module('checkouts').factory('PaypalServicesSetExpressCheckout', ['$resou
       productCurrency: '',
       cartShippingAmount: '',
       productNo: '',
-      productItemAmount: ''
+      productItemAmount: '',
+      cartSubtotalAmount: ''
 
     }, {
       query: { method: 'GET', isArray: false }
