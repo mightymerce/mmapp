@@ -9,6 +9,12 @@
         <div class="col">
           <div class="wrapper-md">
             <div class="row">
+              <div ng-show="error" class="alert alert-danger">
+                <p ng-bind="error"></p>
+              </div>
+              <div ng-show="success" class="alert alert-success">
+                <p ng-bind="success"></p>
+              </div>
               <div class="col-md-6 col-md-offset-3">
                 <div class="panel b-a">
                   <div class="panel-heading">
@@ -53,7 +59,7 @@
                                     <td><span class="lbl-subtotal"></span></td>
                                   </tr>
                                   <tr>
-                                    <td>Shipping (Standard)</td>
+                                    <td>Shipping ({{delivery.deliveryTitle}})</td>
                                     <td><span class="lbl-shipping" data-ng-bind="delivery.deliveryCost" data-value="{{delivery.deliveryCost}}"></span></td>
                                   </tr>
                                   <tr class="total">
@@ -71,10 +77,11 @@
 
                             <img ng-click="checkoutPaypal()" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" />
 
-                            <input type="text" value="0" class="form-control lbl-subtotal-PP" />
-                            <input type="text" value="0" class="form-control lbl-total-PP" />
-                            <input type="text" value="0" class="form-control lbl-shipping-PP" />
-                            <input type="text" value="0" class="form-control lbl-itemprice-PP" />
+                            <input ng-hide="true" type="text" value="0" class="form-control lbl-subtotal-PP" hidden />
+                            <input ng-hide="true" type="text" value="0" class="form-control lbl-total-PP" hidden />
+                            <input ng-hide="true" type="text" value="0" class="form-control lbl-shipping-PP" hidden />
+                            <input ng-hide="true" type="text" value="0" class="form-control lbl-itemprice-PP" hidden />
+                            <input ng-hide="true" type="text" value="0" class="form-control lbl-vat-PP" hidden />
 
                           </aside>
                         </div>

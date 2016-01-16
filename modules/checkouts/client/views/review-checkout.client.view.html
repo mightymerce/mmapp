@@ -46,7 +46,7 @@
                         <h3>Shipping option</h3>
                         <div class="row">
                           <div class="col-xs-12">
-                            <div class="review-shipping-option"></div>
+                            <div class="review-shipping-option">{{deliveryTitle}} - {{deliveryTime}}</div>
                           </div>
                         </div>
                         <div class="row">
@@ -97,7 +97,7 @@
                                 <td><span class="lbl-subtotal"></span></td>
                               </tr>
                               <tr>
-                                <td>Shipping (Standard)</td>
+                                <td>Shipping ({{delivery.deliveryTitle}})</td>
                                 <td><span class="lbl-shipping"></span></td>
                               </tr>
                               <tr class="total">
@@ -106,7 +106,7 @@
                               </tr>
                               <tr class="small">
                                 <td>incl. VAT</td>
-                                <td><span class="lbl-vat"></span></td>
+                                <td><span class="lbl-vat"></span>{{vat}}</td>
                               </tr>
                               </tbody>
                             </table>

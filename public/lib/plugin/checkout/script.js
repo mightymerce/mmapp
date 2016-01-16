@@ -65,6 +65,7 @@ function calculatePrices() {
     $('.lbl-shipping-PP').val(parseCurrencyForPP(shipping));
     $('.lbl-itemprice-PP').val(parseCurrencyForPP(singlePrice));
     $('.lbl-subtotal-PP').val(parseCurrencyForPP(subtotal));
+    $('.lbl-vat-PP').val(parseCurrencyForPP(vat));
     $('.lbl-vat').text(parseCurrency(vat) + ' €');
 }
 
@@ -125,7 +126,7 @@ $(document).ready(function() {
             moreText: '(read more)',
             lessText: '(read less)'
         });
-    }, 5000);
+    }, 1000);
 });
 
 

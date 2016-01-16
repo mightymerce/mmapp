@@ -24,7 +24,7 @@
                       <div class="row">
                         <div class="col-xs-12">
                           <div class="panel b-a text-center agreement">
-                            <p><strong>Thank you for your order {{PAYMENTREQUEST_0_INVNUM}}! A confirmation of your order will be sent to {{ordereMail}}</strong></p>
+                            <p><strong>Thank you for your order {{PAYMENTREQUEST_0_INVNUM}}! A confirmation of your order will be sent to {{ordereMAIL}}</strong></p>
                           </div>
                         </div>
                       </div>
@@ -65,27 +65,27 @@
                             <tbody>
                             <tr>
                               <td>Quantity</td>
-                              <td><span class="lbl-quantity">{{orderProductQuantity}}</span></td>
+                              <td><span class="lbl-quantity">{{L_PAYMENTREQUEST_0_QTY0}}</span></td>
                             </tr>
                             <tr>
                               <td>Price per item</td>
-                              <td><span class="lbl-priceperitem">{{PAYMENTREQUEST_0_ITEMAMT}} {{orderShipToCurrencyCode}}</span></td>
+                              <td><span class="lbl-priceperitem">{{PAYMENTREQUEST_0_ITEMAMT}}</span></td>
                             </tr>
                             <tr>
                               <td>Subtotal</td>
-                              <td><span class="lbl-subtotal"></span></td>
+                              <td><span class="lbl-subtotal">{{PAYMENTREQUEST_0_AMT}}</span></td>
                             </tr>
                             <tr>
-                              <td>Shipping (Standard)</td>
-                              <td><span class="lbl-shipping" data-value="4.9">{{PAYMENTREQUEST_0_SHIPPINGAMT}}</span></td>
+                              <td>Shipping ({{delivery.deliveryTitle}})</td>
+                              <td><span class="lbl-shipping">{{PAYMENTREQUEST_0_SHIPPINGAMT}}</span></td>
                             </tr>
                             <tr class="total">
                               <td>Total</td>
-                              <td><span class="lbl-total"></span>{{orderShipToTotalAmount}}</td>
+                              <td><span class="lbl-total"></span>{{PAYMENTREQUEST_0_AMT}}</td>
                             </tr>
                             <tr class="small">
                               <td>incl. VAT</td>
-                              <td><span class="lbl-vat"></span></td>
+                              <td><span class="lbl-vat"></span>{{vat}}</td>
                             </tr>
                             </tbody>
                           </table>

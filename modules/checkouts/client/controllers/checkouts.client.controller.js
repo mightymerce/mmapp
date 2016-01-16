@@ -167,6 +167,11 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
           $cookieStore.put('paypal.product.productTitle', $scope.product.productTitle);
           $cookieStore.put('paypal.product.productDescription', $scope.product.productDescription);
           $cookieStore.put('paypal.product.productPrice', $scope.product.productPrice);
+          $cookieStore.put('paypal.delivery.deliveryTitle', $scope.delivery.deliveryTitle);
+          $cookieStore.put('paypal.delivery.productPrice', $scope.delivery.deliveryTime);
+          $cookieStore.put('paypal.order.vat', $('.lbl-vat-PP').val());
+          $cookieStore.put('paypal.order.subtotal', $('.lbl-subtotal-PP').val());
+
           console.log('checkouts.client.controller - paypalSetExpressCheckout - profileImageURL: ' +$scope.user.profileImageURL);
           $window.open(data.redirectUrl);
         });
@@ -205,6 +210,9 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
             $scope.merchantURLText = $cookieStore.get('paypal.user.merchantURLText');
             $scope.productTitle = $cookieStore.get('paypal.product.productTitle');
             $scope.productDescription = $cookieStore.get('paypal.product.productDescription');
+            $scope.deliveryTitle = $cookieStore.get('paypal.delivery.deliveryTitle');
+            $scope.deliveryTime = $cookieStore.get('paypal.delivery.productPrice');
+            $scope.vat = $cookieStore.get('paypal.order.vat');
 
             console.log(data.PAYMENTREQUEST_0_AMT);
 
@@ -300,7 +308,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
 
           // Populate hidden fields for later save
           $scope.orderId = data.PAYMENTREQUEST_0_INVNUM;
-          $scope.orderDate = data.PAYMENTINFO_0_ORDERTIME;
+          $scope.orderDate = data.TIMESTAMP;
           $scope.orderShippingCost = $cookieStore.get('paypal.PAYMENTREQUEST_0_SHIPPINGAMT');
           $scope.orderChannel = '';
           $scope.orderTransactionID = data.PAYMENTINFO_0_TRANSACTIONID;
@@ -333,8 +341,8 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
           $scope.orderCustomerPayerMessage = $cookieStore.get('paypal.PAYMENTREQUEST_0_NOTETEXT');
 
 
-          /*// Put values to store in next step to cookieStore
-          $cookieStore.put('paypal.data', data);
+          // Put values to store in next step to cookieStore
+          /*$cookieStore.put('paypal.data', data);
           $cookieStore.put('paypal.data.token', $location.search().token);
 
           $cookieStore.put('paypal.PAYMENTREQUEST_0_NOTETEXT', data.PAYMENTREQUEST_0_NOTETEXT);
@@ -358,7 +366,8 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
           $cookieStore.put('paypal.PAYMENTREQUEST_0_SHIPTOSTATE', data.PAYMENTREQUEST_0_SHIPTOSTATE);
           $cookieStore.put('paypal.PAYMENTREQUEST_0_SHIPTOZIP', data.PAYMENTREQUEST_0_SHIPTOZIP);
           $cookieStore.put('paypal.PAYMENTREQUEST_0_SHIPTOCOUNTRYNAME', data.PAYMENTREQUEST_0_SHIPTOCOUNTRYNAME);
-          $cookieStore.put('paypal.PAYMENTREQUEST_0_SHIPTOPHONENUM', data.PAYMENTREQUEST_0_SHIPTOPHONENUM);*/
+          $cookieStore.put('paypal.PAYMENTREQUEST_0_SHIPTOPHONENUM', data.PAYMENTREQUEST_0_SHIPTOPHONENUM);
+          */
 
           console.log('checkouts.client.controller - doPayment - save data to DB');
           // Save order in Mongose
@@ -448,7 +457,9 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
       $scope.L_PAYMENTREQUEST_0_QTY0 = $cookieStore.get('paypal.L_PAYMENTREQUEST_0_QTY0');
 
       // Payer Information
-      $scope.EMAIL = $cookieStore.get('paypal.EMAIL');
+      $scope.ordereMAIL = $cookieStore.get('paypal.EMAIL');
+      $scope.vat = $cookieStore.get('paypal.order.vat');
+      $scope.subtotal = $cookieStore.get('paypal.order.subtotal');
 
       $scope.PAYMENTREQUEST_0_SHIPTONAME = $cookieStore.get('paypal.PAYMENTREQUEST_0_SHIPTONAME');
       $scope.PAYMENTREQUEST_0_SHIPTOSTREET = $cookieStore.get('paypal.PAYMENTREQUEST_0_SHIPTOSTREET');
