@@ -10,8 +10,11 @@
       <ul class="nav navbar-nav">
         <li class="dropdown">
           <ul class="nav navbar-nav" ng-if="menu.shouldRender(authentication.user);">
-            <li class="active" ng-hide="!authentication.user">
+            <li class="active" ng-show="basicData">
               <a aria-expanded="false" role="button" ui-sref="dashboard"> Dashboard</a>
+            </li>
+            <li class="active" ng-hide="basicData">
+              <a aria-expanded="false" role="button" ui-sref="tutorial"> Tutorial</a>
             </li>
             <li ng-repeat="item in menu.items | orderBy: 'position'" ng-if="item.shouldRender(authentication.user);" ng-switch="item.type" ng-class="{ active: $state.includes(item.state), dropdown: item.type === 'dropdown' }" class="{{item.class}}" dropdown="item.type === 'dropdown'">
               <a ng-switch-when="dropdown" class="dropdown-toggle" dropdown-toggle role="button">{{::item.title}}&nbsp;<span class="caret"></span></a>

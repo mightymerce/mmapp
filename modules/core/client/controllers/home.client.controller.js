@@ -10,18 +10,26 @@ angular.module('core').controller('HomeController', ['$scope', '$route', '$locat
     $scope.authentication = Authentication;
 
     // Find existing Order for logged in User
-    $scope.initDashboard = function () {
+    $scope.initHome = function () {
       // This provides Authentication context.
       $scope.authentication = Authentication;
 
       console.log('home.client.controller - onLoad - scope.authentication.user: '+ $scope.authentication.user);
 
+      if ($scope.authentication.user.tutorialCompanyDetail === '0' ||
+          $scope.authentication.user.tutorialLegalDetail === '0' ||
+          $scope.authentication.user.tutorialPaypalDetail === '0' ||
+          $scope.authentication.user.tutorialDeliveryDetail === '0' ||
+          $scope.authentication.user.tutorialProductDetail === '0') {
+        // Load Tutorial
+        $state.go('tutorial', $state.previous.params);
+      }
       // If user is signed in then redirect back home
-      if (!$scope.authentication.user) {
+      else if (!$scope.authentication.user) {
         // And redirect to the previous or home page
         $state.go('home', $state.previous.params);
-      }
-      else {
+      } else {
+        // Load Dashboard
         console.log('home.client.controller - initDashboard - getOrders');
 
         Orders.query({ user:$scope.authentication.user._id }, function(orders) {

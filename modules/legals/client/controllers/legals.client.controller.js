@@ -1,8 +1,8 @@
 'use strict';
 
 // Legals controller
-angular.module('legals').controller('LegalsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Legals',
-  function ($scope, $stateParams, $location, Authentication, Legals) {
+angular.module('legals').controller('LegalsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Legals', 'Users',
+  function ($scope, $stateParams, $location, Authentication, Legals, Users) {
     $scope.authentication = Authentication;
 
     // Create new Legal
@@ -26,6 +26,17 @@ angular.module('legals').controller('LegalsController', ['$scope', '$stateParams
 
       // Redirect after save
       legal.$save(function (response) {
+        // in case create update for tutorial
+        if ($scope.authentication.user.tutorialLegalDetail === '0') {
+          var user = new Users($scope.user);
+          user.tutorialLegalDetail = '1';
+
+          user.$update(function (response) {
+            console.log('edit-profile.client.controller - updateUser - tutorial flag');
+          }, function (errorResponse) {
+            console.log('edit-profile.client.controller - updateUser - tutorial flag error');
+          });
+        }
         $scope.success = 'You successfully created a legal option.';
         $location.path('legals/' + response._id + '/edit');
 

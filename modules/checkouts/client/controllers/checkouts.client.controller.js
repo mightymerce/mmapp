@@ -36,6 +36,9 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
           user: $scope.product.user
         });
 
+        // ToDo get channel from URL
+        $cookieStore.put('order.channel', $location.search().channel);
+
       });
       console.log('checkouts.client.controller - findOne - end');
     };
@@ -310,7 +313,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
           $scope.orderId = data.PAYMENTREQUEST_0_INVNUM;
           $scope.orderDate = data.TIMESTAMP;
           $scope.orderShippingCost = $cookieStore.get('paypal.PAYMENTREQUEST_0_SHIPPINGAMT');
-          $scope.orderChannel = '';
+          $scope.orderChannel = $cookieStore.get('order.channel');
           $scope.orderTransactionID = data.PAYMENTINFO_0_TRANSACTIONID;
           $scope.orderCustomer = $cookieStore.get('paypal.FIRSTNAME') + ' ' + $cookieStore.get('paypal.LASTNAME');
           $scope.orderPaymentStatus = data.PAYMENTINFO_n_PAYMENTSTATUS;  // Todo verify status https://developer.paypal.com/docs/classic/api/merchant/DoExpressCheckoutPayment_API_Operation_NVP/

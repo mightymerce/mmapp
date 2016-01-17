@@ -1,0 +1,150 @@
+<section id="HomeController" data-ng-controller="TutorialController" ng-init="initHome()">
+
+  <div class="gray-bg">
+    <div class="wrapper wrapper-content" data-ng-controller="HomeController">
+      <div class="row animated fadeInRight">
+        <div class="col-lg-8">
+          <div class="ibox float-e-margins">
+            <div class="ibox-content gray-bg" align="center">
+              <h2>Welcome <span ng-bind="authentication.user.displayName"></span></h2>
+              <p>Take these 5 steps and you are ready to sell products on your
+                customer’s favorite social channels and market places.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row animated fadeInRight">
+        <div class="col-lg-8">
+          <div class="ibox float-e-margins">
+            <div class="ibox-content gray-bg">
+              <div id="vertical-timeline" class="vertical-container light-timeline">
+
+                <div class="vertical-timeline-block">
+                  <div ng-show="showCompanyDetails" class="btn btn-warning m-r-sm">
+                    <strong>1</strong>
+                  </div>
+                  <div ng-show="showCompanyDetailsComplete" class="btn btn-primary m-r-sm">
+                    <strong>1</strong>
+                  </div>
+
+                  <div class="vertical-timeline-content">
+                    <h2>Add your company details</h2>
+                    <p>The basics. Please add your company details.</p>
+                    <div  class="text-navy" ng-show="showCompanyDetailsComplete">
+                      <h2>Completed <i class="fa fa-check"></i></h2>
+                    </div>
+                    <div ng-show="showCompanyDetails">
+                      <a href="#" class="btn btn-warning" ui-sref="profile">Maintain company data</a>
+                    </div>
+                    <div ng-show="showCompanyDetailsComplete">
+                      <a href="#" class="btn btn-primary btn-outline" ui-sref="profile">Maintain company data</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="vertical-timeline-block">
+                  <div ng-show="showLegalDetails" class="btn btn-warning m-r-sm">
+                    <strong>2</strong>
+                  </div>
+                  <div ng-show="showLegalDetailsComplete" class="btn btn-primary m-r-sm">
+                    <strong>2</strong>
+                  </div>
+
+                  <div class="vertical-timeline-content">
+                    <h2>Maintain your legal data</h2>
+                    <p>Please add your terms and conditions, return policies, data policies and impress to make sure that your offer complies with legal regulatory.</p>
+                    <div  class="text-navy" ng-show="showLegalDetailsComplete">
+                      <h2>Completed <i class="fa fa-check"></i></h2>
+                    </div>
+                    <div ng-show="showLegalDetails">
+                      <a href="#" class="btn btn-warning" ui-sref="legals.create">Maintain legal data</a>
+                    </div>
+                    <div ng-show="showLegalDetailsComplete">
+                      <a href="#" class="btn btn-primary btn-outline" ui-sref="legals.create">Maintain legal data</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="vertical-timeline-block">
+                  <div ng-show="showPaypalDetails" class="btn btn-warning m-r-sm">
+                    <strong>3</strong>
+                  </div>
+                  <div ng-show="showPaypalDetailsComplete" class="btn btn-primary m-r-sm">
+                    <strong>3</strong>
+                  </div>
+
+                  <div class="vertical-timeline-content">
+                    <h2>Connect your PayPal account</h2>
+                    <p>Activate your PayPal account to facilitate checkout for your customers and to enable payments to your account.
+                    </p>
+                    <div class="text-navy" ng-show="showPaypalDetailsComplete">
+                      <h2>Completed <i class="fa fa-check"></i></h2>
+                    </div>
+                    <div ng-show="showPaypalDetails">
+                      <a href="#" class="btn btn-warning" ui-sref="payment">Connect to Paypal</a>
+                    </div>
+                    <div ng-show="showPaypalDetailsComplete">
+                      <a href="#" class="btn btn-primary btn-outline" ui-sref="payment">Connect to Paypal</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="vertical-timeline-block">
+                  <div ng-show="showDeliveryDetails" class="btn btn-warning m-r-sm">
+                    <strong>4</strong>
+                  </div>
+                  <div ng-show="showDeliveryDetailsComplete" class="btn btn-primary m-r-sm">
+                    <strong>4</strong>
+                  </div>
+
+                  <div class="vertical-timeline-content">
+                    <h2>Add your delivery options</h2>
+                    <p>Enable customers to select their preferred delivery option by adding your delivery options.</p>
+                    <div class="text-navy" ng-show="showDeliveryDetailsComplete">
+                      <h2>Completed <i class="fa fa-check"></i></h2>
+                    </div>
+                    <div ng-show="showDeliveryDetails">
+                      <a href="#" class="btn btn-warning" ui-sref="deliverys.create">Maintain delivery options</a>
+                    </div>
+                    <div ng-show="showDeliveryDetailsComplete">
+                      <a href="#" class="btn btn-primary btn-outline" ui-sref="deliverys.create">Maintain delivery options</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="vertical-timeline-block">
+                  <div ng-show="showProductCreate" class="btn btn-warning m-r-sm">
+                    <strong>5</strong>
+                  </div>
+                  <div ng-show="showProductCreateComplete" class="btn btn-primary m-r-sm">
+                    <strong>5</strong>
+                  </div>
+
+                  <div class="vertical-timeline-content">
+                    <h2>Maintain your first product </h2>
+                    <p>Maintain title, description, and pricing of your first product. Add an image of your product that is appealing to your customers.. </p>
+                    <div class="text-navy" ng-show="showProductCreateComplete">
+                      <h2>Completed <i class="fa fa-check"></i></h2>
+                    </div>
+                    <div ng-show="showProductCreate">
+                      <a href="#" class="btn btn-warning" ui-sref="products.create">Maintain product</a>
+                    </div>
+                    <div ng-show="showProductCreateComplete">
+                      <a href="#" class="btn btn-primary btn-outline" ui-sref="products.create">Maintain product</a>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+</section>

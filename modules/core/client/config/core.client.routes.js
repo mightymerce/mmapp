@@ -18,6 +18,12 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
       templateUrl: 'modules/core/client/views/home.client.view.html',
       roles: ['user']
     })
+    $stateProvider
+    .state('tutorial', {
+      url: '/tutorial',
+      templateUrl: 'modules/core/client/views/tutorial.client.view.html',
+      roles: ['user']
+    })
     .state('not-found', {
       url: '/not-found',
       templateUrl: 'modules/core/client/views/404.client.view.html',

@@ -1,8 +1,8 @@
 'use strict';
 
 // Products controller
-angular.module('products').controller('ProductsController', ['$rootScope','$scope', '$state', '$http', '$timeout', '$window', '$stateParams', '$location', 'Authentication', 'Products', '$modal', 'Posts', 'ProductsServices', 'Taxes', 'Currencys', 'Deliverys',
-  function ($rootScope, $scope, $state, $http, $timeout, $window, $stateParams, $location, Authentication, Products, $modal, Posts, ProductsServices, Taxes, Currencys, Deliverys) {
+angular.module('products').controller('ProductsController', ['$rootScope','$scope', '$state', '$http', '$timeout', '$window', '$stateParams', '$location', 'Authentication', 'Products', '$modal', 'Posts', 'ProductsServices', 'Taxes', 'Currencys', 'Deliverys', 'Users',
+  function ($rootScope, $scope, $state, $http, $timeout, $window, $stateParams, $location, Authentication, Products, $modal, Posts, ProductsServices, Taxes, Currencys, Deliverys, Users) {
 
     $scope.authentication = Authentication;
 
@@ -216,6 +216,17 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
       // Redirect after save
       product.$save(function (response) {
+        // in case create update for tutorial
+        if ($scope.authentication.user.tutorialProductDetail === '0') {
+          var user = new Users($scope.user);
+          user.tutorialProductDetail = '1';
+
+          user.$update(function (response) {
+            console.log('edit-profile.client.controller - updateUser - tutorial flag');
+          }, function (errorResponse) {
+            console.log('edit-profile.client.controller - updateUser - tutorial flag error');
+          });
+        }
         $scope.productId = response._id;
         $location.path('products/' + response._id + '/editmedia');
 

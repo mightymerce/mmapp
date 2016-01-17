@@ -1,8 +1,8 @@
 'use strict';
 
 // Deliverys controller
-angular.module('deliverys').controller('DeliverysController', ['$scope', '$stateParams', '$location', 'Authentication', 'Deliverys',
-  function ($scope, $stateParams, $location, Authentication, Deliverys) {
+angular.module('deliverys').controller('DeliverysController', ['$scope', '$stateParams', '$location', 'Authentication', 'Deliverys', 'Users',
+  function ($scope, $stateParams, $location, Authentication, Deliverys, Users) {
     $scope.authentication = Authentication;
 
     // Create new Delivery
@@ -25,6 +25,17 @@ angular.module('deliverys').controller('DeliverysController', ['$scope', '$state
 
       // Redirect after save
       delivery.$save(function (response) {
+        // in case create update for tutorial
+        if ($scope.authentication.user.tutorialDeliveryDetail === '0') {
+          var user = new Users($scope.user);
+          user.tutorialPaypalDetail = '1';
+
+          user.$update(function (response) {
+            console.log('edit-profile.client.controller - updateUser - tutorial flag');
+          }, function (errorResponse) {
+            console.log('edit-profile.client.controller - updateUser - tutorial flag error');
+          });
+        }
         $scope.success = 'You successfully created a delivery option.';
         $location.path('deliverys/' + response._id + '/edit');
 

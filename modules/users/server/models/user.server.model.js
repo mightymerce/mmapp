@@ -131,6 +131,26 @@ var UserSchema = new Schema({
   },
   merchantURLText: {
     type: String
+  },
+  tutorialCompanyDetail: {
+    type: String,
+    default: '0'
+  },
+  tutorialLegalDetail: {
+    type: String,
+    default: '0'
+  },
+  tutorialPaypalDetail: {
+    type: String,
+    default: '0'
+  },
+  tutorialDeliveryDetail: {
+    type: String,
+    default: '0'
+  },
+  tutorialProductDetail: {
+    type: String,
+    default: '0'
   }
 });
 

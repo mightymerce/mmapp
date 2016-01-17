@@ -23,6 +23,25 @@ angular.module('core').controller('HeaderController', ['$http', '$scope', '$stat
       });
     }
 
+    console.log('home.client.controller - onLoad - scope.authentication.user.tutorialCompanyDetail: '+ $scope.authentication.user.tutorialCompanyDetail);
+    console.log('home.client.controller - onLoad - scope.authentication.user.tutorialLegalDetail: '+ $scope.authentication.user.tutorialLegalDetail);
+    console.log('home.client.controller - onLoad - scope.authentication.user.tutorialPaypalDetail: '+ $scope.authentication.user.tutorialPaypalDetail);
+    console.log('home.client.controller - onLoad - scope.authentication.user.tutorialDeliveryDetail: '+ $scope.authentication.user.tutorialDeliveryDetail);
+    console.log('home.client.controller - onLoad - scope.authentication.user.tutorialProductDetail: '+ $scope.authentication.user.tutorialProductDetail);
+
+    $scope.basicData = false;
+
+    // Verify to show either 'dashboard' or 'tutorial'
+    if ($scope.authentication.user.tutorialCompanyDetail === '1' &&
+        $scope.authentication.user.tutorialLegalDetail === '1' &&
+        $scope.authentication.user.tutorialPaypalDetail === '1' &&
+        $scope.authentication.user.tutorialDeliveryDetail === '1' &&
+        $scope.authentication.user.tutorialProductDetail === '1') {
+      // Load Tutorial
+      $scope.basicData = true;
+      console.log('header.client.controller - onLoad - basic data entered ');
+    }
+
     // Get the topbar menu
     $scope.menu = Menus.getMenu('topbar');
 

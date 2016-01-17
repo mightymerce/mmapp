@@ -24,6 +24,7 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
       user.paypalUser = $scope.user.paypalUser;
       user.paypalPwd = $scope.user.paypalPwd;
       user.paypalSignature = $scope.user.paypalSignature;
+      user.tutorialPaypalDetail = '1';
 
       user.$update(function (response) {
         $scope.$broadcast('show-errors-reset', 'userForm');
@@ -60,6 +61,7 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
       user.streetno = $scope.user.streetno;
       user.zipcode = $scope.user.zipcode;
       user.city = $scope.user.city;
+      user.tutorialPaypalDetail = '1';
 
       user.$update(function (response) {
         $scope.$broadcast('show-errors-reset', 'userForm');
