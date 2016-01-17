@@ -18,7 +18,6 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
       templateUrl: 'modules/core/client/views/home.client.view.html',
       roles: ['user']
     })
-    $stateProvider
     .state('tutorial', {
       url: '/tutorial',
       templateUrl: 'modules/core/client/views/tutorial.client.view.html',
