@@ -46,9 +46,6 @@ module.exports = {
         'public/lib/jquery/jquery-ui/jquery-ui.min.js',
         'public/lib/jquery/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js',
 
-        // Inspinia
-        'public/inspinia.js',
-
         // Angular
         'public/lib/angular/angular.js',
         'public/lib/angular/angular.min.js',
@@ -74,14 +71,23 @@ module.exports = {
         'public/lib/bootstrap/dist/js/bootstrap.js',
         'public/lib/bootstrap/dist/js/bootstrap.min.js',
 
+        // SlimScroll
+        'public/lib/plugin/slimscroll/jquery.slimscroll.min.js',
+
         // Metis Menu
         'public/lib/plugin/metisMenu/metisMenu.min.js',
 
         // Peity
         'public/lib/plugin/peity/jquery.peity.min.js',
 
+        // Inspinia
+        'public/inspinia.js',
+
         // Peace JS
         'public/lib/plugin/pace/pace.min.js',
+
+        // iCheck
+        'public/lib/plugin/iCheck/icheck.min.js',
 
         // Footable
         'public/lib/css/plugins/footable/footable.all.min.js',
@@ -100,11 +106,7 @@ module.exports = {
         'public/lib/plugin/oclazyload/dist/ocLazyLoad.min.js',
         'public/lib/ui-bootstrap-tpls-0.12.0.min.js',
 
-        // iCheck
-        'public/lib/plugin/iCheck/icheck.min.js',
 
-        // SlimScroll
-        'public/lib/plugin/slimscroll/jquery.slimscroll.min.js',
 
          // Facebook
         'public/openfb-angular.js',
@@ -116,8 +118,6 @@ module.exports = {
         'public/lib/plugin/angular-soap/soapclient.js',
         'public/lib/plugin/angular-soap/angular.soap.js',
 
-        // iCheck
-        'public/lib/plugin/iCheck/icheck.min.js',
 
         'public/lib/angular-file-upload/dist/angular-file-upload.min.js',
 

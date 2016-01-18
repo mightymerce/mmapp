@@ -31,9 +31,10 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
           $scope.delivery = Delivery;
         });
 
-        // Get Merchant legal information
-        $scope.legal = Legals.query({
-          user: $scope.product.user
+        // Get Delivery option information for product
+        ChoutServices.getLegal($scope.product.user._id).then(function (Legals){
+          $scope.legal = Legals;
+          $cookieStore.put('user.legals', Legals);
         });
 
         // ToDo get channel from URL
@@ -178,6 +179,8 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
           console.log('checkouts.client.controller - paypalSetExpressCheckout - profileImageURL: ' +$scope.user.profileImageURL);
           $window.open(data.redirectUrl);
         });
+
+
       }
     };
 
@@ -191,6 +194,9 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
         // Get Merchant information for product
         ChoutServices.getUser($cookieStore.get('paypal.user.userId')).then(function (Users){
           $scope.user = Users;
+
+          // Get legal option of merchant
+          $scope.legal = $cookieStore.get('user.legals');
 
           console.log('checkouts.client.controller - getExpressDetails - user (Merchant): ' +$scope.user.username);
 
@@ -218,6 +224,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
             $scope.vat = $cookieStore.get('paypal.order.vat');
 
             console.log(data.PAYMENTREQUEST_0_AMT);
+
 
             $('.single-price').text(data.L_PAYMENTREQUEST_0_AMT0);
             $('.lbl-total').text(data.PAYMENTREQUEST_0_AMT);
@@ -440,6 +447,8 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
 
     $scope.loadSuccess = function () {
       console.log('checkouts.client.controller - laodSuccess - start');
+
+      $scope.legal = $cookieStore.get('user.legals');
 
       // Take data from cookieStore
       $scope.paypal = $cookieStore.get('paypal.data');

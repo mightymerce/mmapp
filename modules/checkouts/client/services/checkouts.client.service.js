@@ -127,6 +127,24 @@ angular.module('checkouts').factory('ChoutServices', ['$http', '$q',
         });
         return promise;
       },
+      getLegal: function getLegal(id) {
+        console.log('checkouts.client.service.js - GetLegal - Userid: ' +id);
+        var promise = $http({
+          method: 'GET',
+          url: '/api/legals?user=' +id
+        }).then(function successCallback(response) {
+          // this callback will be called asynchronously
+          // when the response is available
+          console.log('checkouts.client.service.js - GetLegal - Success');
+          console.log(response.data[0]);
+          // The return value gets picked up by the then in the controller.
+          return response.data[0];
+        }, function errorCallback(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+        });
+        return promise;
+      },
       SetExpressCheckout: function paypalSetExpressCheckout(){
         console.log('checkouts.client.service - Start SetExpressCheckout');
         var promise = $http({
