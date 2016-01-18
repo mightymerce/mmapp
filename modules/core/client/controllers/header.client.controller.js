@@ -23,12 +23,6 @@ angular.module('core').controller('HeaderController', ['$http', '$scope', '$stat
       });
     }
 
-    console.log('home.client.controller - onLoad - scope.authentication.user.tutorialCompanyDetail: '+ $scope.authentication.user.tutorialCompanyDetail);
-    console.log('home.client.controller - onLoad - scope.authentication.user.tutorialLegalDetail: '+ $scope.authentication.user.tutorialLegalDetail);
-    console.log('home.client.controller - onLoad - scope.authentication.user.tutorialPaypalDetail: '+ $scope.authentication.user.tutorialPaypalDetail);
-    console.log('home.client.controller - onLoad - scope.authentication.user.tutorialDeliveryDetail: '+ $scope.authentication.user.tutorialDeliveryDetail);
-    console.log('home.client.controller - onLoad - scope.authentication.user.tutorialProductDetail: '+ $scope.authentication.user.tutorialProductDetail);
-
     $scope.basicData = false;
 
     // Verify to show either 'dashboard' or 'tutorial'
