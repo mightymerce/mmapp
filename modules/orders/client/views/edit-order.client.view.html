@@ -27,7 +27,7 @@
                 <i class="fa fa-credit-card fa-5x"></i>
               </div>
               <div class="col-xs-8 text-right">
-                <span> Payment Status </span>
+                <div><span> Payment Status </span></div>
                 <div class="stat-percent text-white"><span data-ng-bind="order.orderPaymentStatus"></span></div>
               </div>
             </div>
@@ -40,7 +40,7 @@
                 <i class="fa fa-cogs fa-5x"></i>
               </div>
               <div class="col-xs-8 text-right">
-                <span> Order Status </span>
+                <div><span> Order Status </span></div>
                 <div class="stat-percent text-white"><span data-ng-bind="order.orderStatus"></span></div>
               </div>
             </div>
@@ -53,7 +53,7 @@
                 <i class="fa fa-calendar fa-5x"></i>
               </div>
               <div class="col-xs-8 text-right">
-                <span> Payment Date </span>
+                <div><span> Payment Date </span></div>
                 <div class="stat-percent"><span data-ng-bind="order.orderPaymentDate"></span></div>
               </div>
             </div>
@@ -127,8 +127,8 @@
                 <i class="fa fa-money fa-5x"></i>
               </div>
               <div class="col-xs-8 text-right">
-                <span> Subtotal </span>
-                <div class="stat-percent text-white">65,96 EUR</div>
+                <div><span> Subtotal </span></div>
+                <div class="stat-percent text-white"><span data-ng-bind="order.orderShipToSubtotalAmount"></span> <span data-ng-bind="order.orderShipToCurrencyCode"></div>
               </div>
             </div>
           </div>
@@ -140,7 +140,7 @@
                 <i class="fa fa-truck fa-5x"></i>
               </div>
               <div class="col-xs-8 text-right">
-                <span> Shipping Costs </span>
+                <div><span> Shipping Costs </span></div>
                 <div class="stat-percent text-white"><span data-ng-bind="order.orderShippingCost"></span> <span data-ng-bind="order.orderShipToCurrencyCode"></span></div>
               </div>
             </div>
@@ -153,7 +153,7 @@
                 <i class="fa fa-money fa-5x"></i>
               </div>
               <div class="col-xs-8 text-right">
-                <span> Total Amount </span>
+                <div><span> Total Amount </span></div>
                 <div class="stat-percent"><span data-ng-bind="order.orderShipToTotalAmount"></span> <span data-ng-bind="order.orderShipToCurrencyCode"></span></div>
               </div>
             </div>
@@ -267,17 +267,17 @@
       </div>
       <div class="wrapper wrapper-content animated fadeInRight ecommerce">
         <div class="row">
-          <div class="col-lg-2">
-            <a class="btn btn-outline btn-default" ng-click="modalcancelOrder('sm', order)">
-              Cancel Order
-            </a>
-          </div>
-          <div class="col-lg-2">
-            <button type="button" class="btn btn-outline btn-default" ui-sref="orders.list">Back to order overview</button>
+          <div class="col-lg-4">
+            <div>
+              <a class="btn btn-outline btn-default" ng-click="modalcancelOrder('sm', order)">
+                Cancel Order
+              </a>
+              <button type="button" class="btn btn-outline btn-default" ui-sref="orders.list">Back to order overview</button>
+            </div>
           </div>
           <div class="col-lg-8" align="right">
             <div ng-show="order.orderStatus === 'CREATED'">
-              <a class="btn btn-warning btn-xs" ng-click="modalshipOrder('sm', order)">
+              <a class="btn btn-warning" ng-click="modalshipOrder('sm', order)">
                 Ship order
               </a>
             </div>

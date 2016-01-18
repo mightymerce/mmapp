@@ -143,6 +143,11 @@ var OrderSchema = new Schema({
     default: '',
     trim: true
   },
+  orderShipToSubtotalAmount: {
+    type: String,
+    default: '',
+    trim: true
+  },
   orderStatus: {
     type: String,
     default: '',

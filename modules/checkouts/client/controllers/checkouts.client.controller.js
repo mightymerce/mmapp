@@ -225,7 +225,6 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
 
             console.log(data.PAYMENTREQUEST_0_AMT);
 
-
             $('.single-price').text(data.L_PAYMENTREQUEST_0_AMT0);
             $('.lbl-total').text(data.PAYMENTREQUEST_0_AMT);
             $('.lbl-priceperitem').text(data.L_PAYMENTREQUEST_0_AMT0);
@@ -234,13 +233,6 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
             $('.lbl-shipping').text(data.PAYMENTREQUEST_0_SHIPPINGAMT);
             $('.lbl-subtotal').text(data.PAYMENTREQUEST_0_ITEMAMT);
 
-
-            $cookieStore.put('paypal.PAYMENTREQUEST_0_HANDLINGAMT', data.PAYMENTREQUEST_0_HANDLINGAMT);
-            $cookieStore.put('paypal.PAYMENTREQUEST_0_SHIPPINGAMT', data.PAYMENTREQUEST_0_SHIPPINGAMT);
-            $cookieStore.put('paypal.PAYMENTREQUEST_0_ITEMAMT', data.PAYMENTREQUEST_0_ITEMAMT);
-            $cookieStore.put('paypal.PAYMENTREQUEST_0_CURRENCYCODE', data.PAYMENTREQUEST_0_CURRENCYCODE);
-            $cookieStore.put('paypal.PAYMENTREQUEST_0_AMT', data.PAYMENTREQUEST_0_AMT);
-            $cookieStore.put('paypal.L_PAYMENTREQUEST_0_QTY0', data.L_PAYMENTREQUEST_0_QTY0);
 
             // Put values to store in next step to cookieStore
             $cookieStore.put('paypal.data', data);
@@ -326,7 +318,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
           $scope.orderPaymentStatus = data.PAYMENTINFO_n_PAYMENTSTATUS;  // Todo verify status https://developer.paypal.com/docs/classic/api/merchant/DoExpressCheckoutPayment_API_Operation_NVP/
           $scope.orderPaymentDate = data.PAYMENTINFO_0_ORDERTIME;
           $scope.orderPaymentType = data.PAYMENTINFO_0_PAYMENTTYPE;
-          $scope.orderTaxAmount = data.PAYMENTINFO_0_TAXAMT;
+          $scope.orderTaxAmount = $cookieStore.get('paypal.order.vat');
           $scope.orderTax = '';
           $scope.ordereMail = $cookieStore.get('paypal.EMAIL');
           $scope.orderPayerID = data.PAYERID;
@@ -340,8 +332,9 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
           $scope.orderShipToCntryCode = data.PAYMENTREQUEST_n_SHIPTOCOUNTRYCODE;
           $scope.orderShipToZip = data.PAYMENTREQUEST_0_SHIPTOZIP;
           $scope.orderShipToAdressStatus = ''; //$cookieStore.get('paypal.PAYMENTREQUEST_0_ADDRESSSTATUS');
-          $scope.orderShipToTotalAmount = data.PAYMENTINFO_0_AMT;
-          $scope.orderShipToCurrencyCode = data.PAYMENTINFO_0_CURRENCYCODE;
+          $scope.orderShipToTotalAmount = $cookieStore.get('paypal.PAYMENTREQUEST_0_AMT');
+          $scope.orderShipToCurrencyCode = $cookieStore.get('paypal.PAYMENTREQUEST_0_CURRENCYCODE');
+          $scope.orderShipToSubtotalAmount = $cookieStore.get('paypal.PAYMENTREQUEST_0_ITEMAMT');
           $scope.orderStatus = 'CREATED';
           $scope.orderProductID = $cookieStore.get('paypal.product.productId');
           $scope.orderProductQuantity = $cookieStore.get('paypal.L_PAYMENTREQUEST_0_QTY0');
@@ -349,7 +342,6 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
           $scope.ordereMailCustomerShipMessage = '';
           $scope.userId = $cookieStore.get('paypal.user.userId');
           $scope.orderCustomerPayerMessage = $cookieStore.get('paypal.PAYMENTREQUEST_0_NOTETEXT');
-
 
           // Put values to store in next step to cookieStore
           /*$cookieStore.put('paypal.data', data);
