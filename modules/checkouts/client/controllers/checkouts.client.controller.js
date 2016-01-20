@@ -140,7 +140,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
         } else {
           cancelUrl = $location.protocol() + '://' + $location.host() + '/checkouts/cancel/cancel';
         }
-
+/*
         PaypalServicesSetExpressCheckout.query({
           USER: $scope.user.paypalUser,
           PWD: $scope.user.paypalPwd,
@@ -179,7 +179,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
           console.log('checkouts.client.controller - paypalSetExpressCheckout - profileImageURL: ' +$scope.user.profileImageURL);
           $window.open(data.redirectUrl);
         });
-
+*/
 
       }
     };
@@ -224,7 +224,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
             $scope.vat = $cookieStore.get('paypal.order.vat');
 
             console.log(data.PAYMENTREQUEST_0_AMT);
-
+/*
             $('.single-price').text(data.L_PAYMENTREQUEST_0_AMT0);
             $('.lbl-total').text(data.PAYMENTREQUEST_0_AMT);
             $('.lbl-priceperitem').text(data.L_PAYMENTREQUEST_0_AMT0);
@@ -232,7 +232,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
             $('.amount').text(data.L_PAYMENTREQUEST_0_QTY0);
             $('.lbl-shipping').text(data.PAYMENTREQUEST_0_SHIPPINGAMT);
             $('.lbl-subtotal').text(data.PAYMENTREQUEST_0_ITEMAMT);
-
+*/
 
             // Put values to store in next step to cookieStore
             $cookieStore.put('paypal.data', data);
