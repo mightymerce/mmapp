@@ -94,6 +94,8 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
         return false;
       }
 
+      $scope.credentials.email = $scope.credentials.username;
+
       $http.post('/api/auth/signup', $scope.credentials).success(function (response) {
         console.log('authentication.client.controller - sign up - successfull called signup');
         // If successful we assign the response to the global user model

@@ -1,8 +1,8 @@
 'use strict';
 
 // Legals controller
-angular.module('legals').controller('LegalsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Legals', 'Users',
-  function ($scope, $stateParams, $location, Authentication, Legals, Users) {
+angular.module('legals').controller('LegalsController', ['$scope', '$stateParams', '$location', '$http', 'Authentication', 'Legals', 'Users',
+  function ($scope, $stateParams, $location, $http, Authentication, Legals, Users) {
     $scope.authentication = Authentication;
 
     // Create new Legal
@@ -93,11 +93,13 @@ angular.module('legals').controller('LegalsController', ['$scope', '$stateParams
     // Find a list of Legals
     $scope.find = function () {
       console.log('legals.client.controller - find - user id: ' +$scope.authentication.user._id);
-      $scope.legals = Legals.query({
-        'user': $scope.authentication.user._id
+
+      var legal = Legals.get({
+        user: $scope.authentication.user._id
       });
-      console.log('legals.client.controller - find - legalCopyright: ' +$scope.legalCopyright);
-      console.log('legals.client.controller - find - legal.legalCopyright: ' +$scope.legals.legalCopyright);
+      $scope.legal = legal;
+      console.log('legals.client.controller - find - legalCopyright: ' +legal.legalImprint);
+      console.log('legals.client.controller - find - legal.legalCopyright: ' +$scope.legal.legalCopyright);
     };
 
     // Find existing Legal

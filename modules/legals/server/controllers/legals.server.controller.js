@@ -80,13 +80,14 @@ exports.delete = function (req, res) {
  * List of Legals
  */
 exports.list = function (req, res) {
-  Legal.find(({ user: { $eq: req.query.user } })).sort('-created').populate('user', 'displayName').exec(function (err, legals) {
+  Legal.find(({ user: { $eq: req.query.user } })).sort('-created').populate('user', 'displayname').exec(function (err, legals) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.json(legals);
+      console.log('legals.server.controller - find - result: ' +legals[0].legalImprint);
+      res.json(legals[0]);
     }
   });
 };
