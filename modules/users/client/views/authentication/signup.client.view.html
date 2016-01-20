@@ -33,7 +33,7 @@
                     </div>
                   </div>
                   <div ng-show="false" class="form-group" show-errors>
-                    <input type="text" name="email" placeholder="Email" class="form-email form-control" id="email" ng-model="credentials.email" lowercase required>
+                    <input type="text" name="email" placeholder="Email" class="form-email form-control" id="email" ng-model="credentials.email" lowercase>
                     <div ng-messages="userForm.email.$error" role="alert">
                       <p class="help-block error-text" ng-message="required">Eingabe Email notwendig.</p>
                       <p class="help-block error-text" ng-message="email">Eingabe Email ungültig.</p>

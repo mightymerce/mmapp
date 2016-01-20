@@ -314,8 +314,8 @@ exports.sendactivateemail = function (req, res, next) {
 
   rand = Math.floor((Math.random() * 100) + 54);
   host = req.get('host');
-  link = 'http://'+req.get('host')+'authentication/signin?id='+rand;
-  linkcancel = 'http://'+req.get('host')+'authentication/signin?id=cancel'+rand;
+  link = 'http://'+req.get('host')+'/authentication/signin?id='+rand;
+  linkcancel = 'http://'+req.get('host')+'/authentication/signin?id=cancel'+rand;
 
   var smtpTransport = nodemailer.createTransport({
     service: 'gmail',
@@ -1508,7 +1508,7 @@ exports.sendactivateemail = function (req, res, next) {
       activateURL: rand,
       cancelURL: linkcancel
     };
-    console.log('users.authentication.server.controller - sendactivateemail - sent mail success');
+    console.log('users.authentication.server.controller - sendactivateemail - sent mail success: ' +link);
     return res.json(links);
   });
 };

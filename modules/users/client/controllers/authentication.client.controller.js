@@ -156,17 +156,6 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
         }, function (errorResponse) {
         });
 
-        // logout user due to activation process
-        $http.get('/api/auth/signout', $scope.credentials).success(function (response) {
-          console.log('authentication.client.controller - signup - logged out user');
-          $scope.authentication = null;
-          $scope.user = null;
-          $scope.navHide = true;
-        }).error(function (response) {
-          $scope.error = response.message;
-        });
-
-
         // Send eMail for activation
         var currentDate = new Date();
         $http.post('/api/auth/sendactivateemail', {
@@ -192,9 +181,28 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
               $scope.success = 'You successfully signed up at mightymerce. Please check your eMail account - we just send you a verification eMail.';
 
             }).error(function (response) {
+              // logout user due to activation process
+              $http.get('/api/auth/signout', $scope.credentials).success(function (response) {
+                console.log('authentication.client.controller - signup - logged out user');
+                $scope.authentication = null;
+                $scope.user = null;
+                $scope.navHide = true;
+              }).error(function (response) {
+                $scope.error = response.message;
+              });
+
               $scope.error = response.message;
             });
           }, function (errorResponse) {
+            // logout user due to activation process
+            $http.get('/api/auth/signout', $scope.credentials).success(function (response) {
+              console.log('authentication.client.controller - signup - logged out user');
+              $scope.authentication = null;
+              $scope.user = null;
+              $scope.navHide = true;
+            }).error(function (response) {
+              $scope.error = response.message;
+            });
           });
         });
 
