@@ -40,9 +40,9 @@ angular.module('users').factory('UServices', ['$http', '$q', '$filter', 'Users',
 
         Users.get({
           activateURL: activateId
-        }).$promise.then( function(ourUser) {
+        }).$promise.then(function(ourUser) {
           console.log('authentication.client.service - getUser sussess: ' +ourUser._id);
-            }
+        }
         );
 
         /*$http.get('/api/auth/user/:activateURL', {

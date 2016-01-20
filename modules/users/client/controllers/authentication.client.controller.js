@@ -3,7 +3,7 @@
 angular.module('users').controller('AuthenticationController', ['$route', '$scope', '$state', '$http', '$location', '$window', 'Authentication', 'PasswordValidator', 'Currencys', 'Deliverys','Taxes', 'UServices', 'Users', '$filter', '$timeout',
   function ($route, $scope, $state, $http, $location, $window, Authentication, PasswordValidator, Currencys, Deliverys, Taxes, UServices, Users, $filter, $timeout) {
 
-    console.log("authentication.client.controller - load - verify activation id set: " +$location.search().id);
+    console.log('authentication.client.controller - load - verify activation id set: ' +$location.search().id);
 
     // check if verification call
     if(!angular.isUndefined($location.search().id)) {
@@ -19,10 +19,10 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
           });
         }, function (errorResponse) {
         });
-        console.log("authentication.client.controller - load - email is verified - user deleted due to cancel");
+        console.log('authentication.client.controller - load - email is verified - user deleted due to cancel');
       } else {
         // verify if activationId exist in DB
-        console.log("authentication.client.controller - load - verify user activation id");
+        console.log('authentication.client.controller - load - verify user activation id');
 
         // verify that activation id is available
         $http.get('/api/auth/userbyactivateurl?activateURL=' +$location.search().id, {
@@ -37,7 +37,7 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
             }).success(function(data, status, headers, config) {
 
               // send welcome message
-              console.log("authentication.client.controller - load - sendwelcomeemail - start");
+              console.log('authentication.client.controller - load - sendwelcomeemail - start');
               $scope.success = 'Your account is now active please log in and start selling!';
               // send welcome eMail
               $http.post('/api/auth/sendwelcomeemail', {
@@ -50,28 +50,28 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
                 $location.path('/');
 
                 // send welcome message
-                console.log("authentication.client.controller - load - sendwelcomeemail - success");
+                console.log('authentication.client.controller - load - sendwelcomeemail - success');
               });
 
-             }).error(function(errorresponse) {
-               $scope.error = errorresponse.msg;
-               console.log("authentication.client.controller - load - sendwelcomeemail - error");
-             });
+            }).error(function(errorresponse) {
+              $scope.error = errorresponse.msg;
+              console.log('authentication.client.controller - load - sendwelcomeemail - error');
+            });
 
-            } else {
+          } else {
             // message code no longer active
             // ToDo link should be provided to reactivate
             $scope.error = 'Your registration data is no longer active and therefore was deleted. Please sign up again.';
-            console.log("authentication.client.controller - email is verified - no longer acitve");
+            console.log('authentication.client.controller - email is verified - no longer acitve');
           }
         }).error(function(response, status, headers, config) {
           $scope.error = 'Your registration data is no longer active and therefore was deleted. Please sign up again.';
-          console.log("authentication.client.controller - email is verified - no longer acitve");
+          console.log('authentication.client.controller - email is verified - no longer acitve');
         });
       }
     } else {
 
-      console.log("authentication.client.controller - load page - no activation id set");
+      console.log('authentication.client.controller - load page - no activation id set');
       $scope.authentication = Authentication;
       $scope.popoverMsg = PasswordValidator.getPopoverMsg();
 
@@ -85,7 +85,7 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
     }
 
     $scope.signup = function (isValid) {
-      console.log("authentication.client.controller - sign up - start");
+      console.log('authentication.client.controller - sign up - start');
       $scope.error = null;
 
       if (!isValid) {
@@ -95,7 +95,7 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
       }
 
       $http.post('/api/auth/signup', $scope.credentials).success(function (response) {
-        console.log("authentication.client.controller - sign up - successfull called signup");
+        console.log('authentication.client.controller - sign up - successfull called signup');
         // If successful we assign the response to the global user model
         $scope.authentication.user = response;
 
