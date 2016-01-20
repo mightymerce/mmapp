@@ -179,6 +179,58 @@ angular.module('checkouts').factory('ChoutServices', ['$http', '$q',
         return promise;
       },
 
+      sendmail: function sendmail(data){
+        console.log('checkouts.client.service - Start Send eMail ' +data.orderId);
+
+        $http.post('/api/sendmail', {
+          orderId: data.orderId,
+          orderDate: data.orderDate,
+          orderChannel: data.orderChannel,
+
+          // Seller information
+          orderSellerProfileImageURL: data.profileImageURL,
+          orderSellerProfileDisplayName: data.displayName,
+
+          // Customer
+          orderCustomer: data.orderCustomer,
+          ordereMail: data.ordereMail,
+
+          orderShipToName: data.orderShipToName,
+          orderShipToStreet: data.orderShipToStreet,
+          orderShipToCity: data.orderShipToCity,
+          orderShipToState: data.orderShipToState,
+          orderShipToCntryCode: data.orderShipToCntryCode,
+          orderShipToZip: data.orderShipToZip,
+
+          // Price information
+          orderShippingCost: data.orderShippingCost,
+          orderShipToTotalAmount: data.orderShipToTotalAmount,
+          orderShipToSubtotalAmount: data.orderShipToSubtotalAmount,
+          orderShipToCurrencyCode: data.orderShipToCurrencyCode,
+          orderTaxAmount: data.orderTaxAmount,
+          orderProductQuantity: data.orderProductQuantity,
+
+          // Product information
+          orderProductMainImageURL: data.productMainImageURL,
+          orderProductTitle: data.productTitle,
+          orderProductDescription: data.productDescription.substring(0,180),
+          orderProductPrice: data.orderProductPrice,
+
+          // Legal information
+          orderLegalTermsandConditions: data.legal.legalTermsandConditions,
+          orderLegalReturnPolicy: data.legal.legalReturnPolicy
+
+
+        }).success(function(data, status, headers, config) {
+          if(data.success){
+            //
+          }else {
+            //do something about the error
+          }
+        });
+
+      },
+
       GetExpressCheckout: function GetExpressCheckout(token, debug, doPayment, data){
 
         var promise = $http({

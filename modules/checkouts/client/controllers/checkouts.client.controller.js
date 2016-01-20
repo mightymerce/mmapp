@@ -343,6 +343,10 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
           $scope.userId = $cookieStore.get('paypal.user.userId');
           $scope.orderCustomerPayerMessage = $cookieStore.get('paypal.PAYMENTREQUEST_0_NOTETEXT');
 
+          $scope.orderProductPrice = $cookieStore.get('paypal.product.productPrice');
+
+          $scope.legal = $cookieStore.get('user.legals');
+
           // Put values to store in next step to cookieStore
           /*$cookieStore.put('paypal.data', data);
           $cookieStore.put('paypal.data.token', $location.search().token);
@@ -414,13 +418,16 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
             console.log('checkouts.client.controller - doPayment - success stored in DB - now redirect');
             $location.path('/checkouts/success/success');
 
+            // send email
+            ChoutServices.sendmail($scope);
+
             // Clear form fields
             $scope.userId = '';
             $scope.orderId = '';
+
           }, function (errorResponse) {
             $scope.error = errorResponse.data.message;
           });
-
         });
       }
       else{

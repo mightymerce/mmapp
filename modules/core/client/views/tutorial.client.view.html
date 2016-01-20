@@ -3,7 +3,7 @@
   <div class="gray-bg">
     <div class="wrapper wrapper-content" data-ng-controller="HomeController">
       <div class="row animated fadeInRight">
-        <div class="col-lg-8">
+        <div class="col-lg-12">
           <div class="ibox float-e-margins">
             <div class="ibox-content gray-bg" align="center">
               <h2>Welcome <span ng-bind="authentication.user.displayName"></span></h2>
@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="row animated fadeInRight">
-        <div class="col-lg-8">
+        <div class="col-lg-12">
           <div class="ibox float-e-margins">
             <div class="ibox-content gray-bg">
               <div id="vertical-timeline" class="vertical-container light-timeline">
@@ -105,10 +105,10 @@
                       <h2>Completed <i class="fa fa-check"></i></h2>
                     </div>
                     <div ng-show="showDeliveryDetails">
-                      <a href="#" class="btn btn-warning" ui-sref="deliverys.create">Maintain delivery options</a>
+                      <a href="#" class="btn btn-warning" ui-sref="deliverys.list">Verify delivery options</a>
                     </div>
                     <div ng-show="showDeliveryDetailsComplete">
-                      <a href="#" class="btn btn-primary btn-outline" ui-sref="deliverys.create">Maintain delivery options</a>
+                      <a href="#" class="btn btn-primary btn-outline" ui-sref="deliverys.list">Maintain delivery options</a>
                     </div>
                   </div>
                 </div>

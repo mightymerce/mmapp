@@ -33,6 +33,8 @@ angular.module('legals').controller('LegalsController', ['$scope', '$stateParams
 
           user.$update(function (response) {
             console.log('edit-profile.client.controller - updateUser - tutorial flag');
+            $scope.authentication.user.tutorialLegalDetail = '1';
+            Authentication.user.tutorialLegalDetail = '1';
           }, function (errorResponse) {
             console.log('edit-profile.client.controller - updateUser - tutorial flag error');
           });

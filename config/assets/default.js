@@ -48,7 +48,7 @@ module.exports = {
 
         // Angular
         'public/lib/angular/angular.js',
-        'public/lib/angular/angular.min.js',
+        //'public/lib/angular/angular.min.js',
         'public/lib/angular-messages/angular-messages.js',
         'public/lib/angular-translate/angular-translate.min.js',
         'public/lib/angular-resource/angular-resource.js',
@@ -138,8 +138,8 @@ module.exports = {
         'public/lib/plugin/jsnumberformatter/jsnumberformatter.locale.js',
         'public/lib/plugin/jsnumberformatter/jsnumberformatter.locale.decimal.superset.js',
         'public/lib/plugin/checkout/jquery.shorten.js',
-        'public/lib/plugin/checkout/validator.min.js',
-        'public/lib/plugin/checkout/script.js'
+        'public/lib/plugin/checkout/validator.min.js'
+        //'public/lib/plugin/checkout/script.js'
 
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']

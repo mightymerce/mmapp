@@ -12,4 +12,7 @@ module.exports = function (app) {
 
   // Define application route
   app.route('/*').get(core.renderIndex);
+
+  // Define send email route
+  app.route('/api/sendmail').post(core.sendmail);
 };

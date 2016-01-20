@@ -22,6 +22,7 @@ exports.update = function (req, res) {
   console.log('users.profile.server.controller - update - start');
   var user = req.user;
 
+  console.log('users.profile.server.controller - update - user exist: ' +req.user);
   // For security measurement we remove the roles from the req.body object
   delete req.body.roles;
 
@@ -31,14 +32,14 @@ exports.update = function (req, res) {
     user.updated = Date.now();
     user.displayName = user.firstName + ' ' + user.lastName;
 
-    console.log('users.profile.server.controller - update - PaypalUser value for update: ' +user.paypalUser);
-
+    console.log('users.profile.server.controller - update - user exist: ' +user._id);
     user.save(function (err) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
         });
       } else {
+        console.log('users.profile.server.controller - update - success update');
         req.login(user, function (err) {
           if (err) {
             res.status(400).send(err);
@@ -151,5 +152,12 @@ exports.uploadProductImage = function (req, res) {
  * Send User
  */
 exports.me = function (req, res) {
+  res.json(req.user || null);
+};
+
+/**
+ * Send User
+ */
+exports.read = function (req, res) {
   res.json(req.user || null);
 };

@@ -61,7 +61,7 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
       user.streetno = $scope.user.streetno;
       user.zipcode = $scope.user.zipcode;
       user.city = $scope.user.city;
-      user.tutorialPaypalDetail = '1';
+      user.tutorialCompanyDetail = '1';
 
       user.$update(function (response) {
         $scope.$broadcast('show-errors-reset', 'userForm');

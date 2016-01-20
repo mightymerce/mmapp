@@ -146,11 +146,6 @@ exports.paypalSetExpressCheckout = function (req, res) {
 
   console.log('checkout.server.controller - paypalSetExpressCheckout - productDescription: ' +req.params.productDescription);
 
-  console.log('shippingamount: ' +req.params.cartShippingAmount);
-  console.log('itemamount: ' +req.params.productItemAmount);
-  console.log('quantity: ' +req.params.productQuantity);
-  console.log('cart amount: ' +req.params.cartAmount);
-
   // Invoice must be unique.
   var invoice = uuid.v4();
   paypal.setExpressCheckoutPayment(
@@ -187,7 +182,7 @@ exports.paypalGetExpressCheckoutDetails = function (req, res) {
   console.log('checkout.server.controller - paypalGetExpressCheckoutDetails - doPayment: ' +req.params.doPayment);
   paypal.getExpressCheckoutDetails(req.params.token, req.params.doPayment, function(err, data) {
     if (err) {
-      console.log(err);
+      console.log('checkout.server.controller - paypalGetExpressCheckoutDetails - doPayment - ERROR: ' +err.L_LONGMESSAGE0);
       res.status(500).send(err);
       return;
     }

@@ -7,7 +7,7 @@ angular.module('core').controller('TutorialController', ['$scope', '$route', '$l
     $route.reload();
 
     // This provides Authentication context.
-    $scope.authentication = Authentication;
+    //$scope.authentication = Authentication;
 
     // Find existing Order for logged in User
     $scope.initHome = function () {
@@ -15,6 +15,15 @@ angular.module('core').controller('TutorialController', ['$scope', '$route', '$l
       $scope.authentication = Authentication;
 
       console.log('tutorial.client.controller - onLoad - scope.authentication.user: '+ $scope.authentication.user);
+
+      console.log('tutorial.client.controller - onLoad - scope.authentication.user: '+ $scope.authentication.user.tutorialCompanyDetail);
+      console.log('tutorial.client.controller - onLoad - scope.authentication.user: '+ $scope.authentication.user.tutorialLegalDetail);
+      console.log('tutorial.client.controller - onLoad - scope.authentication.user: '+ $scope.authentication.user.tutorialPaypalDetail);
+      console.log('tutorial.client.controller - onLoad - scope.authentication.user: '+ $scope.authentication.user.tutorialDeliveryDetail);
+      console.log('tutorial.client.controller - onLoad - scope.authentication.user: '+ $scope.authentication.user.tutorialProductDetail);
+
+
+
 
       // If user is signed in then redirect back home
       if (!$scope.authentication.user) {

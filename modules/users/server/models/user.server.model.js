@@ -151,6 +151,14 @@ var UserSchema = new Schema({
   tutorialProductDetail: {
     type: String,
     default: '0'
+  },
+  activateURL: {
+    type: String,
+    default: '0'
+  },
+  userStatus: {
+    type: String,
+    default: '0'
   }
 });
 

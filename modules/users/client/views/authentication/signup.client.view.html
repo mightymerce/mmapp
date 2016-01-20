@@ -57,8 +57,12 @@
                     &nbsp; or&nbsp;
                     <a class="a-login" ui-sref="home">Sign in</a>
                   </div>
-                  <div ng-show="error" class="text-center text-danger">
-                    <strong ng-bind="error"></strong>
+                  <br>
+                  <div ng-show="error" class="alert alert-danger">
+                    <p ng-bind="error"></p>
+                  </div>
+                  <div ng-show="success" class="alert alert-success">
+                    <p ng-bind="success"></p>
                   </div>
                 </fieldset>
               </form>

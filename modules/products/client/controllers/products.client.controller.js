@@ -223,6 +223,8 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
           user.$update(function (response) {
             console.log('edit-profile.client.controller - updateUser - tutorial flag');
+            $scope.authentication.user.tutorialProductDetail = '1';
+            Authentication.user.tutorialProductDetail = '1';
           }, function (errorResponse) {
             console.log('edit-profile.client.controller - updateUser - tutorial flag error');
           });

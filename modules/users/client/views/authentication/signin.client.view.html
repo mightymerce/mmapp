@@ -46,9 +46,13 @@
                   <div class="text-center forgot-password">
                     <a class="a-login" ui-sref="authentication.signup">Sign up</a> or <a class="a-login" ui-sref="password.forgot">Forgot your password?</a>
                   </div>
-                  <alert type="danger" ng-show="error" class="text-center text-danger">
-                    <span ng-bind="error"></span>
-                  </alert>
+                  <br>
+                  <div ng-show="error" class="alert alert-danger">
+                    <p ng-bind="error"></p>
+                  </div>
+                  <div ng-show="success" class="alert alert-success">
+                    <p ng-bind="success"></p>
+                  </div>
                 </fieldset>
               </form>
             </div>

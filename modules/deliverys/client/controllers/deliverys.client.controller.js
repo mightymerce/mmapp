@@ -32,12 +32,14 @@ angular.module('deliverys').controller('DeliverysController', ['$scope', '$state
 
           user.$update(function (response) {
             console.log('edit-profile.client.controller - updateUser - tutorial flag');
+            $scope.authentication.user.tutorialDeliveryDetail = '1';
+            Authentication.user.tutorialDeliveryDetail = '1';
           }, function (errorResponse) {
             console.log('edit-profile.client.controller - updateUser - tutorial flag error');
           });
         }
         $scope.success = 'You successfully created a delivery option.';
-        $location.path('deliverys/' + response._id + '/edit');
+        $location.path('deliverys');
 
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;

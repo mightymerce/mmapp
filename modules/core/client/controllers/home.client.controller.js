@@ -33,7 +33,7 @@ angular.module('core').controller('HomeController', ['$scope', '$route', '$locat
         console.log('home.client.controller - initDashboard - getOrders');
 
         Orders.query({ user:$scope.authentication.user._id }, function(orders) {
-          console.log('home.client.controller - initDashboard - getOrders' +orders.length);
+          console.log('home.client.controller - initDashboard - getOrders' +orders);
           $scope.orders = orders;
           $scope.ordersForCalcs = orders;
         });
