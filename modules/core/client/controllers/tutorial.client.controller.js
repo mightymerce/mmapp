@@ -4,8 +4,6 @@ angular.module('core').controller('TutorialController', ['$scope', '$route', '$l
 
   function ($scope, $route, $location, $state, Authentication, OrdersServices, Orders) {
 
-    $route.reload();
-
     // This provides Authentication context.
     //$scope.authentication = Authentication;
 
@@ -23,8 +21,6 @@ angular.module('core').controller('TutorialController', ['$scope', '$route', '$l
       console.log('tutorial.client.controller - onLoad - scope.authentication.user: '+ $scope.authentication.user.tutorialProductDetail);
 
 
-
-
       // If user is signed in then redirect back home
       if (!$scope.authentication.user) {
         // And redirect to the previous or home page
@@ -38,7 +34,8 @@ angular.module('core').controller('TutorialController', ['$scope', '$route', '$l
         $state.go('dashboard', $state.previous.params);
       } else {
         // Load Tutorial
-        console.log('home.client.controller - initTutorial - xxx');
+        console.log('home.client.controller - initTutorial - start');
+        $scope.basicData = false;
 
         if ($scope.authentication.user.tutorialCompanyDetail === '0') {
           $scope.showCompanyDetailsComplete = false;

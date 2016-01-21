@@ -40,7 +40,8 @@ var UserSchema = new Schema({
   },
   displayName: {
     type: String,
-    trim: true
+    trim: true,
+    default: 'Your company'
   },
   street: {
     type: String,

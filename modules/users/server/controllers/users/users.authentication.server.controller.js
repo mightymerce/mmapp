@@ -330,17 +330,16 @@ exports.sendactivateemail = function (req, res, next) {
 
   console.log('users.authentication.server.controller - sendactivateemail - start');
 
-  var html = html + '	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">		';
-  html = html + '	<html xmlns="http://www.w3.org/1999/xhtml">		';
-  html = html + '	<head>		';
-  html = html + '	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">		';
-  html = html + '	<meta name="viewport" content="width=device-width">		';
-  html = html + '	<meta name="format-detection" content="address=no;email=no;telephone=no">		';
-  html = html + '	<title>Welcome to mightymerce</title>		';
+  var html = html + '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">';
+  html = html + '	<html xmlns="http://www.w3.org/1999/xhtml">';
+  html = html + '	<head>';
+  html = html + '	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
+  html = html + '	<meta name="viewport" content="width=device-width">';
+  html = html + '	<meta name="format-detection" content="address=no;email=no;telephone=no">';
+  html = html + '	<title>Welcome to mightymerce</title>';
   html = html + '	<style type="text/css">		';
   html = html + '	/* Modified:30/01/2016 */		';
   html = html + '	/* Global Reset */		';
-  html = html + '			';
   html = html + '	body {		';
   html = html + '		-webkit-text-size-adjust: 100%;	';
   html = html + '		-ms-text-size-adjust: 100%;	';
@@ -1421,12 +1420,12 @@ exports.sendactivateemail = function (req, res, next) {
   html = html + '		line-height: 0 !important;	';
   html = html + '		padding: 0 !important;	';
   html = html + '		overflow: hidden !important;	';
-  html = html + '	}		';
-  html = html + '	}		';
-  html = html + '	</style>		';
-  html = html + '	<style type="text/css">		';
-  html = html + '	</style>		';
-  html = html + '	</head>		';
+  html = html + '	}';
+  html = html + '	}';
+  html = html + '	</style>';
+  html = html + '	<style type="text/css">';
+  html = html + '	</style>';
+  html = html + '	</head>';
   html = html + '	<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;height: 100%;width: 100%;min-height: 1000px;background-color: #f2f2f2;">		';
   html = html + '	<div class="emailSummary" style="mso-hide: all;display: none !important;font-size: 0 !important;max-height: 0 !important;line-height: 0 !important;padding: 0 !important;overflow: hidden !important;float: none !important;width: 0 !important;height: 0 !important;">You just registered at mightymerce. Please verify your eMail address by clicking the link.</div>		';
   html = html + '	<table id="emailBody" width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;height: 100%;width: 100%;min-height: 1000px;background-color: #f2f2f2;">		';
@@ -1492,9 +1491,9 @@ exports.sendactivateemail = function (req, res, next) {
 
   // setup e-mail data with unicode symbols
   var mailOptions = {
-    from: 'activate <noreply@mightymerce.com>', // sender address
+    from: 'Mightymermerce | activation <noreply@mightymerce.com>', // sender address
     to: inputData.usereMail, // list of receivers
-    subject: 'Mightymerce - please activate your account', // Subject line
+    subject: 'Your activation email for mightymerce. Start converting your followers into customers', // Subject line
     text: '', // plaintext body
     html: html
   };
@@ -1536,14 +1535,14 @@ exports.sendwelcomeemail = function (req, res, next) {
 
   console.log('users.authentication.server.controller - sendactivateemail - start');
 
-  var html = html + '	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">		';
-  html = html + '	<html xmlns="http://www.w3.org/1999/xhtml">		';
-  html = html + '	<head>		';
-  html = html + '	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">		';
-  html = html + '	<meta name="viewport" content="width=device-width">		';
-  html = html + '	<meta name="format-detection" content="address=no;email=no;telephone=no">		';
-  html = html + '	<title>Welcome to mightymerce</title>		';
-  html = html + '	<style type="text/css">		';
+  var html = html + '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">';
+  html = html + '	<html xmlns="http://www.w3.org/1999/xhtml">';
+  html = html + '	<head>';
+  html = html + '	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
+  html = html + '	<meta name="viewport" content="width=device-width">';
+  html = html + '	<meta name="format-detection" content="address=no;email=no;telephone=no">';
+  html = html + '	<title>Welcome to mightymerce</title>';
+  html = html + '	<style type="text/css">';
   html = html + '	/* Modified:30/10/2014 */		';
   html = html + '	/* Global Reset */		';
   html = html + '			';
@@ -2698,9 +2697,9 @@ exports.sendwelcomeemail = function (req, res, next) {
 
   // setup e-mail data with unicode symbols
   var mailOptions = {
-    from: 'registration <noreply@mightymerce.com>', // sender address
+    from: 'mightymerce | registration <noreply@mightymerce.com>', // sender address
     to: inputData.usereMail, // list of receivers
-    subject: 'Mightymerce - welcome and start convert your followers into customers', // Subject line
+    subject: 'Welcome to mightymerce. Your account is set up. Start selling now!', // Subject line
     text: '', // plaintext body
     html: html
   };

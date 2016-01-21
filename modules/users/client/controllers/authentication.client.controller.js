@@ -4,9 +4,15 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
   function ($route, $scope, $state, $http, $location, $window, Authentication, PasswordValidator, Currencys, Deliverys, Taxes, UServices, Users, $filter, $timeout) {
 
     console.log('authentication.client.controller - load - verify activation id set: ' +$location.search().id);
+    $scope.authentication = null;
+    $scope.user = null;
+    $scope.navHide = true;
+    $scope.footHide = false;
 
     // check if verification call
     if(!angular.isUndefined($location.search().id)) {
+      $scope.navHide = true;
+
       // activation call
       var activationId = $location.search().id;
 
@@ -47,7 +53,7 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
                 $scope.authentication = null;
                 $scope.user = null;
                 $scope.navHide = true;
-                $location.path('/');
+                $scope.footHide = false;
 
                 // send welcome message
                 console.log('authentication.client.controller - load - sendwelcomeemail - success');
@@ -74,6 +80,7 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
       console.log('authentication.client.controller - load page - no activation id set');
       $scope.authentication = Authentication;
       $scope.popoverMsg = PasswordValidator.getPopoverMsg();
+      $scope.navHide = true;
 
       // Get an eventual error defined in the URL query string:
       $scope.error = $location.search().err;
@@ -86,6 +93,8 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
 
     $scope.signup = function (isValid) {
       console.log('authentication.client.controller - sign up - start');
+      $scope.navHide = true;
+      $scope.footHide = false;
       $scope.error = null;
 
       if (!isValid) {
@@ -178,6 +187,7 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
               $scope.authentication = null;
               $scope.user = null;
               $scope.navHide = true;
+              $scope.footHide = false;
               $scope.success = 'You successfully signed up at mightymerce. Please check your eMail account - we just send you a verification eMail.';
 
             }).error(function (response) {
@@ -187,6 +197,7 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
                 $scope.authentication = null;
                 $scope.user = null;
                 $scope.navHide = true;
+                $scope.footHide = false;
               }).error(function (response) {
                 $scope.error = response.message;
               });
@@ -200,6 +211,7 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
               $scope.authentication = null;
               $scope.user = null;
               $scope.navHide = true;
+              $scope.footHide = false;
             }).error(function (response) {
               $scope.error = response.message;
             });
@@ -221,22 +233,22 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
       }
       console.log('authentication.client.controller - signin - start');
       $http.post('/api/auth/signin', $scope.credentials).success(function (response) {
+        // we assign the response to the global user model
+        $scope.authentication.user = response;
         // If successful
         // verify if entered userid is already activated
-        if($scope.authentication.user.userStatus === '0' || $scope.authentication.user.userStatus){
+        if($scope.authentication.user.userStatus === '0' || !$scope.authentication.user.userStatus){
           $http.get('/api/auth/signout', $scope.credentials).success(function (response) {
             console.log('authentication.client.controller - signin - logged out user after update');
             $scope.authentication = null;
             $scope.user = null;
             $scope.navHide = true;
+            $scope.footHide = false;
             $scope.error = 'You have not activate your account yet. Please verify your eMail for activation information.';
           }).error(function (response) {
             $scope.error = response.message;
           });
         } else {
-          // we assign the response to the global user model
-          $scope.authentication.user = response;
-
           // And redirect to the previous or home page
           $state.go('dashboard', $state.previous.params);
         }
