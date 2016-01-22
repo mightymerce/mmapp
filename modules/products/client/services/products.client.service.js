@@ -287,10 +287,11 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
             var PDK = $window.PDK;
             // Make post to facebook and wait for answer
             PDK.pin(image_url, note, link, function(response) {
-              
-              if (!response || response.error) {
-                console.log('product.client.service - postToPinterest - error occured post to Pinterest' + response.error.message);
-                deferred.reject(response.error.message);
+
+              if (!response) {
+                console.log('product.client.service - postToPinterest - error occured post to Pinterest');
+                deferred.reject('Oops there was an error while pin it. Or you canceled your action.');
+                return deferred.promise;
               } else {
                 console.log('products.client.service - postToPinterest - post to Pinterest success - response: ' +response);
                 // do something
@@ -309,9 +310,11 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                 post.$save(function (response) {
                   console.log('products.client.service - postToPinterest - Save Post on MM success!');
                   deferred.resolve('Success posting to Pinterest! - Mightymerce Post-Id: ' +response._id);
+                  return deferred.promise;
                 }, function (errorResponse) {
                   console.log('products.client.service - postToPinterest - Save Post on MM error: ' +errorResponse);
                   deferred.reject(errorResponse);
+                  return deferred.promise;
                 });
               }
             });
