@@ -23,8 +23,6 @@ angular.module('core').controller('HeaderController', ['$http', '$scope', '$stat
       });
     }
 
-    $scope.basicData = false;
-
     // Verify to show either 'dashboard' or 'tutorial'
     if ($scope.authentication.user.tutorialCompanyDetail === '1' &&
         $scope.authentication.user.tutorialLegalDetail === '1' &&
@@ -33,7 +31,10 @@ angular.module('core').controller('HeaderController', ['$http', '$scope', '$stat
         $scope.authentication.user.tutorialProductDetail === '1') {
       // Load Tutorial
       $scope.basicData = true;
-      console.log('header.client.controller - onLoad - basic data entered ');
+      console.log('header.client.controller - onLoad - show dashboard ');
+    } else {
+      $scope.basicData = false;
+      console.log('header.client.controller - onLoad - show tutorial ');
     }
 
     // Get the topbar menu
@@ -65,10 +66,10 @@ angular.module('core').controller('HeaderController', ['$http', '$scope', '$stat
 
       $http.get('/api/auth/signout').success(function (response) {
 
-        $scope.authentication = null;
+        $scope.authentication.user = null;
 
         // And redirect to the previous or home page
-        $state.go('home', $state.previous.params);
+        $state.go('authentication.signin', $state.previous.params);
 
       }).error(function (response) {
         $scope.error = response.message;

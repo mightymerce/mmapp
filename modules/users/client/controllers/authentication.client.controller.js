@@ -4,14 +4,23 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
   function ($route, $scope, $state, $http, $location, $window, Authentication, PasswordValidator, Currencys, Deliverys, Taxes, UServices, Users, $filter, $timeout) {
 
     console.log('authentication.client.controller - load - verify activation id set: ' +$location.search().id);
-    $scope.authentication = null;
-    $scope.user = null;
-    $scope.navHide = true;
-    $scope.footHide = false;
+    $scope.authentication = Authentication;
+    $scope.popoverMsg = PasswordValidator.getPopoverMsg();
 
-    // check if verification call
+    // Get an eventual error defined in the URL query string:
+    $scope.error = $location.search().err;
+
+    // If user is signed in then redirect back home
+    if ($scope.authentication.user) {
+      $location.path('/dashboard');
+    }
+
+    // check if activation id is set
     if(!angular.isUndefined($location.search().id)) {
+      $scope.authentication = null;
+      $scope.user = null;
       $scope.navHide = true;
+      $scope.footHide = false;
 
       // activation call
       var activationId = $location.search().id;
@@ -36,15 +45,22 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
         }).success(function(response, status, headers, config) {
           if(response){
             console.log('authentication.client.controller - load - got user with activationid:' +response._id);
-            // user still in db for activation - activate now
 
-            // send welcome eMail
+            // user still in db for activation - activate now
             $http.put('/api/auth/updateactivateuser?activateURL=' +$location.search().id, {
             }).success(function(data, status, headers, config) {
-
-              // send welcome message
               console.log('authentication.client.controller - load - sendwelcomeemail - start');
               $scope.success = 'Your account is now active please log in and start selling!';
+
+              $scope.authentication = null;
+              $scope.user = null;
+              $scope.navHide = true;
+              $scope.footHide = false;
+
+              $timeout(function() {
+                $state.go('authentication.signin', $state.previous.params);
+              }, 1000);
+
               // send welcome eMail
               $http.post('/api/auth/sendwelcomeemail', {
                 usereMail: response.email
@@ -61,7 +77,7 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
 
             }).error(function(errorresponse) {
               $scope.error = errorresponse.msg;
-              console.log('authentication.client.controller - load - sendwelcomeemail - error');
+              console.log('authentication.client.controller - load - activate in mm db - error');
             });
 
           } else {
@@ -80,14 +96,13 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
       console.log('authentication.client.controller - load page - no activation id set');
       $scope.authentication = Authentication;
       $scope.popoverMsg = PasswordValidator.getPopoverMsg();
-      $scope.navHide = true;
 
       // Get an eventual error defined in the URL query string:
       $scope.error = $location.search().err;
 
       // If user is signed in then redirect back home
       if ($scope.authentication.user) {
-        $location.path('/');
+        $state.go('dashboard', $state.previous.params);
       }
     }
 
@@ -184,7 +199,7 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
             // logout user due to activation process
             $http.get('/api/auth/signout', $scope.credentials).success(function (response) {
               console.log('authentication.client.controller - signup - logged out user after update');
-              $scope.authentication = null;
+              $scope.authentication.user = null;
               $scope.user = null;
               $scope.navHide = true;
               $scope.footHide = false;
@@ -194,7 +209,7 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
               // logout user due to activation process
               $http.get('/api/auth/signout', $scope.credentials).success(function (response) {
                 console.log('authentication.client.controller - signup - logged out user');
-                $scope.authentication = null;
+                $scope.authentication.user = null;
                 $scope.user = null;
                 $scope.navHide = true;
                 $scope.footHide = false;
@@ -208,7 +223,7 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
             // logout user due to activation process
             $http.get('/api/auth/signout', $scope.credentials).success(function (response) {
               console.log('authentication.client.controller - signup - logged out user');
-              $scope.authentication = null;
+              $scope.authentication.user = null;
               $scope.user = null;
               $scope.navHide = true;
               $scope.footHide = false;
@@ -221,27 +236,40 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
       }).error(function (response) {
         $scope.error = response.message;
       });
+
+      $scope.authentication.user = null;
+      $scope.navHide = true;
+      $scope.footHide = false;
+
     };
 
     $scope.signin = function (isValid) {
+      $scope.authentication = Authentication;
+      $scope.popoverMsg = PasswordValidator.getPopoverMsg();
       $scope.error = null;
+      $scope.success = null;
 
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'userForm');
 
         return false;
       }
+
       console.log('authentication.client.controller - signin - start');
+
       $http.post('/api/auth/signin', $scope.credentials).success(function (response) {
+
+        console.log('authentication.client.controller - signin - signin success');
+
         // we assign the response to the global user model
         $scope.authentication.user = response;
+
         // If successful
         // verify if entered userid is already activated
         if($scope.authentication.user.userStatus === '0' || !$scope.authentication.user.userStatus){
           $http.get('/api/auth/signout', $scope.credentials).success(function (response) {
-            console.log('authentication.client.controller - signin - logged out user after update');
+            console.log('authentication.client.controller - signin - logged out user because not activated yet');
             $scope.authentication = null;
-            $scope.user = null;
             $scope.navHide = true;
             $scope.footHide = false;
             $scope.error = 'You have not activate your account yet. Please verify your eMail for activation information.';
@@ -249,6 +277,7 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
             $scope.error = response.message;
           });
         } else {
+          console.log('authentication.client.controller - signin - signin success redirect to dashboard');
           // And redirect to the previous or home page
           $state.go('dashboard', $state.previous.params);
         }

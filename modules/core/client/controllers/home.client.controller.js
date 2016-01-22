@@ -4,6 +4,9 @@ angular.module('core').controller('HomeController', ['$scope', '$route', '$locat
 
   function ($scope, $route, $location, $state, $http, Authentication, OrdersServices, Orders) {
 
+    // better set show status of nav
+    $scope.navHide = false;
+
     // This provides Authentication context.
     $scope.authentication = Authentication;
 
@@ -26,7 +29,7 @@ angular.module('core').controller('HomeController', ['$scope', '$route', '$locat
       // If user is signed in then redirect back home
       else if (!$scope.authentication.user) {
         // And redirect to the previous or home page
-        $state.go('home', $state.previous.params);
+        $state.go('authentication.signin', $state.previous.params);
       } else {
         // Load Dashboard
         $scope.basicData = true;
