@@ -287,29 +287,33 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
             var PDK = $window.PDK;
             // Make post to facebook and wait for answer
             PDK.pin(image_url, note, link, function(response) {
-              console.log('products.client.service - postToPinterest - post to Pinterest success - response: ' +response);
-              // do something
-              // Create new Post object
-              var post = new Posts({
-                product: product._id,
-                channel: '563c7fab09f30c482f304273',
-                postChannel: 'Pinterest',
-                postId: 'xxx', //response.id,
-                postStatus: 'Active',
-                postPublicationDate: new Date(),
-                postExternalPostKey: '' //response.id
-              });
+              
+              if (!response || response.error) {
+                console.log('product.client.service - postToPinterest - error occured post to Pinterest' + response.error.message);
+                deferred.reject(response.error.message);
+              } else {
+                console.log('products.client.service - postToPinterest - post to Pinterest success - response: ' +response);
+                // do something
+                // Create new Post object
+                var post = new Posts({
+                  product: product._id,
+                  channel: '563c7fab09f30c482f304273',
+                  postChannel: 'Pinterest',
+                  postId: 'xxx', //response.id,
+                  postStatus: 'Active',
+                  postPublicationDate: new Date(),
+                  postExternalPostKey: '' //response.id
+                });
 
-              // Save post to MM
-              post.$save(function (response) {
-                console.log('products.client.service - postToPinterest - Save Post on MM success!');
-                deferred.resolve('Success posting to Pinterest! - Mightymerce Post-Id: ' +response._id);
-              }, function (errorResponse) {
-                console.log('products.client.service - postToPinterest - Save Post on MM error: ' +errorResponse);
-                deferred.reject(errorResponse);
-              });
-
-              deferred.resolve(response.id);
+                // Save post to MM
+                post.$save(function (response) {
+                  console.log('products.client.service - postToPinterest - Save Post on MM success!');
+                  deferred.resolve('Success posting to Pinterest! - Mightymerce Post-Id: ' +response._id);
+                }, function (errorResponse) {
+                  console.log('products.client.service - postToPinterest - Save Post on MM error: ' +errorResponse);
+                  deferred.reject(errorResponse);
+                });
+              }
             });
           })
           .error(function(msg,code) {
