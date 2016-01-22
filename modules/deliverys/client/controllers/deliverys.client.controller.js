@@ -5,6 +5,18 @@ angular.module('deliverys').controller('DeliverysController', ['$scope', '$state
   function ($scope, $stateParams, $location, Authentication, Deliverys, Users) {
     $scope.authentication = Authentication;
 
+    // check if all tutorial fields are set
+    if ($scope.authentication.user.tutorialCompanyDetail === '1' &&
+        $scope.authentication.user.tutorialLegalDetail === '1' &&
+        $scope.authentication.user.tutorialPaypalDetail === '1' &&
+        $scope.authentication.user.tutorialDeliveryDetail === '1' &&
+        $scope.authentication.user.tutorialProductDetail === '1') {
+      // Load Tutorial
+      $scope.basicData = true;
+    } else {
+      $scope.basicData = false;
+    }
+
     // Create new Delivery
     $scope.create = function (isValid) {
       $scope.error = null;

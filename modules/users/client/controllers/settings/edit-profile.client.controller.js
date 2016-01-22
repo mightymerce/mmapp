@@ -3,10 +3,22 @@
 angular.module('users').controller('EditProfileController', ['$scope', '$http', '$location', 'Users', 'Deliverys', 'Authentication',
   function ($scope, $http, $location, Users, Deliverys, Authentication) {
     console.log('edit-profile.client.controller - load - start');
+    $scope.authentication = Authentication;
     $scope.user = Authentication.user;
 
-    console.log('edit-profile.client.controller - load - end');
+    // check if all tutorial fields are set
+    if ($scope.authentication.user.tutorialCompanyDetail === '1' &&
+        $scope.authentication.user.tutorialLegalDetail === '1' &&
+        $scope.authentication.user.tutorialPaypalDetail === '1' &&
+        $scope.authentication.user.tutorialDeliveryDetail === '1' &&
+        $scope.authentication.user.tutorialProductDetail === '1') {
+      // Load Tutorial
+      $scope.basicData = true;
+    } else {
+      $scope.basicData = false;
+    }
 
+    console.log('edit-profile.client.controller - load - end');
 
     // Update a user profile
     $scope.updatePaymentDetails = function (isValid) {

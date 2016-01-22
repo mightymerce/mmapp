@@ -14,6 +14,18 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       $state.go('home', $state.previous.params);
     }
 
+    // check if all tutorial fields are set
+    if ($scope.authentication.user.tutorialCompanyDetail === '1' &&
+        $scope.authentication.user.tutorialLegalDetail === '1' &&
+        $scope.authentication.user.tutorialPaypalDetail === '1' &&
+        $scope.authentication.user.tutorialDeliveryDetail === '1' &&
+        $scope.authentication.user.tutorialProductDetail === '1') {
+      // Load Tutorial
+      $scope.basicData = true;
+    } else {
+      $scope.basicData = false;
+    }
+
     console.log('products.client.controller - load ProductsController');
 
     $scope.modalupdateProductPost = function (size, selectedProduct, postChannel, postStatus, postPublicationDate) {
