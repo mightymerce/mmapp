@@ -1,19 +1,21 @@
   function Cropper(element, options) {
-    this.element = element;
-    this.options = extend({}, Cropper.DEFAULTS, isPlainObject(options) && options);
-    this.isLoaded = false;
-    this.isBuilt = false;
-    this.isCompleted = false;
-    this.isRotated = false;
-    this.isCropped = false;
-    this.isDisabled = false;
-    this.isReplaced = false;
-    this.isLimited = false;
-    this.isImg = false;
-    this.originalUrl = '';
-    this.crossOrigin = '';
-    this.canvasData = null;
-    this.cropBoxData = null;
-    this.previews = null;
-    this.init();
+    var _this = this;
+
+    _this.element = element;
+    _this.options = extend({}, Cropper.DEFAULTS, isPlainObject(options) && options);
+    _this.ready = false;
+    _this.built = false;
+    _this.complete = false;
+    _this.rotated = false;
+    _this.cropped = false;
+    _this.disabled = false;
+    _this.replaced = false;
+    _this.limited = false;
+    _this.wheeling = false;
+    _this.isImg = false;
+    _this.originalUrl = '';
+    _this.canvasData = null;
+    _this.cropBoxData = null;
+    _this.previews = null;
+    _this.init();
   }

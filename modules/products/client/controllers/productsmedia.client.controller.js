@@ -106,7 +106,6 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
     // **                                **
     // ************************************
     //
-
     $scope.user = Authentication.user;
     $scope.imageURL = $scope.user.profileImageURL;
 
@@ -118,49 +117,70 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
       type: 'image/jpeg',
       name: 'logo.jpg',
       onSuccessItem: function (item, response, status, headers) {
+
+      },
+
+
+
+      onCompleteItem: function (item, response, status, headers) {
+
+
         $scope.successpicture = false;
-        console.log('products.client.controller - image uploader - onSuccessItem');
+        console.log('products.client.controller - image uploader - onCompleteItem - start');
 
-        /*if($scope.product)
-        {
-          $scope.product.productMainImageURL = response;
-        } else {
-          $scope.productMainImageURL = response;
-        }
-
-        console.log('products.client.controller - image uploader - ImageURL: ' +$scope.productMainImageURL);*/
-
-        // Update product Main ImageURL
+        // Update product Main ImageURLs
         var product = $scope.product;
 
         if ($scope.insertFurtherImage1 === true){
-          product.productFurtherImage1URL = response;
-          product.productFurtherImage1URLFacebook = response;
-          product.productFurtherImage1URLPinterest = response;
-          product.productFurtherImage1URLCode = response;
+          if(item.name === 'main')
+            product.productFurtherImage1URL = response;
+          if(item.name === 'facebook') {
+            product.productFurtherImage1URLFacebook = response;
+            product.productFurtherImage1URLCode = response;
+          }
+          if(item.name === 'pinterest') {
+            product.productFurtherImage1URLPinterest = response;
+          }
+
           product.productFurtherImage1Alt = $scope.productMainImageAlt;
         }
         else if ($scope.insertFurtherImage2 === true) {
-          product.productFurtherImage2URL = response;
-          product.productFurtherImage2URLFacebook = response;
-          product.productFurtherImage2URLPinterest = response;
-          product.productFurtherImage2URLCode = response;
+          if(item.name === 'main')
+            product.productFurtherImage2URL = response;
+          if(item.name === 'facebook') {
+            product.productFurtherImage2URLFacebook = response;
+            product.productFurtherImage2URLCode = response;
+          }
+          if(item.name === 'pinterest') {
+            product.productFurtherImage2URLPinterest = response;
+          }
+
           product.productFurtherImage2Alt = $scope.productMainImageAlt;
         }
         else {
-          product.productMainImageURL = response;
-          product.productMainImageURLFacebook = response;
-          product.productMainImageURLPinterest = response;
-          product.productMainImageURLCode = response;
+          alert('Item name: ' +item.name);
+          if(item.name === 'main')
+            product.productMainImageURL = response;
+          if(item.name === 'facebook') {
+            product.productMainImageURLFacebook = response;
+            product.productMainImageURLCode = response;
+          }
+          if(item.name === 'pinterest') {
+            product.productMainImageURLPinterest = response;
+          }
+
           product.productMainImageAlt = $scope.productMainImageAlt;
         }
 
+        $scope.productMainImageURL = response;
+
+        // Update path in MM DB
         product.$update(function () {
           $scope.success = 'Successfully changed product media data';
         }, function (errorResponse) {
           $scope.error = errorResponse.data.message;
         });
-        console.log('products.client.controller - update - end');
+        console.log('products.client.controller - image uploader - onCompleteItem - update - end');
 
 
         if ($scope.insertFurtherImage1 === true){
@@ -175,24 +195,8 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
 
         // Show success message
         $scope.successpicture = true;
-        //$location.path('products/' + product._id + '/edit');
 
-      },
-
-      // fileFormDataName
-      onCompleteItem: function (item, response, status, headers) {
-        $scope.successpicture = false;
-        console.log('products.client.controller - image uploader - onCompleteItem');
-
-
-        $scope.productMainImageURL = response;
-
-        console.log('products.client.controller - image uploader - ImageURL: ' +$scope.productMainImageURL);
-
-        // Show success message
-        $scope.successpicture = true;
-
-        //$location.path('products/' + product._id + '/edit');
+        console.log('products.client.controller - image uploader - onCompleteItem - end');
 
       }
     });
@@ -212,12 +216,13 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
     uploader.onAfterAddingFile = function (fileItem) {
       console.log('products.client.controller - image uploader - onAfterAddingFile start ');
       $scope.successpicture = false;
-      $scope.file = fileItem;
+
 
       if ($window.FileReader) {
 
         var fileExtension = '.' + fileItem.file.name.split('.').pop();
-        fileItem.file.name = fileItem.file.name;
+        fileItem.name = 'main';
+        $scope.file = fileItem;
         //Math.random().toString(36).substring(7) + new Date().getTime()
 
         var fileReader = new FileReader();
@@ -231,10 +236,6 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
       }
 
       console.log('products.client.controller - image uploader - onAfterAddingFile end ');
-
-      //console.log('products.client.controller - image uploader - Start uploadProductMainPicture');
-      //fileItem.upload();
-      //console.log('products.client.controller - image uploader - End uploadProductMainPicture');
     };
 
 
@@ -249,16 +250,56 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
 
     // ******* Main Function being called to save picture
     //
-    $scope.uploadProductMainPicture = function (fileItem) {
+    $scope.uploadProductMainPicture = function (fileItemfacebook,fileItempinterest) {
+
       console.log('products.client.controller - image uploader - Start uploadProductMainPicture');
 
       // Set scope for kind of Image
       $scope.uploadMainImage = true;
 
-      fileItem.upload();
+      uploader.queueLimit = 5;
+
+      // Create blob from cropped file - FACEBOOK
+      var blobfacebook = dataURItoBlob(fileItemfacebook.toDataURL());
+      var itemfacebook = new FileUploader.FileItem(uploader, $scope.file);
+      itemfacebook._file = blobfacebook;
+      itemfacebook.name = 'facebook';
+      itemfacebook.type = 'image/jpeg';
+      uploader.queue.push(itemfacebook);
+
+
+      // Create blob from cropped file - PINTEREST
+      var blobpinterest = dataURItoBlob(fileItempinterest.toDataURL());
+      var itempinterest = new FileUploader.FileItem($scope.uploader, $scope.file);
+      itempinterest._file = blobpinterest;
+      itempinterest.name = 'pinterest';
+      itempinterest.type = 'image/jpeg';
+      uploader.queue.push(itempinterest);
+
+
+      // Upload all files in queue
+      uploader.uploadAll();
 
       console.log('products.client.controller - image uploader - End uploadProductMainPicture');
     };
+
+    /**
+     * Converts data uri to Blob. Necessary for uploading.
+     * @see
+     *   http://stackoverflow.com/questions/4998908/convert-data-uri-to-file-then-append-to-formdata
+     * @param  {String} dataURI
+     * @return {Blob}
+     */
+    var dataURItoBlob = function(dataURI) {
+      var binary = atob(dataURI.split(',')[1]);
+      var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+      var array = [];
+      for(var i = 0; i < binary.length; i++) {
+        array.push(binary.charCodeAt(i));
+      }
+      return new Blob([new Uint8Array(array)], {type: mimeString});
+    };
+
 
     // Cancel the upload process
     $scope.cancelUpload = function () {
@@ -270,18 +311,24 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
       $scope.showMainImage = true;
       $scope.insertFurtherImage1 = false;
       $scope.insertFurtherImage2 = false;
+      $scope.selectImage = true;
     };
 
     $scope.showFurtherImage1Function = function () {
-      $scope.showMainImage = true;
+      $scope.showMainImage = false;
       $scope.insertFurtherImage1 = true;
       $scope.insertFurtherImage2 = false;
+      $scope.selectImage = true;
     };
 
     $scope.showFurtherImage2Function = function () {
-      $scope.showMainImage = true;
+      $scope.showMainImage = false;
       $scope.insertFurtherImage2 = true;
       $scope.insertFurtherImage1 = false;
+      $scope.selectImage = true;
     };
+
+
+
   }
 ]);

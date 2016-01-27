@@ -15,11 +15,17 @@
     // A selector for adding extra containers to preview
     preview: '',
 
-    // Rebuild when resize the window
+    // Re-render the cropper when resize the window
     responsive: true,
 
-    // Check if the target image is cross origin
+    // Restore the cropped area after resize the window
+    restore: true,
+
+    // Check if the current image is a cross-origin image
     checkCrossOrigin: true,
+
+    // Check the current image's Exif Orientation information
+    checkOrientation: true,
 
     // Show the black modal
     modal: true,

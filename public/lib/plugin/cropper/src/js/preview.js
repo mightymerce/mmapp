@@ -1,22 +1,26 @@
-  extend(prototype, {
     initPreview: function () {
-      var preview = this.options.preview;
-      var image = document.createElement('img');
-      var crossOrigin = this.crossOrigin;
-      var url = this.url;
+      var _this = this;
+      var preview = _this.options.preview;
+      var image = createElement('img');
+      var crossOrigin = _this.crossOrigin;
+      var url = crossOrigin ? _this.crossOriginUrl : _this.url;
       var previews;
 
-      setCrossOrigin(image, crossOrigin);
+      if (crossOrigin) {
+        image.crossOrigin = crossOrigin;
+      }
+
       image.src = url;
-      appendChild(this.viewBox, image);
+      appendChild(_this.viewBox, image);
 
       if (!preview) {
         return;
       }
 
-      this.previews = previews = querySelectorAll(document, preview);
+      _this.previews = previews = document.querySelectorAll(preview);
+
       each(previews, function (element) {
-        var image = document.createElement('img');
+        var image = createElement('img');
 
         // Save the original size for recover
         setData(element, DATA_PREVIEW, {
@@ -25,7 +29,10 @@
           html: element.innerHTML
         });
 
-        setCrossOrigin(image, crossOrigin);
+        if (crossOrigin) {
+          image.crossOrigin = crossOrigin;
+        }
+
         image.src = url;
 
         /**
@@ -34,10 +41,15 @@
          * Add `height:auto` to override `height` attribute on IE8
          * (Occur only when margin-top <= -height)
          */
+
         image.style.cssText = (
-          'display:block;width:100%;height:auto;' +
-          'min-width:0!important;min-height:0!important;' +
-          'max-width:none!important;max-height:none!important;' +
+          'display:block;' +
+          'width:100%;' +
+          'height:auto;' +
+          'min-width:0!important;' +
+          'min-height:0!important;' +
+          'max-width:none!important;' +
+          'max-height:none!important;' +
           'image-orientation:0deg!important;"'
         );
 
@@ -50,38 +62,46 @@
       each(this.previews, function (element) {
         var data = getData(element, DATA_PREVIEW);
 
-        element.style.width = data.width + 'px';
-        element.style.height = data.height + 'px';
+        setStyle(element, {
+          width: data.width,
+          height: data.height
+        });
+
         element.innerHTML = data.html;
         removeData(element, DATA_PREVIEW);
       });
     },
 
     preview: function () {
-      var imageData = this.imageData;
-      var canvasData = this.canvasData;
-      var cropBoxData = this.cropBoxData;
+      var _this = this;
+      var imageData = _this.imageData;
+      var canvasData = _this.canvasData;
+      var cropBoxData = _this.cropBoxData;
       var cropBoxWidth = cropBoxData.width;
       var cropBoxHeight = cropBoxData.height;
       var width = imageData.width;
       var height = imageData.height;
       var left = cropBoxData.left - canvasData.left - imageData.left;
       var top = cropBoxData.top - canvasData.top - imageData.top;
+      var transform = getTransform(imageData);
+      var transforms = {
+            WebkitTransform: transform,
+            msTransform: transform,
+            transform: transform
+          };
 
-      if (!this.isCropped || this.isDisabled) {
+      if (!_this.cropped || _this.disabled) {
         return;
       }
 
-      querySelector(this.viewBox, 'img').style.cssText = (
-        'width:' + width + 'px;' +
-        'height:' + height + 'px;' +
-        'margin-left:' + -left + 'px;' +
-        'margin-top:' + -top + 'px;' +
-        'transform:' + getTransform(imageData) + ';'
-      );
+      setStyle(getByTag(_this.viewBox, 'img')[0], extend({
+        width: width,
+        height: height,
+        marginLeft: -left,
+        marginTop: -top
+      }, transforms));
 
-      each(this.previews, function (element) {
-        var imageStyle = querySelector(element, 'img').style;
+      each(_this.previews, function (element) {
         var data = getData(element, DATA_PREVIEW);
         var originalWidth = data.width;
         var originalHeight = data.height;
@@ -100,13 +120,16 @@
           newHeight = originalHeight;
         }
 
-        element.style.width = newWidth + 'px';
-        element.style.height = newHeight + 'px';
-        imageStyle.width = width * ratio + 'px';
-        imageStyle.height = height * ratio + 'px';
-        imageStyle.marginLeft = -left * ratio + 'px';
-        imageStyle.marginTop = -top * ratio + 'px';
-        imageStyle.transform = getTransform(imageData);
+        setStyle(element, {
+          width: newWidth,
+          height: newHeight
+        });
+
+        setStyle(getByTag(element, 'img')[0], extend({
+          width: width * ratio,
+          height: height * ratio,
+          marginLeft: -left * ratio,
+          marginTop: -top * ratio
+        }, transforms));
       });
-    }
-  });
+    },

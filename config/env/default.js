@@ -70,11 +70,11 @@ module.exports = {
         'public/lib/plugin/cropper/cropper.min.css',
 
         // Cropper
-        'public/lib/cropper/assets/css/font-awesome.min.css',
+        'public/lib/cropper/assets/css/font-awesome.min.css'
         //'public/lib/cropper/assets/css/bootstrap.min.css',
         //'public/lib/cropper/assets/css/tooltip.min.css',
-        'public/lib/cropper/dist/cropper.css',
-        'public/lib/cropper/main.css'
+        //'public/lib/cropper/dist/cropper.css',
+        //'public/lib/cropper/main.css'
 
 
       ],
@@ -136,7 +136,7 @@ module.exports = {
         //'public/lib/plugin/cropper/assets/js/jquery.min.js',
         //'public/lib/cropper/assets/js/tooltip.min.js',
         //'public/lib/plugin/cropper/assets/js/bootstrap.min.js',
-        'public/lib/plugin/cropper/dist/cropper.js',
+        //'public/lib/plugin/cropper/dist/cropper.js',
 
         // OWASP password
         'public/lib/plugin/owasp-password-strength-test/owasp-password-strength-test.js',

@@ -1,35 +1,43 @@
-  extend(prototype, {
     render: function () {
-      this.initContainer();
-      this.initCanvas();
-      this.initCropBox();
+      var _this = this;
 
-      this.renderCanvas();
+      _this.initContainer();
+      _this.initCanvas();
+      _this.initCropBox();
 
-      if (this.isCropped) {
-        this.renderCropBox();
+      _this.renderCanvas();
+
+      if (_this.cropped) {
+        _this.renderCropBox();
       }
     },
 
     initContainer: function () {
-      var options = this.options;
-      var element = this.element;
-      var container = this.container;
-      var cropper = this.cropper;
+      var _this = this;
+      var options = _this.options;
+      var element = _this.element;
+      var container = _this.container;
+      var cropper = _this.cropper;
       var containerData;
 
       addClass(cropper, CLASS_HIDDEN);
       removeClass(element, CLASS_HIDDEN);
 
-      this.containerData = containerData = {
-        width: max(container.offsetWidth, num(options.minContainerWidth) || 200),
-        height: max(container.offsetHeight, num(options.minContainerHeight) || 100)
+      _this.containerData = containerData = {
+        width: max(
+          container.offsetWidth,
+          Number(options.minContainerWidth) || 200
+        ),
+        height: max(
+          container.offsetHeight,
+          Number(options.minContainerHeight) || 100
+        )
       };
 
-      cropper.style.cssText = (
-        'width:' + containerData.width + 'px;' +
-        'height:' + containerData.height + 'px;'
-      );
+      setStyle(cropper, {
+        width: containerData.width,
+        height: containerData.height
+      });
 
       addClass(element, CLASS_HIDDEN);
       removeClass(cropper, CLASS_HIDDEN);
@@ -37,89 +45,98 @@
 
     // Canvas (image wrapper)
     initCanvas: function () {
-      var viewMode = this.options.viewMode;
-      var containerData = this.containerData;
-      var containerWidth = containerData.width;
-      var containerHeight = containerData.height;
-      var imageData = this.imageData;
-      var aspectRatio = imageData.aspectRatio;
-      var canvasData = {
-            naturalWidth: imageData.naturalWidth,
-            naturalHeight: imageData.naturalHeight,
-            aspectRatio: aspectRatio,
-            width: containerWidth,
-            height: containerHeight
-          };
+      var _this = this;
+      var viewMode = _this.options.viewMode;
+      var containerData = _this.containerData;
+      var imageData = _this.imageData;
+      var rotated = abs(imageData.rotate) === 90;
+      var naturalWidth = rotated ? imageData.naturalHeight : imageData.naturalWidth;
+      var naturalHeight = rotated ? imageData.naturalWidth : imageData.naturalHeight;
+      var aspectRatio = naturalWidth / naturalHeight;
+      var canvasWidth = containerData.width;
+      var canvasHeight = containerData.height;
+      var canvasData;
 
-      if (containerHeight * aspectRatio > containerWidth) {
+      if (containerData.height * aspectRatio > containerData.width) {
         if (viewMode === 3) {
-          canvasData.width = containerHeight * aspectRatio;
+          canvasWidth = containerData.height * aspectRatio;
         } else {
-          canvasData.height = containerWidth / aspectRatio;
+          canvasHeight = containerData.width / aspectRatio;
         }
       } else {
         if (viewMode === 3) {
-          canvasData.height = containerWidth / aspectRatio;
+          canvasHeight = containerData.width / aspectRatio;
         } else {
-          canvasData.width = containerHeight * aspectRatio;
+          canvasWidth = containerData.height * aspectRatio;
         }
       }
 
-      canvasData.oldLeft = canvasData.left = (containerWidth - canvasData.width) / 2;
-      canvasData.oldTop = canvasData.top = (containerHeight - canvasData.height) / 2;
+      canvasData = {
+        naturalWidth: naturalWidth,
+        naturalHeight: naturalHeight,
+        aspectRatio: aspectRatio,
+        width: canvasWidth,
+        height: canvasHeight
+      };
 
-      this.canvasData = canvasData;
-      this.isLimited = (viewMode === 1 || viewMode === 2);
-      this.limitCanvas(true, true);
-      this.initialImageData = extend({}, imageData);
-      this.initialCanvasData = extend({}, canvasData);
+      canvasData.oldLeft = canvasData.left = (containerData.width - canvasWidth) / 2;
+      canvasData.oldTop = canvasData.top = (containerData.height - canvasHeight) / 2;
+
+      _this.canvasData = canvasData;
+      _this.limited = (viewMode === 1 || viewMode === 2);
+      _this.limitCanvas(true, true);
+      _this.initialImageData = extend({}, imageData);
+      _this.initialCanvasData = extend({}, canvasData);
     },
 
-    limitCanvas: function (isSizeLimited, isPositionLimited) {
-      var options = this.options;
+    limitCanvas: function (sizeLimited, positionLimited) {
+      var _this = this;
+      var options = _this.options;
       var viewMode = options.viewMode;
-      var containerData = this.containerData;
-      var containerWidth = containerData.width;
-      var containerHeight = containerData.height;
-      var canvasData = this.canvasData;
+      var containerData = _this.containerData;
+      var canvasData = _this.canvasData;
       var aspectRatio = canvasData.aspectRatio;
-      var cropBoxData = this.cropBoxData;
-      var isCropped = this.isCropped && cropBoxData;
+      var cropBoxData = _this.cropBoxData;
+      var cropped = _this.cropped && cropBoxData;
       var minCanvasWidth;
       var minCanvasHeight;
       var newCanvasLeft;
       var newCanvasTop;
 
-      if (isSizeLimited) {
-        minCanvasWidth = num(options.minCanvasWidth) || 0;
-        minCanvasHeight = num(options.minCanvasHeight) || 0;
+      if (sizeLimited) {
+        minCanvasWidth = Number(options.minCanvasWidth) || 0;
+        minCanvasHeight = Number(options.minCanvasHeight) || 0;
 
-        if (viewMode) {
-          if (viewMode > 1) {
-            minCanvasWidth = max(minCanvasWidth, containerWidth);
-            minCanvasHeight = max(minCanvasHeight, containerHeight);
+        if (viewMode > 1) {
+          minCanvasWidth = max(minCanvasWidth, containerData.width);
+          minCanvasHeight = max(minCanvasHeight, containerData.height);
 
-            if (viewMode === 3) {
-              if (minCanvasHeight * aspectRatio > minCanvasWidth) {
-                minCanvasWidth = minCanvasHeight * aspectRatio;
-              } else {
-                minCanvasHeight = minCanvasWidth / aspectRatio;
-              }
+          if (viewMode === 3) {
+            if (minCanvasHeight * aspectRatio > minCanvasWidth) {
+              minCanvasWidth = minCanvasHeight * aspectRatio;
+            } else {
+              minCanvasHeight = minCanvasWidth / aspectRatio;
             }
-          } else {
-            if (minCanvasWidth) {
-              minCanvasWidth = max(minCanvasWidth, isCropped ? cropBoxData.width : 0);
-            } else if (minCanvasHeight) {
-              minCanvasHeight = max(minCanvasHeight, isCropped ? cropBoxData.height : 0);
-            } else if (isCropped) {
-              minCanvasWidth = cropBoxData.width;
-              minCanvasHeight = cropBoxData.height;
+          }
+        } else if (viewMode > 0) {
+          if (minCanvasWidth) {
+            minCanvasWidth = max(
+              minCanvasWidth,
+              cropped ? cropBoxData.width : 0
+            );
+          } else if (minCanvasHeight) {
+            minCanvasHeight = max(
+              minCanvasHeight,
+              cropped ? cropBoxData.height : 0
+            );
+          } else if (cropped) {
+            minCanvasWidth = cropBoxData.width;
+            minCanvasHeight = cropBoxData.height;
 
-              if (minCanvasHeight * aspectRatio > minCanvasWidth) {
-                minCanvasWidth = minCanvasHeight * aspectRatio;
-              } else {
-                minCanvasHeight = minCanvasWidth / aspectRatio;
-              }
+            if (minCanvasHeight * aspectRatio > minCanvasWidth) {
+              minCanvasWidth = minCanvasHeight * aspectRatio;
+            } else {
+              minCanvasHeight = minCanvasWidth / aspectRatio;
             }
           }
         }
@@ -142,17 +159,17 @@
         canvasData.maxHeight = Infinity;
       }
 
-      if (isPositionLimited) {
+      if (positionLimited) {
         if (viewMode) {
-          newCanvasLeft = containerWidth - canvasData.width;
-          newCanvasTop = containerHeight - canvasData.height;
+          newCanvasLeft = containerData.width - canvasData.width;
+          newCanvasTop = containerData.height - canvasData.height;
 
           canvasData.minLeft = min(0, newCanvasLeft);
           canvasData.minTop = min(0, newCanvasTop);
           canvasData.maxLeft = max(0, newCanvasLeft);
           canvasData.maxTop = max(0, newCanvasTop);
 
-          if (isCropped && this.isLimited) {
+          if (cropped && _this.limited) {
             canvasData.minLeft = min(
               cropBoxData.left,
               cropBoxData.left + cropBoxData.width - canvasData.width
@@ -165,12 +182,12 @@
             canvasData.maxTop = cropBoxData.top;
 
             if (viewMode === 2) {
-              if (canvasData.width >= containerWidth) {
+              if (canvasData.width >= containerData.width) {
                 canvasData.minLeft = min(0, newCanvasLeft);
                 canvasData.maxLeft = max(0, newCanvasLeft);
               }
 
-              if (canvasData.height >= containerHeight) {
+              if (canvasData.height >= containerData.height) {
                 canvasData.minTop = min(0, newCanvasTop);
                 canvasData.maxTop = max(0, newCanvasTop);
               }
@@ -179,23 +196,22 @@
         } else {
           canvasData.minLeft = -canvasData.width;
           canvasData.minTop = -canvasData.height;
-          canvasData.maxLeft = containerWidth;
-          canvasData.maxTop = containerHeight;
+          canvasData.maxLeft = containerData.width;
+          canvasData.maxTop = containerData.height;
         }
       }
     },
 
-    renderCanvas: function (isChanged) {
-      var canvasData = this.canvasData;
-      var imageData = this.imageData;
+    renderCanvas: function (changed) {
+      var _this = this;
+      var canvasData = _this.canvasData;
+      var imageData = _this.imageData;
       var rotate = imageData.rotate;
-      var naturalWidth = imageData.naturalWidth;
-      var naturalHeight = imageData.naturalHeight;
       var aspectRatio;
       var rotatedData;
 
-      if (this.isRotated) {
-        this.isRotated = false;
+      if (_this.rotated) {
+        _this.rotated = false;
 
         // Computes rotated sizes with image sizes
         rotatedData = getRotatedSizes({
@@ -212,14 +228,14 @@
           canvasData.width = rotatedData.width;
           canvasData.height = rotatedData.height;
           canvasData.aspectRatio = aspectRatio;
-          canvasData.naturalWidth = naturalWidth;
-          canvasData.naturalHeight = naturalHeight;
+          canvasData.naturalWidth = imageData.naturalWidth;
+          canvasData.naturalHeight = imageData.naturalHeight;
 
           // Computes rotated sizes with natural image sizes
           if (rotate % 180) {
             rotatedData = getRotatedSizes({
-              width: naturalWidth,
-              height: naturalHeight,
+              width: imageData.naturalWidth,
+              height: imageData.naturalHeight,
               degree: rotate
             });
 
@@ -227,15 +243,17 @@
             canvasData.naturalHeight = rotatedData.height;
           }
 
-          this.limitCanvas(true, false);
+          _this.limitCanvas(true, false);
         }
       }
 
-      if (canvasData.width > canvasData.maxWidth || canvasData.width < canvasData.minWidth) {
+      if (canvasData.width > canvasData.maxWidth ||
+        canvasData.width < canvasData.minWidth) {
         canvasData.left = canvasData.oldLeft;
       }
 
-      if (canvasData.height > canvasData.maxHeight || canvasData.height < canvasData.minHeight) {
+      if (canvasData.height > canvasData.maxHeight ||
+        canvasData.height < canvasData.minHeight) {
         canvasData.top = canvasData.oldTop;
       }
 
@@ -248,7 +266,7 @@
         canvasData.maxHeight
       );
 
-      this.limitCanvas(false, true);
+      _this.limitCanvas(false, true);
 
       canvasData.oldLeft = canvasData.left = min(
         max(canvasData.left, canvasData.minLeft),
@@ -259,28 +277,33 @@
         canvasData.maxTop
       );
 
-      this.canvas.style.cssText = (
-        'width:' + canvasData.width + 'px;' +
-        'height:' + canvasData.height + 'px;' +
-        'left:' + canvasData.left + 'px;' +
-        'top:' + canvasData.top + 'px;'
-      );
+      setStyle(_this.canvas, {
+        width: canvasData.width,
+        height: canvasData.height,
+        left: canvasData.left,
+        top: canvasData.top
+      });
 
-      this.renderImage();
+      _this.renderImage();
 
-      if (this.isCropped && this.isLimited) {
-        this.limitCropBox(true, true);
+      if (_this.cropped && _this.limited) {
+        _this.limitCropBox(true, true);
       }
 
-      if (isChanged) {
-        this.output();
+      if (changed) {
+        _this.output();
       }
     },
 
-    renderImage: function (isChanged) {
-      var canvasData = this.canvasData;
-      var imageData = this.imageData;
+    renderImage: function (changed) {
+      var _this = this;
+      var canvasData = _this.canvasData;
+      var imageData = _this.imageData;
+      var newImageData;
       var reversedData;
+      var reversedWidth;
+      var reversedHeight;
+      var transform;
 
       if (imageData.rotate) {
         reversedData = getRotatedSizes({
@@ -289,38 +312,48 @@
           degree: imageData.rotate,
           aspectRatio: imageData.aspectRatio
         }, true);
+
+        reversedWidth = reversedData.width;
+        reversedHeight = reversedData.height;
+
+        newImageData = {
+          width: reversedWidth,
+          height: reversedHeight,
+          left: (canvasData.width - reversedWidth) / 2,
+          top: (canvasData.height - reversedHeight) / 2
+        };
       }
 
-      extend(imageData, reversedData ? {
-        width: reversedData.width,
-        height: reversedData.height,
-        left: (canvasData.width - reversedData.width) / 2,
-        top: (canvasData.height - reversedData.height) / 2
-      } : {
+      extend(imageData, newImageData || {
         width: canvasData.width,
         height: canvasData.height,
         left: 0,
         top: 0
       });
 
-      this.image.style.cssText = (
-        'width:' + imageData.width + 'px;' +
-        'height:' + imageData.height + 'px;' +
-        'margin-left:' + imageData.left + 'px;' +
-        'margin-top:' + imageData.top + 'px;' +
-        'transform:' + getTransform(imageData) + ';'
-      );
+      transform = getTransform(imageData);
 
-      if (isChanged) {
-        this.output();
+      setStyle(_this.image, {
+        width: imageData.width,
+        height: imageData.height,
+        marginLeft: imageData.left,
+        marginTop: imageData.top,
+        WebkitTransform: transform,
+        msTransform: transform,
+        transform: transform
+      });
+
+      if (changed) {
+        _this.output();
       }
     },
 
     initCropBox: function () {
-      var options = this.options;
+      var _this = this;
+      var options = _this.options;
       var aspectRatio = options.aspectRatio;
-      var autoCropArea = num(options.autoCropArea) || 0.8;
-      var canvasData = this.canvasData;
+      var autoCropArea = Number(options.autoCropArea) || 0.8;
+      var canvasData = _this.canvasData;
       var cropBoxData = {
             width: canvasData.width,
             height: canvasData.height
@@ -334,8 +367,8 @@
         }
       }
 
-      this.cropBoxData = cropBoxData;
-      this.limitCropBox(true, true);
+      _this.cropBoxData = cropBoxData;
+      _this.limitCropBox(true, true);
 
       // Initialize auto crop area
       cropBoxData.width = min(
@@ -356,35 +389,44 @@
         cropBoxData.minHeight,
         cropBoxData.height * autoCropArea
       );
-      cropBoxData.oldLeft = cropBoxData.left = canvasData.left + (canvasData.width - cropBoxData.width) / 2;
-      cropBoxData.oldTop = cropBoxData.top = canvasData.top + (canvasData.height - cropBoxData.height) / 2;
+      cropBoxData.oldLeft = cropBoxData.left = (
+        canvasData.left + (canvasData.width - cropBoxData.width) / 2
+      );
+      cropBoxData.oldTop = cropBoxData.top = (
+        canvasData.top + (canvasData.height - cropBoxData.height) / 2
+      );
 
-      this.initialCropBoxData = extend({}, cropBoxData);
+      _this.initialCropBoxData = extend({}, cropBoxData);
     },
 
-    limitCropBox: function (isSizeLimited, isPositionLimited) {
-      var options = this.options;
+    limitCropBox: function (sizeLimited, positionLimited) {
+      var _this = this;
+      var options = _this.options;
       var aspectRatio = options.aspectRatio;
-      var containerData = this.containerData;
-      var containerWidth = containerData.width;
-      var containerHeight = containerData.height;
-      var canvasData = this.canvasData;
-      var cropBoxData = this.cropBoxData;
-      var isLimited = this.isLimited;
+      var containerData = _this.containerData;
+      var canvasData = _this.canvasData;
+      var cropBoxData = _this.cropBoxData;
+      var limited = _this.limited;
       var minCropBoxWidth;
       var minCropBoxHeight;
       var maxCropBoxWidth;
       var maxCropBoxHeight;
 
-      if (isSizeLimited) {
-        minCropBoxWidth = num(options.minCropBoxWidth) || 0;
-        minCropBoxHeight = num(options.minCropBoxHeight) || 0;
+      if (sizeLimited) {
+        minCropBoxWidth = Number(options.minCropBoxWidth) || 0;
+        minCropBoxHeight = Number(options.minCropBoxHeight) || 0;
 
         // The min/maxCropBoxWidth/Height must be less than containerWidth/Height
-        minCropBoxWidth = min(minCropBoxWidth, containerWidth);
-        minCropBoxHeight = min(minCropBoxHeight, containerHeight);
-        maxCropBoxWidth = min(containerWidth, isLimited ? canvasData.width : containerWidth);
-        maxCropBoxHeight = min(containerHeight, isLimited ? canvasData.height : containerHeight);
+        minCropBoxWidth = min(minCropBoxWidth, containerData.width);
+        minCropBoxHeight = min(minCropBoxHeight, containerData.height);
+        maxCropBoxWidth = min(
+          containerData.width,
+          limited ? canvasData.width : containerData.width
+        );
+        maxCropBoxHeight = min(
+          containerData.height,
+          limited ? canvasData.height : containerData.height
+        );
 
         if (aspectRatio) {
           if (minCropBoxWidth && minCropBoxHeight) {
@@ -413,33 +455,40 @@
         cropBoxData.maxHeight = maxCropBoxHeight;
       }
 
-      if (isPositionLimited) {
-        if (isLimited) {
+      if (positionLimited) {
+        if (limited) {
           cropBoxData.minLeft = max(0, canvasData.left);
           cropBoxData.minTop = max(0, canvasData.top);
-          cropBoxData.maxLeft = min(containerWidth, canvasData.left + canvasData.width) - cropBoxData.width;
-          cropBoxData.maxTop = min(containerHeight, canvasData.top + canvasData.height) - cropBoxData.height;
+          cropBoxData.maxLeft = min(
+            containerData.width,
+            canvasData.left + canvasData.width
+          ) - cropBoxData.width;
+          cropBoxData.maxTop = min(
+            containerData.height,
+            canvasData.top + canvasData.height
+          ) - cropBoxData.height;
         } else {
           cropBoxData.minLeft = 0;
           cropBoxData.minTop = 0;
-          cropBoxData.maxLeft = containerWidth - cropBoxData.width;
-          cropBoxData.maxTop = containerHeight - cropBoxData.height;
+          cropBoxData.maxLeft = containerData.width - cropBoxData.width;
+          cropBoxData.maxTop = containerData.height - cropBoxData.height;
         }
       }
     },
 
     renderCropBox: function () {
-      var options = this.options;
-      var containerData = this.containerData;
-      var containerWidth = containerData.width;
-      var containerHeight = containerData.height;
-      var cropBoxData = this.cropBoxData;
+      var _this = this;
+      var options = _this.options;
+      var containerData = _this.containerData;
+      var cropBoxData = _this.cropBoxData;
 
-      if (cropBoxData.width > cropBoxData.maxWidth || cropBoxData.width < cropBoxData.minWidth) {
+      if (cropBoxData.width > cropBoxData.maxWidth ||
+        cropBoxData.width < cropBoxData.minWidth) {
         cropBoxData.left = cropBoxData.oldLeft;
       }
 
-      if (cropBoxData.height > cropBoxData.maxHeight || cropBoxData.height < cropBoxData.minHeight) {
+      if (cropBoxData.height > cropBoxData.maxHeight ||
+        cropBoxData.height < cropBoxData.minHeight) {
         cropBoxData.top = cropBoxData.oldTop;
       }
 
@@ -452,7 +501,7 @@
         cropBoxData.maxHeight
       );
 
-      this.limitCropBox(false, true);
+      _this.limitCropBox(false, true);
 
       cropBoxData.oldLeft = cropBoxData.left = min(
         max(cropBoxData.left, cropBoxData.minLeft),
@@ -463,35 +512,36 @@
         cropBoxData.maxTop
       );
 
-      if (options.movable && options.cropBoxDataMovable) {
+      if (options.movable && options.cropBoxMovable) {
 
         // Turn to move the canvas when the crop box is equal to the container
-        setData(this.face, DATA_ACTION, (cropBoxData.width === containerWidth && cropBoxData.height === containerHeight) ? ACTION_MOVE : ACTION_ALL);
+        setData(_this.face, DATA_ACTION, cropBoxData.width === containerData.width &&
+          cropBoxData.height === containerData.height ? ACTION_MOVE : ACTION_ALL);
       }
 
-      this.cropBox.style.cssText = (
-        'width:' + cropBoxData.width + 'px;' +
-        'height:' + cropBoxData.height + 'px;' +
-        'left:' + cropBoxData.left + 'px;' +
-        'top:' + cropBoxData.top + 'px;'
-      );
+      setStyle(_this.cropBox, {
+        width: cropBoxData.width,
+        height: cropBoxData.height,
+        left: cropBoxData.left,
+        top: cropBoxData.top
+      });
 
-      if (this.isCropped && this.isLimited) {
-        this.limitCanvas(true, true);
+      if (_this.cropped && _this.limited) {
+        _this.limitCanvas(true, true);
       }
 
-      if (!this.isDisabled) {
-        this.output();
+      if (!_this.disabled) {
+        _this.output();
       }
     },
 
     output: function () {
-      var options = this.options;
+      var _this = this;
+      var options = _this.options;
 
-      this.preview();
+      _this.preview();
 
-      if (this.isCompleted && isFunction(options.crop)) {
-        options.crop.call(this.element, this.getData());
+      if (_this.complete && isFunction(options.crop)) {
+        options.crop.call(_this.element, _this.getData());
       }
-    }
-  });
+    },

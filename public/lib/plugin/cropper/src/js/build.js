@@ -1,8 +1,9 @@
-  extend(prototype, {
     build: function () {
-      var options = this.options;
-      var element = this.element;
-      var image = this.image;
+      var _this = this;
+      var options = _this.options;
+      var element = _this.element;
+      var image = _this.image;
+      var container;
       var template;
       var cropper;
       var canvas;
@@ -10,46 +11,48 @@
       var cropBox;
       var face;
 
-      if (!this.isLoaded) {
+      if (!_this.ready) {
         return;
       }
 
       // Unbuild first when replace
-      if (this.isBuilt) {
-        this.unbuild();
+      if (_this.built) {
+        _this.unbuild();
       }
 
-      template = document.createElement('div');
+      template = createElement('div');
       template.innerHTML = Cropper.TEMPLATE;
 
       // Create cropper elements
-      this.container = element.parentNode;
-      this.cropper = cropper = querySelector(template, '.cropper-container');
-      this.canvas = canvas = querySelector(cropper, '.cropper-canvas');
-      this.dragBox = dragBox = querySelector(cropper, '.cropper-drag-box');
-      this.cropBox = cropBox = querySelector(cropper, '.cropper-crop-box');
-      this.viewBox = querySelector(cropper, '.cropper-view-box');
-      this.face = face = querySelector(cropBox, '.cropper-face');
+      _this.container = container = element.parentNode;
+      _this.cropper = cropper = getByClass(template, 'cropper-container')[0];
+      _this.canvas = canvas = getByClass(cropper, 'cropper-canvas')[0];
+      _this.dragBox = dragBox = getByClass(cropper, 'cropper-drag-box')[0];
+      _this.cropBox = cropBox = getByClass(cropper, 'cropper-crop-box')[0];
+      _this.viewBox = getByClass(cropper, 'cropper-view-box')[0];
+      _this.face = face = getByClass(cropBox, 'cropper-face')[0];
 
       appendChild(canvas, image);
 
       // Hide the original image
       addClass(element, CLASS_HIDDEN);
-      insertBefore(element, cropper);
+
+      // Inserts the cropper after to the current image
+      container.insertBefore(cropper, element.nextSibling);
 
       // Show the image if is hidden
-      if (!this.isImg) {
+      if (!_this.isImg) {
         removeClass(image, CLASS_HIDE);
       }
 
-      this.initPreview();
-      this.bind();
+      _this.initPreview();
+      _this.bind();
 
       options.aspectRatio = max(0, options.aspectRatio) || NaN;
       options.viewMode = max(0, min(3, round(options.viewMode))) || 0;
 
       if (options.autoCrop) {
-        this.isCropped = true;
+        _this.cropped = true;
 
         if (options.modal) {
           addClass(dragBox, CLASS_MODAL);
@@ -59,11 +62,11 @@
       }
 
       if (!options.guides) {
-        addClass(querySelectorAll(cropBox, '.cropper-dashed'), CLASS_HIDDEN);
+        addClass(getByClass(cropBox, 'cropper-dashed'), CLASS_HIDDEN);
       }
 
       if (!options.center) {
-        addClass(querySelector(cropBox, '.cropper-center'), CLASS_HIDDEN);
+        addClass(getByClass(cropBox, 'cropper-center'), CLASS_HIDDEN);
       }
 
       if (options.background) {
@@ -80,57 +83,59 @@
       }
 
       if (!options.cropBoxResizable) {
-        addClass(querySelectorAll(cropBox, '.cropper-line'), CLASS_HIDDEN);
-        addClass(querySelectorAll(cropBox, '.cropper-point'), CLASS_HIDDEN);
+        addClass(getByClass(cropBox, 'cropper-line'), CLASS_HIDDEN);
+        addClass(getByClass(cropBox, 'cropper-point'), CLASS_HIDDEN);
       }
 
-      this.setDragMode(options.dragMode);
-      this.render();
-      this.isBuilt = true;
-      this.setData(options.data);
+      _this.setDragMode(options.dragMode);
+      _this.render();
+      _this.built = true;
+      _this.setData(options.data);
 
       // Call the built asynchronously to keep "image.cropper" is defined
-      setTimeout(proxy(function () {
+      setTimeout(function () {
         if (isFunction(options.built)) {
           options.built.call(element);
         }
 
         if (isFunction(options.crop)) {
-          options.crop.call(element, this.getData());
+          options.crop.call(element, _this.getData());
         }
 
-        this.isCompleted = true;
-      }, this), 0);
+        _this.complete = true;
+      }, 0);
     },
 
     unbuild: function () {
-      if (!this.isBuilt) {
+      var _this = this;
+
+      if (!_this.built) {
         return;
       }
 
-      this.isBuilt = false;
-      this.initialImageData = null;
+      _this.built = false;
+      _this.complete = false;
+      _this.initialImageData = null;
 
       // Clear `initialCanvasData` is necessary when replace
-      this.initialCanvasData = null;
-      this.initialCropBoxData = null;
-      this.containerData = null;
-      this.canvasData = null;
+      _this.initialCanvasData = null;
+      _this.initialCropBoxData = null;
+      _this.containerData = null;
+      _this.canvasData = null;
 
       // Clear `cropBoxData` is necessary when replace
-      this.cropBoxData = null;
-      this.unbind();
+      _this.cropBoxData = null;
+      _this.unbind();
 
-      this.resetPreview();
-      this.previews = null;
+      _this.resetPreview();
+      _this.previews = null;
 
-      this.viewBox = null;
-      this.cropBox = null;
-      this.dragBox = null;
-      this.canvas = null;
-      this.container = null;
+      _this.viewBox = null;
+      _this.cropBox = null;
+      _this.dragBox = null;
+      _this.canvas = null;
+      _this.container = null;
 
-      removeChild(this.cropper);
-      this.cropper = null;
-    }
-  });
+      removeChild(_this.cropper);
+      _this.cropper = null;
+    },

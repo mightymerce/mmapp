@@ -1,9 +1,5 @@
   function typeOf(obj) {
-    return toString.call(obj).match(REGEXP_TYPES)[1].toLowerCase();
-  }
-
-  function isString(str) {
-    return typeof str === 'string';
+    return toString.call(obj).slice(8, -1).toLowerCase();
   }
 
   function isNumber(num) {
@@ -45,38 +41,18 @@
   }
 
   function toArray(obj, offset) {
-    var args = [];
+    offset = offset >= 0 ? offset : 0;
 
-    // This is necessary for IE8
-    if (isNumber(offset)) {
-      args.push(offset);
+    if (Array.from) {
+      return Array.from(obj).slice(offset);
     }
 
-    return args.slice.apply(obj, args);
-  }
-
-  function inArray(value, arr) {
-    var index = -1;
-
-    each(arr, function (n, i) {
-      if (n === value) {
-        index = i;
-        return false;
-      }
-    });
-
-    return index;
+    return slice.call(obj, offset);
   }
 
   function trim(str) {
-    if (!isString(str)) {
-      str = String(str);
-    }
-
-    if (str.trim) {
-      str = str.trim();
-    } else {
-      str = str.replace(REGEXP_TRIM, '$1');
+    if (typeof str === 'string') {
+      str = str.trim ? str.trim() : str.replace(REGEXP_TRIM, '$1');
     }
 
     return str;
@@ -95,7 +71,7 @@
         }
       } else if (isObject(obj)) {
         for (i in obj) {
-          if (hasOwnProperty.call(obj, i)) {
+          if (obj.hasOwnProperty(i)) {
             if (callback.call(obj, obj[i], i, obj) === false) {
               break;
             }
@@ -108,17 +84,23 @@
   }
 
   function extend(obj) {
-    var args = toArray(arguments);
+    var args;
 
-    if (args.length > 1) {
+    if (arguments.length > 1) {
+      args = toArray(arguments);
+
+      if (Object.assign) {
+        return Object.assign.apply(Object, args);
+      }
+
       args.shift();
-    }
 
-    each(args, function (arg) {
-      each(arg, function (prop, i) {
-        obj[i] = prop;
+      each(args, function (arg) {
+        each(arg, function (prop, i) {
+          obj[i] = prop;
+        });
       });
-    });
+    }
 
     return obj;
   }
@@ -131,16 +113,26 @@
     };
   }
 
-  function parseClass(className) {
-    return trim(className).split(REGEXP_SPACES);
+  function setStyle(element, styles) {
+    var style = element.style;
+
+    each(styles, function (value, property) {
+      if (REGEXP_SUFFIX.test(property) && isNumber(value)) {
+        value += 'px';
+      }
+
+      style[property] = value;
+    });
   }
 
   function hasClass(element, value) {
-    return element.className.indexOf(value) > -1;
+    return element.classList ?
+      element.classList.contains(value) :
+      element.className.indexOf(value) > -1;
   }
 
   function addClass(element, value) {
-    var classes;
+    var className;
 
     if (isNumber(element.length)) {
       return each(element, function (elem) {
@@ -148,49 +140,56 @@
       });
     }
 
-    classes = parseClass(element.className);
+    if (element.classList) {
+      return element.classList.add(value);
+    }
 
-    each(parseClass(value), function (n) {
-      if (inArray(n, classes) < 0) {
-        classes.push(n);
-      }
-    });
+    className = trim(element.className);
 
-    element.className = classes.join(' ');
+    if (!className) {
+      element.className = value;
+    } else if (className.indexOf(value) < 0) {
+      element.className = className + ' ' + value;
+    }
   }
 
   function removeClass(element, value) {
-    var classes;
-
     if (isNumber(element.length)) {
       return each(element, function (elem) {
         removeClass(elem, value);
       });
     }
 
-    classes = parseClass(element.className);
+    if (element.classList) {
+      return element.classList.remove(value);
+    }
 
-    each(parseClass(value), function (n, i) {
-      if ((i = inArray(n, classes)) > -1) {
-        classes.splice(i, 1);
-      }
-    });
-
-    element.className = classes.join(' ');
+    if (element.className.indexOf(value) >= 0) {
+      element.className = element.className.replace(value, '');
+    }
   }
 
   function toggleClass(element, value, added) {
-    return added ? addClass(element, value) : removeClass(element, value);
+    if (isNumber(element.length)) {
+      return each(element, function (elem) {
+        toggleClass(elem, value, added);
+      });
+    }
+
+    // IE10-11 doesn't support the second parameter of `classList.toggle`
+    if (added) {
+      addClass(element, value);
+    } else {
+      removeClass(element, value);
+    }
   }
 
   function getData(element, name) {
-    if (isObject(element[name])) {
-      return element[name];
-    } else if (element.dataset) {
-      return element.dataset[name];
-    } else {
-      return element.getAttribute('data-' + name);
-    }
+    return isObject(element[name]) ?
+      element[name] :
+      element.dataset ?
+        element.dataset[name] :
+        element.getAttribute('data-' + name);
   }
 
   function setData(element, name, data) {
@@ -214,13 +213,7 @@
   }
 
   function addListener(element, type, handler) {
-    var types;
-
-    if (!isFunction(handler)) {
-      return;
-    }
-
-    types = trim(type).split(REGEXP_SPACES);
+    var types = trim(type).split(REGEXP_SPACES);
 
     if (types.length > 1) {
       return each(types, function (type) {
@@ -236,13 +229,7 @@
   }
 
   function removeListener(element, type, handler) {
-    var types;
-
-    if (!isFunction(handler)) {
-      return;
-    }
-
-    types = trim(type).split(REGEXP_SPACES);
+    var types = trim(type).split(REGEXP_SPACES);
 
     if (types.length > 1) {
       return each(types, function (type) {
@@ -258,12 +245,10 @@
   }
 
   function preventDefault(e) {
-    if (e) {
-      if (e.preventDefault) {
-        e.preventDefault();
-      } else {
-        e.returnValue = false;
-      }
+    if (e.preventDefault) {
+      e.preventDefault();
+    } else {
+      e.returnValue = false;
     }
   }
 
@@ -291,20 +276,43 @@
 
     return {
       left: box.left + (window.scrollX || doc && doc.scrollLeft || 0) - (doc && doc.clientLeft || 0),
-      top: box.top  + (window.scrollY || doc && doc.scrollTop || 0)  - (doc && doc.clientTop  || 0)
+      top: box.top + (window.scrollY || doc && doc.scrollTop || 0) - (doc && doc.clientTop || 0)
     };
   }
 
-  function querySelector(element, selector) {
-    return element.querySelector(selector);
+  function getTouchesCenter(touches) {
+    var length = touches.length;
+    var pageX = 0;
+    var pageY = 0;
+
+    if (length) {
+      each(touches, function (touch) {
+        pageX += touch.pageX;
+        pageY += touch.pageY;
+      });
+
+      pageX /= length;
+      pageY /= length;
+    }
+
+    return {
+      pageX: pageX,
+      pageY: pageY
+    };
   }
 
-  function querySelectorAll(element, selector) {
-    return element.querySelectorAll(selector);
+  function getByTag(element, tagName) {
+    return element.getElementsByTagName(tagName);
   }
 
-  function insertBefore(element, elem) {
-    element.parentNode.insertBefore(elem, element);
+  function getByClass(element, className) {
+    return element.getElementsByClassName ?
+      element.getElementsByClassName(className) :
+      element.querySelectorAll('.' + className);
+  }
+
+  function createElement(tagName) {
+    return document.createElement(tagName);
   }
 
   function appendChild(element, elem) {
@@ -312,7 +320,9 @@
   }
 
   function removeChild(element) {
-    element.parentNode.removeChild(element);
+    if (element.parentNode) {
+      element.parentNode.removeChild(element);
+    }
   }
 
   function empty(element) {
@@ -322,19 +332,13 @@
   }
 
   function isCrossOriginURL(url) {
-    var parts = url.match(/^(https?:)\/\/([^\:\/\?#]+):?(\d*)/i);
+    var parts = url.match(REGEXP_ORIGINS);
 
     return parts && (
       parts[1] !== location.protocol ||
       parts[2] !== location.hostname ||
       parts[3] !== location.port
     );
-  }
-
-  function setCrossOrigin(image, crossOrigin) {
-    if (crossOrigin) {
-      image.crossOrigin = crossOrigin;
-    }
   }
 
   function addTimestamp(url) {
@@ -352,7 +356,7 @@
     }
 
     // IE8: Don't use `new Image()` here
-    newImage = document.createElement('img');
+    newImage = createElement('img');
 
     newImage.onload = function () {
       callback(this.width, this.height);
@@ -361,11 +365,11 @@
     newImage.src = image.src;
   }
 
-  function getTransform(options) {
+  function getTransform(data) {
     var transforms = [];
-    var rotate = options.rotate;
-    var scaleX = options.scaleX;
-    var scaleY = options.scaleY;
+    var rotate = data.rotate;
+    var scaleX = data.scaleX;
+    var scaleY = data.scaleY;
 
     if (isNumber(rotate)) {
       transforms.push('rotate(' + rotate + 'deg)');
@@ -378,9 +382,9 @@
     return transforms.length ? transforms.join(' ') : 'none';
   }
 
-  function getRotatedSizes(data, isReversed) {
+  function getRotatedSizes(data, reversed) {
     var deg = abs(data.degree) % 180;
-    var arc = (deg > 90 ? (180 - deg) : deg) * Math.PI / 180;
+    var arc = (deg > 90 ? (180 - deg) : deg) * PI / 180;
     var sinArc = sin(arc);
     var cosArc = cos(arc);
     var width = data.width;
@@ -389,7 +393,7 @@
     var newWidth;
     var newHeight;
 
-    if (!isReversed) {
+    if (!reversed) {
       newWidth = width * cosArc + height * sinArc;
       newHeight = width * sinArc + height * cosArc;
     } else {
@@ -404,7 +408,7 @@
   }
 
   function getSourceCanvas(image, data) {
-    var canvas = document.createElement('canvas');
+    var canvas = createElement('canvas');
     var context = canvas.getContext('2d');
     var x = 0;
     var y = 0;
@@ -452,7 +456,7 @@
     }
 
     if (rotatable) {
-      context.rotate(rotate * Math.PI / 180);
+      context.rotate(rotate * PI / 180);
     }
 
     // Should call `scale` after rotated
@@ -460,11 +464,123 @@
       context.scale(scaleX, scaleY);
     }
 
-    context.drawImage(image, x, y, width, height);
+    context.drawImage(image, floor(x), floor(y), floor(width), floor(height));
 
     if (advanced) {
       context.restore();
     }
 
     return canvas;
+  }
+
+  function getStringFromCharCode(dataView, start, length) {
+    var str = '';
+    var i = start;
+
+    for (length += start; i < length; i++) {
+      str += fromCharCode(dataView.getUint8(i));
+    }
+
+    return str;
+  }
+
+  function getOrientation(arrayBuffer) {
+    var dataView = new DataView(arrayBuffer);
+    var length = dataView.byteLength;
+    var orientation;
+    var exifIDCode;
+    var tiffOffset;
+    var firstIFDOffset;
+    var littleEndian;
+    var endianness;
+    var app1Start;
+    var ifdStart;
+    var offset;
+    var i;
+
+    // Only handle JPEG image (start by 0xFFD8)
+    if (dataView.getUint8(0) === 0xFF && dataView.getUint8(1) === 0xD8) {
+      offset = 2;
+
+      while (offset < length) {
+        if (dataView.getUint8(offset) === 0xFF && dataView.getUint8(offset + 1) === 0xE1) {
+          app1Start = offset;
+          break;
+        }
+
+        offset++;
+      }
+    }
+
+    if (app1Start) {
+      exifIDCode = app1Start + 4;
+      tiffOffset = app1Start + 10;
+
+      if (getStringFromCharCode(dataView, exifIDCode, 4) === 'Exif') {
+        endianness = dataView.getUint16(tiffOffset);
+        littleEndian = endianness === 0x4949;
+
+        if (littleEndian || endianness === 0x4D4D /* bigEndian */) {
+          if (dataView.getUint16(tiffOffset + 2, littleEndian) === 0x002A) {
+            firstIFDOffset = dataView.getUint32(tiffOffset + 4, littleEndian);
+
+            if (firstIFDOffset >= 0x00000008) {
+              ifdStart = tiffOffset + firstIFDOffset;
+            }
+          }
+        }
+      }
+    }
+
+    if (ifdStart) {
+      length = dataView.getUint16(ifdStart, littleEndian);
+
+      for (i = 0; i < length; i++) {
+        offset = ifdStart + i * 12 + 2;
+
+        if (dataView.getUint16(offset, littleEndian) === 0x0112 /* Orientation */) {
+
+          // 8 is the offset of the current tag's value
+          offset += 8;
+
+          // Get the original orientation value
+          orientation = dataView.getUint16(offset, littleEndian);
+
+          // Override the orientation with the default value: 1
+          dataView.setUint16(offset, 1, littleEndian);
+          break;
+        }
+      }
+    }
+
+    return orientation;
+  }
+
+  function dataURLToArrayBuffer(dataURL) {
+    var base64 = dataURL.replace(REGEXP_DATA_URL_HEAD, '');
+    var binary = atob(base64);
+    var length = binary.length;
+    var arrayBuffer = new ArrayBuffer(length);
+    var dataView = new Uint8Array(arrayBuffer);
+    var i;
+
+    for (i = 0; i < length; i++) {
+      dataView[i] = binary.charCodeAt(i);
+    }
+
+    return arrayBuffer;
+  }
+
+  // Only available for JPEG image
+  function arrayBufferToDataURL(arrayBuffer) {
+    var dataView = new Uint8Array(arrayBuffer);
+    var length = dataView.length;
+    var base64 = '';
+    var i;
+
+    for (i = 0; i < length; i++) {
+      base64 += fromCharCode(dataView[i]);
+    }
+
+    return 'data:image/jpeg;base64,' + btoa(base64);
   }

@@ -17,7 +17,7 @@ module.exports = {
 
 
         // Image cropper
-        'public/lib/plugin/cropper/cropper.min.css',
+        //'public/lib/plugin/cropper/cropper.min.css',
 
         // Login
         'public/css/login/*.css',
@@ -25,19 +25,21 @@ module.exports = {
         // Cropper
         'public/lib/cropper/assets/css/font-awesome.min.css',
         //'public/lib/cropper/assets/css/bootstrap.min.css',
-        //'public/lib/cropper/assets/css/tooltip.min.css',
+        'public/lib/cropper/assets/css/tooltip.min.css',
         'public/lib/cropper/dist/cropper.css',
+        'public/lib/cropper/main.css',
+
+        // iCheck
+        'public/lib/plugin/iCheck/custom.css',
 
         // Inspinia
         'public/css/animate.css',
-        'public/css/style.css',
+        'public/css/style.css'
         //'public/css/style.min.css',
 
         // Checkout
         //'modules/checkouts/client/css/*.css',
 
-        // iCheck
-        'public/lib/plugin/iCheck/custom.css'
       ],
       js: [
         // JQuery
@@ -95,9 +97,9 @@ module.exports = {
 
         // Cropper
         //'public/lib/plugin/cropper/assets/js/jquery.min.js',
-        //'public/lib/cropper/assets/js/tooltip.min.js',
-        //'public/lib/plugin/cropper/assets/js/bootstrap.min.js',
-        'public/lib/plugin/cropper/dist/cropper.js',
+        //'public/lib/plugin/cropper/assets/js/tooltip.min.js',
+        //'public/lib/plugin/cropper/dist/cropper.js',
+        //'public/lib/plugin/cropper/main.js',
 
         // OWASP password
         'public/lib/plugin/owasp-password-strength-test/owasp-password-strength-test.js',
@@ -106,13 +108,8 @@ module.exports = {
         'public/lib/plugin/oclazyload/dist/ocLazyLoad.min.js',
         'public/lib/ui-bootstrap-tpls-0.12.0.min.js',
 
-
-
          // Facebook
         'public/openfb-angular.js',
-
-        // Image cropper
-        'public/lib/plugin/cropper/cropper.min.js',
 
         // Angular SOAP
         'public/lib/plugin/angular-soap/soapclient.js',
@@ -145,8 +142,9 @@ module.exports = {
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },
     css: [
-
-      //'modules/*/client/css/*.css'
+      'modules/products/client/cropper/assets/css/*.css',
+      'modules/products/client/cropper/dist/cropper.css',
+      'modules/products/client/cropper/main.css'
     ],
     less: [
       'modules/*/client/less/*.less'
@@ -159,7 +157,9 @@ module.exports = {
       'modules/core/client/app/init.js',
       'modules/*/client/*.js',
       'modules/*/client/**/*.js',
-      'modules/users/client/assets/js/*.js'
+      'modules/users/client/assets/js/*.js',
+      'modules/products/client/cropper/dist/cropper.js',
+      'modules/products/client/cropper/main.js'
       // Angular-File-Upload
       //'modules/products/client/dist/angular-file-upload.js'
 

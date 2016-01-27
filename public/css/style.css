@@ -503,9 +503,9 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
     margin-top: 0px;
 }
 .top-navigation .navbar-brand {
-    background: #D0D0D0;
+    background: #ffffff;
     color: #fff;
-    padding: 0px 0px;
+    padding: 5px 5px;
 }
 .top-navigation .navbar-top-links li:last-child {
     margin-right: 0;
@@ -5250,7 +5250,7 @@ del {
     margin: 0 20px;
 }
 .product-images-list {
-    height: 25px;
+    height: 55px;
 }
 /* Social feed */
 .social-feed-separated .social-feed-box {

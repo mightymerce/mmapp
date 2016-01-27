@@ -1,19 +1,25 @@
   // Globals
   var document = window.document;
   var location = window.location;
+  var ArrayBuffer = window.ArrayBuffer;
+  var Object = window.Object;
+  var Array = window.Array;
+  var String = window.String;
+  var Number = window.Number;
+  var Math = window.Math;
 
   // Constants
   var NAMESPACE = 'cropper';
 
   // Classes
-  var CLASS_MODAL = 'cropper-modal';
-  var CLASS_HIDE = 'cropper-hide';
-  var CLASS_HIDDEN = 'cropper-hidden';
-  var CLASS_INVISIBLE = 'cropper-invisible';
-  var CLASS_MOVE = 'cropper-move';
-  var CLASS_CROP = 'cropper-crop';
-  var CLASS_DISABLED = 'cropper-disabled';
-  var CLASS_BG = 'cropper-bg';
+  var CLASS_MODAL = NAMESPACE + '-modal';
+  var CLASS_HIDE = NAMESPACE + '-hide';
+  var CLASS_HIDDEN = NAMESPACE + '-hidden';
+  var CLASS_INVISIBLE = NAMESPACE + '-invisible';
+  var CLASS_MOVE = NAMESPACE + '-move';
+  var CLASS_CROP = NAMESPACE + '-crop';
+  var CLASS_DISABLED = NAMESPACE + '-disabled';
+  var CLASS_BG = NAMESPACE + '-bg';
 
   // Events
   var EVENT_MOUSE_DOWN = 'mousedown touchstart pointerdown MSPointerDown';
@@ -26,10 +32,14 @@
   var EVENT_LOAD = 'load';
 
   // RegExps
-  var REGEXP_ACTIONS = /^(e|w|s|n|se|sw|ne|nw|all|crop|move|zoom)$/;
+  var REGEXP_ACTIONS = /e|w|s|n|se|sw|ne|nw|all|crop|move|zoom/;
+  var REGEXP_SUFFIX = /width|height|left|top|marginLeft|marginTop/;
+  var REGEXP_ORIGINS = /^(https?:)\/\/([^\:\/\?#]+):?(\d*)/i;
+  var REGEXP_TRIM = /^\s+(.*)\s+$/;
   var REGEXP_SPACES = /\s+/;
-  var REGEXP_TYPES = /\s([a-zA-Z]+)/;
-  var REGEXP_TRIM = /^\s+(.*)\s+^/;
+  var REGEXP_DATA_URL = /^data\:/;
+  var REGEXP_DATA_URL_HEAD = /^data\:([^\;]+)\;base64,/;
+  var REGEXP_DATA_URL_JPEG = /^data\:image\/jpeg.*;base64,/;
 
   // Data
   var DATA_PREVIEW = 'preview';
@@ -54,7 +64,6 @@
   var SUPPORT_CANVAS = !!document.createElement('canvas').getContext;
 
   // Maths
-  var num = Number;
   var min = Math.min;
   var max = Math.max;
   var abs = Math.abs;
@@ -62,13 +71,12 @@
   var cos = Math.cos;
   var sqrt = Math.sqrt;
   var round = Math.round;
-
-  // Prototype
-  var prototype = {
-    version: '@VERSION'
-  };
+  var floor = Math.floor;
+  var PI = Math.PI;
 
   // Utilities
-  var EMPTY_OBJECT = {};
-  var toString = EMPTY_OBJECT.toString;
-  var hasOwnProperty = EMPTY_OBJECT.hasOwnProperty;
+  var objectProto = Object.prototype;
+  var toString = objectProto.toString;
+  var hasOwnProperty = objectProto.hasOwnProperty;
+  var slice = Array.prototype.slice;
+  var fromCharCode = String.fromCharCode;
