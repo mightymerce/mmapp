@@ -227,7 +227,6 @@ window.onload = function () {
     var data;
     var datafacebook;
 
-    alert('los gehts!');
 
     if (!cropper) {
       return;
@@ -289,8 +288,6 @@ window.onload = function () {
         case 'getCroppedCanvas':
           if (result) {
 
-            alert(result.toDataURL());
-            alert(resultfacebook.toDataURL());
             angular.element(document.getElementById('productsMediaControllerID')).scope().uploadProductMainPicture(result,resultfacebook);
 
             // Bootstrap's Modal
@@ -306,7 +303,6 @@ window.onload = function () {
         case 'getCroppedCanvasfacebook':
           if (result) {
 
-            alert(result.toDataURL());
             angular.element(document.getElementById('productsMediaControllerID')).scope().uploadProductMainPicture(result);
 
             // Bootstrap's Modal
@@ -400,7 +396,6 @@ window.onload = function () {
         case 'getCroppedCanvas':
           if (result) {
 
-            alert(result.toDataURL());
             angular.element(document.getElementById('productsMediaControllerID')).scope().uploadProductMainPicture(result);
 
             // Bootstrap's Modal
