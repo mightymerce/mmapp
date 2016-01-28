@@ -158,7 +158,6 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
           product.productFurtherImage2Alt = $scope.productMainImageAlt;
         }
         else {
-          alert('Item name: ' +item.name);
           if(item.name === 'main')
             product.productMainImageURL = response;
           if(item.name === 'facebook') {
