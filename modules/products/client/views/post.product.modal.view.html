@@ -43,7 +43,15 @@
         <div class="modal-body-white">
           <p><strong><span ng-bind="product.productTitle"></span></strong> </p>
           <p><span ng-bind="product.productId"></span></p>
-          <img ng-src="{{product.productMainImageURL}}" class="product-images-list">
+          <div ng-show="varPostChannel === 'Facebook'">
+            <img ng-src="{{product.productMainImageURLFacebook}}" alt="{{product.productMainImageAlt}}" class="product-images-list">
+          </div>
+          <div ng-show="varPostChannel === 'Pinterest'">
+            <img ng-src="{{product.productMainImageURLPinterest}}" alt="{{product.productMainImageAlt}}" class="product-images-list">
+          </div>
+          <div ng-show="varPostChannel === 'Code'">
+            <img ng-src="{{product.productMainImageURLCode}}" alt="{{product.productMainImageAlt}}" class="product-images-list">
+          </div>
         </div>
         <div class="modal-body">
           <div ng-show="varPostChannel === 'Facebook' && varPostStatus === 'Wait'">

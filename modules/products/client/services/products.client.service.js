@@ -110,7 +110,6 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
           }
         },{ scope: 'publish_actions' });
 
-
       },
 
       getFacebookLoginStatus: function() {
@@ -118,11 +117,9 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
         var FB = $window.FB;
 
         FB.getLoginStatus(function(response){
-          console.log('products.client.service - getFacebookLoginStatus - return: '+response.status);
+          console.log('products.client.service - getFacebookLoginStatus');
           return response.status;
         });
-
-
       },
 
       postProcessFacebook: function(product) {
@@ -161,7 +158,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
 
             params.name = product.productTitle;
             params.link = linkUrl + product._id + '?channel=facebook';
-            params.picture = linkMainImageUrl + product.productMainImageURL.substring(1);
+            params.picture = linkMainImageUrl + product.productMainImageURLFacebook.substring(1);
             params.description = product.productDescription;
 
             console.log('product.client.service - postToWall - productMainImageURL ' + params.picture);
@@ -281,7 +278,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
             // when the response is available
 
             var link = linkUrl +product._id + '?channel=pinterest';
-            var image_url = linkMainImageUrl + product.productMainImageURL.substring(1);
+            var image_url = linkMainImageUrl + product.productMainImageURLPinterest.substring(1);
             var note = product.productTitle + ' für ' +product.productPrice + ' ' +response.currencyCode + ' ' + product.productDescription;
 
             var PDK = $window.PDK;

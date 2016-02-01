@@ -77,11 +77,16 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
             else {
               // Note: The call will only work if you accept the permission request
               console.log('products.client.controller - modalupdateProductPost - call login Facebook');
-              ProductsServices.loginFacebook();
-              // TODO - work with promise to show error message
-              // $scope.error = 'You are now connected to facebook! Please click on "Create Post again"!';
-              $scope.varFBConnected = true;
-              $scope.success = 'You are now connected to facebook! Please click on "Create Post again"!';
+              ProductsServices.loginFacebook().then(function(promise) {
+
+                $scope.varFBConnected = true;
+                $scope.success = 'You are now connected to facebook! Please click on "Create Post again"!';
+                $scope.error = 'You are now connected to facebook! Please click on "Create Post again"!';
+
+                console.log('products.client.controller - modalupdateProductPost - login Facebook done');
+
+                // Do not show promise - as this is the token returned
+              });
             }
 
           });

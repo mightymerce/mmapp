@@ -6,6 +6,8 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
     console.log('authentication.client.controller - load - verify activation id set: ' +$location.search().id);
     $scope.authentication = Authentication;
     $scope.popoverMsg = PasswordValidator.getPopoverMsg();
+    $scope.navHide = true;
+    $scope.footHide = false;
 
     // Get an eventual error defined in the URL query string:
     $scope.error = $location.search().err;
@@ -278,6 +280,7 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
           });
         } else {
           console.log('authentication.client.controller - signin - signin success redirect to dashboard');
+
           // And redirect to the previous or home page
           $state.go('dashboard', $state.previous.params);
         }

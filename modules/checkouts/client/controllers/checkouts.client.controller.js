@@ -6,9 +6,6 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
     $scope.authentication = Authentication;
     $scope.totalPrice = '';
 
-    // set the default bootswatch name
-    $scope.css = 'modules/checkouts/client/css/style-min.css';
-
     // Find existing Checkout Product
     $scope.findOne = function () {
       console.log('checkouts.client.controller - findOne - start');
