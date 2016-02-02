@@ -17,18 +17,28 @@
 
   <!-- Facebook META -->
   <meta property="fb:app_id" content="{{facebookAppId}}">
-  <meta property="og:site_name" content="{{title}}">
-  <meta property="og:title" content="{{ productTitle }}">
-  <meta property="og:description" content="{{ productDescription }}">
-  <meta property="og:url" content="{{url}}">
-  <meta property="og:image" content="{{logo}}">
+  <meta property="og:site_name" content="{{displayName}}">
+  <meta property="og:title" content="{{productTitle}}">
+  <meta property="og:description" content="{{productDescription}}">
+  <meta property="og:url" content="{{checkoutURL}}">
+  <meta property="og:image" content="{{productMainImageURLFacebook}}">
   <meta property="og:type" content="website">
 
   <!-- Twitter META -->
-  <meta name="twitter:title" content="{{title}}">
-  <meta name="twitter:description" content="{{description}}">
+  <meta name="twitter:title" content="{{productTitle}}">
+  <meta name="twitter:description" content="{{productDescription}}">
   <meta name="twitter:url" content="{{url}}">
   <meta name="twitter:image" content="{{logo}}">
+
+  <!-- Pinterest META -->
+  <meta property="og:type" content="product">
+  <meta property="og:title" content="{{ productTitle }}">
+  <meta property="og:description" content="{{ productDescription }}">
+  <meta property="og:url" content="{{checkoutURL}}" />
+  <meta property="og:price:amount" content="{{productPrice}}">
+  <meta property="og:price:currency" content="{{productCurrency}}">
+  <meta property="og:availability" content="instock">
+  <meta property="og:site_name" content="{{displayName}}">
 
   <!-- Open Sans Font-->
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
@@ -92,7 +102,7 @@
 <script>
   window.fbAsyncInit = function() {
 
-    /*
+ /*
     // init the FB JS SDK Mightymerce Test
     FB.init({
       appId      : '1679730548952270',                        // App ID from the app dashboard
@@ -101,7 +111,7 @@
       xfbml      : true                                  // Look for social plugins on the page
     });
 
-
+*/
 
     // init the FB JS SDK Migthymerce Dev
     FB.init({
@@ -111,16 +121,19 @@
       xfbml      : true                                  // Look for social plugins on the page
     });
 
-    */
+/*
+
+
 
 
     // init the FB JS SDK Migthymerce Prod
     FB.init({
       appId      : '1679726155619376',                        // App ID from the app dashboard
-      channelUrl : '../../modules/products/client/views/channel.html', // Channel file for x-domain comms
       version    : 'v2.5',
       xfbml      : true                                  // Look for social plugins on the page
     });
+
+    */
 
 
     // Additional initialization code such as adding Event Listeners goes here

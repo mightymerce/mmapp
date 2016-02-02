@@ -23,14 +23,14 @@ angular.module('posts').config(['$stateProvider',
         })
         .state('posts.view', {
           url: '/:postId/edit',
-          templateUrl: 'modules/posts/client/views/edit-post.client.view.html',
+          templateUrl: 'modules/posts/client/views/edit-posts.client.view.html',
           data: {
             roles: ['user', 'admin']
           }
         })
         .state('posts.edit', {
           url: '/:postId/edit',
-          templateUrl: 'modules/posts/client/views/edit-post.client.view.html',
+          templateUrl: 'modules/posts/client/views/edit-posts.client.view.html',
           data: {
             roles: ['user', 'admin']
           }

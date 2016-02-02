@@ -15,16 +15,11 @@ module.exports = {
         // Footable
         'public/lib/css/plugins/footable/footable.core.css',
 
-
-        // Image cropper
-        //'public/lib/plugin/cropper/cropper.min.css',
-
         // Login
         'public/css/login/*.css',
 
         // Cropper
         'public/lib/cropper/assets/css/font-awesome.min.css',
-        //'public/lib/cropper/assets/css/bootstrap.min.css',
         'public/lib/cropper/assets/css/tooltip.min.css',
         'public/lib/cropper/dist/cropper.css',
         'public/lib/cropper/main.css',
@@ -34,8 +29,10 @@ module.exports = {
 
         // Inspinia
         'public/css/animate.css',
-        'public/css/style.css'
-        //'public/css/style.min.css',
+        'public/css/style.css',
+
+        // Sweet Alert
+        'public/lib/plugin/sweetalert/sweetalert.css'
 
         // Checkout
         //'modules/checkouts/client/css/*.css',
@@ -91,15 +88,12 @@ module.exports = {
         // iCheck
         'public/lib/plugin/iCheck/icheck.min.js',
 
+        // Sweet Alert
+        'public/lib/plugin/sweetalert/sweetalert.min.js',
+
         // Footable
         'public/lib/css/plugins/footable/footable.all.min.js',
         'public/lib/css/plugins/footable/angular-footable.js',
-
-        // Cropper
-        //'public/lib/plugin/cropper/assets/js/jquery.min.js',
-        //'public/lib/plugin/cropper/assets/js/tooltip.min.js',
-        //'public/lib/plugin/cropper/dist/cropper.js',
-        //'public/lib/plugin/cropper/main.js',
 
         // OWASP password
         'public/lib/plugin/owasp-password-strength-test/owasp-password-strength-test.js',
@@ -117,12 +111,6 @@ module.exports = {
 
 
         'public/lib/angular-file-upload/dist/angular-file-upload.min.js',
-
-        // Flot
-        //'public/lib/plugin/flot/jquery.flot.js',
-        //'public/lib/plugin/flot/jquery.flot.tooltip.min.js',
-        //'public/lib/plugin/flot/jquery.flot.resize.js',
-        //'public/lib/plugin/flot/jquery.flot.pie.js',
 
         // ChartJS
         'public/lib/plugin/chartJs/Chart.min.js',
@@ -160,9 +148,6 @@ module.exports = {
       'modules/users/client/assets/js/*.js',
       'modules/products/client/cropper/dist/cropper.js',
       'modules/products/client/cropper/main.js'
-      // Angular-File-Upload
-      //'modules/products/client/dist/angular-file-upload.js'
-
 
     ],
     views: ['modules/*/client/views/**/*.html'],

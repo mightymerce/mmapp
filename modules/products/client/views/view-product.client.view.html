@@ -123,13 +123,13 @@
                   <td><span ng-bind="post.postStatus"></span></td>
                   <td>
                     <div ng-show="post.postStatus === 'Active'">
-                      <a class="btn btn-primary btn-outline btn-xs" ng-click="modalupdateProductPost('sm', product, post.postChannel, post.postStatus, post.postPublicationDate)"><i class="fa fa-check"></i> View Post</a>
+                      <a class="btn btn-primary btn-outline btn-sm" ng-click="modalupdateProductPost('sm', product, post.postChannel, post.postStatus, post.postPublicationDate)"><i class="fa fa-check"></i> View Post</a>
                     </div>
                     <div ng-show="post.postStatus === 'Wait'">
-                      <a class="btn btn-warning btn-outline btn-xs" ng-click="modalupdateProductPost('sm', product, post.postChannel, post.postStatus, post.postPublicationDate)"><i class="fa fa-warning"></i> Review Post</a>
+                      <a class="btn btn-warning btn-outline btn-sm" ng-click="modalupdateProductPost('sm', product, post.postChannel, post.postStatus, post.postPublicationDate)"><i class="fa fa-warning"></i> Review Post</a>
                     </div>
                     <div ng-show="post.postStatus === 'Error'">
-                      <a class="btn btn-danger btn-outline btn-xs" ng-click="modalupdateProductPost('sm', product, post.postChannel, post.postStatus, post.postPublicationDate)"><i class="fa fa-pencil"></i> Review Post</a>
+                      <a class="btn btn-danger btn-outline btn-sm" ng-click="modalupdateProductPost('sm', product, post.postChannel, post.postStatus, post.postPublicationDate)"><i class="fa fa-pencil"></i> Review Post</a>
                     </div>
                   </td>
                 </tr>

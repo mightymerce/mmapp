@@ -269,6 +269,10 @@ var ProductSchema = new Schema({
     type: String,
     default: ''
   },
+  productActive: {
+    type: String,
+    default: 'active'
+  },
   user: {
     type: Schema.ObjectId,
     ref: 'User'

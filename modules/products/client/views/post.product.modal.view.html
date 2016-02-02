@@ -100,9 +100,21 @@
             <button type="button" class="btn btn-white" ng-click="$dismiss()">Close</button>
             <button type="submit" class="btn btn-warning">Try post again</button>
           </div>
-          <div ng-show="varPostStatus === 'Wait' || varPostStatus === 'Active'">
+          <div ng-show="varPostChannel === 'Facebook' && varPostStatus === 'Wait'">
             <button type="button" class="btn btn-white" ng-click="$dismiss()">Close</button>
             <button type="submit" class="btn btn-warning">Try post again</button>
+          </div>
+          <div ng-show="varPostChannel === 'Pinterest' && varPostStatus === 'Wait'">
+            <button type="button" class="btn btn-white" ng-click="$dismiss()">Close</button>
+            <button type="button" class="btn btn-warning" ng-click="postPostPinterest()">Try post again</button>
+          </div>
+          <div ng-show="varPostChannel === 'Facebook' && varPostStatus === 'Active'">
+            <button type="button" class="btn btn-white" ng-click="$dismiss()">Close</button>
+            <button type="submit" class="btn btn-warning">Try post again</button>
+          </div>
+          <div ng-show="varPostChannel === 'Pinterest' && varPostStatus === 'Active'">
+            <button type="button" class="btn btn-white" ng-click="$dismiss()">Close</button>
+            <button type="button" class="btn btn-warning" ng-click="postPostPinterest()">Try post again</button>
           </div>
           <div ng-show="varPostChannel === 'Facebook' && varPostStatus === 'New'">
             <button type="button" class="btn btn-white" ng-click="$dismiss()">Close</button>

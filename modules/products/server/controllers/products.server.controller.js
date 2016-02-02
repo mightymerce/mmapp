@@ -100,6 +100,7 @@ exports.update = function (req, res) {
   product.productFurtherImage5URLDawanda = req.body.productFurtherImage5URLDawanda;
   product.productFurtherImage5URLCode = req.body.productFurtherImage5URLCode;
   product.productFurtherImage5Alt = req.body.productFurtherImage5Alt;
+  product.productActive = req.body.productActive;
 
   product.save(function (err) {
     if (err) {

@@ -2,8 +2,8 @@
 
 // Orders controller
 angular.module('orders')
-    .controller('OrdersController', ['$scope', '$state', '$stateParams', '$location', 'Authentication', 'Products', '$modal', '$http', 'Orders', 'OrdersServices', 'OrdersUpdateServices',
-  function ($scope, $state, $stateParams, $location, Authentication, Products, $modal, $http, Orders, OrdersServices, OrdersUpdateServices) {
+    .controller('OrdersController', ['$scope', '$state', '$stateParams', '$location', 'Authentication', 'Products', '$uibModal', '$http', 'Orders', 'OrdersServices', 'OrdersUpdateServices',
+  function ($scope, $state, $stateParams, $location, Authentication, Products, $uibModal, $http, Orders, OrdersServices, OrdersUpdateServices) {
     $scope.authentication = Authentication;
 
     // If user is signed in then redirect back home
@@ -16,11 +16,11 @@ angular.module('orders')
     $scope.modalcancelOrder = function (size, selectedOrder) {
       console.log('orders.client.controller - open modalcancelOrder');
 
-      var modalInstance = $modal.open({
+      var modalInstance = $uibModal.open({
 
         //animation: $scope.animationsEnabled,
         templateUrl: 'modules/orders/client/views/cancel-order.modal.view.html',
-        controller: function ($scope, $modalInstance, order) {
+        controller: function ($scope, order) {
           $scope.order = order;
 
         },
@@ -38,11 +38,11 @@ angular.module('orders')
     $scope.modalshipOrder = function (size, selectedOrder) {
       console.log('modalshipOrder');
 
-      $scope.modalInstance = $modal.open({
+      $scope.modalInstance = $uibModal.open({
 
         //animation: $scope.animationsEnabled,
         templateUrl: 'modules/orders/client/views/ship-order.modal.view.html',
-        controller: function ($scope, $modalInstance, order) {
+        controller: function ($scope, order) {
           $scope.order = order;
 
         },
@@ -59,11 +59,11 @@ angular.module('orders')
     $scope.modalreturnOrder = function (size, selectedOrder) {
       console.log('orders.client.controller - modalreturnOrder');
 
-      var modalInstance = $modal.open({
+      var modalInstance = $uibModal.open({
 
         //animation: $scope.animationsEnabled,
         templateUrl: 'modules/orders/client/views/receive-return-order.modal.view.html',
-        controller: function ($scope, $modalInstance, order) {
+        controller: function ($scope, order) {
           $scope.order = order;
 
         },
@@ -236,17 +236,13 @@ angular.module('orders')
 
     // Cancel order -> update Status to Canceled
     $scope.cancelOrder = function() {
-      console.log('Start Order - cancelled');
+      console.log('orders.client.controller - cancelOrder - start');
       $scope.order.orderStatus = 'CANCELLED';
-      console.log('Order Status new: ' +$scope.order.orderStatus);
-      console.log('Order Id: ' +$scope.order._id);
-      console.log('Order Id: ' +$scope.order);
 
       $http.put('api/orders/' + $scope.order._id, $scope.order).then(function successCallback(response) {
         // this callback will be called asynchronously
         // when the response is available
-        console.log('GetProducts');
-        console.log(response);
+        console.log('orders.client.controller - cancelOrder - order update api');
         // The return value gets picked up by the then in the controller.
         return response.data;
       }, function errorCallback(response) {
@@ -256,7 +252,7 @@ angular.module('orders')
 
       // ToDo - send email in case Textfield is filled
 
-      console.log('Order - cancelled');
+      console.log('orders.client.controller - cancelOrder - end');
     };
 
     // Ship order -> update Status, TrackingID and send customer message
@@ -273,5 +269,6 @@ angular.module('orders')
     $scope.cancelModal = function () {
       $scope.modalInstance.$dismiss();
     };
+
   }
 ]);

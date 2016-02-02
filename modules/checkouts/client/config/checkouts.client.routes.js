@@ -1,8 +1,8 @@
 'use strict';
 
 // Setting up route
-angular.module('checkouts').config(['$stateProvider',
-  function ($stateProvider) {
+angular.module('checkouts').config(['$stateProvider', '$locationProvider',
+  function ($stateProvider, $locationProvider) {
     // Checkouts state routing
     $stateProvider
       .state('checkouts', {

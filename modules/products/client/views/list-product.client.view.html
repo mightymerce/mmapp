@@ -62,17 +62,22 @@
                       <td><span data-ng-bind="product.productId"></span></td>
                       <td><span ng-bind="product.productTitle"></span></td>
                       <td class="text-right">
-                        <div class="btn-group">
-                          <a class="btn btn-primary btn-outline btn-xs" ui-sref="products.edit({productId: product._id})">
-                            <i class="fa fa-cogs"></i> Edit product
-                          </a>
-                        </div>
+
+                      </td>
+                      <td class="text-right">
+
                       </td>
                       <td class="text-right">
                         <div>
-                          <a class="btn btn-warning btn-xs" ui-sref="products.view({productId: product._id})">
+                          <a class="btn btn-warning btn-sm" ui-sref="products.view({productId: product._id})">
                             <i class="fa fa-cloud-upload"></i> Create post
                           </a>
+                          <a class="btn btn-default btn-outline btn-sm" ui-sref="products.edit({productId: product._id})">
+                            <i class="fa fa-cogs"></i> Edit product
+                          </a>
+                          <button class="btn btn-default btn-outline btn-sm demo4">
+                            <i class="fa fa-trash"></i>
+                          </button>
                         </div>
                       </td>
                     </tr>
@@ -91,5 +96,4 @@
         </div>
       </div>
     <!-- </div> -->
-
 </section>

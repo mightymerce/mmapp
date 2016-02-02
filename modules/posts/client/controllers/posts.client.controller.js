@@ -1,8 +1,8 @@
 'use strict';
 
 // Posts controller
-angular.module('posts').controller('PostsController', ['$scope', '$state', '$stateParams', '$location', 'Authentication', 'Posts', 'Products', 'ProductsServices',
-  function ($scope, $state, $stateParams, $location, Authentication, Posts, Products, ProductsServices) {
+angular.module('posts').controller('PostsController', ['$scope', '$state', '$stateParams', '$location', 'Authentication', 'Posts', 'Products', 'ProductsServices', '$uibModal',
+  function ($scope, $state, $stateParams, $location, Authentication, Posts, Products, ProductsServices, $uibModal) {
     $scope.authentication = Authentication;
 
     // If user is signed in then redirect back home
@@ -105,6 +105,33 @@ angular.module('posts').controller('PostsController', ['$scope', '$state', '$sta
     $scope.findProducts = function () {
       ProductsServices.getProducts().then(function (Products) {
         $scope.products = Products;
+      });
+    };
+
+    $scope.modalupdateProductPost = function (size, selectedProduct, postChannel, postStatus, postPublicationDate) {
+
+      console.log('orders.client.controller - start open modal - ModalUpateProductPost');
+
+      var product = Products.get({
+        productId: selectedProduct
+      });
+
+      // OPEN MODAL
+      $scope.modalInstance = $uibModal.open({
+        //animation: $scope.animationsEnabled,
+        templateUrl: 'modules/products/client/views/post.product.modal.view.html',
+        controller: function ($scope) {
+          $scope.product = product;
+          $scope.varPostStatus = postStatus;
+          $scope.varPostPublicationDate = postPublicationDate;
+          $scope.varPostChannel = postChannel;
+        },
+        size: size,
+        resolve: {
+          product: function () {
+            return selectedProduct;
+          }
+        }
       });
     };
   }

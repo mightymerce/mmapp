@@ -1,8 +1,8 @@
 'use strict';
 
 // Products controller
-angular.module('products').controller('ProductsController', ['$rootScope','$scope', '$state', '$http', '$timeout', '$window', '$stateParams', '$location', 'Authentication', 'Products', '$modal', 'Posts', 'ProductsServices', 'Taxes', 'Currencys', 'Deliverys', 'Users',
-  function ($rootScope, $scope, $state, $http, $timeout, $window, $stateParams, $location, Authentication, Products, $modal, Posts, ProductsServices, Taxes, Currencys, Deliverys, Users) {
+angular.module('products').controller('ProductsController', ['$rootScope','$scope', '$state', '$http', '$timeout', '$window', '$stateParams', '$location', 'Authentication', 'Products', '$uibModal', 'Posts', 'ProductsServices', 'Taxes', 'Currencys', 'Deliverys', 'Users',
+  function ($rootScope, $scope, $state, $http, $timeout, $window, $stateParams, $location, Authentication, Products, $uibModal, Posts, ProductsServices, Taxes, Currencys, Deliverys, Users) {
 
     $scope.authentication = Authentication;
 
@@ -48,10 +48,10 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
               console.log('products.client.controller - modalupdateProductPost - Facebook connected open modal');
 
               // OPEN MODAL
-              $scope.modalInstance = $modal.open({
+              $scope.modalInstance = $uibModal.open({
                 //animation: $scope.animationsEnabled,
                 templateUrl: 'modules/products/client/views/post.product.modal.view.html',
-                controller: function ($scope, $modalInstance, product) {
+                controller: function ($scope, product) {
                   $scope.product = product;
                   $scope.varPostStatus = postStatus;
                   $scope.varPostPublicationDate = postPublicationDate;
@@ -122,10 +122,10 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
           // session has been set
           // OPEN MODAL
           console.log('');
-          $scope.modalInstance = $modal.open({
+          $scope.modalInstance = $uibModal.open({
             //animation: $scope.animationsEnabled,
             templateUrl: 'modules/products/client/views/post.product.modal.view.html',
-            controller: function ($scope, $modalInstance, product) {
+            controller: function ($scope, product) {
               $scope.product = product;
               $scope.varPostStatus = postStatus;
               $scope.varPostPublicationDate = postPublicationDate;
@@ -374,10 +374,10 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
     $scope.modaleditPinterestProduct = function (size, selectedProduct) {
 
       // OPEN MODAL
-      $scope.modalInstance = $modal.open({
+      $scope.modalInstance = $uibModal.open({
         //animation: $scope.animationsEnabled,
         templateUrl: 'modules/products/client/views/edit-pinterest.product.modal.view.html',
-        controller: function ($scope, $modalInstance, Products) {
+        controller: function ($scope, Products) {
           ProductsServices.getProducts().then(function (Products) {
             $scope.products = Products;
           });
@@ -403,10 +403,10 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
     $scope.modaleditFacebookProduct = function (size, selectedProduct) {
 
       // OPEN MODAL
-      $scope.modalInstance = $modal.open({
+      $scope.modalInstance = $uibModal.open({
         //animation: $scope.animationsEnabled,
         templateUrl: 'modules/products/client/views/edit-facebook.product.modal.view.html',
-        controller: function ($scope, $modalInstance, Products) {
+        controller: function ($scope, Products) {
           ProductsServices.getProducts().then(function (Products) {
             $scope.products = Products;
           });
@@ -440,10 +440,10 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       }
 
       // OPEN MODAL
-      $scope.modalInstance = $modal.open({
+      $scope.modalInstance = $uibModal.open({
         //animation: $scope.animationsEnabled,
         templateUrl: templateURL,
-        controller: function ($scope, $modalInstance) {
+        controller: function ($scope) {
         },
         size: size
         /*resolve: {

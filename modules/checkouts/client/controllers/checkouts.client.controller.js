@@ -37,6 +37,16 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
         // ToDo get channel from URL
         $cookieStore.put('order.channel', $location.search().channel);
 
+        console.log('checkouts.client.controller - findOne - data: ' +$scope.seo.productTitle);
+
+        // Set Metatags
+        $scope.productTitle = $scope.product.productTitle;
+        $scope.productDescription = $scope.product.productDescription;
+        $scope.productPrice = $scope.product.productPrice;
+        $scope.productCurrency = $scope.product.productCurrency;
+        $scope.displayName = $scope.user.displayName;
+        $scope.checkoutURL = $scope.user.displayName;
+
       });
       console.log('checkouts.client.controller - findOne - end');
     };

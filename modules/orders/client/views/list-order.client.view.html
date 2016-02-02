@@ -52,21 +52,21 @@
                       <td><span ng-bind="order.orderPayment"></span></td>
                       <td><span ng-bind="order.orderStatus"></span></td>
                       <td>
-                        <div>
-                          <a class="btn btn-outline btn-default btn-xs" ui-sref="orders.edit({orderId: order._id})">
-                            View details
-                          </a>
-                        </div>
-                      </td>
-                      <td>
                         <div ng-show="order.orderStatus === 'SHIPPED'">
-                          <a class="btn btn-outline btn-default btn-xs" ng-click="modalreturnOrder('sm', order)">
+                          <a class="btn btn-outline btn-default btn-sm" ng-click="modalreturnOrder('sm', order)">
                             Receive Return
                           </a>
                         </div>
                         <div ng-show="order.orderStatus === 'CREATED'">
-                          <a class="btn btn-warning btn-xs" ng-click="modalshipOrder('sm', order)">
+                          <a class="btn btn-warning btn-sm" ng-click="modalshipOrder('sm', order)">
                             Ship order
+                          </a>
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          <a class="btn btn-outline btn-default btn-sm" ui-sref="orders.edit({orderId: order._id})">
+                            View details
                           </a>
                         </div>
                       </td>

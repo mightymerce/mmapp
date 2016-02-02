@@ -128,6 +128,9 @@ module.exports = {
         // iCheck
         'public/lib/plugin/iCheck/icheck.min.js',
 
+        // Sweet Alert
+        'public/lib/plugin/sweetalert/sweetalert.min.js',
+
         // Footable
         'public/lib/css/plugins/footable/footable.all.min.js',
         'public/lib/css/plugins/footable/angular-footable.js',

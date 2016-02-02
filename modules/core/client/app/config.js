@@ -2,6 +2,7 @@
 
 // Init the application configuration module for AngularJS application
 var ApplicationConfiguration = (function () {
+  
   // Init module configuration options
   var applicationModuleName = 'mean';
   var applicationModuleVendorDependencies = ['ngResource', 'ngRoute', 'ngAnimate', 'ngMessages', 'ngCookies', 'ui.router', 'ui.bootstrap', 'ui.utils', 'angularFileUpload','angularSoap', 'door3.css'];

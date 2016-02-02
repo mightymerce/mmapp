@@ -50,6 +50,7 @@ module.exports.initLocalVariables = function (app) {
  * Initialize application middleware
  */
 module.exports.initMiddleware = function (app) {
+
   // Showing stack errors
   app.set('showStackError', true);
 
