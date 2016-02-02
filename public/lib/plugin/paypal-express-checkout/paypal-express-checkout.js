@@ -16,8 +16,11 @@ function Paypal(apiUsername, apiPassword, signature, debug) {
 	this.payOptions = {};
 	this.products = [];
 
-	this.url = 'https://' + (debug ? 'api-3t.sandbox.paypal.com' : 'api-3t.paypal.com') + '/nvp';
-	this.redirect = 'https://' + (debug ? 'www.sandbox.paypal.com/cgi-bin/webscr' : 'www.paypal.com/cgi-bin/webscr');
+	this.url = 'https://' + (debug ? 'api-3t.paypal.com' : 'api-3t.paypal.com') + '/nvp';
+	this.redirect = 'https://' + (debug ? 'www.paypal.com/cgi-bin/webscr' : 'www.paypal.com/cgi-bin/webscr');
+
+	//this.url = 'https://' + (debug ? 'api-3t.sandbox.paypal.com' : 'api-3t.paypal.com') + '/nvp';
+	//this.redirect = 'https://' + (debug ? 'www.sandbox.paypal.com/cgi-bin/webscr' : 'www.paypal.com/cgi-bin/webscr');
 }
 
 /**
