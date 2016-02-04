@@ -303,9 +303,22 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
     // Find a list of Products
     $scope.find = function () {
-      $scope.products = Products.query({
+      var products = Products.query({
         'user': $scope.authentication.user._id
       });
+
+      $scope.products = products;
+
+      // Todo - set no. products correct
+      var noProducts = 0;
+      $scope.showAddProduct = true;
+
+      if($scope.authentication.user.subscriptionplan === 'mmbasic' && noProducts > 4){
+        $scope.showAddProduct = false;
+      } else if($scope.authentication.user.subscriptionplan === 'mmprofessional' && noProducts > 10){
+        $scope.showAddProduct = false;
+      }
+      console.log('Products: ' +products[0]);
     };
 
     // Find a list of Products

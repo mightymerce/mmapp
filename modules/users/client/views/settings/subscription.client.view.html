@@ -1,0 +1,309 @@
+<section ng-controller="EditProfileController" id="EditProfileControllerID">
+
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+      <h2>User</h2>
+      <ol class="breadcrumb">
+        <li>
+          <a href="index.html">Home</a>
+        </li>
+        <li>
+          <strong>Settings</strong>
+        </li>
+        <li class="active">
+          <strong>Subscription</strong>
+        </li>
+      </ol>
+    </div>
+    <div class="col-lg-2"></div>
+  </div>
+
+
+  <form name="profileForm" class="form-horizontal" ng-submit="updateProfileDetails(profileForm.$valid)">
+
+    <div class="row">
+      <div class="wrapper wrapper-content">
+        <div class="col-lg-12">
+          <div class="ibox float-e-margins">
+            <div ng-show="error" class="alert alert-danger">
+              <p ng-bind="error"></p>
+            </div>
+            <div ng-show="success" class="alert alert-success">
+              <p ng-bind="success"></p>
+            </div>
+
+            <div class="ibox-content">
+              <div class="x_panel" style="height:600px;">
+                <div class="x_title">
+                  <h2></h2>
+                </div>
+
+                <div class="x_content">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="jumbotron">
+                        <h1>Your subscription</h1>
+                        <p>Based on the growth of your business your are able to manage your subscriptions by upgrading or downsizing your plans.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+
+                      <!-- price element -->
+                      <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="pricing ui-ribbon-container">
+                          <div class="ui-ribbon-wrapper">
+                            <div class="ui-ribbon-yourplan" ng-show="yourPlanFree">
+                              Your plan
+                            </div>
+                          </div>
+                          <div class="titleselected">
+                            <h2> </h2>
+                            <h1>FREE</h1>
+
+                          </div>
+                          <div class="x_content">
+                            <div class="">
+                              <div class="pricing_features">
+                                <ul class="list-unstyled text-left">
+                                  <li><i class="fa fa-check text-success"></i> 5 different products <strong> to sell</strong></li>
+                                  <li><i class="fa fa-check text-success"></i> All available<strong> sales channels</strong> </li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="pricing_footer">
+
+                              <a ng-show="upgradeSubscriptionFree" class="btn btn-default btn-block" disabled>Return to free subscription now!</a>
+                              <button ng-click="cancelStripeSubscriptionBasic()" ng-hide="upgradeSubscriptionFree" class="btn btn-warning btn-block">Return to free subscription now!</button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- price element -->
+
+
+
+                      <!-- price element -->
+                      <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="pricing ui-ribbon-container">
+                          <div class="ui-ribbon-wrapper">
+                            <div class="ui-ribbon-yourplan" ng-show="yourPlanBasic">
+                              Your plan
+                            </div>
+                          </div>
+                          <div class="title">
+                            <h2>Basic</h2>
+                            <h1>19 €</h1>
+                            <span>Monthly</span>
+                          </div>
+                          <div class="x_content">
+                            <div class="">
+                              <div class="pricing_features">
+                                <ul class="list-unstyled text-left">
+                                  <li><i class="fa fa-check text-success"></i> 10 different products <strong> to sell</strong></li>
+                                  <li><i class="fa fa-check text-success"></i> All available<strong> sales channels</strong> </li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="pricing_footer">
+
+                              <a ng-show="upgradeSubscriptionBasicDefault" class="btn btn-default btn-block" disabled>Upgrade subscription now!</a>
+                              <button id="customButtonBasic" ng-show="upgradeSubscriptionBasic" class="btn btn-warning btn-block">Upgrade subscription now!</button>
+                              <button ng-show="downgradeSubscriptionBasic" ng-click="createStripeSubscriptionBasic('mmbasic','','')" class="btn btn-warning btn-block">Downgrade subscription now!</button>
+
+                              <script>
+                                var handlerBasic = StripeCheckout.configure({
+                                  key: 'pk_test_ddjMazisTUr7jFeihO8C4s7L',
+                                  image: '/modules/core/client/img/brand/favicon.ico',
+                                  locale: 'auto',
+                                  billingAddress: true,
+                                  token: function(token) {
+                                    // Use the token to create the charge with a server-side script.
+                                    // You can access the token ID with `token.id`
+                                    angular.element(document.getElementById('EditProfileControllerID')).scope().createStripeSubscriptionBasic('mmbasic',token.id,token.email);
+                                  }
+                                });
+
+                                $('#customButtonBasic').on('click', function(e) {
+                                  // Open Checkout with further options
+                                  handlerBasic.open({
+                                    name: 'mightymerce',
+                                    description: 'Upgrade to Basic subscription',
+                                    currency: "eur",
+                                    amount: 1900
+                                  });
+                                  e.preventDefault();
+                                });
+
+                                // Close Checkout on page navigation
+                                $(window).on('popstate', function() {
+                                  handlerBasic.close();
+                                });
+                              </script>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- price element -->
+
+                      <!-- price element -->
+                      <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="pricing ui-ribbon-container">
+                          <div class="ui-ribbon-wrapper">
+                            <div class="ui-ribbon-yourplan" ng-show="yourPlanProfessional">
+                              Your plan
+                            </div>
+                            <div class="ui-ribbon" ng-show="favouritePlan">
+                              Most popular
+                            </div>
+                          </div>
+                          <div class="title">
+                            <h2>Professional</h2>
+                            <h1>59 €</h1>
+                            <span>Monthly</span>
+                          </div>
+                          <div class="x_content">
+                            <div class="">
+                              <div class="pricing_features">
+                                <ul class="list-unstyled text-left">
+                                  <li><i class="fa fa-check text-success"></i> 100 different products <strong> to sell</strong></li>
+                                  <li><i class="fa fa-check text-success"></i> All available<strong> sales channels</strong> </li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="pricing_footer">
+
+                              <a ng-show="upgradeSubscriptionProfessionalDefault" class="btn btn-default btn-block" disabled>Upgrade subscription now!</a>
+                              <button id="customButtonProfessional" ng-show="upgradeSubscriptionProfessional" class="btn btn-warning btn-block">Upgrade subscription now!</button>
+                              <button ng-show="downgradeSubscriptionProfessional" ng-click="createStripeSubscriptionBasic('mmprofessional','','')" class="btn btn-warning btn-block">Downgrade subscription now!</button>
+                              <button ng-show="upgradeExistingSubscriptionProfessional" ng-click="createStripeSubscriptionBasic('mmprofessional','','')" class="btn btn-warning btn-block">Upgrade subscription now!</button>
+                              <script>
+                                var handlerProfessional = StripeCheckout.configure({
+                                  key: 'pk_test_ddjMazisTUr7jFeihO8C4s7L',
+                                  image: '/modules/core/client/img/brand/favicon.ico',
+                                  locale: 'auto',
+                                  billingAddress: true,
+                                  token: function(token) {
+                                    // Use the token to create the charge with a server-side script.
+                                    // You can access the token ID with `token.id`
+                                    angular.element(document.getElementById('EditProfileControllerID')).scope().createStripeSubscriptionBasic('mmprofessional',token.id,token.email);
+                                  }
+                                });
+
+                                $('#customButtonProfessional').on('click', function(e) {
+                                  // Open Checkout with further options
+                                  handlerProfessional.open({
+                                    name: 'mightymerce',
+                                    description: 'Upgrade to Professional subscription',
+                                    currency: "eur",
+                                    amount: 5900
+                                  });
+                                  e.preventDefault();
+                                });
+
+                                // Close Checkout on page navigation
+                                $(window).on('popstate', function() {
+                                  handlerProfessional.close();
+                                });
+                              </script>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- price element -->
+
+                      <!-- price element -->
+                      <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="pricing ui-ribbon-container">
+                          <div class="ui-ribbon-wrapper">
+                            <div class="ui-ribbon-yourplan" ng-show="yourPlanUnlimited">
+                              Your plan
+                            </div>
+                          </div>
+                          <div class="title">
+                            <h2>Unlimited</h2>
+                            <h1>159 €</h1>
+                            <span>Monthly</span>
+                          </div>
+                          <div class="x_content">
+                            <div class="">
+                              <div class="pricing_features">
+                                <ul class="list-unstyled text-left">
+                                  <li><i class="fa fa-check text-success"></i> Unlimited different products <strong> to sell</strong></li>
+                                  <li><i class="fa fa-check text-success"></i> All available<strong> sales channels</strong> </li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="pricing_footer">
+
+                              <a ng-show="upgradeSubscriptionUnlimitedDefault" class="btn btn-default btn-block" disabled>Upgrade subscription now!</a>
+                              <button id="customButtonUnlimited" ng-show="upgradeSubscriptionUnlimited" class="btn btn-warning btn-block">Upgrade subscription now!</button>
+                              <button ng-show="upgradeExistingSubscriptionUnlimited" ng-click="createStripeSubscriptionBasic('mmunlimited','','')" class="btn btn-warning btn-block">Upgrade subscription now!</button>
+
+                              <script>
+                                var handlerUnlimited = StripeCheckout.configure({
+                                  key: 'pk_test_ddjMazisTUr7jFeihO8C4s7L',
+                                  image: '/modules/core/client/img/brand/favicon.ico',
+                                  locale: 'auto',
+                                  billingAddress: true,
+                                  token: function(token) {
+                                    // Use the token to create the charge with a server-side script.
+                                    // You can access the token ID with `token.id`
+                                    angular.element(document.getElementById('EditProfileControllerID')).scope().createStripeSubscriptionBasic('mmunlimited',token.id,token.email);
+                                  }
+                                });
+
+                                $('#customButtonUnlimited').on('click', function(e) {
+                                  // Open Checkout with further options
+                                  handlerUnlimited.open({
+                                    name: 'mightymerce',
+                                    description: 'Upgrade to Unlimited subscription',
+                                    currency: "eur",
+                                    amount: 15900
+                                  });
+                                  e.preventDefault();
+                                });
+
+                                // Close Checkout on page navigation
+                                $(window).on('popstate', function() {
+                                  handlerUnlimited.close();
+                                });
+                              </script>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- price element -->
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="wrapper wrapper-content animated fadeInRight ecommerce">
+        <div class="col-lg-12">
+          <div class="ibox float-e-margins">
+            <div class="col-sm-8">
+            </div>
+            <div class="col-sm-3">
+            </div>
+            <div class="col-sm-1">
+            </div>
+          </div>
+        </div>
+        <br>
+      </div>
+    </div>
+  </form>
+
+
+</section>

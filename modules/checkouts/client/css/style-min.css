@@ -1423,3 +1423,7 @@ a:focus {
 .collapse.in {
     display: block
 }
+
+.paypal-button-hidden {
+  visibility: hidden;
+}

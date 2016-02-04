@@ -1,8 +1,8 @@
 'use strict';
 
 // Products controller
-angular.module('products').controller('ProductsMediaController', ['$rootScope','$scope', '$state', '$http', '$timeout', '$window', '$stateParams', '$location', 'Authentication', 'Products', '$modal', 'Posts', 'ProductsServices', 'FileUploader',
-  function ($rootScope, $scope, $state, $http, $timeout, $window, $stateParams, $location, Authentication, Products, $modal, Posts, ProductsServices, FileUploader) {
+angular.module('products').controller('ProductsMediaController', ['$rootScope','$scope', '$state', '$http', '$timeout', '$window', '$stateParams', '$location', 'Authentication', 'Products', '$uibModal', 'Posts', 'ProductsServices', 'FileUploader',
+  function ($rootScope, $scope, $state, $http, $timeout, $window, $stateParams, $location, Authentication, Products, $uibModal, Posts, ProductsServices, FileUploader) {
 
     $scope.authentication = Authentication;
 
@@ -84,10 +84,10 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
       }
 
       // OPEN MODAL
-      $scope.modalInstance = $modal.open({
+      $scope.modalInstance = $uibModal.open({
         //animation: $scope.animationsEnabled,
         templateUrl: templateURL,
-        controller: function ($scope, $modalInstance) {
+        controller: function ($scope) {
         },
         size: size
         /*resolve: {

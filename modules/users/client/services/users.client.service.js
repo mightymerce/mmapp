@@ -24,3 +24,38 @@ angular.module('users.admin').factory('Admin', ['$resource',
     });
   }
 ]);
+
+angular.module('users').factory('stripeCreateSubscription', ['$resource',
+  function($resource) {
+    return $resource('/api/users/stripeCreateSubscription/:USER/:PLAN/:TOKEN', {
+      USER: '',
+      PLAN: '',
+      TOKEN: ''
+    }, {
+      query: { method: 'GET', isArray: false }
+    });
+  }
+]);
+
+angular.module('users').factory('stripeUpdateSubscription', ['$resource',
+  function($resource) {
+    return $resource('/api/users/stripeUpdateSubscription/:CUSID/:SUBID/:PLAN', {
+      CUSID: '',
+      SUBID: '',
+      PLAN: ''
+    }, {
+      query: { method: 'GET', isArray: false }
+    });
+  }
+]);
+
+angular.module('users').factory('stripeCancelSubscription', ['$resource',
+  function($resource) {
+    return $resource('/api/users/stripeCancelSubscription/:CUSID/:SUBID', {
+      CUSID: '',
+      SUBID: ''
+    }, {
+      query: { method: 'GET', isArray: false }
+    });
+  }
+]);

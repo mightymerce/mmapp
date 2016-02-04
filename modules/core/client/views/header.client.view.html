@@ -8,7 +8,7 @@
     </div>
     <div class="navbar-collapse collapse" id="navbar">
       <ul class="nav navbar-nav">
-        <li class="dropdown">
+        <li class="dropdown" uib-dropdown>
           <ul class="nav navbar-nav" ng-if="menu.shouldRender(authentication.user);">
             <li class="active" ng-show="{{basicData}}">
               <a aria-expanded="false" role="button" ui-sref="dashboard"> Dashboard</a>
@@ -16,9 +16,9 @@
             <li class="active" ng-hide="{{basicData}}">
               <a aria-expanded="false" role="button" ui-sref="tutorial"> Tutorial</a>
             </li>
-            <li ng-repeat="item in menu.items | orderBy: 'position'" ng-if="item.shouldRender(authentication.user);" ng-switch="item.type" ng-class="{ active: $state.includes(item.state), dropdown: item.type === 'dropdown' }" class="{{item.class}}" dropdown="item.type === 'dropdown'">
-              <a ng-switch-when="dropdown" class="dropdown-toggle" dropdown-toggle role="button">{{::item.title}}&nbsp;<span class="caret"></span></a>
-              <ul ng-switch-when="dropdown" class="dropdown-menu">
+            <li ng-repeat="item in menu.items | orderBy: 'position'" ng-if="item.shouldRender(authentication.user);" ng-switch="item.type" ng-class="{ active: $state.includes(item.state), dropdown: item.type === 'dropdown' }" class="{{item.class}}" uib-dropdown="item.type === 'dropdown'">
+              <a ng-switch-when="dropdown" class="dropdown-toggle" uib-dropdown-toggle role="button">{{::item.title}}&nbsp;<span class="caret"></span></a>
+              <ul ng-switch-when="dropdown" class="dropdown-menu" uib-dropdown-menu>
                 <li ng-repeat="subitem in item.items | orderBy: 'position'" ng-if="subitem.shouldRender(authentication.user);" ui-sref-active="active">
                   <a ui-sref="{{subitem.state}}" ng-bind="subitem.title"></a>
                 </li>
@@ -31,15 +31,15 @@
 
 
       <ul class="nav navbar-nav">
-      <li class="dropdown">
-        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+      <li class="dropdown" uib-dropdown>
+        <a class="dropdown-toggle count-info" uib-dropdown-toggle href="#">
           <i class="fa fa-envelope"></i>  <span class="label label-warning">0</span>
         </a>
         <ul class="dropdown-menu dropdown-messages">
         </ul>
       </li>
-      <li class="dropdown">
-        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+      <li class="dropdown" uib-dropdown>
+        <a class="dropdown-toggle count-info" uib-dropdown-toggle href="#">
           <i class="fa fa-bell"></i>  <span class="label label-primary">{{ noOpenOrders }}</span>
         </a>
         <ul class="dropdown-menu dropdown-alerts">
@@ -54,13 +54,10 @@
           <li class="divider"></li>
           <li data-ng-repeat="order in orders | limitTo: 5 | orderBy:'-created' | filter: {orderStatus: 'CREATED'}">
             <div class="dropdown-messages-box" ui-sref="orders.edit({orderId: order._id})">
-              <a class="pull-left">
-                <img alt="image" class="img-circle" ng-src="img/a4.jpg">
-              </a>
               <div class="media-body ">
                 <small class="pull-right text-navy" ng-bind="order.orderDate | date:'mediumDate'"></small>
-                <strong>{{order.orderCustomer}}</strong> order amount: <strong>{{order.orderShipToTotalAmount}} €</strong>. <br>
-                <small class="text-muted">via Channel: {{order.orderChannel}}</small>
+                 customer: <strong>{{order.orderCustomer}}</strong> order amount: <strong>{{order.orderShipToTotalAmount}} €</strong>. <br>
+                <small class="text-muted"> via Channel: {{order.orderChannel}}</small>
               </div>
             </div>
           </li>
@@ -85,16 +82,19 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right" ng-show="authentication.user">
-        <li class="dropdown" dropdown>
-          <a class="dropdown-toggle user-header-dropdown-toggle" dropdown-toggle role="button">
+        <li class="dropdown" uib-dropdown>
+          <a class="dropdown-toggle user-header-dropdown-toggle" uib-dropdown-toggle role="button">
             <span ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
           </a>
-          <ul class="dropdown-menu" role="menu">
+          <ul class="dropdown-menu" uib-dropdown-menu="" role="menu">
             <li ui-sref-active="active">
               <a ui-sref="profile">Profile</a>
             </li>
             <li ui-sref-active="active">
               <a ui-sref="payment">Payment</a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="subscription">Subscription</a>
             </li>
             <li ui-sref-active="active" ng-show="authentication.user.provider === 'local'">
               <a ui-sref="settings.password">Change Password</a>

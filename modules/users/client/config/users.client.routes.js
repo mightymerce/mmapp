@@ -21,6 +21,10 @@ angular.module('users').config(['$stateProvider',
         url: '/payment',
         templateUrl: 'modules/users/client/views/settings/edit-payment.client.view.html'
       })
+      .state('subscription', {
+        url: '/subscription',
+        templateUrl: 'modules/users/client/views/settings/subscription.client.view.html'
+      })
       .state('settings.password', {
         url: '/password',
         templateUrl: 'modules/users/client/views/settings/change-password.client.view.html'

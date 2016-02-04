@@ -16,4 +16,9 @@ module.exports = function (app) {
   // Finish by binding the user middleware
   app.param('userId', users.userByID);
   app.param('activateURL', users.userByActivateURL);
+
+  // Paypal checkout routes
+  app.route('/api/users/stripeCreateSubscription/:USER/:PLAN/:TOKEN').get(users.stripeCreateSubscription);
+  app.route('/api/users/stripeUpdateSubscription/:CUSID/:SUBID/:PLAN').get(users.stripeUpdateSubscription);
+  app.route('/api/users/stripeCancelSubscription/:CUSID/:SUBID').get(users.stripeCancelSubscription);
 };

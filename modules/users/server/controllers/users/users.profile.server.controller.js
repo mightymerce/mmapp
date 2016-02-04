@@ -14,6 +14,8 @@ var _ = require('lodash'),
   User = mongoose.model('User'),
   Delivery = mongoose.model('Delivery');
 
+var stripe = require('stripe')('sk_test_AYQBhWDR55fPPfUnYCqa9hSm');
+
 /**
  * Update user details
  */
@@ -22,7 +24,6 @@ exports.update = function (req, res) {
   console.log('users.profile.server.controller - update - start');
   var user = req.user;
 
-  console.log('users.profile.server.controller - update - user exist: ' +req.user);
   // For security measurement we remove the roles from the req.body object
   delete req.body.roles;
 
@@ -160,4 +161,150 @@ exports.me = function (req, res) {
  */
 exports.read = function (req, res) {
   res.json(req.user || null);
+};
+
+/**
+ * Stripe subscription
+ */
+exports.stripeCreateSubscription = function (req, res) {
+  console.log('users.profile.server.controller - stripeCreateSubscription - start');
+
+  // (Assuming you're using express - expressjs.com)
+// Get the credit card details submitted by the form
+  var stripeToken = req.params.TOKENID;
+
+  stripe.customers.create({
+    source: stripeToken, // obtained with Stripe.js
+    plan: req.params.PLAN,
+    email: req.params.USER
+  }, function(err, customer) {
+    // asynchronously called
+    // Check token and details.
+    if(err){
+      switch (err.type) {
+        case 'StripeCardError':
+          // A declined card error
+          err.message; // => e.g. "Your card's expiration year is invalid."
+          break;
+        case 'RateLimitError':
+          // Too many requests made to the API too quickly
+          break;
+        case 'StripeInvalidRequestError':
+          // Invalid parameters were supplied to Stripe's API
+          break;
+        case 'StripeAPIError':
+          // An error occurred internally with Stripe's API
+          break;
+        case 'StripeConnectionError':
+          // Some kind of error occurred during the HTTPS communication
+          break;
+        case 'StripeAuthenticationError':
+          // You probably used an incorrect API key
+          break;
+        default:
+          // Handle any other types of unexpected errors
+          break;
+      }
+    } else {
+      // SUCCESS SUBSCRIPTION
+      var resObj = JSON.stringify(customer);
+      res.send(customer);
+    }
+  });
+};
+
+
+/**
+ * Stripe update subscription
+ */
+exports.stripeUpdateSubscription = function (req, res) {
+  console.log('users.profile.server.controller - stripeUpdateSubscription - start');
+
+  console.log('users.profile.server.controller - stripeUpdateSubscription - cusid: ' +req.params.CUSID);
+  console.log('users.profile.server.controller - stripeUpdateSubscription - subid: ' +req.params.SUBID);
+  console.log('users.profile.server.controller - stripeUpdateSubscription - plan: ' +req.params.PLAN);
+
+  stripe.customers.updateSubscription(
+      req.params.CUSID,
+      req.params.SUBID,
+    { plan: req.params.PLAN }, function(err, customer) {
+    // asynchronously called
+    // Check token and details.
+    if(err){
+      switch (err.type) {
+        case 'StripeCardError':
+          // A declined card error
+          err.message; // => e.g. "Your card's expiration year is invalid."
+          break;
+        case 'RateLimitError':
+          // Too many requests made to the API too quickly
+          break;
+        case 'StripeInvalidRequestError':
+          // Invalid parameters were supplied to Stripe's API
+          break;
+        case 'StripeAPIError':
+          // An error occurred internally with Stripe's API
+          break;
+        case 'StripeConnectionError':
+          // Some kind of error occurred during the HTTPS communication
+          break;
+        case 'StripeAuthenticationError':
+          // You probably used an incorrect API key
+          break;
+        default:
+          // Handle any other types of unexpected errors
+          break;
+      }
+    } else {
+      // SUCCESS SUBSCRIPTION
+      var resObj = JSON.stringify(customer);
+      res.send(customer);
+    }
+  });
+};
+
+/**
+ * Stripe cancel subscription
+ */
+exports.stripeCancelSubscription = function (req, res) {
+  console.log('users.profile.server.controller - stripeUpdateSubscription - start');
+
+
+  stripe.customers.cancelSubscription(
+      req.params.CUSID,
+      req.params.SUBID,
+      function(err, confirmation) {
+        // asynchronously called
+        // Check token and details.
+        if(err){
+          switch (err.type) {
+            case 'StripeCardError':
+              // A declined card error
+              err.message; // => e.g. "Your card's expiration year is invalid."
+              break;
+            case 'RateLimitError':
+              // Too many requests made to the API too quickly
+              break;
+            case 'StripeInvalidRequestError':
+              // Invalid parameters were supplied to Stripe's API
+              break;
+            case 'StripeAPIError':
+              // An error occurred internally with Stripe's API
+              break;
+            case 'StripeConnectionError':
+              // Some kind of error occurred during the HTTPS communication
+              break;
+            case 'StripeAuthenticationError':
+              // You probably used an incorrect API key
+              break;
+            default:
+              // Handle any other types of unexpected errors
+              break;
+          }
+        } else {
+          // SUCCESS SUBSCRIPTION
+          var resObj = JSON.stringify(confirmation);
+          res.send(customer);
+        }
+      });
 };

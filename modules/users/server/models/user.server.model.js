@@ -157,6 +157,22 @@ var UserSchema = new Schema({
     type: String,
     default: '0'
   },
+  subscriptionplan: {
+    type: String,
+    default: ''
+  },
+  subscriptioncusid: {
+    type: String,
+    default: ''
+  },
+  subscriptionsubid: {
+    type: String,
+    default: ''
+  },
+  subscriptionemail: {
+    type: String,
+    default: ''
+  },
   userStatus: {
     type: String,
     default: '0'
