@@ -28,9 +28,16 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
 
     if($scope.authentication.user.subscriptionplan === ''){
       $scope.upgradeSubscriptionFree = true;
+      $scope.yourPlanProfessional = false;
+      $scope.yourPlanBasic = false;
+      $scope.yourPlanUnlimited = false;
       $scope.yourPlanFree = true;
+      $scope.upgradeSubscriptionBasic = true;
       $scope.upgradeSubscriptionProfessional = true;
       $scope.upgradeSubscriptionUnlimited = true;
+      $scope.upgradeExistingSubscriptionBasic = false;
+      $scope.upgradeExistingSubscriptionProfessional = false;
+      $scope.upgradeExistingSubscriptionUnlimited = false;
     }
     else if($scope.authentication.user.subscriptionplan === 'mmbasic'){
       $scope.upgradeSubscriptionFree = false;
@@ -173,9 +180,16 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
 
             if($scope.authentication.user.subscriptionplan === ''){
               $scope.upgradeSubscriptionFree = true;
+              $scope.yourPlanProfessional = false;
+              $scope.yourPlanBasic = false;
+              $scope.yourPlanUnlimited = false;
               $scope.yourPlanFree = true;
+              $scope.upgradeSubscriptionBasic = true;
               $scope.upgradeSubscriptionProfessional = true;
               $scope.upgradeSubscriptionUnlimited = true;
+              $scope.upgradeExistingSubscriptionBasic = false;
+              $scope.upgradeExistingSubscriptionProfessional = false;
+              $scope.upgradeExistingSubscriptionUnlimited = false;
             }
             else if($scope.authentication.user.subscriptionplan === 'mmbasic'){
               $scope.upgradeSubscriptionFree = false;
@@ -260,9 +274,16 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
 
             if($scope.authentication.user.subscriptionplan === ''){
               $scope.upgradeSubscriptionFree = true;
+              $scope.yourPlanProfessional = false;
+              $scope.yourPlanBasic = false;
+              $scope.yourPlanUnlimited = false;
               $scope.yourPlanFree = true;
+              $scope.upgradeSubscriptionBasic = true;
               $scope.upgradeSubscriptionProfessional = true;
               $scope.upgradeSubscriptionUnlimited = true;
+              $scope.upgradeExistingSubscriptionBasic = false;
+              $scope.upgradeExistingSubscriptionProfessional = false;
+              $scope.upgradeExistingSubscriptionUnlimited = false;
             }
             else if($scope.authentication.user.subscriptionplan === 'mmbasic'){
               $scope.upgradeSubscriptionFree = false;
@@ -353,9 +374,16 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
 
           if($scope.authentication.user.subscriptionplan === ''){
             $scope.upgradeSubscriptionFree = true;
+            $scope.yourPlanProfessional = false;
+            $scope.yourPlanBasic = false;
+            $scope.yourPlanUnlimited = false;
             $scope.yourPlanFree = true;
+            $scope.upgradeSubscriptionBasic = true;
             $scope.upgradeSubscriptionProfessional = true;
             $scope.upgradeSubscriptionUnlimited = true;
+            $scope.upgradeExistingSubscriptionBasic = false;
+            $scope.upgradeExistingSubscriptionProfessional = false;
+            $scope.upgradeExistingSubscriptionUnlimited = false;
           }
           else if($scope.authentication.user.subscriptionplan === 'mmbasic'){
             $scope.upgradeSubscriptionFree = false;
