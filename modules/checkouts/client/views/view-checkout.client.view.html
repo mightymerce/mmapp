@@ -1,4 +1,4 @@
-<section ng-controller="CheckoutsController" ng-init="findOne()">
+<section ng-controller="CheckoutsController" id="CheckoutsControllerID" ng-init="findOne()">
   <div class="app app-dock">
 
     <!-- content -->
@@ -9,12 +9,6 @@
         <div class="col">
           <div class="wrapper-md">
             <div class="row">
-              <div ng-show="error" class="alert alert-danger">
-                <p ng-bind="error"></p>
-              </div>
-              <div ng-show="success" class="alert alert-success">
-                <p ng-bind="success"></p>
-              </div>
               <div class="col-md-6 col-md-offset-3">
                 <div class="panel b-a">
                   <div class="panel-heading">
@@ -27,6 +21,12 @@
 
                   <div class="bg-light lter b-b wrapper-md wrapper-p5" id="belowpicture">
                     <span class="text-muted step-headline">Order now</span>
+                  </div>
+                  <div ng-show="error" class="alert alert-danger">
+                    <p ng-bind="error"></p>
+                  </div>
+                  <div ng-show="success" class="alert alert-success">
+                    <p ng-bind="success"></p>
                   </div>
 
                   <div class="panel-body wrapper-md">
@@ -44,7 +44,15 @@
                                 </div>
                                 <div class="col-xs-4">
                                   <div class="pull-right">
-                                    <input type="text" value="1" class="form-control amount" />
+                                    <input class="form-control amount" id="amountID" type="text" value="1" name="amountID">
+                                    <script>
+                                      $("input[name='amountID']").TouchSpin({
+                                        min: 1,
+                                        max: 10,
+                                        step: 1,
+                                        decimals: 0
+                                      });
+                                    </script>
                                   </div>
                                 </div>
                               </form>
@@ -74,7 +82,7 @@
                                 </table>
                               </div>
                             </div>
-                            <a id="myContainer">
+                            <a id="myContainer" ng-hide="itemOutofStock">
                               <img ng-click="checkoutPaypal()" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" />
                             </a>
                             <input ng-hide="true" type="text" value="0" class="form-control lbl-subtotal-PP" hidden />
@@ -150,14 +158,3 @@
   </div>
 
 </section>
-
-<script>
-  window.paypalCheckoutReady = function () {
-    paypal.checkout.setup('wagner.register-facilitator_api1.gmail.com', {
-      environment: 'sandbox',
-      container: 'myContainer'
-    });
-  };
-</script>
-
-<script src="//www.paypalobjects.com/api/checkout.js" async></script>

@@ -127,7 +127,7 @@ exports.checkoutByID = function (req, res, next, id) {
  * @return {[type]}      [description]
  */
 exports.paypalSetExpressCheckout = function (req, res) {
-  console.log('checkout.server.controller - paypalSetExpressCheckout - start ' +req.params.USER);
+  console.log('checkout.server.controller - paypalSetExpressCheckout - start ');
 
   // create paypal object in sandbox mode. If you want non-sandbox remove tha last param.
   var paypal = PayPal.create(req.params.USER, req.params.PWD, req.params.SIGNATURE, true);

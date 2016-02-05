@@ -18,9 +18,9 @@ function Paypal(apiUsername, apiPassword, signature, debug) {
 
 	// Live environment
 	this.url = 'https://' + (debug ? 'api-3t.paypal.com' : 'api-3t.paypal.com') + '/nvp';
-	//this.redirect = 'https://' + (debug ? 'www.paypal.com/cgi-bin/webscr' : 'www.paypal.com/cgi-bin/webscr');
+	this.redirect = 'https://' + (debug ? 'www.paypal.com/cgi-bin/webscr' : 'www.paypal.com/cgi-bin/webscr');
 
-	this.redirect = 'https://' + (debug ? 'www.paypal.com/checkoutnow' : 'www.paypal.com/checkoutnow');
+	//this.redirect = 'https://' + (debug ? 'www.paypal.com/checkoutnow' : 'www.paypal.com/checkoutnow');
 
 	// Sandbox environment
 	//this.url = 'https://' + (debug ? 'api-3t.sandbox.paypal.com' : 'api-3t.paypal.com') + '/nvp';
@@ -208,7 +208,7 @@ Paypal.prototype.setExpressCheckoutPayment = function(email, invoiceNumber, amou
 	params.CANCELURL = cancelUrl;
 
 	params.NOSHIPPING = 1;
-	params.ALLOWNOTE = 1;
+	params.ALLOWNOTE = 0;
 	params.REQCONFIRMSHIPPING = 0;
 	params.METHOD = 'SetExpressCheckout';
 
@@ -222,7 +222,8 @@ Paypal.prototype.setExpressCheckoutPayment = function(email, invoiceNumber, amou
 
 		if (data.ACK === 'Success') {
 			callback(null, { 
-				redirectUrl: self.redirect + '?cmd=_express-checkout&useraction=commit&token=' + data.TOKEN, 
+				redirectUrl: self.redirect + '?cmd=_express-checkout&useraction=commit&token=' + data.TOKEN,
+				//redirectUrl: self.redirect + '?token=' + data.TOKEN,
 				token: data.TOKEN 
 			});
 			return;

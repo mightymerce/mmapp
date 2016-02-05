@@ -291,6 +291,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       var product = $scope.product;
 
       console.log('products.client.controller - update - product.productId: ' +product.productId);
+      console.log('products.client.controller - update - product.productItemInStock: ' +product.productItemInStock);
 
       product.$update(function () {
         $location.path('products/' + product._id + '/edit');

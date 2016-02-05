@@ -73,8 +73,8 @@ var ProductSchema = new Schema({
     required: 'Product shipping option cannot be blank'
   },
   productItemInStock: {
-    type: String,
-    default: '',
+    type: Number,
+    default: 1,
     trim: true
   },
   productMainImageURL: {

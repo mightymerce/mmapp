@@ -2712,4 +2712,24 @@ exports.sendwelcomeemail = function (req, res, next) {
     console.log('users.authentication.server.controller - sendwelcomeemail - sent mail success');
     return res.json('success');
   });
+
+  // setup e-mail data with unicode symbols
+  var mailOptionsIntern = {
+    from: 'mightymerce | registration <noreply@mightymerce.com>', // sender address
+    to: 'registration@mightymerce.com', // list of receivers
+    subject: 'Neuer Nutzer bei Mightymerce', // Subject line
+    text: 'Eben hat ' + inputData.usereMail + ' seinen Account aktiviert.' // plaintext body
+  };
+
+  if(req.get('host') === 'shop.mightymerce.com'){
+    // send mail with defined transport object
+    smtpTransport.sendMail(mailOptionsIntern, function(error, info){
+      if(error){
+        return console.log(error);
+      }
+      console.log('users.authentication.server.controller - sendwelcomeemail - sent mail success');
+      return res.json('success');
+    });
+  }
+
 };

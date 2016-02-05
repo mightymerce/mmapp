@@ -10,6 +10,8 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
     $scope.findOne = function () {
       console.log('checkouts.client.controller - findOne - start');
 
+      $scope.itemOutofStock = false;
+
       // Call getSelected Product service
       var searchObject = $stateParams.checkoutId;
       console.log('checkouts.client.controller - findOne - checkoutId: ' +searchObject);
@@ -33,6 +35,13 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
           $scope.legal = Legals;
           $cookieStore.put('user.legals', Legals);
         });
+
+        // Verfify if item is in stoke
+        if($scope.product.productItemInStock === '0'){
+          //Out of stock and disable Buy button
+          $scope.itemOutofStock = true;
+          $scope.error = 'Oups sorry. But this item is so popular and currently out of stock. We already reorded the item and apologize.'
+        }
 
         // ToDo get channel from URL
         $cookieStore.put('order.channel', $location.search().channel);
@@ -183,6 +192,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
 
           console.log('checkouts.client.controller - paypalSetExpressCheckout - profileImageURL: ' +$scope.user.profileImageURL);
           $window.open(data.redirectUrl);
+          //return data.redirectUrl;
         });
 
 
