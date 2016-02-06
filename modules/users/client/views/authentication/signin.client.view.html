@@ -1,26 +1,18 @@
+<section class="row ng-scope">
 <div ng-controller="AuthenticationController">
-  <div class="top-content">
+
     <div class="bodylogin">
       <br>
       <div class="container">
         <div class="row">
-          <div class="col-sm-8 col-sm-offset-2 text">
-            <h1 class="h1-login"><strong>Mightymerce Login</strong></h1>
-            <div class="description">
-              <p>
-              </p>
-            </div>
+          <div class="col-sm-4 col-sm-offset-4 text">
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-6 col-sm-offset-3 form-box">
+          <div class="col-sm-4 col-sm-offset-4 form-box">
             <div class="form-top">
-              <div class="form-top-left">
-                <h2>Willkommen zurück! Log dich ein und sieh nach deinen Produkten, Posts und Bestellungen.</h2>
-                <p></p>
-              </div>
-              <div class="form-top-right">
-                <i class="fa fa-lock"></i>
+              <div class="form-top-center">
+                <a href="#" class="navbar-brand"><img alt="mightymerce.com - social commerce" class="" src="/modules/core/client/img/brand/mm_Logo.png"/></a>
               </div>
             </div>
             <div class="form-bottom">
@@ -40,8 +32,10 @@
                       <p class="help-block error-text" ng-message="required">Password is required.</p>
                     </div>
                   </div>
-                  <button type="submit" class="btn buttonlogin">Sign in!</button>
-                  <br>
+                  <div class="form-group">
+                    <button type="submit" class="btn buttonlogin">Sign in!</button>
+                    <br>
+                  </div>
                   <br>
                   <div class="text-center forgot-password">
                     <a class="a-login" ui-sref="authentication.signup">Sign up</a> or <a class="a-login" ui-sref="password.forgot">Forgot your password?</a>
@@ -59,9 +53,10 @@
           </div>
         </div>
         <div class="row">
-          <br><br><br><br>
+          <br><br><br><br><br><br><br>
         </div>
       </div>
     </div>
-  </div>
+
 </div>
+</section>

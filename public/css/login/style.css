@@ -143,14 +143,14 @@ ul.navbar-navlogin {
 .top-content .description a:focus { border-bottom: 1px dotted #fff; }
 
 .form-box {
-	margin-top: 35px;
+	margin-top: 135px;
 }
 
 .form-top {
 	overflow: hidden;
 	padding: 0 25px 15px 25px;
 	background: #fff;
-	-moz-border-radius: 4px 4px 0 0; -webkit-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;
+	-moz-border-radius: 8px 8px 0 0; -webkit-border-radius: 8px 8px 0 0; border-radius: 8px 8px 0 0;
 	text-align: left;
 }
 
@@ -158,6 +158,13 @@ ul.navbar-navlogin {
 	float: left;
 	width: 75%;
 	padding-top: 25px;
+	text-align: left;
+}
+
+.form-top-center {
+	width: 100%;
+	padding-top: 45px;
+	text-align: center;
 }
 
 .form-top-left h3 { margin-top: 0; }
@@ -174,8 +181,8 @@ ul.navbar-navlogin {
 
 .form-bottom {
 	padding: 25px 25px 30px 25px;
-	background: #eee;
-	-moz-border-radius: 0 0 4px 4px; -webkit-border-radius: 0 0 4px 4px; border-radius: 0 0 4px 4px;
+	background: #fff;
+	-moz-border-radius: 0 0 8px 8px; -webkit-border-radius: 0 0 8px 8px; border-radius: 0 0 8px 8px;
 	text-align: left;
 }
 
