@@ -160,9 +160,9 @@ module.exports = {
       'modules/core/client/app/init.js',
       'modules/*/client/*.js',
       'modules/*/client/**/*.js',
-      'modules/users/client/assets/js/*.js',
-      'modules/products/client/cropper/dist/cropper.js',
-      'modules/products/client/cropper/main.js'
+      'modules/users/client/assets/js/*.js'
+      //'modules/products/client/cropper/dist/cropper.js'
+      //'modules/products/client/cropper/main.js'
       // Angular-File-Upload
       //'modules/products/client/dist/angular-file-upload.js'
 
