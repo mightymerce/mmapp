@@ -153,13 +153,14 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
             // this callback will be called asynchronously
             // when the response is available
 
-            params.message = product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode;
+            // params.message = product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode;
             console.log('product.client.service - postToWall - currency: ' + response.currencyCode);
 
-            params.name = product.productTitle;
+            params.name = product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode;
             params.link = linkUrl + product._id + '?channel=facebook';
             params.picture = linkMainImageUrl + product.productMainImageURLFacebook.substring(1);
             params.description = product.productDescription;
+            params.type = 'product';
 
             console.log('product.client.service - postToWall - productMainImageURL ' + params.picture);
 
