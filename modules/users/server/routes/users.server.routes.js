@@ -21,4 +21,9 @@ module.exports = function (app) {
   app.route('/api/users/stripeCreateSubscription/:USER/:PLAN/:TOKEN').get(users.stripeCreateSubscription);
   app.route('/api/users/stripeUpdateSubscription/:CUSID/:SUBID/:PLAN').get(users.stripeUpdateSubscription);
   app.route('/api/users/stripeCancelSubscription/:CUSID/:SUBID').get(users.stripeCancelSubscription);
+
+  // Etsy connection routes
+  //app.route('/api/products/getetsytoken').get(products.getEtsyOAuth());
+  // Dawanda connection routes
+  app.route('/api/users/auth/getdawanda').get(users.getDawandaOAuth);
 };
