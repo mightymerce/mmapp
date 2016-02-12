@@ -1,8 +1,8 @@
 'use strict';
 
 // Checkouts controller
-angular.module('checkouts').controller('CheckoutsController', ['$window', '$scope', '$stateParams', '$location', '$http', 'Authentication', 'Checkouts', 'ChoutServices', 'PaypalServicesSetExpressCheckout', 'PaypalServicesGetExpressCheckoutDetails', 'Products', 'Users', 'Orders', 'Legals', '$cookieStore',
-  function ($window, $scope, $stateParams, $location, $http, Authentication, Checkouts, ChoutServices, PaypalServicesSetExpressCheckout, PaypalServicesGetExpressCheckoutDetails, Products, Users, Orders, Legals, $cookieStore) {
+angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$window', '$scope', '$stateParams', '$location', '$http', 'Authentication', 'Checkouts', 'ChoutServices', 'PaypalServicesSetExpressCheckout', 'PaypalServicesGetExpressCheckoutDetails', 'Products', 'Users', 'Orders', 'Legals', '$cookieStore',
+  function ($rootScope, $window, $scope, $stateParams, $location, $http, Authentication, Checkouts, ChoutServices, PaypalServicesSetExpressCheckout, PaypalServicesGetExpressCheckoutDetails, Products, Users, Orders, Legals, $cookieStore) {
     $scope.authentication = Authentication;
     $scope.totalPrice = '';
 
@@ -46,13 +46,20 @@ angular.module('checkouts').controller('CheckoutsController', ['$window', '$scop
         // ToDo get channel from URL
         $cookieStore.put('order.channel', $location.search().channel);
 
+
         // Set Metatags
-        $scope.productTitle = $scope.product.productTitle;
-        $scope.productDescription = $scope.product.productDescription;
-        $scope.productPrice = $scope.product.productPrice;
-        $scope.productCurrency = $scope.product.productCurrency;
-        $scope.displayName = $scope.user.displayName;
-        $scope.checkoutURL = $scope.user.displayName;
+        $rootScope.metadata.productTitle = $scope.product.productTitle;
+        $rootScope.metadata.productDescription = $scope.product.productDescription;
+        $rootScope.metadata.productPrice = $scope.product.productPrice;
+        $rootScope.metadata.productCurrency = $scope.product.productCurrency;
+        $rootScope.metadata.displayName = $scope.user.displayName;
+        $rootScope.metadata.image = getAbsoluteImageUrl();
+        $rootScope.metadata.checkoutURL = $location.absUrl();
+
+        function getAbsoluteImageUrl() {
+          var root = $location.absUrl().split(/product\/\d/)[0];
+          return root + product.image;
+        }
 
       });
       console.log('checkouts.client.controller - findOne - end');

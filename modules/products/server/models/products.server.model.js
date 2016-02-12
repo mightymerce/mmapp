@@ -273,6 +273,10 @@ var ProductSchema = new Schema({
     type: String,
     default: 'active'
   },
+  productCheckoutURL: {
+    type: String,
+    default: ''
+  },
   user: {
     type: Schema.ObjectId,
     ref: 'User'
