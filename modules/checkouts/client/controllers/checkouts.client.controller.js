@@ -48,13 +48,13 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
 
 
         // Set Metatags
-        $rootScope.metadata.productTitle = $scope.product.productTitle;
-        $rootScope.metadata.productDescription = $scope.product.productDescription;
-        $rootScope.metadata.productPrice = $scope.product.productPrice;
-        $rootScope.metadata.productCurrency = $scope.product.productCurrency;
-        $rootScope.metadata.displayName = $scope.user.displayName;
-        $rootScope.metadata.image = getAbsoluteImageUrl();
-        $rootScope.metadata.checkoutURL = $location.absUrl();
+        $rootScope.$parent.metadata.productTitle = $scope.product.productTitle;
+        $rootScope.$parent.metadata.productDescription = $scope.product.productDescription;
+        $rootScope.$parent.metadata.productPrice = $scope.product.productPrice;
+        $rootScope.$parent.metadata.productCurrency = $scope.product.productCurrency;
+        $rootScope.$parent.metadata.displayName = $scope.user.displayName;
+        $rootScope.$parent.metadata.image = getAbsoluteImageUrl();
+        $rootScope.$parent.metadata.checkoutURL = $location.absUrl();
 
         function getAbsoluteImageUrl() {
           var root = $location.absUrl().split(/product\/\d/)[0];
