@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
   <base href="/">
 
+  <meta name="fragment" content="!">
+
   <title>Mightymerce - convert followers into customers</title>
   <meta name="description" content="Looking for an easy way to sell your products. Join Migthymerce and start using your networks to convert your followers into customers.">
   <meta name="fragment" content="!">
@@ -17,28 +19,29 @@
 
   <!-- Facebook META -->
   <meta property="fb:app_id" content="{{facebookAppId}}">
-  <meta property="og:site_name" content="{{displayName}}">
-  <meta property="og:title" content="{{productTitle}}">
-  <meta property="og:description" content="{{productDescription}}">
-  <meta property="og:url" content="{{checkoutURL}}">
-  <meta property="og:image" content="{{productMainImageURLFacebook}}">
+  <meta property="og:site_name" content="{{ metadata.displayName }}">
+  <meta property="og:title" content="{{ metadata.productTitle }}">
+  <meta property="og:description" content="{{ metadata.productDescription }}">
+  <meta property="og:url" content="{{ metadata.checkoutURL }}">
+  <meta property="og:image" content="{{ metadata.productMainImageURLFacebook }}">
   <meta property="og:type" content="website">
 
   <!-- Twitter META -->
-  <meta name="twitter:title" content="{{productTitle}}">
-  <meta name="twitter:description" content="{{productDescription}}">
-  <meta name="twitter:url" content="{{url}}">
-  <meta name="twitter:image" content="{{logo}}">
+  <meta property="twitter:card" content="product" />
+  <meta name="twitter:title" content="{{ metadata.productTitle }}">
+  <meta name="twitter:description" content="{{ metadata.productDescription }}">
+  <meta name="twitter:url" content="{{ metadata.checkoutURL }}">
+  <meta name="twitter:image" content="{{ metadata.image }}">
 
   <!-- Pinterest META -->
   <meta property="og:type" content="product">
-  <meta property="og:title" content="{{ productTitle }}">
-  <meta property="og:description" content="{{ productDescription }}">
-  <meta property="og:url" content="{{checkoutURL}}" />
-  <meta property="og:price:amount" content="{{productPrice}}">
-  <meta property="og:price:currency" content="{{productCurrency}}">
+  <meta property="og:title" content="{{ metadata.productTitle }}">
+  <meta property="og:description" content="{{ metadata.productDescription }}">
+  <meta property="og:url" content="{{ metadata.checkoutURL }}" />
+  <meta property="og:price:amount" content="{{ metadata.productPrice }}">
+  <meta property="og:price:currency" content="{{ metadata.productCurrency }}">
   <meta property="og:availability" content="instock">
-  <meta property="og:site_name" content="{{displayName}}">
+  <meta property="og:site_name" content="{{ metadata.displayName }}">
 
   <!-- Open Sans Font-->
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
@@ -104,7 +107,7 @@
 <script>
   window.fbAsyncInit = function() {
 
- /*
+
     // init the FB JS SDK Mightymerce Test
     FB.init({
       appId      : '1679730548952270',                        // App ID from the app dashboard
@@ -113,7 +116,7 @@
       xfbml      : true                                  // Look for social plugins on the page
     });
 
-
+/*
 
     // init the FB JS SDK Migthymerce Dev
     FB.init({
@@ -126,7 +129,7 @@
 
 
 
-*/
+
 
     // init the FB JS SDK Migthymerce Prod
     FB.init({
@@ -135,7 +138,7 @@
       xfbml      : true                                  // Look for social plugins on the page
     });
 
-
+    */
 
 
     // Additional initialization code such as adding Event Listeners goes here
@@ -150,6 +153,20 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 </script>
+
+
+<!--   GOOGLE ANALYTICS
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-67741485-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+-->
 
 <script>
   window.pAsyncInit = function() {
@@ -166,17 +183,6 @@
     js.src = "//assets.pinterest.com/sdk/sdk.js";
     pjs.parentNode.insertBefore(js, pjs);
   }(document, 'script', 'pinterest-jssdk'));
-</script>
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-67741485-2', 'auto');
-  ga('send', 'pageview');
-
 </script>
 
 
