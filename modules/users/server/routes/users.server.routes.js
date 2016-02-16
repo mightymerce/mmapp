@@ -25,5 +25,5 @@ module.exports = function (app) {
   // Etsy connection routes
   //app.route('/api/products/getetsytoken').get(products.getEtsyOAuth());
   // Dawanda connection routes
-  app.route('/api/users/auth/getdawanda').get(users.getDawandaOAuth);
+  //app.route('/api/users/auth/getdawanda').get(users.getDawandaOAuth);
 };
