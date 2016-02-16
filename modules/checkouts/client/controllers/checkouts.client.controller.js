@@ -1,8 +1,8 @@
 'use strict';
 
 // Checkouts controller
-angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$window', '$scope', '$stateParams', '$location', '$http', 'Authentication', 'Checkouts', 'ChoutServices', 'PaypalServicesSetExpressCheckout', 'PaypalServicesGetExpressCheckoutDetails', 'Products', 'Users', 'Orders', 'Legals', '$cookieStore',
-  function ($rootScope, $window, $scope, $stateParams, $location, $http, Authentication, Checkouts, ChoutServices, PaypalServicesSetExpressCheckout, PaypalServicesGetExpressCheckoutDetails, Products, Users, Orders, Legals, $cookieStore) {
+angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$window', '$scope', '$stateParams', '$location', '$http', 'Authentication', 'Checkouts', 'ChoutServices', 'PaypalServicesSetExpressCheckout', 'PaypalServicesGetExpressCheckoutDetails', 'Products', 'Users', 'Orders', 'Legals', '$cookieStore', 'Currencys',
+  function ($rootScope, $window, $scope, $stateParams, $location, $http, Authentication, Checkouts, ChoutServices, PaypalServicesSetExpressCheckout, PaypalServicesGetExpressCheckoutDetails, Products, Users, Orders, Legals, $cookieStore, Currencys) {
     $scope.authentication = Authentication;
     $scope.totalPrice = '';
 
@@ -46,20 +46,58 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
         // ToDo get channel from URL
         $cookieStore.put('order.channel', $location.search().channel);
 
+        console.log('checkouts.client.controller - findOne - productTitle: ' +$scope.product.productTitle);
 
-        // Set Metatags
-        $rootScope.$parent.metadata.productTitle = $scope.product.productTitle;
-        $rootScope.$parent.metadata.productDescription = $scope.product.productDescription;
-        $rootScope.$parent.metadata.productPrice = $scope.product.productPrice;
-        $rootScope.$parent.metadata.productCurrency = $scope.product.productCurrency;
-        $rootScope.$parent.metadata.displayName = $scope.user.displayName;
-        $rootScope.$parent.metadata.image = getAbsoluteImageUrl();
-        $rootScope.$parent.metadata.checkoutURL = $location.absUrl();
+        ChoutServices.getCurrency($scope.product.productCurrency).then(function (Currencys){
+
+          // Set Metatags
+          var linkUrl = $location.protocol() + '://' + $location.host();
+          if($location.host() === 'localhost'){
+            linkUrl = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/checkouts/';
+          } else {
+            linkUrl = $location.protocol() + '://' + $location.host() + '/checkouts/';
+          }
+
+          var linkMainImageUrl = $location.protocol() + '://' + $location.host();
+          if($location.host() === 'localhost'){
+            linkMainImageUrl = $location.protocol() + '://' + $location.host() + ':' + $location.port();
+          } else {
+            linkMainImageUrl = $location.protocol() + '://' + $location.host();
+          }
+
+          $(document).ready(function($) {
+            // todo - wie need channel Pinterest in URL. Can't distinguish at the moment
+
+            // FACEBOOK
+            $("meta[property='og:site_name']").attr('content', 'super og:title');
+            $("meta[property='og:title']").attr('content', $scope.product.productTitle);
+            $("meta[property='og:description']").attr('content', $scope.product.productDescription);
+            $("meta[property='og:url']").attr('content', linkUrl + $scope.product._id + '?channel=facebook');
+            $("meta[property='og:image']").attr('content', linkMainImageUrl + $scope.product.productMainImageURLFacebook.substring(1));
+
+            // PINTEREST (additional to Facebook)
+            $("meta[property='og:price:amount']").attr('content', $scope.product.productPrice);
+            $("meta[property='og:price:currency']").attr('content', Currencys.currencyCode);
+            $("meta[property='og:availability']").attr('content', 'in stock');
+
+            // TWITTER
+            $("meta[name='twitter:title']").attr('content', $scope.product.productTitle);
+            $("meta[name='twitter:description']").attr('content', $scope.product.productDescription);
+            $("meta[name='twitter:url']").attr('content', linkUrl + $scope.product._id + '?channel=twitter');
+            $("meta[name='twitter:image']").attr('content', linkMainImageUrl + $scope.product.productMainImageURLTwitter.substring(1));
+
+          });
+        });
+
+        $rootScope.image = getAbsoluteImageUrl();
+        $rootScope.checkoutURL = $location.absUrl();
 
         function getAbsoluteImageUrl() {
           var root = $location.absUrl().split(/product\/\d/)[0];
-          return root + product.image;
+          return root + $scope.product.image;
         }
+
+        console.log('checkouts.client.controller - findOne - end Metas: ' +$rootScope.productTitle);
 
       });
       console.log('checkouts.client.controller - findOne - end');
@@ -584,6 +622,5 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
     };*/
   }
 ]);
-
 
 

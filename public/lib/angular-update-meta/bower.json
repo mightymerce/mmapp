@@ -1,6 +1,6 @@
 {
   "name": "angular-update-meta",
-  "version": "1.6.0",
+  "version": "1.8.0",
   "authors": [
     {
       "name": "Jurgen Van de Moere",
@@ -26,10 +26,10 @@
     "**/.*"
   ],
   "dependencies": {
-    "angular": "~1.2.21"
+    "angular": "^1.2.x"
   },
   "devDependencies": {
-    "angular-mocks": "~1.2.21",
-    "angular-scenario": "~1.2.21"
+    "angular-mocks": "^1.2.x",
+    "angular-scenario": "^1.2.x"
   }
 }

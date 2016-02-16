@@ -45,7 +45,6 @@ angular.module('updateMeta', []);
       },
       link: function(scope, iElem, iAttrs) {
         var selector;
-
         if(scope.name) {
           selector = 'meta[name="' + scope.name + '"]';
         }

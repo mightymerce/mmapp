@@ -40,8 +40,6 @@ module.exports.start = function start(callback) {
 
   _this.init(function (app, db, config) {
 
-    app.use(require('prerender-node').set('prerenderToken', 'eFhIM2fYchDc5X1drgwq'));
-
     // Start the app by listening on <port>
     app.listen(config.port, function () {
 

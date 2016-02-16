@@ -46,11 +46,11 @@ Suppose you have the following markup in your template:
 Now you can use the following markup in your view(s):
  
 ```xml
+<update-title title="A new title"></update-title>
 <update-meta charset="ISO-8859-1"></update-meta>
 <update-meta http-equiv="Content-Language" content="es"></update-meta>
 <update-meta name="description" content="A page specific description"></update-meta>
 <update-meta property="og:title" content="Minions"></update-meta>
-<update-title title="A new title"></update-title>
 ```
 
 So the head is updated to:
@@ -111,6 +111,14 @@ $ gulp test
 ```
 
 ## Change log
+
+### 1.8.0
+
+- added examples for use with ngRoute and ui-router
+
+### v1.7.1
+
+- fix bower dependencies
 
 ### v1.7.0
 

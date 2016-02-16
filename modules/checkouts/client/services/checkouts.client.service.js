@@ -84,6 +84,25 @@ angular.module('checkouts').factory('ChoutServices', ['$http', '$q',
           // when the response is available
           console.log('checkouts.client.service.js - GetProduct');
           // The return value gets picked up by the then in the controller.
+
+          return response.data;
+        }, function errorCallback(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+        });
+        return promise;
+      },
+      getCurrency: function getCurrency(id) {
+        console.log('checkouts.client.service.js - GetCurrency - Productid: ' +id);
+        var promise = $http({
+          method: 'GET',
+          url: '/api/currencys/' +id
+        }).then(function successCallback(response) {
+          // this callback will be called asynchronously
+          // when the response is available
+          console.log('checkouts.client.service.js - GetCurrency - Success');
+          console.log(response);
+          // The return value gets picked up by the then in the controller.
           return response.data;
         }, function errorCallback(response) {
           // called asynchronously if an error occurs
