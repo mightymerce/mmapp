@@ -97,7 +97,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
           return root + $scope.product.image;
         }
 
-        console.log('checkouts.client.controller - findOne - end Metas: ' +$rootScope.productTitle);
+        console.log('checkouts.client.controller - findOne - end Metas');
 
       });
       console.log('checkouts.client.controller - findOne - end');
@@ -176,8 +176,6 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
     // Call Paypal - paypalSetExpressCheckout
     $scope.checkoutPaypal = function () {
 
-      // ToDo get user paypal Details
-
       console.log('checkouts.client.controller - paypalSetExpressCheckout - start');
       if(!$scope.user.paypalUser || !$scope.user.paypalPwd || !$scope.user.paypalSignature)
       {
@@ -218,7 +216,12 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
           cartSubtotalAmount: $('.lbl-subtotal-PP').val(),
           buyerMail: '@',
           productCurrency: 'EUR'
-        }, function(data) {
+        }, function(err, data) {
+          if(err)
+          {
+            $scope.error="Authentication with Paypal failed. Wrong paypal user derails. Please verify your details in the Settings section."
+            return;
+          }
           console.log('checkouts.client.controller - paypalSetExpressCheckout and open Paypal window URL: ' +data.redirectUrl);
           $cookieStore.put('paypal.user.profileImageURL', $scope.user.profileImageURL);
           $cookieStore.put('paypal.product.productMainImageURL', $scope.product.productMainImageURL);
@@ -236,8 +239,41 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
           $cookieStore.put('paypal.order.subtotal', $('.lbl-subtotal-PP').val());
 
           console.log('checkouts.client.controller - paypalSetExpressCheckout - profileImageURL: ' +$scope.user.profileImageURL);
+          console.log('checkouts.client.controller - paypalSetExpressCheckout - returnURL: ' +data.redirectUrl);
           $window.open(data.redirectUrl);
-          //return data.redirectUrl;
+
+
+          // Playing with integratd checkout
+
+          /*
+          paypal.checkout.setup('9EPRL8XBW2HWQ', {
+            environment: 'sandbox',
+            container: 'myContainer',
+            click: function(event) {
+              event.preventDefault();
+
+              paypal.checkout.initXO();
+
+              angular.element(document.getElementById('CheckoutsControllerID')).scope().checkoutPaypal({
+                //Load the minibrowser with the redirection url in the success handler
+                success: function (url) {
+                  alert('success');
+                  //var url = paypal.checkout.urlPrefix +token;
+                  //Loading Mini browser with redirect url, true for async AJAX calls
+                  paypal.checkout.startFlow(url);
+                },
+                error: function (responseData, textStatus, errorThrown) {
+                  alert("Error in ajax post"+responseData.statusText);
+                  //Gracefully Close the minibrowser in case of AJAX errors
+                  paypal.checkout.closeFlow();
+                }
+
+              });
+            }
+          });
+
+          return data.redirectUrl;
+          */
         });
 
 
@@ -543,83 +579,10 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
     };
 
 
-
-
-
-
-    /*// TODO: Put your PayPal settings here:
-    var returnUrl = 'http://localhost:3001/paypal/success';
-    var cancelUrl = 'http://localhost:3001/paypal/cancel/cancel';
-
-    /!**
-     * React to pay POST. This will create paypal pay url and redirect user there.
-     * @param  {[type]} req  [description]
-     * @param  {[type]} res) {}          [description]
-     * @return {[type]}      [description]
-     *!/
-      // Paypal Checkout
-    $scope.pay = function (req, res) {
-      console.log('Start paypal - pay function');
-      // create paypal object in sandbox mode. If you want non-sandbox remove tha last param.
-      var paypal = PayPal.create('wagner+2@mightymerce.com', process.env.API_PASSWORD, process.env.SIGNATURE, true);
-      console.log('scope.pay: ' +paypal);
-      paypal.setPayOptions('ACME Soft', null, process.env.logoImage, '00ff00', 'eeeeee');
-
-      paypal.setProducts([{
-        name: 'ACME Drill',
-        description: 'Amazing drill',
-        quantity: 1,
-        amount: 100.99
-      }]);
-
-      // Invoice must be unique.
-      var invoice = uuid.v4();
-      paypal.setExpressCheckoutPayment(
-          'test@email.com',
-          invoice,
-          100.99,
-          'This is really amazing product you are getting',
-          'USD',
-          returnUrl,
-          cancelUrl,
-          false,
-          function(err, data) {
-            if (err) {
-              console.log(err);
-              res.status(500).send(err);
-              return;
-            }
-
-            // Regular paid.
-            res.redirect(data.redirectUrl);
-          });
-        };
-
-
-    $scope.paypalcancel = function (req, res) {
-      // Cancel payment.
-      res.send('Payment canceled');
-    };
-
-    $scope.paypalsuccess = function (req, res) {
-      var paypal = PayPal.create(process.env.API_USERNAME, process.env.API_PASSWORD, process.env.SIGNATURE, true);
-      paypal.getExpressCheckoutDetails(req.query.token, true, function(err, data) {
-        if (err) {
-          console.log(err);
-          res.status(500).send(err);
-          return;
-        }
-      });
-
-      // Check token and details.
-      var resObj = JSON.stringify(data);
-      res.send('Successfuly payment, ' + resObj);
-    };
-
     // catch 404 and forwarding to error handler
     $scope.use = function (req, res) {
       res.status(404).send('Unknown page');
-    };*/
+    };
   }
 ]);
 

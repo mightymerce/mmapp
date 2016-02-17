@@ -101,7 +101,6 @@ angular.module('checkouts').factory('ChoutServices', ['$http', '$q',
           // this callback will be called asynchronously
           // when the response is available
           console.log('checkouts.client.service.js - GetCurrency - Success');
-          console.log(response);
           // The return value gets picked up by the then in the controller.
           return response.data;
         }, function errorCallback(response) {
@@ -119,7 +118,6 @@ angular.module('checkouts').factory('ChoutServices', ['$http', '$q',
           // this callback will be called asynchronously
           // when the response is available
           console.log('checkouts.client.service.js - GetUser - Success');
-          console.log(response);
           // The return value gets picked up by the then in the controller.
           return response.data;
         }, function errorCallback(response) {
@@ -137,7 +135,6 @@ angular.module('checkouts').factory('ChoutServices', ['$http', '$q',
           // this callback will be called asynchronously
           // when the response is available
           console.log('checkouts.client.service.js - GetDelivery - Success');
-          console.log(response);
           // The return value gets picked up by the then in the controller.
           return response.data;
         }, function errorCallback(response) {
@@ -147,7 +144,7 @@ angular.module('checkouts').factory('ChoutServices', ['$http', '$q',
         return promise;
       },
       getLegal: function getLegal(id) {
-        console.log('checkouts.client.service.js - GetLegal - Userid: ' +id);
+        console.log('checkouts.client.service.js - GetLegal - Legalid: ' +id);
         var promise = $http({
           method: 'GET',
           url: '/api/legals?user=' +id
@@ -155,9 +152,8 @@ angular.module('checkouts').factory('ChoutServices', ['$http', '$q',
           // this callback will be called asynchronously
           // when the response is available
           console.log('checkouts.client.service.js - GetLegal - Success');
-          console.log(response.data[0]);
           // The return value gets picked up by the then in the controller.
-          return response.data[0];
+          return response.data;
         }, function errorCallback(response) {
           // called asynchronously if an error occurs
           // or server returns response with an error status.

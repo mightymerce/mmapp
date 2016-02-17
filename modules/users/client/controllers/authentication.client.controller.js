@@ -151,7 +151,7 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
           deliveryTitle: 'Standard',
           deliveryTime: '3-5 working days',
           deliveryCountry: 'Germany',
-          deliveryCost: '3,50'
+          deliveryCost: '3.50'
         });
 
         // save

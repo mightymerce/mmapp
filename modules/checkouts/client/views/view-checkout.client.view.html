@@ -1,4 +1,5 @@
 <section ng-controller="CheckoutsController" id="CheckoutsControllerID" ng-init="findOne()">
+
   <div class="app app-dock">
 
     <!-- content -->
@@ -82,9 +83,11 @@
                                 </table>
                               </div>
                             </div>
-                            <a id="myContainer" ng-hide="itemOutofStock">
-                              <img ng-click="checkoutPaypal()" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" />
-                            </a>
+                            <div align="center">
+                              <a id="myContainer" ng-hide="itemOutofStock">
+                               <img ng-click="checkoutPaypal()" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-medium.png" />
+                              </a>
+                            </div>
                             <input ng-hide="true" type="text" value="0" class="form-control lbl-subtotal-PP" hidden />
                             <input ng-hide="true" type="text" value="0" class="form-control lbl-total-PP" hidden />
                             <input ng-hide="true" type="text" value="0" class="form-control lbl-shipping-PP" hidden />
@@ -156,5 +159,7 @@
     <!-- / footer -->
 
   </div>
+
+  <!-- <script src="//www.paypalobjects.com/api/checkout.js" async></script> -->
 
 </section>

@@ -6,7 +6,7 @@ function parseCurrency(number) {
 
     var options = new JsNumberFormatter.locales.formatOptions('de')
                     .specifyDecimalMask('00');
-    number = JsNumberFormatter.formatNumber(number, options, true);
+    number = JsNumberFormatter.formatNumber(number, options, false);
 
     return number;
 
@@ -16,7 +16,7 @@ function parseCurrencyForPP(number) {
 
     var options = new JsNumberFormatter.locales.formatOptions('us')
                     .specifyDecimalMask('00');
-    number = JsNumberFormatter.formatNumber(number, options, true);
+    number = JsNumberFormatter.formatNumber(number, options, false);
 
     return number;
 
@@ -31,8 +31,8 @@ function calculatePrices() {
     } else {
     	singlePrice = singlePriceData;
     }
-    console.log(singlePrice);
-    console.log(typeof singlePrice);
+    //console.log(singlePrice);
+    //console.log(typeof singlePrice);
 
     var shippingData = $('.lbl-shipping').data('value');
     var shipping;
@@ -41,32 +41,32 @@ function calculatePrices() {
     } else {
         shipping = shippingData;
     }
-    console.log(shipping);
-    console.log(typeof shipping);
+    //console.log(shipping);
+    //console.log(typeof shipping);
 
     var amount = $('.amount').val();
     var subtotal = amount * singlePrice;
     var total = subtotal + shipping;
     var vat = total * 19 / 100;
-    console.log('Amount: ' +amount);
-    console.log('Subtotal: ' +subtotal);
-    console.log('Total: ' +total);
+    //console.log('Amount: ' +amount);
+    //console.log('Subtotal: ' +subtotal);
+    //console.log('Total: ' +total);
 
 
-    $('.single-price').text(parseCurrency(singlePrice) + ' €');
-    $('.highlight-price').text(parseCurrency(singlePrice) + ' €');
-    $('.lbl-priceperitem').text(parseCurrency(singlePrice) + ' €');
+    $('.single-price').text(parseCurrency(parseFloat(singlePrice)) + ' €');
+    $('.highlight-price').text(parseCurrency(parseFloat(singlePrice)) + ' €');
+    $('.lbl-priceperitem').text(parseCurrency(parseFloat(singlePrice)) + ' €');
     $('.lbl-quantity').text(amount);
-    $('.lbl-shipping').text(parseCurrency(shipping) + ' €');
-    $('.lbl-subtotal').text(parseCurrency(subtotal) + ' €');
-    $('#PAYMENTREQUEST_0_ITEMAMT').val(parseCurrencyForPP(subtotal));
-    $('.lbl-total').text(parseCurrency(total));
+    $('.lbl-shipping').text(parseCurrency(parseFloat(shipping)) + ' €');
+    $('.lbl-subtotal').text(parseCurrency(parseFloat(subtotal)) + ' €');
+    $('#PAYMENTREQUEST_0_ITEMAMT').val(parseCurrencyForPP(parseFloat(subtotal)));
+    $('.lbl-total').text(parseCurrency(parseFloat(total)));
     $('.lbl-total-PP').val(parseCurrencyForPP(total));
     $('.lbl-shipping-PP').val(parseCurrencyForPP(shipping));
     $('.lbl-itemprice-PP').val(parseCurrencyForPP(singlePrice));
     $('.lbl-subtotal-PP').val(parseCurrencyForPP(subtotal));
     $('.lbl-vat-PP').val(parseCurrencyForPP(vat));
-    $('.lbl-vat').text(parseCurrency(vat) + ' €');
+    $('.lbl-vat').text(parseCurrency(parseFloat(vat)) + ' €');
 }
 
 function scrollToDiv(element, offset){

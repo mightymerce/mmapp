@@ -54,8 +54,6 @@ angular.module('core').controller('HeaderController', ['$http', '$scope', '$stat
     // For checkout get rid of Navigation
     var path = $location.path();
 
-    console.log($state);
-
     if (path.includes('/checkouts') || path.includes('/authentication') || $scope.authentication === null) {
       $scope.navHide = true;
       $scope.footHide = true;
