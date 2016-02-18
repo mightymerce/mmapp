@@ -41,13 +41,24 @@
           </div>
         </div>
         <div class="modal-body-white">
-          <p><strong><span ng-bind="product.productTitle"></span></strong> </p>
-          <p><span ng-bind="product.productId"></span></p>
           <div ng-show="varPostChannel === 'Facebook'">
-            <img ng-src="{{product.productMainImageURLFacebook}}" alt="{{product.productMainImageAlt}}" class="product-images-list">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <h2 style="font-family: Georgia, serif;"><span ng-bind="product.productTitle"></span> für <span ng-bind="product.productPrice"></span></h2>
+                <p><img ng-src="{{product.productMainImageURLFacebook}}" alt="{{product.productMainImageAlt}}"></p>
+                <p><span ng-bind="product.productDescription"></span> </p>
+                <p><a href="#">SHOP.MIGHTYMERCE.COM</a></p>
+              </div>
+            </div>
           </div>
           <div ng-show="varPostChannel === 'Pinterest'">
-            <img ng-src="{{product.productMainImageURLPinterest}}" alt="{{product.productMainImageAlt}}" class="product-images-list">
+            <div class="pin">
+              <img ng-src="{{product.productMainImageURLPinterest}}" alt="{{product.productMainImageAlt}}">
+              <p>
+                <span ng-bind="product.productTitle"></span> für <span ng-bind="product.productPrice"></span>
+                <span ng-bind="product.productDescription"></span>
+              </p>
+            </div>
           </div>
           <div ng-show="varPostChannel === 'Code'">
             <img ng-src="{{product.productMainImageURLCode}}" alt="{{product.productMainImageAlt}}" class="product-images-list">
@@ -65,6 +76,8 @@
           </div>
           <div ng-show="varPostChannel === 'Facebook' && varPostStatus === 'New'">
             <span>Please note: Posts to Facebook may not be updated after the post.</span>
+            <a href="#" class="pull-right"></a>
+            <p><strong>Preview of your post </strong><i>(This is not the final look of your post)</i></p>
           </div>
           <div ng-show="varPostChannel === 'Pinterest'  && varPostStatus === 'Wait'">
             <span>Please note: TBD.</span>
