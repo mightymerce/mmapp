@@ -44,6 +44,18 @@ angular.module(ApplicationConfiguration.applicationModuleName).run(function ($ro
     storePreviousState(fromState, fromParams);
   });
 
+  $rootScope.$on('$viewContentLoaded', function(){
+
+    var interval = setInterval(function(){
+      if (document.readyState == "complete") {
+        window.scrollTo(0, 0);
+        clearInterval(interval);
+      }
+    },200);
+
+  });
+
+
   // Store previous state
   function storePreviousState(state, params) {
     // only store this state if it shouldn't be ignored 
