@@ -86,7 +86,6 @@ exports.list = function (req, res) {
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      console.log('legals.server.controller - find - result: ' +legals[0].legalImprint);
       res.json(legals[0]);
     }
   });

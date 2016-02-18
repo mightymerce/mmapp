@@ -50,7 +50,7 @@ module.exports = {
       css: [
         // Bootstrap
         'public/lib/bootstrap/dist/css/bootstrap.css',
-        'public/lib/bootstrap/dist/css/bootstrap.min.css',
+        //'public/lib/bootstrap/dist/css/bootstrap.min.css',
         'public/lib/bootstrap/dist/css/bootstrap-theme.css',
         // Font Awsome
         'public/lib/font-awesome/css/*.css',

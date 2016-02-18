@@ -37,6 +37,34 @@ angular.module('legals').config(['$stateProvider',
         data: {
           roles: ['user', 'admin']
         }
+      })
+      .state('legals.editcopyright', {
+        url: '/:legalId/editcopyright',
+        templateUrl: 'modules/legals/client/views/edit-legal-copyright.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
+      })
+      .state('legals.editimprint', {
+        url: '/:legalId/editimprint',
+        templateUrl: 'modules/legals/client/views/edit-legal-imprint.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
+      })
+      .state('legals.editreturnpolicy', {
+        url: '/:legalId/editreturnpolicy',
+        templateUrl: 'modules/legals/client/views/edit-legal-returnpolicy.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
+      })
+      .state('legals.edittermsandconditions', {
+        url: '/:legalId/edittermsandconditions',
+        templateUrl: 'modules/legals/client/views/edit-legal-termsandconditions.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
       });
   }
 ]);

@@ -13,7 +13,7 @@
           <a ui-sref="legals.list">Legals</a>
         </li>
         <li class="active">
-          <strong>Edit - Privacy Policy</strong>
+          <strong>Edit - Terms and Conditions</strong>
         </li>
       </ol>
     </div>
@@ -37,11 +37,11 @@
               <div class="ibox-tools"></div>
             </div>
             <div class="ibox-content">
-              <div class="form-group"><label class="col-sm-2 control-label">Privacy Policy*</label>
+              <div class="form-group"><label class="col-sm-2 control-label">Terms and Conditions*</label>
                 <div class="col-sm-8">
-                  <textarea rows="15" ng-model="legal.legalPrivacyPolicy" id="legalPrivacyPolicy" class="supertext" placeholder="" required></textarea></div>
-                <div ng-messages="legalForm.legalPrivacyPolicy.$error" role="alert">
-                  <p class="help-block error-text" ng-message="required">Privacy policy is required.</p>
+                  <textarea rows="15" ng-model="legal.legalTermsandConditions" id="legalTermsandConditions" class="supertext" placeholder="" required></textarea></div>
+                <div ng-messages="legalForm.legalTermsandConditions.$error" role="alert">
+                  <p class="help-block error-text" ng-message="required">Terms and Conditions are required.</p>
                 </div>
                 <div class="col-sm-2">
                 </div>
@@ -60,7 +60,7 @@
           <div class="ibox float-e-margins">
             <div align="right">
               <a ng-hide="basicData" ui-sref="tutorial" class="btn btn-w-m btn-warning btn-outline">Return to tutorial</a>
-              <button type="submit" class="btn btn-w-m btn-warning">Update Privacy Policy</button>
+              <button type="submit" class="btn btn-w-m btn-warning">Update Terms and Conditions</button>
             </div>
           </div>
         </div>
