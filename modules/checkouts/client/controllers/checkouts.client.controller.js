@@ -68,6 +68,8 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
           $(document).ready(function($) {
             // todo - wie need channel Pinterest in URL. Can't distinguish at the moment
 
+            $("meta[name='og:keywords']").attr('content', $scope.product.productTitle + ', ' + $scope.user.displayName + ', shop.mightymerce.com');
+
             // FACEBOOK
             $("meta[property='og:site_name']").attr('content', 'shop.mightymerce.com');
             $("meta[property='og:title']").attr('content', $scope.product.productTitle);

@@ -14,10 +14,10 @@
                 <div class="panel b-a">
                   <div class="panel-heading">
                     <a href="#/">
-                      <img ng-src="{{user.profileImageURL}}" alt="." />
+                      <img ng-src="{{user.profileImageURL}}" alt="{{user.displayName}}" />
                     </a>
                   </div>
-                  <img ng-src="{{product.productMainImageURL}}" class="teaser-img" />
+                  <img ng-src="{{product.productMainImageURL}}" class="teaser-img" alt="{{product.productMainImageAlt}}"/>
                   <button class="btn m-b-xs w-xs btn-info single-price" ng-bind="product.productPrice" data-value="{{product.productPrice}}"></button>
 
                   <div class="bg-light lter b-b wrapper-md wrapper-p5" id="belowpicture">
@@ -85,7 +85,7 @@
                             </div>
                             <div align="center">
                               <a id="myContainer" ng-hide="itemOutofStock">
-                               <img ng-click="checkoutPaypal()" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-medium.png" />
+                               <img ng-click="checkoutPaypal()" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-medium.png" alt="mightymerce checkout with paypal" />
                               </a>
                             </div>
                             <input ng-hide="true" type="text" value="0" class="form-control lbl-subtotal-PP" hidden />
