@@ -51,6 +51,8 @@ module.exports.initLocalVariables = function (app) {
  */
 module.exports.initMiddleware = function (app) {
 
+  app.use(require('prerender-node').set('prerenderToken', 'eFhIM2fYchDc5X1drgwq'));
+
   // Showing stack errors
   app.set('showStackError', true);
 
