@@ -69,7 +69,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
             // todo - wie need channel Pinterest in URL. Can't distinguish at the moment
 
             // FACEBOOK
-            $("meta[property='og:site_name']").attr('content', 'super og:title');
+            $("meta[property='og:site_name']").attr('content', 'shop.mightymerce.com');
             $("meta[property='og:title']").attr('content', $scope.product.productTitle);
             $("meta[property='og:description']").attr('content', $scope.product.productDescription);
             $("meta[property='og:url']").attr('content', linkUrl + $scope.product._id + '?channel=facebook');
@@ -97,10 +97,10 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
           return root + $scope.product.image;
         }
 
-        console.log('checkouts.client.controller - findOne - end Metas');
+        console.log('checkouts.client.controller - findOne - end');
 
       });
-      console.log('checkouts.client.controller - findOne - end');
+      console.log('checkouts.client.controller - init - end');
     };
 
 
@@ -217,6 +217,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
           buyerMail: '@',
           productCurrency: 'EUR'
         }, function(err, data) {
+          alert('hallo');
           if(err)
           {
             $scope.error="Authentication with Paypal failed. Wrong paypal user derails. Please verify your details in the Settings section."
