@@ -106,7 +106,7 @@ JsNumberFormatter.locales = {
 
         // if (isFullLocale === false) {
         //     // Extract and convert to lower-case any language code from a real 'locale' formatted string, if not use as-is
-        //     // (To prevent locale format like : "fr_FR", "en_US", "de_DE", "fr_FR", "en-US", "de-DE")
+        //     // (To prevent locale format like : "fr_FR", "en_US", "de_DE", "fr_FR", "en-US", "de-DE.json")
         //     if (locale.indexOf('_') != -1) {
         //         locale = locale.split('_')[1].toLowerCase();
         //     } else if (locale.indexOf('-') != -1) {
@@ -139,7 +139,7 @@ JsNumberFormatter.locales = {
 
         // if (isFullLocale === false) {
         //     // Extract and convert to lower-case any language code from a real 'locale' formatted string, if not use as-is
-        //     // (To prevent locale format like : "fr_FR", "en_US", "de_DE", "fr_FR", "en-US", "de-DE")
+        //     // (To prevent locale format like : "fr_FR", "en_US", "de_DE", "fr_FR", "en-US", "de-DE.json")
         //     if (locale.indexOf('_') != -1) {
         //         locale = locale.split('_')[1].toLowerCase();
         //     } else if (locale.indexOf('-') != -1) {
