@@ -173,6 +173,14 @@ var UserSchema = new Schema({
     type: String,
     default: ''
   },
+  etsyuserkey: {
+    type: String,
+    default: ''
+  },
+  etsyusersecret: {
+    type: String,
+    default: ''
+  },
   userStatus: {
     type: String,
     default: '0'

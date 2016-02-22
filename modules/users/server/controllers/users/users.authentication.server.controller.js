@@ -305,6 +305,39 @@ exports.updateActivateUser = function (req, res, next) {
   });
 };
 
+
+exports.getDawandaOAuth = function (req, res, next) {
+  console.log('products.server.controller - getDawandaOAuth - start');
+
+  var client = require('http');
+  var options = {
+    host: 'http://de.dawanda.com',
+    path: '/api/v1/oauth/request_token',
+    api_key: 'OnKajypXQtvwLe9LzzyT',
+    api_secret: 'q7FoM4VW5yprPq8v7e9bJUqiU99oYzagTkEqGCQ7',
+    country: 'de',
+    method: 'GET' //POST,PUT,DELETE etc
+  };
+
+  console.log('products.server.controller - getDawandaOAuth - start request');
+
+  //handle request;
+  var httpRequest = client.request(options, function(response){
+    console.log("Code: "+response.statusCode+ "\n Headers: "+response.headers);
+    response.on('data', function (chunk) {
+      console.log(chunk);
+    });
+    response.on('end',function(){
+      console.log("\nResponse ended\n");
+    });
+    response.on('error', function(err){
+      console.log("Error Occurred: "+err.message);
+    });
+
+  });
+};
+
+
 /**
  * Send activate email
  */

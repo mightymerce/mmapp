@@ -26,4 +26,9 @@ module.exports = function (app) {
   //app.route('/api/products/getetsytoken').get(products.getEtsyOAuth());
   // Dawanda connection routes
   //app.route('/api/users/auth/getdawanda').get(users.getDawandaOAuth);
+
+  // Twitter checkout routes
+  app.route('/api/users/twitter/twitterGetOAuthToken/:productId').get(users.twitterGetOAuthToken);
+  app.route('/api/users/twitter/twitterGetAccessToken/:oauth_verifier/:oauth_token').get(users.twitterGetAccessToken);
+
 };

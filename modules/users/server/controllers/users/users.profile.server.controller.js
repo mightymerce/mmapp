@@ -12,7 +12,10 @@ var _ = require('lodash'),
   crypto = require('crypto'),
   config = require(path.resolve('./config/config')),
   User = mongoose.model('User'),
-  Delivery = mongoose.model('Delivery');
+  Delivery = mongoose.model('Delivery'),
+  https = require('https'),
+  http = require("http"),
+  urlParser = require('url');
 
 var stripe = require('stripe')('sk_test_AYQBhWDR55fPPfUnYCqa9hSm');
 
@@ -307,4 +310,84 @@ exports.stripeCancelSubscription = function (req, res) {
           res.send(customer);
         }
       });
+};
+
+/**
+ * Twitter get OAuthToken
+ */
+exports.twitterGetOAuthToken = function (req, res) {
+  console.log('users.profile.server.controller - twitterGetOAuthToken - start');
+
+  var request = require('request');
+  var qs = require('querystring');
+
+  var callback_url = req.protocol + "://" + req.get('host') + '/products/' + req.params.productId + '/view';
+  var oauth =
+      {
+        callback: callback_url,
+        consumer_key: 'cEtPSgsJWRzJI1zGlb2gpp7TZ',
+        consumer_secret: 'UAf5069PyJFGjNeTvqY6dbpIXAquj5T12siqf2SdvfkTU6i0f1'
+
+      };
+  var url = 'https://api.twitter.com/oauth/request_token';
+
+  request.post({
+    url: url,
+    oauth: oauth
+  }, function (e, r, body) {
+    // Ideally, you would take the body in the response
+    // and construct a URL that a user clicks on (like a sign in button).
+    // The verifier is only available in the response after a user has
+    // verified with twitter that they are authorizing your app.
+
+    var req_data = qs.parse(body);
+    console.log('users.profile.server.controller - twitterGetOAuthToken - return value: ' +req_data.oauth_token);
+    res.json(req_data.oauth_token);
+  });
+
+};
+
+/**
+ * Twitter get AccessToken
+ */
+exports.twitterGetAccessToken = function (req, res) {
+  console.log('users.profile.server.controller - twitterGetAccessToken - start');
+
+  console.log('users.profile.server.controller - twitterGetAccessToken - oauth_verifier: '+req.params.oauth_verifier);
+  console.log('users.profile.server.controller - twitterGetAccessToken - oauth_token: '+req.params.oauth_token);
+
+  var request = require('request');
+  var qs = require('querystring');
+  var oauth =
+  {
+    verifier: req.params.oauth_verifier
+  };
+  var url = 'https://api.twitter.com/oauth/access_token';
+
+  request.post({
+    url: url,
+    oauth: oauth
+  }, function (error, r, body) {
+
+    // Ideally, you would take the body in the response
+    // and construct a URL that a user clicks on (like a sign in button).
+    // The verifier is only available in the response after a user has
+    // verified with twitter that they are authorizing your app.
+    if(error){
+      return console.log('Error:', error);
+    }
+
+    //Check for right status code
+    if(r.statusCode !== 200){
+      return console.log('Invalid Status Code Returned:', r.statusCode + ' ' + r.statusText);
+    }
+
+    console.log(body);
+
+    var req_data = qs.parse(body);
+    console.log('users.profile.server.controller - twitterGetAccessToken - return value: ' +req_data);
+    console.log('users.profile.server.controller - twitterGetAccessToken - return value: ' +req_data.oauth_token_secret);
+    res.json(req_data);
+  });
+
 };

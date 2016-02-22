@@ -3,10 +3,10 @@
 /**
  * Module dependencies.
  */
-module.exports = function (app) {
+var productsPolicy = require('../policies/products.server.policy');
+var products = require('../controllers/products.server.controller');
 
-  var productsPolicy = require('../policies/products.server.policy');
-  var products = require('../controllers/products.server.controller');
+module.exports = function (app) {
 
   // Products collection routes
   app.route('/api/products').all(productsPolicy.isAllowed)

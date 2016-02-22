@@ -101,6 +101,7 @@ exports.update = function (req, res) {
   product.productFurtherImage5URLCode = req.body.productFurtherImage5URLCode;
   product.productFurtherImage5Alt = req.body.productFurtherImage5Alt;
   product.productActive = req.body.productActive;
+  product.productCheckoutURL = req.body.productCheckoutURL;
 
   product.save(function (err) {
     if (err) {
@@ -149,21 +150,26 @@ exports.list = function (req, res) {
  * Product middleware
  */
 exports.productByID = function (req, res, next, id) {
-
+  console.log('product.server.controller - productByID - start');
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
       message: 'Product is invalid'
     });
   }
 
+  console.log('product.server.controller - productByID - Mongoose Type valid');
+
   Product.findById(id).populate('user', 'displayName').exec(function (err, product) {
+    console.log('product.server.controller - productByID - findById - start id: ' +id);
     if (err) {
+      console.log('product.server.controller - productByID - findById - error');
       return next(err);
     } else if (!product) {
       return res.status(404).send({
         message: 'No product with that identifier has been found'
       });
     }
+    console.log('product.server.controller - productByID - findById - success');
     req.product = product;
     next();
   });

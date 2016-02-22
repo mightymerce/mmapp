@@ -1,8 +1,8 @@
 'use strict';
 
 // Products controller
-angular.module('products').controller('ProductsController', ['$rootScope','$scope', '$state', '$http', '$timeout', '$window', '$stateParams', '$location', 'Authentication', 'Products', '$uibModal', 'Posts', 'ProductsServices', 'Taxes', 'Currencys', 'Deliverys', 'Users',
-  function ($rootScope, $scope, $state, $http, $timeout, $window, $stateParams, $location, Authentication, Products, $uibModal, Posts, ProductsServices, Taxes, Currencys, Deliverys, Users) {
+angular.module('products').controller('ProductsController', ['$rootScope','$scope', '$state', '$http', '$timeout', '$window', '$stateParams', '$location', 'Authentication', 'Products', '$uibModal', 'Posts', 'ProductsServices', 'Taxes', 'Currencys', 'Deliverys', 'Users', 'GetDawanda',
+  function ($rootScope, $scope, $state, $http, $timeout, $window, $stateParams, $location, Authentication, Products, $uibModal, Posts, ProductsServices, Taxes, Currencys, Deliverys, Users, GetDawanda) {
 
     $scope.authentication = Authentication;
 
@@ -25,6 +25,29 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
     } else {
       $scope.basicData = false;
     }
+
+
+    console.log('products.client.controller - laodAfterCallbackTwitter - twitterGetAccessToken - $routeParams.oauth_verifier: ' +$location.search().oauth_verifier);
+    console.log('products.client.controller - laodAfterCallbackTwitter - twitterGetAccessToken - $routeParams.oauth_token: ' +$location.search().oauth_token);
+
+    // Load page after Twitter callback
+    if($location.search().oauth_verifier && $location.search().oauth_token){
+
+      // should return oauth_token & oauth_verifier
+      var twitterOAuth_Verifier = $location.search().oauth_verifier;
+      var twitterOAuth_Token = $location.search().oauth_token;
+
+      var promiseOAuthVerifier = ProductsServices.twitterGetAccessToken(twitterOAuth_Verifier, twitterOAuth_Token);
+      promiseOAuthVerifier.then(function(promise) {
+        console.log('products.client.controller - laodAfterCallbackTwitter - twitterGetAccessToken - return oauth_token: ' +promise.oauth_token);
+        console.log('products.client.controller - laodAfterCallbackTwitter - twitterGetAccessToken - return oauth_token_secret: ' +promise.oauth_token_secret);
+
+        // todo message to user - success and continue
+
+        // todo store twitter user data for further requests
+      });
+    }
+
 
     console.log('products.client.controller - load ProductsController');
 
@@ -140,6 +163,91 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
           });
         }
       }
+
+      if (postChannel === 'Etsy') {
+        // Etsy connect
+        console.log('products.client.controller - modalupdateProductPost - Start');
+
+        ProductsServices.getEtsyOAuth().then(function(promise) {
+          console.log('products.client.controller - modalupdateProductPost - getEtsyOAuth - return URL: ' +promise);
+          window.open(promise);
+        });
+      }
+
+      if (postChannel === 'Dawanda') {
+        // Etsy connect
+        console.log('products.client.controller - modalupdateProductPost - Start');
+
+        //GetDawanda.query();
+        ProductsServices.getDawandaOAuth().then(function(promise) {
+          console.log('products.client.controller - modalupdateProductPost - getDawandaOAuth - return URL: ' +promise);
+          //window.open(promise);
+        });
+      }
+
+      if (postChannel === 'Twitter') {
+        // Twitter connect
+        console.log('products.client.controller - modalupdateProductPost - Start');
+
+        var promiseOAuth = ProductsServices.twitterGetOAuthToken($scope.product._id);
+        promiseOAuth.then(function successCallback(response) {
+          console.log('products.client.controller - modalupdateProductPost - twitterGetOAuthToken - return OAuthToken: ' +response);
+
+          window.open('https://api.twitter.com/oauth/authenticate?oauth_token=' +response);
+        });
+
+        /*//if the user is a returning user, hide the sign in button and display the tweets
+        if (ProductsServices.twitterIsReady()) {
+          // session has been set
+          // OPEN MODAL
+          console.log('');
+          $scope.modalInstance = $uibModal.open({
+            //animation: $scope.animationsEnabled,
+            templateUrl: 'modules/products/client/views/post.product.modal.view.html',
+            controller: function ($scope, product) {
+              $scope.product = product;
+              $scope.varPostStatus = postStatus;
+              $scope.varPostPublicationDate = postPublicationDate;
+              $scope.varPostChannel = postChannel;
+            },
+            size: size,
+            resolve: {
+              product: function () {
+                return selectedProduct;
+              }
+            }
+          });
+
+        } else {
+          ProductsServices.connectTwitter().then(function() {
+            if (twitterService.isReady()) {
+              // session has been set
+              // OPEN MODAL
+              console.log('');
+              $scope.modalInstance = $uibModal.open({
+                //animation: $scope.animationsEnabled,
+                templateUrl: 'modules/products/client/views/post.product.modal.view.html',
+                controller: function ($scope, product) {
+                  $scope.product = product;
+                  $scope.varPostStatus = postStatus;
+                  $scope.varPostPublicationDate = postPublicationDate;
+                  $scope.varPostChannel = postChannel;
+                },
+                size: size,
+                resolve: {
+                  product: function () {
+                    return selectedProduct;
+                  }
+                }
+              });
+
+            } else {
+              $scope.error="Oups. There was an error connecting to Twitter. Pleas try again.";
+            }
+          });
+        }*/
+      }
+
     };
 
     $scope.productCurrency = Currencys.query({
@@ -165,6 +273,13 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
         console.log('Error!');
 
         return false;
+      }
+
+      var linkUrl = $location.protocol() + '://' + $location.host();
+      if($location.host() === 'localhost'){
+        linkUrl = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/checkouts/';
+      } else {
+        linkUrl = $location.protocol() + '://' + $location.host() + '/checkouts/';
       }
 
       // Create new Product object
@@ -228,7 +343,8 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
         productFurtherImage5URLEtsy: this.productFurtherImage5URLEtsy,
         productFurtherImage5URLDawanda: this.productFurtherImage5URLDawanda,
         productFurtherImage5URLCode: this.productFurtherImage5URLCode,
-        productFurtherImage5Alt: this.productFurtherImage5Alt
+        productFurtherImage5Alt: this.productFurtherImage5Alt,
+        productCheckoutURL: linkUrl
       });
 
       // Redirect after save
@@ -346,10 +462,12 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       $scope.facebookPostsAvailable = false;
       $scope.pinterestPostsAvailable = false;
       $scope.codeSnippetPostsAvailable = false;
+      $scope.twitterPostsAvailable = false;
 
       var varFacebookPosts = 0;
       var varPinterestPosts = 0;
       var varCodeSnippetPosts = 0;
+      var varTwitterPosts = 0;
 
       ProductsServices.getPosts($scope.authentication.user._id,$stateParams.productId).then(function (Posts) {
         $scope.posts = Posts;
@@ -362,6 +480,10 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
             varFacebookPosts += 1;
             $scope.pinterestPostsAvailable = true;
           }
+          if (Posts[i].product === $stateParams.productId && Posts[i].postChannel === 'Twitter') {
+            varTwitterPosts += 1;
+            $scope.twitterPostsAvailable = true;
+          }
           if (Posts[i].product === $stateParams.productId && Posts[i].postChannel === 'CodeSnippet') {
             varCodeSnippetPosts += 1;
             $scope.codeSnippetPostsAvailable = true;
@@ -372,6 +494,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
         $scope.facebookPostsNo = varFacebookPosts;
         $scope.pinterestPostsNo = varPinterestPosts;
         $scope.codeSnippetPostsNo = varCodeSnippetPosts;
+        $scope.twitterPostsNo = varTwitterPosts;
       });
 
     };
@@ -569,6 +692,17 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       });
     };
 
+
+    // ************************************
+    // **                                **
+    // **        POST to Etsy            **
+    // **                                **
+    // ************************************
+    //
+    $scope.getEtsyOAuth = function (isValid) {
+
+
+    };
 
 
     // Close Modal

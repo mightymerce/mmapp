@@ -13,10 +13,22 @@ angular.module('products').factory('Products', ['$resource',
   }
 ]);
 
+angular.module('products').factory('GetDawanda', ['$resource',
+  function($resource) {
+    return $resource('/api/users/auth/getdawanda', {
+    }, {
+      query: { method: 'GET', isArray: false }
+    });
+  }
+]);
+
 
 //Service to retrieve posts per product
 angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', '$window', '$location', 'Currencys',
   function ($http, $q, Posts, $window, $location, Currencys) {
+
+    var authorizationResult = false;
+
     return {
       getPosts: function getPosts(userid, id) {
         var promise = $http({
@@ -313,6 +325,90 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
 
           });
         return deferred.promise;
+      },
+
+      // ************************************
+      // **                                **
+      // **             Etsy               **
+      // **           services             **
+      // **                                **
+      // ************************************
+      //
+      //
+
+      getEtsyOAuth: function() {
+        console.log('product.client.service - getEtsyOAuth - start');
+        $http.get('/api/users/auth/getdawanda')
+        //$http.get('/api/currencys')
+          .success(function (response) {
+            // this callback will be called asynchronously
+            // when the response is available
+
+            // params.message = product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode;
+            console.log('product.client.service - getEtsyOAuth - success');
+            return deferred.promise;
+          })
+          .error(function(msg,code) {
+            console.log('product.client.service - getEtsyOAuth - error');
+
+          });
+      },
+
+      // ************************************
+      // **                                **
+      // **            Dawanda             **
+      // **           services             **
+      // **                                **
+      // ************************************
+      //
+      //
+
+      getDawandaOAuth: function getDawandaOAuth() {
+        console.log('product.client.service - getDawandaOAuth - start');
+        var promise = $http({
+          method: 'GET',
+          url: '/api/users/auth/getdawanda'
+        }).then(function successCallback(response) {
+          // this callback will be called asynchronously
+          // when the response is available
+          console.log('product.client.service - getDawandaOAuth - success');
+          // The return value gets picked up by the then in the controller.
+          return response;
+        }, function errorCallback(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+          console.log('product.client.service - getDawandaOAuth - error');
+        });
+        return promise;
+      },
+
+
+      // ************************************
+      // **                                **
+      // **            Twitter             **
+      // **           services             **
+      // **                                **
+      // ************************************
+      //
+      //
+
+      twitterGetOAuthToken: function(productId) {
+        console.log('product.client.service - twitterGetOAuthToken - start');
+        var url = '/api/users/twitter/twitterGetOAuthToken/' +productId;
+        return $http.get(url).then(function (response) {
+          console.log('product.client.service - twitterGetOAuthToken - return value: ' +response.data);
+          return response.data;
+        });
+      },
+
+      twitterGetAccessToken: function(oauth_Verifier, oauth_Token) {
+        console.log('product.client.service - twitterGetAccessToken - start');
+
+        var url = '/api/users/twitter/twitterGetAccessToken/' +oauth_Verifier + '/' +oauth_Token;
+        return $http.get(url).then(function (response) {
+          console.log('product.client.service - twitterGetAccessToken - return value: ' +response.data);
+          return response.data;
+        });
       }
     };
   }
