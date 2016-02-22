@@ -3,8 +3,8 @@
 module.exports = {
   secure: {
     ssl: true,
-    privateKey: '/opt/bitnami/apache2/conf/shopmightymerce.key',
-    certificate: '/opt/bitnami/apache2/conf/shopmightymerce.crt'
+    privateKey: '/opt/bitnami/apache2/conf/server.key',
+    certificate: '/opt/bitnami/apache2/conf/www.shopmightymerce.crt'
   },
   port: process.env.PORT || 8443,
   db: {
