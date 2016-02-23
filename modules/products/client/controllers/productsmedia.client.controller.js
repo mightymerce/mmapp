@@ -132,7 +132,7 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
         var product = $scope.product;
 
         if ($scope.insertFurtherImage1 === true){
-          if(item.name === 'main')
+          if(item.name.substring(0,4) === 'crop')
             product.productFurtherImage1URL = response;
           if(item.name === 'facebook') {
             product.productFurtherImage1URLFacebook = response;
@@ -145,7 +145,7 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
           product.productFurtherImage1Alt = $scope.productMainImageAlt;
         }
         else if ($scope.insertFurtherImage2 === true) {
-          if(item.name === 'main')
+          if(item.name.substring(0,4) === 'crop')
             product.productFurtherImage2URL = response;
           if(item.name === 'facebook') {
             product.productFurtherImage2URLFacebook = response;
@@ -158,7 +158,7 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
           product.productFurtherImage2Alt = $scope.productMainImageAlt;
         }
         else {
-          if(item.name === 'main')
+          if(item.name.substring(0,4) === 'crop')
             product.productMainImageURL = response;
           if(item.name === 'facebook') {
             product.productMainImageURLFacebook = response;
@@ -222,7 +222,7 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
         var fileExtension = '.' + fileItem.file.name.split('.').pop();
         var index = uploader.getIndexOfItem(fileItem);
 
-        fileItem.name = fileItem.file.name + ' (' + index + ')';
+        fileItem.name = 'crop-' + fileItem.file.name + ' (' + index + ')';
         fileItem.size = fileItem.file.size;
 
         $scope.file = fileItem;

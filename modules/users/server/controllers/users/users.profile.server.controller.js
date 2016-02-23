@@ -117,8 +117,6 @@ exports.uploadProductImage = function (req, res) {
   var storage = multer.diskStorage({
     destination: './modules/products/client/img/products/uploads/',
     filename: function (req, file, cb) {
-      console.log('File Name: ' +file.name);
-      console.log('File Original Name: ' +file.originalname);
       var fileExtension = '';
       if (file.mimetype === 'image/png') {
         fileExtension = '.png';
@@ -132,11 +130,11 @@ exports.uploadProductImage = function (req, res) {
       if (file.mimetype === 'image/gif') {
         fileExtension = '.gif';
       }
-      console.log('File extension: ' +fileExtension);
-      crypto.pseudoRandomBytes(4, function (err, raw) {
+
+      crypto.pseudoRandomBytes(8, function (err, raw) {
         if (err)
           return cb(err);
-        cb(null, 'product-' + user.displayName + '-' + raw.toString('hex') + fileExtension);
+        cb(null, 'product-mightymerce-' + raw.toString('hex') + fileExtension);
       });
     }
   });
@@ -238,10 +236,6 @@ exports.stripeCreateSubscription = function (req, res) {
  */
 exports.stripeUpdateSubscription = function (req, res) {
   console.log('users.profile.server.controller - stripeUpdateSubscription - start');
-
-  console.log('users.profile.server.controller - stripeUpdateSubscription - cusid: ' +req.params.CUSID);
-  console.log('users.profile.server.controller - stripeUpdateSubscription - subid: ' +req.params.SUBID);
-  console.log('users.profile.server.controller - stripeUpdateSubscription - plan: ' +req.params.PLAN);
 
   stripe.customers.updateSubscription(
       req.params.CUSID,
