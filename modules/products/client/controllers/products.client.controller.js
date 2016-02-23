@@ -435,7 +435,6 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       } else if($scope.authentication.user.subscriptionplan === 'mmprofessional' && noProducts > 10){
         $scope.showAddProduct = false;
       }
-      console.log('Products: ' +products[0]);
     };
 
     // Find a list of Products

@@ -220,9 +220,12 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
       if ($window.FileReader) {
 
         var fileExtension = '.' + fileItem.file.name.split('.').pop();
-        fileItem.name = 'main';
+        var index = uploader.getIndexOfItem(fileItem);
+
+        fileItem.name = fileItem.file.name + ' (' + index + ')';
+        fileItem.size = fileItem.file.size;
+
         $scope.file = fileItem;
-        //Math.random().toString(36).substring(7) + new Date().getTime()
 
         var fileReader = new FileReader();
         fileReader.readAsDataURL(fileItem._file);

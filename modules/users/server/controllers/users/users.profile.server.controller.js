@@ -117,10 +117,26 @@ exports.uploadProductImage = function (req, res) {
   var storage = multer.diskStorage({
     destination: './modules/products/client/img/products/uploads/',
     filename: function (req, file, cb) {
-      crypto.pseudoRandomBytes(16, function (err, raw) {
+      console.log('File Name: ' +file.name);
+      console.log('File Original Name: ' +file.originalname);
+      var fileExtension = '';
+      if (file.mimetype === 'image/png') {
+        fileExtension = '.png';
+      }
+      if (file.mimetype === 'image/jpg') {
+        fileExtension = '.jpg';
+      }
+      if (file.mimetype === 'image/jpeg') {
+        fileExtension = '.jpeg';
+      }
+      if (file.mimetype === 'image/gif') {
+        fileExtension = '.gif';
+      }
+      console.log('File extension: ' +fileExtension);
+      crypto.pseudoRandomBytes(4, function (err, raw) {
         if (err)
           return cb(err);
-        cb(null, 'product' + raw.toString('hex') + path.extname(file.originalname));
+        cb(null, 'product-' + user.displayName + '-' + raw.toString('hex') + fileExtension);
       });
     }
   });
