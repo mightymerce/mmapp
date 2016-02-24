@@ -27,9 +27,6 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
     }
 
 
-    console.log('products.client.controller - laodAfterCallbackTwitter - twitterGetAccessToken - $routeParams.oauth_verifier: ' +$location.search().oauth_verifier);
-    console.log('products.client.controller - laodAfterCallbackTwitter - twitterGetAccessToken - $routeParams.oauth_token: ' +$location.search().oauth_token);
-
     // Load page after Twitter callback
     if($location.search().oauth_verifier && $location.search().oauth_token){
 
@@ -39,12 +36,25 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
       var promiseOAuthVerifier = ProductsServices.twitterGetAccessToken(twitterOAuth_Verifier, twitterOAuth_Token);
       promiseOAuthVerifier.then(function(promise) {
-        console.log('products.client.controller - laodAfterCallbackTwitter - twitterGetAccessToken - return oauth_token: ' +promise.oauth_token);
-        console.log('products.client.controller - laodAfterCallbackTwitter - twitterGetAccessToken - return oauth_token_secret: ' +promise.oauth_token_secret);
-
-        // todo message to user - success and continue
 
         // todo store twitter user data for further requests
+        var user = new Users($scope.user);
+        user.twitterAccessToken = promise.oauth_token;
+        user.twitterAccessTokenSecret = promise.oauth_token_secret;
+
+        user.$update(function (response) {
+          $scope.$broadcast('show-errors-reset', 'userForm');
+
+          // Show user message if tokens stored successful
+          $scope.success = 'Your twitter account verification was successful. Please click on - Create Post - again.';
+          Authentication.user = response;
+
+          console.log('edit-profile.client.controller - updatePaymentDetails - success');
+        }, function (errorResponse) {
+          $scope.error = errorResponse.data.message;
+          console.log('edit-profile.client.controller - updatePaymentDetails - error');
+        });
+
       });
     }
 
@@ -92,7 +102,6 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
             } else if (response.status === 'not_authorized') {
               // The person is logged into Facebook, but not your app.
-              // TODO Error message that user has not the necessary authorization given
               console.log('products.client.controller - modalupdateProductPost - Not authorized');
               $scope.error = 'The user you are currently logged in to facebook is not authorized for Mightymerce. Please switch to your authorized user or log off from facebook and click again on "Create Post" to authorize your current facebook user.';
 
@@ -186,44 +195,26 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       }
 
       if (postChannel === 'Twitter') {
-        // Twitter connect
-        console.log('products.client.controller - modalupdateProductPost - Start');
+        if ((!$scope.authentication.user.twitterAccessToken && !$scope.authentication.user.twitterAccessTokenSecret) || ($scope.authentication.user.twitterAccessToken === '' && $scope.authentication.user.twitterAccessTokenSecret === ''))
+        {
+          // Twitter connect
+          console.log('products.client.controller - modalupdateProductPost - Twitter - Start');
 
-        var promiseOAuth = ProductsServices.twitterGetOAuthToken($scope.product._id);
-        promiseOAuth.then(function successCallback(response) {
-          console.log('products.client.controller - modalupdateProductPost - twitterGetOAuthToken - return OAuthToken: ' +response);
-
-          window.open('https://api.twitter.com/oauth/authenticate?oauth_token=' +response);
-        });
-
-        /*//if the user is a returning user, hide the sign in button and display the tweets
-        if (ProductsServices.twitterIsReady()) {
-          // session has been set
-          // OPEN MODAL
-          console.log('');
-          $scope.modalInstance = $uibModal.open({
-            //animation: $scope.animationsEnabled,
-            templateUrl: 'modules/products/client/views/post.product.modal.view.html',
-            controller: function ($scope, product) {
-              $scope.product = product;
-              $scope.varPostStatus = postStatus;
-              $scope.varPostPublicationDate = postPublicationDate;
-              $scope.varPostChannel = postChannel;
-            },
-            size: size,
-            resolve: {
-              product: function () {
-                return selectedProduct;
-              }
-            }
+          var promiseOAuth = ProductsServices.twitterGetOAuthToken($scope.product._id);
+          promiseOAuth.then(function successCallback(response) {
+            window.open('https://api.twitter.com/oauth/authenticate?oauth_token=' +response);
           });
+        }
+        else
+        {
+          console.log('products.client.controller - modalupdateProductPost - Twitter - twitterVerifyCredentials - AccessToken: ' +$scope.authentication.user.twitterAccessToken);
 
-        } else {
-          ProductsServices.connectTwitter().then(function() {
-            if (twitterService.isReady()) {
-              // session has been set
+          //if the user is a returning user, hide the sign in button and display the tweets
+          var promiseOAuth = ProductsServices.twitterVerifyCredentials($scope.authentication.user.twitterAccessToken, $scope.authentication.user.twitterAccessTokenSecret);
+          promiseOAuth.then(function successCallback(response) {
+            if (response === 'valid') {
+              // user is valid Twitter User
               // OPEN MODAL
-              console.log('');
               $scope.modalInstance = $uibModal.open({
                 //animation: $scope.animationsEnabled,
                 templateUrl: 'modules/products/client/views/post.product.modal.view.html',
@@ -240,12 +231,20 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
                   }
                 }
               });
-
-            } else {
-              $scope.error="Oups. There was an error connecting to Twitter. Pleas try again.";
             }
+
+            else {
+              // Twitter connect to get new credentials
+              console.log('products.client.controller - modalupdateProductPost - Twitter - get new credentials');
+
+              var promiseOAuth = ProductsServices.twitterGetOAuthToken($scope.product._id);
+              promiseOAuth.then(function successCallback(response) {
+                window.open('https://api.twitter.com/oauth/authenticate?oauth_token=' +response);
+              });
+            }
+
           });
-        }*/
+        }
       }
 
     };
@@ -590,73 +589,6 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       });
     };
 
-    /*
-
-    $scope.loginFacebook = function (response) {
-
-      // ************************************
-      // **                                **
-      // **      VERIFY USER connected     **
-      // **           to FACEBOOK          **
-      // **                                **
-      // ************************************
-      //
-      //FB.getLoginStatus(function(response) {
-      if (response.status === 'connected') {
-        // Logged into your app and Facebook.
-        console.log('Logged in. Token: ' +response.authResponse.accessToken);
-      } else if (response.status === 'not_authorized') {
-        // The person is logged into Facebook, but not your app.
-      }
-      else {
-        // Note: The call will only work if you accept the permission request
-        // TODO use service instead call in controller
-        ProductsServices.loginFacebook();
-        $scope.varFBConnected = true;
-      }
-    };
-
-
-
-    $scope.loginPinterest = function (isValid) {
-
-      // ************************************
-      // **                                **
-      // **      VERIFY USER connected     **
-      // **           to PINTEREST         **
-      // **                                **
-      // ************************************
-      //
-      var session = PDK.getSession();
-      if (!session) {
-        alert('No session has been set.');
-        PDK.login({ scope : 'read_public, write_public' }, function(session) {
-          if (!session) {
-            alert('The user chose not to grant permissions or closed the pop-up');
-          } else {
-            console.log('Thanks for authenticating. Getting your information...');
-            PDK.me(function(response) {
-              if (!response || response.error) {
-                alert('Oops, there was a problem getting your information');
-              } else {
-                console.log('Welcome,  ' + response.data.first_name + '!');
-              }
-            });
-          }
-        });
-      } else {
-        // save session to server
-        PDK.setSession(session, function(response) {
-          if (!response || !response.session) {
-            alert('Session was not set. Did you provide a valid session?');
-          } else {
-            // session has been set
-          }
-        });
-      }
-    };
-
-*/
 
     // ************************************
     // **                                **
@@ -670,10 +602,6 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       ProductsServices.postToWall($scope.product).then(function(promise) {
         $scope.success = promise;
       });
-
-      // Close modal
-      //$scope.modalInstance.close();
-
     };
 
 
@@ -687,6 +615,20 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
       console.log('products.client.controller - postPostPinterest - Start');
       ProductsServices.postToPinterest($scope.product).then(function(promise) {
+        $scope.success = promise;
+      });
+    };
+
+    // ************************************
+    // **                                **
+    // **        POST to TWITTER         **
+    // **                                **
+    // ************************************
+    //
+    $scope.postPostTwitter = function (isValid) {
+
+      console.log('products.client.controller - postPostTwitter - Start');
+      ProductsServices.postToTwitter($scope.product, $scope.authentication.user.twitterAccessToken, $scope.authentication.user.twitterAccessTokenSecret).then(function(promise) {
         $scope.success = promise;
       });
     };

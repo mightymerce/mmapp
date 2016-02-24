@@ -2754,7 +2754,7 @@ exports.sendwelcomeemail = function (req, res, next) {
     text: 'Eben hat ' + inputData.usereMail + ' seinen Account aktiviert.' // plaintext body
   };
 
-  if(req.get('host') === 'shop.mightymerce.com'){
+  if(req.get('host') === 'shopmightymerce.com' || req.get('host') === 'www.shopmightymerce.com'){
     // send mail with defined transport object
     smtpTransport.sendMail(mailOptionsIntern, function(error, info){
       if(error){

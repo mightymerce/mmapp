@@ -181,6 +181,14 @@ var UserSchema = new Schema({
     type: String,
     default: ''
   },
+  twitterAccessToken: {
+    type: String,
+    default: ''
+  },
+  twitterAccessTokenSecret: {
+    type: String,
+    default: ''
+  },
   userStatus: {
     type: String,
     default: '0'

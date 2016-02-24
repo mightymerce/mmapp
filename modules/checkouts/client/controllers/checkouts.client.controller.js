@@ -87,6 +87,8 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
             $("meta[name='twitter:description']").attr('content', $scope.product.productDescription);
             $("meta[name='twitter:url']").attr('content', linkUrl + $scope.product._id + '?channel=twitter');
             $("meta[name='twitter:image']").attr('content', linkMainImageUrl + $scope.product.productMainImageURLTwitter.substring(1));
+            $("meta[name='twitter:label1']").attr('content', 'Preis: ');
+            $("meta[name='twitter:data1']").attr('content', $scope.product.productPrice + ' ' + Currencys.currencyCode);
 
           });
         });

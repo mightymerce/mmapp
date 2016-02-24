@@ -12,6 +12,9 @@
           <div ng-show="varPostChannel === 'Pinterest'">
             <i class="fa fa-pinterest modal-icon"></i>
           </div>
+          <div ng-show="varPostChannel === 'Twitter'">
+            <i class="fa fa-twitter modal-icon"></i>
+          </div>
           <div ng-show="varPostChannel === 'Etsy'">
             <i class="">Etsy</i>
           </div>
@@ -47,7 +50,7 @@
                 <h2 style="font-family: Georgia, serif;"><span ng-bind="product.productTitle"></span> für <span ng-bind="product.productPrice"></span></h2>
                 <p><img ng-src="{{product.productMainImageURLFacebook}}" alt="{{product.productMainImageAlt}}"></p>
                 <p><span ng-bind="product.productDescription"></span> </p>
-                <p><a href="#">SHOP.MIGHTYMERCE.COM</a></p>
+                <p><a href="#">WWW.SHOPMIGHTYMERCE.COM</a></p>
               </div>
             </div>
           </div>
@@ -58,6 +61,16 @@
                 <span ng-bind="product.productTitle"></span> für <span ng-bind="product.productPrice"></span>
                 <span ng-bind="product.productDescription"></span>
               </p>
+            </div>
+          </div>
+          <div ng-show="varPostChannel === 'Twitter'">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <h2 style="font-family: Georgia, serif;"><span ng-bind="product.productTitle"></span> für <span ng-bind="product.productPrice"></span></h2>
+                <p><img ng-src="{{product.productMainImageURLFacebook}}" alt="{{product.productMainImageAlt}}"></p>
+                <p><span ng-bind="product.productDescription"></span> </p>
+                <p><a href="#">WWW.SHOPMIGHTYMERCE.COM</a></p>
+              </div>
             </div>
           </div>
           <div ng-show="varPostChannel === 'Code'">
@@ -91,6 +104,20 @@
           <div ng-show="varPostChannel === 'Pinterest'  && varPostStatus === 'New'">
             <span>Please note: The post will automatically be updated, if you edit the product after the post.</span>
           </div>
+          <div ng-show="varPostChannel === 'Twitter'  && varPostStatus === 'Wait'">
+            <span>Please note: TBD.</span>
+          </div>
+          <div ng-show="varPostChannel === 'Twitter'  && varPostStatus === 'Error'">
+            <span>TBD</span>
+          </div>
+          <div ng-show="varPostChannel === 'Twitter'  && varPostStatus === 'Active'">
+            <span>Please note: There is currently no update functionality available for Twitter tweets.</span>
+          </div>
+          <div ng-show="varPostChannel === 'Facebook' && varPostStatus === 'New'">
+            <span>Please note: Posts to Facebook may not be updated after the post.</span>
+            <a href="#" class="pull-right"></a>
+            <p><strong>Preview of your post </strong><i>(This is not the final look of your post)</i></p>
+          </div>
           <div ng-show="varPostChannel === 'Etsy' && varPostStatus === 'Wait'">
             <span>Please note: TBD.</span>
           </div>
@@ -121,6 +148,10 @@
             <button type="button" class="btn btn-white" ng-click="$dismiss()">Close</button>
             <button type="button" class="btn btn-warning" ng-click="postPostPinterest()">Try post again</button>
           </div>
+          <div ng-show="varPostChannel === 'Twitter' && varPostStatus === 'Wait'">
+            <button type="button" class="btn btn-white" ng-click="$dismiss()">Close</button>
+            <button type="button" class="btn btn-warning" ng-click="postPostTwitter()">Try tweet again</button>
+          </div>
           <div ng-show="varPostChannel === 'Facebook' && varPostStatus === 'Active'">
             <button type="button" class="btn btn-white" ng-click="$dismiss()">Close</button>
             <button type="submit" class="btn btn-warning">Try post again</button>
@@ -129,6 +160,10 @@
             <button type="button" class="btn btn-white" ng-click="$dismiss()">Close</button>
             <button type="button" class="btn btn-warning" ng-click="postPostPinterest()">Try post again</button>
           </div>
+          <div ng-show="varPostChannel === 'Twitter' && varPostStatus === 'Wait'">
+            <button type="button" class="btn btn-white" ng-click="$dismiss()">Close</button>
+            <button type="button" class="btn btn-warning" ng-click="postPostTwitter()">Try tweet again</button>
+          </div>
           <div ng-show="varPostChannel === 'Facebook' && varPostStatus === 'New'">
             <button type="button" class="btn btn-white" ng-click="$dismiss()">Close</button>
             <button type="submit" class="btn btn-warning">Post Product to Facebook</button>
@@ -136,7 +171,11 @@
           <div ng-show="varPostChannel === 'Pinterest' && varPostStatus === 'New'">
             <button type="button" class="btn btn-white" ng-click="$dismiss()">Close</button>
             <button type="button" class="btn btn-warning" ng-click="postPostPinterest()">Post Product to Pinterest</button>
-            <a data-pin-do="buttonPin" href="https://www.pinterest.com/pin/create/button/?url=http://localhost:3000/checkouts/{{ product._id }}&media={{ product.productMainImageURL }}&description={{ product.productDescription }}" data-pin-height="28"></a>
+            <!-- <a data-pin-do="buttonPin" href="https://www.pinterest.com/pin/create/button/?url=http://localhost:3000/checkouts/{{ product._id }}&media={{ product.productMainImageURL }}&description={{ product.productDescription }}" data-pin-height="28"></a> -->
+          </div>
+          <div ng-show="varPostChannel === 'Twitter' && varPostStatus === 'New'">
+            <button type="button" class="btn btn-white" ng-click="$dismiss()">Close</button>
+            <button type="button" class="btn btn-warning" ng-click="postPostTwitter()">Tweet Product to Twitter</button>
           </div>
           <div ng-show="varPostChannel === 'Etsy' && varPostStatus === 'New'">
             <button type="button" class="btn btn-white" ng-click="$dismiss()">Close</button>

@@ -34,9 +34,10 @@ exports.update = function (req, res) {
     // Merge existing user
     user = _.extend(user, req.body);
     user.updated = Date.now();
-    user.displayName = user.firstName + ' ' + user.lastName;
+    // user.displayName = user.firstName + ' ' + user.lastName;
 
     console.log('users.profile.server.controller - update - user exist: ' +user._id);
+    console.log('users.profile.server.controller - update - Access Token: ' +user.twitterAccessToken);
     user.save(function (err) {
       if (err) {
         return res.status(400).send({
@@ -335,8 +336,8 @@ exports.twitterGetOAuthToken = function (req, res) {
   var oauth =
       {
         callback: callback_url,
-        consumer_key: 'cEtPSgsJWRzJI1zGlb2gpp7TZ',
-        consumer_secret: 'UAf5069PyJFGjNeTvqY6dbpIXAquj5T12siqf2SdvfkTU6i0f1'
+        consumer_key: 'OJ6s65TtbW0tJKHiWi9CsdoAt',
+        consumer_secret: 'OOKHG8B29mgZvcrPdOzEUlTn8wkSfd4AfEnJdYZZh9imcv48RP'
 
       };
   var url = 'https://api.twitter.com/oauth/request_token';
@@ -351,7 +352,6 @@ exports.twitterGetOAuthToken = function (req, res) {
     // verified with twitter that they are authorizing your app.
 
     var req_data = qs.parse(body);
-    console.log('users.profile.server.controller - twitterGetOAuthToken - return value: ' +req_data.oauth_token);
     res.json(req_data.oauth_token);
   });
 
@@ -363,13 +363,11 @@ exports.twitterGetOAuthToken = function (req, res) {
 exports.twitterGetAccessToken = function (req, res) {
   console.log('users.profile.server.controller - twitterGetAccessToken - start');
 
-  console.log('users.profile.server.controller - twitterGetAccessToken - oauth_verifier: '+req.params.oauth_verifier);
-  console.log('users.profile.server.controller - twitterGetAccessToken - oauth_token: '+req.params.oauth_token);
-
   var request = require('request');
   var qs = require('querystring');
   var oauth =
   {
+    token: req.params.oauth_token,
     verifier: req.params.oauth_verifier
   };
   var url = 'https://api.twitter.com/oauth/access_token';
@@ -392,12 +390,108 @@ exports.twitterGetAccessToken = function (req, res) {
       return console.log('Invalid Status Code Returned:', r.statusCode + ' ' + r.statusText);
     }
 
-    console.log(body);
-
     var req_data = qs.parse(body);
-    console.log('users.profile.server.controller - twitterGetAccessToken - return value: ' +req_data);
-    console.log('users.profile.server.controller - twitterGetAccessToken - return value: ' +req_data.oauth_token_secret);
     res.json(req_data);
   });
 
 };
+
+/**
+ * Twitter Verify credentials
+ */
+exports.twitterVerifyCredentials = function (req, res) {
+  console.log('users.profile.server.controller - twitterVerifyCredentials - start');
+
+  var request = require('request');
+  var qs = require('querystring');
+  var oauth =
+  {
+    consumer_key: 'OJ6s65TtbW0tJKHiWi9CsdoAt',
+    consumer_secret: 'OOKHG8B29mgZvcrPdOzEUlTn8wkSfd4AfEnJdYZZh9imcv48RP',
+    token: req.params.oauth_AccessToken,
+    token_secret: req.params.oauth_AccessTokenSecret
+  };
+  var url = 'https://api.twitter.com/1.1/account/verify_credentials.json';
+
+  request.get({
+    url: url,
+    oauth: oauth
+  }, function (error, r, body) {
+
+    // Ideally, you would take the body in the response
+    // and construct a URL that a user clicks on (like a sign in button).
+    // The verifier is only available in the response after a user has
+    // verified with twitter that they are authorizing your app.
+    if(error){
+      console.log('users.profile.server.controller - twitterVerifyCredentials - error ');
+      return console.log('Error:', error);
+    }
+
+    //Check for right status code
+    if(r.statusCode !== 200){
+      console.log('users.profile.server.controller - twitterVerifyCredentials - Error: ' +'code: ' + r.statusCode + ' - message: ' + r.statusText);
+      res.json('code: ' + r.statusCode + ' - ' + r.statusText);
+    }
+    else {
+      console.log('users.profile.server.controller - twitterVerifyCredentials - success ');
+      res.json('valid');
+    }
+  });
+
+};
+
+
+
+/**
+ * Twitter get tweetStatus
+ */
+exports.twitterTweetStatus = function (req, res) {
+  console.log('users.profile.server.controller - twitterTweetStatus - start');
+
+  var request = require('request');
+  var qs = require('querystring');
+  var oauth =
+  {
+    consumer_key: 'OJ6s65TtbW0tJKHiWi9CsdoAt',
+    consumer_secret: 'OOKHG8B29mgZvcrPdOzEUlTn8wkSfd4AfEnJdYZZh9imcv48RP',
+    token: req.params.oauth_AccessToken,
+    token_secret: req.params.oauth_AccessTokenSecret,
+    signature_method: 'HMAC-SHA1'
+  };
+
+  var data =
+  {
+    status: req.params.tweetStatus
+  };
+
+  var url = 'https://api.twitter.com/1.1/statuses/update.json';
+
+  request.post({
+    url: url,
+    oauth: oauth,
+    status: req.params.tweetStatus
+  }, function (error, r, body) {
+
+    // Ideally, you would take the body in the response
+    // and construct a URL that a user clicks on (like a sign in button).
+    // The verifier is only available in the response after a user has
+    // verified with twitter that they are authorizing your app.
+    if(error){
+      console.log('users.profile.server.controller - twitterTweetStatus - error ');
+      return console.log('Error:', error);
+    }
+
+    //Check for right status code
+    if(r.statusCode !== 200){
+      console.log('users.profile.server.controller - twitterTweetStatus - Error: ' +'code: ' + r.statusCode + ' - message: ' + r.statusText);
+      res.json('code: ' + r.statusCode + ' - ' + r.statusText);
+    }
+    else {
+      console.log('users.profile.server.controller - twitterTweetStatus - success ');
+      var req_data = qs.parse(body);
+      res.json(req_data);
+    }
+  });
+
+};
+

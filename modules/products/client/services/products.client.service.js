@@ -327,6 +327,100 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
         return deferred.promise;
       },
 
+
+      // ************************************
+      // **                                **
+      // **          Twitter               **
+      // **           services             **
+      // **                                **
+      // ************************************
+      //
+      //
+      postToTwitter: function (product, oauth_AccessToken, oauth_AccessTokenSecret) {
+
+        console.log('product.client.service - postToTwitter - start post to Twitter!');
+        var linkUrl = $location.protocol() + '://' + $location.host();
+        if($location.host() === 'localhost'){
+          linkUrl = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/checkouts/';
+        } else {
+          linkUrl = $location.protocol() + '://' + $location.host() + '/checkouts/';
+        }
+
+        var linkMainImageUrl = $location.protocol() + '://' + $location.host();
+        if($location.host() === 'localhost'){
+          linkMainImageUrl = $location.protocol() + '://' + $location.host() + ':' + $location.port();
+        } else {
+          linkMainImageUrl = $location.protocol() + '://' + $location.host();
+        }
+
+        var deferred = $q.defer();
+        var params = {};
+
+        $http.get('/api/currencys/' +product.productCurrency)
+          .success(function (response) {
+            // this callback will be called asynchronously
+            // when the response is available
+
+            var status = product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode + '. ' +product.productDescription;
+            //params.status = status.substring(0, 135) + '... ';
+
+            console.log('product.client.service - postToTwitter - tweet status: ' + status);
+
+            var url = '/api/users/twitter/twitterTweetStatus/' + oauth_AccessToken + '/' +oauth_AccessTokenSecret + '/' + status.substring(0, 135) + '... ';
+            return $http.get(url).then(function (response) {
+              console.log('product.client.service - postToTwitter - return value: ' +response.data);
+
+              // The return value gets picked up by the then in the controller.
+              // Save post to MM
+              /*
+               post.$save(function (response) {
+               console.log('product.client.service - postToTwitter - save post on MM success Post ID: ' + response._id);
+               deferred.resolve('Success posting to Twitter! - Mightymerce Post-Id: ' +response._id);
+               }, function (errorResponse) {
+               console.log('product.client.service - postToTwitter - save post on MM error: ' + errorResponse);
+               deferred.reject(errorResponse);
+               });
+               */
+
+              return response.data;
+            });
+          })
+          .error(function(msg,code) {
+
+        });
+        return deferred.promise;
+      },
+
+      twitterGetOAuthToken: function(productId) {
+        console.log('product.client.service - twitterGetOAuthToken - start');
+        var url = '/api/users/twitter/twitterGetOAuthToken/' +productId;
+        return $http.get(url).then(function (response) {
+          console.log('product.client.service - twitterGetOAuthToken - return value: ' +response.data);
+          return response.data;
+        });
+      },
+
+      twitterGetAccessToken: function(oauth_Verifier, oauth_Token) {
+        console.log('product.client.service - twitterGetAccessToken - start');
+
+        var url = '/api/users/twitter/twitterGetAccessToken/' +oauth_Verifier + '/' +oauth_Token;
+        return $http.get(url).then(function (response) {
+          console.log('product.client.service - twitterGetAccessToken - return value: ' +response.data);
+          return response.data;
+        });
+      },
+
+      twitterVerifyCredentials: function(oauth_AccessToken, oauth_AccessTokenSecret) {
+        console.log('product.client.service - twitterVerifyCredentials - start');
+
+        var url = '/api/users/twitter/twitterVerifyCredentials/' +oauth_AccessToken + '/' +oauth_AccessTokenSecret;
+        return $http.get(url).then(function (response) {
+          console.log('product.client.service - twitterVerifyCredentials - return value: ' +response.data);
+          return response.data;
+        });
+      },
+
+
       // ************************************
       // **                                **
       // **             Etsy               **
@@ -380,35 +474,6 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
           console.log('product.client.service - getDawandaOAuth - error');
         });
         return promise;
-      },
-
-
-      // ************************************
-      // **                                **
-      // **            Twitter             **
-      // **           services             **
-      // **                                **
-      // ************************************
-      //
-      //
-
-      twitterGetOAuthToken: function(productId) {
-        console.log('product.client.service - twitterGetOAuthToken - start');
-        var url = '/api/users/twitter/twitterGetOAuthToken/' +productId;
-        return $http.get(url).then(function (response) {
-          console.log('product.client.service - twitterGetOAuthToken - return value: ' +response.data);
-          return response.data;
-        });
-      },
-
-      twitterGetAccessToken: function(oauth_Verifier, oauth_Token) {
-        console.log('product.client.service - twitterGetAccessToken - start');
-
-        var url = '/api/users/twitter/twitterGetAccessToken/' +oauth_Verifier + '/' +oauth_Token;
-        return $http.get(url).then(function (response) {
-          console.log('product.client.service - twitterGetAccessToken - return value: ' +response.data);
-          return response.data;
-        });
       }
     };
   }
