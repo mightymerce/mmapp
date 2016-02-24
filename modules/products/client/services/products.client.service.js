@@ -366,7 +366,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
 
             console.log('product.client.service - postToTwitter - tweet status: ' + status);
 
-            var url = '/api/users/twitter/twitterTweetStatus/' + oauth_AccessToken + '/' +oauth_AccessTokenSecret + '/' + status.substring(0, 135) + '... ';
+            var url = '/api/users/twitter/twitterTweetStatus/' + oauth_AccessToken + '/' +oauth_AccessTokenSecret + '/' + status.substring(0, 100) + '... ';
             return $http.get(url).then(function (response) {
               console.log('product.client.service - postToTwitter - return value: ' +response.data);
 

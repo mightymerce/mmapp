@@ -239,7 +239,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
               var promiseOAuth = ProductsServices.twitterGetOAuthToken($scope.product._id);
               promiseOAuth.then(function successCallback(response) {
-                window.open('https://api.twitter.com/oauth/authenticate?oauth_token=' +response);
+                window.open('https://api.twitter.com/oauth/authorize?oauth_token=' +response);
               });
             }
 

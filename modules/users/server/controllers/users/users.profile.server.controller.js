@@ -483,7 +483,7 @@ exports.twitterTweetStatus = function (req, res) {
 
     //Check for right status code
     if(r.statusCode !== 200){
-      console.log('users.profile.server.controller - twitterTweetStatus - Error: ' +'code: ' + r.statusCode + ' - message: ' + r.statusText);
+      console.log('users.profile.server.controller - twitterTweetStatus - Error: ' +'code: ' + r.statusCode + ' - message: ' + r.status);
       res.json('code: ' + r.statusCode + ' - ' + r.statusText);
     }
     else {
