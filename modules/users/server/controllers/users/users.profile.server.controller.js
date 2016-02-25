@@ -15,9 +15,11 @@ var _ = require('lodash'),
   Delivery = mongoose.model('Delivery'),
   https = require('https'),
   http = require("http"),
-  urlParser = require('url');
+  urlParser = require('url'),
+  Twitter = require('twitter');
 
 var stripe = require('stripe')('sk_test_AYQBhWDR55fPPfUnYCqa9hSm');
+var oauthSignature = require('oauth-signature');
 
 /**
  * Update user details
@@ -448,28 +450,84 @@ exports.twitterVerifyCredentials = function (req, res) {
 exports.twitterTweetStatus = function (req, res) {
   console.log('users.profile.server.controller - twitterTweetStatus - start');
 
+  var nonceValue = crypto.randomBytes(Math.ceil(32 * 3 / 4))
+      .toString('base64')   // convert to base64 format
+      .slice(0, 32)        // return required number of characters
+      .replace(/\+/g, '0')  // replace '+' with '0'
+      .replace(/\//g, '0'); // replace '/' with '0'
+
+  var timestampValue = Math.floor(new Date() / 1000);
+
   var request = require('request');
   var qs = require('querystring');
+  var params =
+  {
+    consumer_key: 'OJ6s65TtbW0tJKHiWi9CsdoAt',
+    nonce: timestampValue,
+    signature_method: 'HMAC-SHA1',
+    timestamp: timestampValue,
+    version: '1.0',
+    token: req.params.oauth_AccessToken
+  };
+  var url = 'https://api.twitter.com/1.1/statuses/update.json';
+
+  var signatureOAuth = oauthSignature.generate('POST', url, params,'OOKHG8B29mgZvcrPdOzEUlTn8wkSfd4AfEnJdYZZh9imcv48RP',req.params.oauth_AccessTokenSecret);
+
   var oauth =
   {
     consumer_key: 'OJ6s65TtbW0tJKHiWi9CsdoAt',
+    nonce: timestampValue,
+    signature_method: 'HMAC-SHA1',
+    timestamp: timestampValue,
+    version: '1.0',
+    signature: signatureOAuth,
+    token: req.params.oauth_AccessToken
+    //consumer_secret: 'OOKHG8B29mgZvcrPdOzEUlTn8wkSfd4AfEnJdYZZh9imcv48RP',
+    //token_secret: req.params.oauth_AccessTokenSecret
+
+  };
+
+  var client = new Twitter({
+    consumer_key: 'OJ6s65TtbW0tJKHiWi9CsdoAt',
     consumer_secret: 'OOKHG8B29mgZvcrPdOzEUlTn8wkSfd4AfEnJdYZZh9imcv48RP',
-    token: req.params.oauth_AccessToken,
-    token_secret: req.params.oauth_AccessTokenSecret,
-    signature_method: 'HMAC-SHA1'
-  };
+    access_token_key: req.params.oauth_AccessToken,
+    access_token_secret: req.params.oauth_AccessTokenSecret,
+  });
 
-  var data =
-  {
-    status: req.params.tweetStatus
-  };
+  var statusTweetURL = req.protocol + "://" + req.get('host') + '/checkouts/' + req.params.tweetStatus + '?channel=twitter';
 
-  var url = 'https://api.twitter.com/1.1/statuses/update.json';
+  console.log('users.profile.server.controller - twitterTweetStatus - response: ' + statusTweetURL);
 
+  client.post('statuses/update', {status: statusTweetURL},  function(error, tweet, response){
+    if(error) throw error;
+    //console.log(tweet);  // Tweet body.
+    console.log('users.profile.server.controller - twitterTweetStatus - response: ' +response);  // Raw response object.
+    if(error){
+      console.log('users.profile.server.controller - twitterTweetStatus - error ');
+      return console.log('Error:', error);
+    }
+
+    //Check for right status code
+    if(response.statusCode !== 200){
+      console.log('users.profile.server.controller - twitterTweetStatus - Error: ' +'code: ' + response.statusCode + ' - message: ' + r.status);
+      res.json('code: ' + response.statusCode + ' - ' + response.statusText);
+    }
+    else {
+      console.log('users.profile.server.controller - twitterTweetStatus - success ');
+      var req_data = qs.parse(response.body);
+      console.log(req_data);
+      res.json(req_data);
+    }
+  });
+
+
+  /*
   request.post({
     url: url,
     oauth: oauth,
-    status: req.params.tweetStatus
+    status: req.params.tweetStatus,
+    include_entities: true
+
   }, function (error, r, body) {
 
     // Ideally, you would take the body in the response
@@ -492,6 +550,49 @@ exports.twitterTweetStatus = function (req, res) {
       res.json(req_data);
     }
   });
-
+  */
 };
+
+/**
+ ** Instagram get AccessToken
+ */
+exports.instagramGetAccessToken = function (req, res) {
+  console.log('users.profile.server.controller - instagramGetAccessToken - start');
+
+  var request = require('request');
+  var qs = require('querystring');
+
+  var url = 'https://api.instagram.com/oauth/access_token';
+  var callback_url = req.protocol + "://" + req.get('host') + '/products?this=' + req.params.callback_uri + '&response_type=code&scope=likes+comments';
+
+  console.log('users.profile.server.controller - instagramGetAccessToken - callback_uri: ' + callback_url);
+  console.log('users.profile.server.controller - instagramGetAccessToken - code: ' + req.params.oauth_code);
+  request.post({
+    url: url,
+    client_id: '15005e14881a44b7a3021a6e63ca3e04',
+    client_secret: '6ec00b3abfdb4b9ab8fd3ae305226af2',
+    grant_type: 'authorization_code',
+    redirect_uri: callback_url,
+    code: req.params.oauth_code
+
+  }, function (error, r, body) {
+
+    // Ideally, you would take the body in the response
+    // and construct a URL that a user clicks on (like a sign in button).
+    // The verifier is only available in the response after a user has
+    // verified with twitter that they are authorizing your app.
+    if(error){
+      return console.log('Error:', error);
+    }
+
+    //Check for right status code
+    if(r.statusCode !== 200){
+      return console.log('Invalid Status Code Returned:', r.statusCode + ' ' + r.data);
+    }
+
+    var req_data = qs.parse(body);
+    res.json(req_data);
+  });
+};
+
 

@@ -189,6 +189,10 @@ var UserSchema = new Schema({
     type: String,
     default: ''
   },
+  instagramAccessToken: {
+    type: String,
+    default: ''
+  },
   userStatus: {
     type: String,
     default: '0'

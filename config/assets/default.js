@@ -138,6 +138,9 @@ module.exports = {
 
         // Checkout
         'public/lib/plugin/jsnumberformatter/jsnumberformatter.js',
+
+        // Checkout
+        'public/lib/plugin/jsnumberformatter/jsnumberformatter.js',
         'public/lib/plugin/jsnumberformatter/jsnumberformatter.locale.js',
         'public/lib/plugin/jsnumberformatter/jsnumberformatter.locale.decimal.superset.js',
         'public/lib/plugin/checkout/jquery.shorten.js',

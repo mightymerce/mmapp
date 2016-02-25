@@ -27,9 +27,13 @@ module.exports = function (app) {
   // Dawanda connection routes
   //app.route('/api/users/auth/getdawanda').get(users.getDawandaOAuth);
 
-  // Twitter checkout routes
+  // Twitter connection routes
   app.route('/api/users/twitter/twitterGetOAuthToken/:productId').get(users.twitterGetOAuthToken);
   app.route('/api/users/twitter/twitterGetAccessToken/:oauth_verifier/:oauth_token').get(users.twitterGetAccessToken);
   app.route('/api/users/twitter/twitterVerifyCredentials/:oauth_AccessToken/:oauth_AccessTokenSecret').get(users.twitterVerifyCredentials);
   app.route('/api/users/twitter/twitterTweetStatus/:oauth_AccessToken/:oauth_AccessTokenSecret/:tweetStatus').get(users.twitterTweetStatus);
+
+  // Instagram connection routes
+  app.route('/api/users/instagram/instagramGetAccessToken/:oauth_code/:callback_uri').get(users.instagramGetAccessToken);
+
 };
