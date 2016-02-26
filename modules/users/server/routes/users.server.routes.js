@@ -31,7 +31,7 @@ module.exports = function (app) {
   app.route('/api/users/twitter/twitterGetOAuthToken/:productId').get(users.twitterGetOAuthToken);
   app.route('/api/users/twitter/twitterGetAccessToken/:oauth_verifier/:oauth_token').get(users.twitterGetAccessToken);
   app.route('/api/users/twitter/twitterVerifyCredentials/:oauth_AccessToken/:oauth_AccessTokenSecret').get(users.twitterVerifyCredentials);
-  app.route('/api/users/twitter/twitterTweetStatus/:oauth_AccessToken/:oauth_AccessTokenSecret/:tweetStatus').get(users.twitterTweetStatus);
+  app.route('/api/users/twitter/twitterTweetStatus/:oauth_AccessToken/:oauth_AccessTokenSecret/:tweetStatus/:productid').get(users.twitterTweetStatus);
 
   // Instagram connection routes
   app.route('/api/users/instagram/instagramGetAccessToken/:oauth_code/:callback_uri').get(users.instagramGetAccessToken);

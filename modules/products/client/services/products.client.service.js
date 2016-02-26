@@ -348,10 +348,9 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
             // this callback will be called asynchronously
             // when the response is available
 
-            //var status = product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode + '. ' +product.productDescription;
-            //params.status = status.substring(0, 135) + '... ';
+            var status = product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode + '. ' +product.productDescription;
 
-            var url = '/api/users/twitter/twitterTweetStatus/' + oauth_AccessToken + '/' +oauth_AccessTokenSecret + '/' + product._id;
+            var url = '/api/users/twitter/twitterTweetStatus/' + oauth_AccessToken + '/' +oauth_AccessTokenSecret + '/' + status.substring(0,53) + '...' + '/' + product._id;
             $http.get(url).then(function (response) {
               // Error
               var responseMessage = response.toString();

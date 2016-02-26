@@ -494,11 +494,11 @@ exports.twitterTweetStatus = function (req, res) {
     access_token_secret: req.params.oauth_AccessTokenSecret,
   });
 
-  var statusTweetURL = req.protocol + "://" + req.get('host') + '/checkouts/' + req.params.tweetStatus + '?channel=twitter';
+  var statusTweetURL = req.protocol + "://" + req.get('host') + '/checkouts/' + req.params.productid + '?channel=twitter';
 
   console.log('users.profile.server.controller - twitterTweetStatus - response: ' + statusTweetURL);
 
-  client.post('statuses/update', {status: statusTweetURL},  function(error, tweet, response){
+  client.post('statuses/update', {status: req.params.tweetStatus + ' ' + statusTweetURL},  function(error, tweet, response){
     if(error){
       console.log('users.profile.server.controller - twitterTweetStatus - error: ' + error);
       return 'Error:' + error;
