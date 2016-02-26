@@ -85,6 +85,8 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
             // TWITTER
             $("meta[name='twitter:title']").attr('content', $scope.product.productTitle);
             $("meta[name='twitter:description']").attr('content', $scope.product.productDescription);
+            $("meta[name='twitter:text:title']").attr('content', $scope.product.productTitle);
+            $("meta[name='twitter:text:description']").attr('content', $scope.product.productDescription);
             $("meta[name='twitter:url']").attr('content', linkUrl + $scope.product._id + '?channel=twitter');
             $("meta[name='twitter:image']").attr('content', linkMainImageUrl + $scope.product.productMainImageURLTwitter.substring(1));
             $("meta[name='twitter:label1']").attr('content', 'Preis: ');
