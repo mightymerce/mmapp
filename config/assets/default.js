@@ -101,12 +101,6 @@ module.exports = {
         'public/lib/css/plugins/footable/footable.all.min.js',
         'public/lib/css/plugins/footable/angular-footable.js',
 
-        // Cropper
-        //'public/lib/plugin/cropper/assets/js/jquery.min.js',
-        //'public/lib/plugin/cropper/assets/js/tooltip.min.js',
-        //'public/lib/plugin/cropper/dist/cropper.js',
-        //'public/lib/plugin/cropper/main.js',
-
         // OWASP password
         'public/lib/plugin/owasp-password-strength-test/owasp-password-strength-test.js',
 
@@ -167,11 +161,6 @@ module.exports = {
       'modules/*/client/*.js',
       'modules/*/client/**/*.js',
       'modules/users/client/assets/js/*.js'
-      //'modules/products/client/cropper/dist/cropper.js'
-      //'modules/products/client/cropper/main.js'
-      // Angular-File-Upload
-      //'modules/products/client/dist/angular-file-upload.js'
-
 
     ],
     views: ['modules/*/client/views/**/*.html'],

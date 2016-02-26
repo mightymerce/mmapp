@@ -353,30 +353,47 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
 
             var url = '/api/users/twitter/twitterTweetStatus/' + oauth_AccessToken + '/' +oauth_AccessTokenSecret + '/' + product._id;
             $http.get(url).then(function (response) {
-              console.log('product.client.service - postToTwitter - return value: ' +response.id);
-
-              // The return value gets picked up by the then in the controller.
-              // Save post to MM
-              // Create new Post object
-              var post = new Posts({
-                product: product._id,
-                channel: '263c7fab09f30c482f304273',
-                postChannel: 'Twitter',
-                postId: response.id,
-                postStatus: 'Active',
-                postPublicationDate: new Date(),
-                postExternalPostKey: response.body.id
-              });
-
-              post.$save(function (response) {
-                console.log('products.client.service - postToTwitter - Save Post on MM success!');
-                deferred.resolve('Success posting to Twitter! - Mightymerce Post-Id: ' +response.id);
+              // Error
+              if (response.substring(0,6) === 'Error:')
+              {
+                console.log('products.client.service - postToTwitter - error connecting to Twitter: ' + response.substring(7));
+                deferred.reject('There was an error while connecting to Twitter. Please try again.');
                 return deferred.promise;
-              }, function (errorResponse) {
-                console.log('products.client.service - postToTwitter - Save Post on MM error: ' +errorResponse);
-                deferred.reject(errorResponse);
+              }
+              // Code != 200
+              else if (response.substring(0,6) === 'Code: ')
+              {
+                console.log('products.client.service - postToTwitter - code != 200 connecting to Twitter: ' + response.substring(7));
+                deferred.reject('Twitter responded but did not grant access. Please verify in your Twitter account.');
                 return deferred.promise;
-              });
+              }
+              else
+              {
+                console.log('product.client.service - postToTwitter - return value id: ' +response.data.id);
+
+                // The return value gets picked up by the then in the controller.
+                // Save post to MM
+                // Create new Post object
+                var post = new Posts({
+                  product: product._id,
+                  channel: '263c7fab09f30c482f304273',
+                  postChannel: 'Twitter',
+                  postId: response.data.id,
+                  postStatus: 'Active',
+                  postPublicationDate: new Date(),
+                  postExternalPostKey: response.data.id_str
+                });
+
+                post.$save(function (response) {
+                  console.log('products.client.service - postToTwitter - Save Post on MM success!');
+                  deferred.resolve('Success posting to Twitter! - Mightymerce Post-Id: ' +response.data.id);
+                  return deferred.promise;
+                }, function (errorResponse) {
+                  console.log('products.client.service - postToTwitter - Save Post on MM error: ' +errorResponse);
+                  deferred.reject(errorResponse);
+                  return deferred.promise;
+                });
+              }
             });
           })
           .error(function(msg,code) {

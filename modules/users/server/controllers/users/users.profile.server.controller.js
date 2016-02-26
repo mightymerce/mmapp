@@ -499,58 +499,26 @@ exports.twitterTweetStatus = function (req, res) {
   console.log('users.profile.server.controller - twitterTweetStatus - response: ' + statusTweetURL);
 
   client.post('statuses/update', {status: statusTweetURL},  function(error, tweet, response){
-    if(error) throw error;
-    //console.log(tweet);  // Tweet body.
-    console.log('users.profile.server.controller - twitterTweetStatus - response: ' +response);  // Raw response object.
     if(error){
-      console.log('users.profile.server.controller - twitterTweetStatus - error ');
-      return console.log('Error:', error);
+      console.log('users.profile.server.controller - twitterTweetStatus - error: ' + error);
+      return 'Error:' + error;
     }
 
     //Check for right status code
     if(response.statusCode !== 200){
-      console.log('users.profile.server.controller - twitterTweetStatus - Error: ' +'code: ' + response.statusCode + ' - message: ' + r.status);
-      res.json('code: ' + response.statusCode + ' - ' + response.statusText);
+      console.log('users.profile.server.controller - twitterTweetStatus - Error: ' +'code: ' + response.statusCode + ' - message: ' + response.status);
+      res.status(response.statusCode).send({
+        message: 'Code: ' + response.statusCode
+      });
     }
     else {
       console.log('users.profile.server.controller - twitterTweetStatus - success ');
-      var req_data = qs.parse(response.body);
-      console.log(req_data);
-      res.json(req_data);
+      console.log(tweet);
+      var resObj = JSON.stringify(tweet);
+      res.json(tweet);
     }
+
   });
-
-
-  /*
-  request.post({
-    url: url,
-    oauth: oauth,
-    status: req.params.tweetStatus,
-    include_entities: true
-
-  }, function (error, r, body) {
-
-    // Ideally, you would take the body in the response
-    // and construct a URL that a user clicks on (like a sign in button).
-    // The verifier is only available in the response after a user has
-    // verified with twitter that they are authorizing your app.
-    if(error){
-      console.log('users.profile.server.controller - twitterTweetStatus - error ');
-      return console.log('Error:', error);
-    }
-
-    //Check for right status code
-    if(r.statusCode !== 200){
-      console.log('users.profile.server.controller - twitterTweetStatus - Error: ' +'code: ' + r.statusCode + ' - message: ' + r.status);
-      res.json('code: ' + r.statusCode + ' - ' + r.statusText);
-    }
-    else {
-      console.log('users.profile.server.controller - twitterTweetStatus - success ');
-      var req_data = qs.parse(body);
-      res.json(req_data);
-    }
-  });
-  */
 };
 
 /**

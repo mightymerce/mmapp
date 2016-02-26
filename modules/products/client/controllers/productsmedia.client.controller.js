@@ -141,6 +141,9 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
           if(item.name === 'pinterest') {
             product.productFurtherImage1URLPinterest = response;
           }
+          if(item.name === 'twitter') {
+            product.productFurtherImage1URLTwitter = response;
+          }
 
           product.productFurtherImage1Alt = $scope.productMainImageAlt;
         }
@@ -154,6 +157,9 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
           if(item.name === 'pinterest') {
             product.productFurtherImage2URLPinterest = response;
           }
+          if(item.name === 'twitter') {
+            product.productFurtherImage2URLTwitter = response;
+          }
 
           product.productFurtherImage2Alt = $scope.productMainImageAlt;
         }
@@ -166,6 +172,9 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
           }
           if(item.name === 'pinterest') {
             product.productMainImageURLPinterest = response;
+          }
+          if(item.name === 'twitter') {
+            product.productMainImageURLTwitter = response;
           }
 
           product.productMainImageAlt = $scope.productMainImageAlt;
@@ -252,7 +261,7 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
 
     // ******* Main Function being called to save picture
     //
-    $scope.uploadProductMainPicture = function (fileItemfacebook,fileItempinterest) {
+    $scope.uploadProductMainPicture = function (fileItemfacebook,fileItempinterest,fileItemtwitter) {
 
       console.log('products.client.controller - image uploader - Start uploadProductMainPicture');
 
@@ -277,6 +286,14 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
       itempinterest.name = 'pinterest';
       itempinterest.type = 'image/jpeg';
       uploader.queue.push(itempinterest);
+
+      // Create blob from cropped file - TWITTER
+      var blobtwitter = dataURItoBlob(fileItemtwitter.toDataURL());
+      var itemtwitter = new FileUploader.FileItem($scope.uploader, $scope.file);
+      itemtwitter._file = blobtwitter;
+      itemtwitter.name = 'twitter';
+      itemtwitter.type = 'image/jpeg';
+      uploader.queue.push(itemtwitter);
 
 
       // Upload all files in queue

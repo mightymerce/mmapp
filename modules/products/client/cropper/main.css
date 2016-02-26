@@ -49,15 +49,18 @@ body {
 
 .img-container,
 .img-container-facebook,
+.img-container-twitter,
 .img-preview,
-.img-preview-facebook{
+.img-preview-facebook,
+.img-preview-twitter{
   background-color: #f7f7f7;
   width: 70%;
   text-align: center;
 }
 
 .img-container,
-.img-container-facebook{
+.img-container-facebook,
+.img-container-twitter{
   min-height: 200px;
   max-height: 316px;
   margin-bottom: 20px;
@@ -65,7 +68,8 @@ body {
 
 @media (min-width: 768px) {
   .img-container,
-  .img-container-facebook{
+  .img-container-facebook,
+  .img-container-twitter{
     min-height: 316px;
   }
 }
@@ -79,7 +83,8 @@ body {
 }
 
 .img-preview,
-.img-preview-facebook{
+.img-preview-facebook,
+.img-preview-twitter{
   float: left;
   margin-right: 10px;
   margin-bottom: 10px;
