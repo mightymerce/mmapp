@@ -354,14 +354,15 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
             var url = '/api/users/twitter/twitterTweetStatus/' + oauth_AccessToken + '/' +oauth_AccessTokenSecret + '/' + product._id;
             $http.get(url).then(function (response) {
               // Error
-              if (response.substring(0,6) === 'Error:')
+              var responseMessage = response.toString();
+              if (responseMessage.substring(0,6) === 'Error:')
               {
                 console.log('products.client.service - postToTwitter - error connecting to Twitter: ' + response.substring(7));
                 deferred.reject('There was an error while connecting to Twitter. Please try again.');
                 return deferred.promise;
               }
               // Code != 200
-              else if (response.substring(0,6) === 'Code: ')
+              else if (responseMessage.substring(0,6) === 'Code: ')
               {
                 console.log('products.client.service - postToTwitter - code != 200 connecting to Twitter: ' + response.substring(7));
                 deferred.reject('Twitter responded but did not grant access. Please verify in your Twitter account.');
