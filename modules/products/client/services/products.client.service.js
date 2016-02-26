@@ -385,7 +385,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                   postExternalPostKey: response.data.id_str
                 });
 
-                post.$save(function (response) {
+                post.$save(function (res) {
                   console.log('products.client.service - postToTwitter - Save Post on MM success!');
                   deferred.resolve('Success posting to Twitter! - Mightymerce Post-Id: ' +response.data.id);
                   return deferred.promise;
