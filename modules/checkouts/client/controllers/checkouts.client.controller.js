@@ -71,7 +71,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
             $("meta[name='og:keywords']").attr('content', $scope.product.productTitle + ', www.shopmightymerce.com');
 
             // FACEBOOK
-            $("meta[property='og:site_name']").attr('content', 'shop.mightymerce.com');
+            $("meta[property='og:site_name']").attr('content', 'www.shopmightymerce.com');
             $("meta[property='og:title']").attr('content', $scope.product.productTitle);
             $("meta[property='og:description']").attr('content', $scope.product.productDescription);
             $("meta[property='og:url']").attr('content', linkUrl + $scope.product._id + '?channel=facebook');
@@ -83,6 +83,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
             $("meta[property='og:availability']").attr('content', 'in stock');
 
             // TWITTER
+            $("meta[name='twitter:site']").attr('content', 'www.shopmightymerce.com');
             $("meta[name='twitter:title']").attr('content', $scope.product.productTitle);
             $("meta[name='twitter:description']").attr('content', $scope.product.productDescription);
             $("meta[name='twitter:text:title']").attr('content', $scope.product.productTitle);
