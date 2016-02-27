@@ -3,18 +3,19 @@
       <br>
       <div class="container">
         <div class="row">
-          <div class="col-sm-4 col-sm-offset-4 text">
+          <div class="col-sm-8 col-sm-offset-2 text">
+            <h1 class="h1-login">mightymerce Registrierung</h1>
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-4 col-sm-offset-4 form-box">
+          <div class="col-sm-6 col-sm-offset-3 form-box">
             <div class="form-top">
               <div class="form-top-center">
                 <a href="#" class="navbar-brand"><img alt="mightymerce.com - social commerce" class="" src="/modules/core/client/img/brand/mm_logo_grey_high.png"/></a>
               </div>
               <div class="form-top-left">
-                <h2>Sign-up and get ready selling on social media and marketplaces. </h2>
-                <h3></h3>
+                <h2>Verkaufe deine Produkte ganz einfach über die sozialen Kanäle und Marktplätze. Und das alles über eine zentrale Stelle. Ganz einfach. Versprochen.
+                </h2>
               </div>
               <div class="form-top-right">
                 <i class="fa fa-pencil"></i>
@@ -25,9 +26,7 @@
                 <fieldset>
                   <div class="form-group" show-errors>
                     <input type="text" id="username" name="username" class="form-control" ng-model="credentials.username" placeholder="Email" lowercase required>
-                    <div ng-messages="userForm.username.$error" role="alert">
-                      <p class="help-block error-text" ng-message="required">Email required.</p>
-                    </div>
+
                   </div>
                   <div ng-show="false" class="form-group" show-errors>
                     <input type="text" name="email" placeholder="Email" class="form-email form-control" id="email" ng-model="credentials.email" lowercase>
@@ -39,7 +38,6 @@
                   <div class="form-group" show-errors>
                     <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="password" popover="{{popoverMsg}}" popover-trigger="focus" password-validator required>
                     <div ng-messages="userForm.password.$error" role="alert">
-                      <p class="help-block error-text" ng-message="required">Password required.</p>
                       <div ng-repeat="passwordError in passwordErrors">
                         <p class="help-block error-text" ng-show="userForm.password.$error.requirements">{{passwordError}}</p>
                       </div>

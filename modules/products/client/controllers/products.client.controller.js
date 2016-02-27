@@ -27,35 +27,37 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
     }
 
 
-    // Load page after Twitter callback
-    if($location.search().oauth_verifier && $location.search().oauth_token){
+    if ((!$scope.authentication.user.twitterAccessToken && !$scope.authentication.user.twitterAccessTokenSecret) || ($scope.authentication.user.twitterAccessToken === '' && $scope.authentication.user.twitterAccessTokenSecret === '')) {
+      // Load page after Twitter callback
+      if ($location.search().oauth_verifier && $location.search().oauth_token) {
 
-      // should return oauth_token & oauth_verifier
-      var twitterOAuth_Verifier = $location.search().oauth_verifier;
-      var twitterOAuth_Token = $location.search().oauth_token;
+        // should return oauth_token & oauth_verifier
+        var twitterOAuth_Verifier = $location.search().oauth_verifier;
+        var twitterOAuth_Token = $location.search().oauth_token;
 
-      var promiseOAuthVerifier = ProductsServices.twitterGetAccessToken(twitterOAuth_Verifier, twitterOAuth_Token);
-      promiseOAuthVerifier.then(function(promise) {
+        var promiseOAuthVerifier = ProductsServices.twitterGetAccessToken(twitterOAuth_Verifier, twitterOAuth_Token);
+        promiseOAuthVerifier.then(function (promise) {
 
-        // store twitter user data for further requests
-        var user = new Users($scope.user);
-        user.twitterAccessToken = promise.oauth_token;
-        user.twitterAccessTokenSecret = promise.oauth_token_secret;
+          // store twitter user data for further requests
+          var user = new Users($scope.user);
+          user.twitterAccessToken = promise.oauth_token;
+          user.twitterAccessTokenSecret = promise.oauth_token_secret;
 
-        user.$update(function (response) {
-          $scope.$broadcast('show-errors-reset', 'userForm');
+          user.$update(function (response) {
+            $scope.$broadcast('show-errors-reset', 'userForm');
 
-          // Show user message if tokens stored successful
-          $scope.success = 'Your twitter account verification was successful. Please click on - Create Post - again.';
-          Authentication.user = response;
+            // Show user message if tokens stored successful
+            $scope.success = 'Your twitter account verification was successful. Please click on - Create Post - again.';
+            Authentication.user = response;
 
-          console.log('product.client.controller - load page after callback Twitter - success');
-        }, function (errorResponse) {
-          $scope.error = errorResponse.data.message;
-          console.log('product.client.controller - load page after callback Twitter - error');
+            console.log('product.client.controller - load page after callback Twitter - success');
+          }, function (errorResponse) {
+            $scope.error = errorResponse.data.message;
+            console.log('product.client.controller - load page after callback Twitter - error');
+          });
+
         });
-
-      });
+      }
     }
 
     // Load page after Twitter callback
