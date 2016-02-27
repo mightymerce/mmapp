@@ -4,12 +4,49 @@
 angular.module(ApplicationConfiguration.applicationModuleName, ApplicationConfiguration.applicationModuleVendorDependencies);
 
 // Setting HTML5 Location Mode
-angular.module(ApplicationConfiguration.applicationModuleName).config(['$locationProvider', '$httpProvider',
-  function ($locationProvider, $httpProvider) {
+angular.module(ApplicationConfiguration.applicationModuleName).config(['$locationProvider', '$httpProvider', '$translateProvider',
+  function ($locationProvider, $httpProvider, $translateProvider) {
     $locationProvider.html5Mode(true);
     $locationProvider.hashPrefix('!');
 
     $httpProvider.interceptors.push('authInterceptor');
+
+    $translateProvider.translations('de-DE', {
+      'LABEL-EMAIL':'Hey Guys, this is a headline!',
+      'SOME_TEXT': 'A text anywhere in the app.'
+    });
+
+    $translateProvider.translations('en-EN', {
+      // VIEW ----- signin.client.view.html ------
+      // LABELS
+      'LABEL-EMAIL':'eMail',
+      'LABEL-PASSWORD':'Password',
+      'PLACEHOLDER-LABEL-EMAIL':'email ...',
+      'PLACEHOLDER-LABEL-PASSWORD':'password...',
+
+      // BUTTONS
+      'BUTTON-TEXT-SIGNIN': 'Sign in',
+      'BUTTON-TEXT-SIGNUP': 'Sign up',
+      'BUTTON-TEXT-FORGOTPWD': 'Forgot password',
+
+      // VALDIATIONS
+      'VALIDATION-REQ-EMAIL':'eMail is required.',
+      'VALIDATION-REQ-PASSWORD':'Password is required.'
+
+      // ERRORS
+
+    });
+
+    /*
+    $translateProvider.useStaticFilesLoader({
+      prefix: '/languages/',
+      suffix: '.json'
+    });
+    $translateProvider.useLocalStorage();
+    */
+
+    $translateProvider.preferredLanguage('en-EN');
+
   }
 ]);
 
