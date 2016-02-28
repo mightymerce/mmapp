@@ -223,13 +223,15 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
           cartSubtotalAmount: $('.lbl-subtotal-PP').val(),
           buyerMail: '@',
           productCurrency: 'EUR'
-        }, function(err, data) {
-          alert('hallo');
+        }, function(data) {
+
+          /*
           if(err)
           {
             $scope.error="Authentication with Paypal failed. Wrong paypal user derails. Please verify your details in the Settings section."
             return;
           }
+          */
           console.log('checkouts.client.controller - paypalSetExpressCheckout and open Paypal window URL: ' +data.redirectUrl);
           $cookieStore.put('paypal.user.profileImageURL', $scope.user.profileImageURL);
           $cookieStore.put('paypal.product.productMainImageURL', $scope.product.productMainImageURL);
