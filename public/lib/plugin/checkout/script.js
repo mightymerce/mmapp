@@ -1,6 +1,8 @@
 /*
 *   FUNCTIONS
 */
+$( window ).load(function() {
+
 
 function parseCurrency(number) {
 
@@ -174,5 +176,7 @@ $('#details-form').validator().on('submit', function (e) {
     $('.step-headline').html('Review Your Order');
     scrollToDiv('#belowpicture', 0);
   }
+});
+
 });
 
