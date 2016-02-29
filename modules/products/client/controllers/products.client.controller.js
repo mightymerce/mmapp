@@ -7,6 +7,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
     $scope.authentication = Authentication;
 
     var PDK = $window.PDK;
+    $scope.hideSpinner = true;
 
     // If user is signed in then redirect back home
     if (!$scope.authentication.user) {
@@ -115,6 +116,8 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
         // Facebook connect
         var FBConnectStatus = '';
         $scope.varFBConnected = false;
+        $scope.hideSpinner = false;
+
 
         var FB = $window.FB;
         if(FB) {
@@ -124,6 +127,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
             if (response.status === 'connected') {
               // Logged into your app and Facebook.
               $scope.varFBConnected = true;
+              $scope.hideSpinner = true;
 
               console.log('products.client.controller - modalupdateProductPost - Facebook connected open modal');
 
@@ -149,6 +153,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
             } else if (response.status === 'not_authorized') {
               // The person is logged into Facebook, but not your app.
+              $scope.hideSpinner = true;
               console.log('products.client.controller - modalupdateProductPost - Not authorized');
               $scope.error = 'The user you are currently logged in to facebook is not authorized for Mightymerce. Please switch to your authorized user or log off from facebook and click again on "Create Post" to authorize your current facebook user.';
 
@@ -162,6 +167,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
                 $scope.success = 'You are now connected to facebook! Please click on "Create Post again"!';
                 $scope.error = 'You are now connected to facebook! Please click on "Create Post again"!';
 
+                $scope.hideSpinner = true;
                 console.log('products.client.controller - modalupdateProductPost - login Facebook done');
 
                 // Do not show promise - as this is the token returned
@@ -683,10 +689,12 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
     // ************************************
     //
     $scope.postPost = function (isValid) {
+      $scope.hideSpinner = false;
 
       console.log('product.client.controller - Start posting to Facebook');
       ProductsServices.postToWall($scope.product).then(function(promise) {
         $scope.success = promise;
+        $scope.hideSpinner = true;
       });
     };
 

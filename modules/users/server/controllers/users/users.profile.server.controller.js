@@ -555,7 +555,7 @@ exports.instagramGetAccessToken = function (req, res) {
 
     //Check for right status code
     if(r.statusCode !== 200){
-      return console.log('Invalid Status Code Returned:', r.statusCode + ' ' + r.data);
+      return console.log('Invalid Status Code Returned:', r.statusCode + ' ' + r);
     }
 
     var req_data = qs.parse(body);

@@ -63,6 +63,8 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
       ProductsServices.getPosts($stateParams.productId).then(function (Posts) {
         $scope.posts = Posts;
       });
+
+      $scope.selectImage = true;
     };
 
     // ************************************
