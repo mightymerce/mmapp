@@ -71,7 +71,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
             $("meta[name='og:keywords']").attr('content', $scope.product.productTitle + ', www.shopmightymerce.com');
 
             // FACEBOOK
-            $("meta[property='og:site_name']").attr('content', $scope.user.displayName + '   <img src="https://www.shopmightymerce.com/modules/products/client/img/buybutton.png" alt="Buy now">');
+            $("meta[property='og:site_name']").attr('content', $scope.user.displayName);
             $("meta[property='og:title']").attr('content', $scope.product.productTitle);
             $("meta[property='og:description']").attr('content', $scope.product.productDescription);
             $("meta[property='og:url']").attr('content', linkUrl + $scope.product._id + '?channel=facebook');

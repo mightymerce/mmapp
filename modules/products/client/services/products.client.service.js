@@ -171,7 +171,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
             params.name = product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode;
             params.link = linkUrl + product._id + '?channel=facebook';
             params.picture = linkMainImageUrl + product.productMainImageURLFacebook.substring(1);
-            params.description = product.productDescription.substring(0,220) + ' ' + '<img src="https://www.shopmightymerce.com/modules/products/client/img/buybutton.png" alt="Buy now">';
+            params.description = product.productDescription.substring(0,220) + ' ' + 'BUY NOW';
             params.type = 'product';
 
             console.log('product.client.service - postToWall - productMainImageURL ' + params.picture);
