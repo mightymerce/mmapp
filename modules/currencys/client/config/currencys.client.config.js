@@ -5,7 +5,7 @@ angular.module('currencys').run(['Menus',
   function (Menus) {
     // Add the currencys dropdown item
     Menus.addMenuItem('topbar', {
-      title: 'Account Settings',
+      title: 'Shop Settings',
       state: 'settings',
       type: 'dropdown',
       roles: ['user']

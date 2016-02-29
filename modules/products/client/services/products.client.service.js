@@ -112,15 +112,18 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
       //
       loginFacebook: function() {
         var FB = $window.FB;
+        var deferred = $q.defer();
 
         FB.login(function(response){
 
           if (response.status === 'connected') {
-            var token = response.authResponse.accessToken;
-            console.log('AccessToken: ' +token);
-            return response;
+            deferred.resolve('You are now connected to your facebook account! Please click "Create Post" again.');
+          }
+          else {
+            deferred.reject('There went something wrong connecting to your facebook account or you canceled the action.');
           }
         },{ scope: 'publish_actions' });
+        return deferred.promise;
 
       },
 
