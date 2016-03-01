@@ -74,7 +74,7 @@ exports.forgot = function (req, res, next) {
       var mailOptions = {
         to: user.email,
         from: config.mailer.from,
-        subject: 'Password Reset',
+        subject: 'mightymerce - Password Reset',
         html: emailHTML
       };
       smtpTransport.sendMail(mailOptions, function (err) {
