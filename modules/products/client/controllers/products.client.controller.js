@@ -715,10 +715,12 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
     // ************************************
     //
     $scope.postPostPinterest = function (isValid) {
+      $scope.hideSpinner = false;
 
       console.log('products.client.controller - postPostPinterest - Start');
       ProductsServices.postToPinterest($scope.product).then(function(promise) {
         $scope.success = promise;
+        $scope.hideSpinner = true;
       });
     };
 
@@ -729,10 +731,12 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
     // ************************************
     //
     $scope.postPostTwitter = function (isValid) {
+      $scope.hideSpinner = false;
 
       console.log('products.client.controller - postPostTwitter - Start');
       ProductsServices.postToTwitter($scope.product, $scope.authentication.user.twitterAccessToken, $scope.authentication.user.twitterAccessTokenSecret).then(function(promise) {
         $scope.success = promise;
+        $scope.hideSpinner = true;
       });
     };
 
