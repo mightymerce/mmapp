@@ -61,15 +61,18 @@
                                 </div>
                                 <div class="col-xs-2">
                                   <div ng-show="pinterestPostsAvailable" class="widget style1 navy-bg" align="center">
-                                    <i class="fa fa-pinterest fa-3x"></i><span> No. Pins: <strong>{{ pinterestPostsNo }}</strong></span>
+                                    <i class="fa fa-pinterest fa-3x"></i><span> Pins: <strong>{{ pinterestPostsNo }}</strong></span>
                                   </div>
                                   <div ng-show="!pinterestPostsAvailable" class="widget style1 red-bg" align="center">
                                     <i class="fa fa-pinterest fa-3x"></i><span> Pins: <strong>{{ pinterestPostsNo }}</strong></span>
                                   </div>
                                 </div>
                                 <div class="col-xs-2">
-                                  <div class="widget style1 gray-bg" align="center">
-                                    <i class="fa fa-twitter fa-3x"></i><span> Tweets: <strong>0</strong></span>
+                                  <div  ng-show="twitterPostsAvailable" class="widget style1 navy-bg" align="center">
+                                    <i class="fa fa-twitter fa-3x"></i><span> Tweets: <strong>{{ twitterPostsNo }}</strong></span>
+                                  </div>
+                                  <div  ng-show="!twitterPostsAvailable" class="widget style1 red-bg" align="center">
+                                    <i class="fa fa-twitter fa-3x"></i><span> Tweets: <strong>{{ twitterPostsNo }}</strong></span>
                                   </div>
                                 </div>
                                 <div class="col-xs-2">
@@ -105,8 +108,8 @@
                               <div class="col-sm-8">
                                 <div class="switch">
                                   <div class="onoffswitch">
-                                    <input type="checkbox" class="onoffswitch-checkbox" id="productItemInStockTest"  ng-model="product.productItemInStock" ng-true-value="'1'" ng-true-false="'0'">
-                                    <label class="onoffswitch-label" for="productItemInStockTest">
+                                    <input type="checkbox" class="onoffswitch-checkbox" id="productItemInStock" ng-model="product.productItemInStock" ng-true-value="1" ng-false-value="0">
+                                    <label class="onoffswitch-label" for="productItemInStock">
                                       <span class="onoffswitch-inner"></span>
                                       <span class="onoffswitch-switch"></span>
                                     </label>
@@ -115,13 +118,13 @@
                               </div>
                               <div class="col-sm-2">
                                 <div class="tooltip-demo">
-                                  <button type="button" class="btn btn-default" tooltip-placement="top" tooltip="If your item is no longer in stock, the product will still be visible in the posted channels - but not buyable for the customer. In case the item is backordered, you might want to add a note for your customers in the title or description field.">i</button>
+                                  <button type="button" class="btn btn-default" tooltip-placement="top" uib-tooltip="If your item is no longer in stock, the product will still be visible in the posted channels - but not buyable for the customer. In case the item is backordered, you might want to add a note for your customers in the title or description field.">i</button>
                                 </div>
                               </div>
                             </div>
-                            <div class="form-group"><label class="col-sm-2 control-label">ID*</label>
+                            <div class="form-group" show-errors><label class="col-sm-2 control-label">ID*</label>
                               <div class="col-sm-8">
-                                <input type="text" ng-model="product.productId" id="productId" class="form-control" placeholder="" required></div>
+                                <input type="text" name="productId" ng-model="product.productId" id="productId" class="form-control" placeholder="" required></div>
                               <div ng-messages="productForm.productId.$error" role="alert">
                                 <p class="help-block error-text" ng-message="required">Products ID is required.</p>
                               </div>
@@ -129,19 +132,21 @@
                             <div class="form-group"><label class="col-sm-2 control-label">Title*</label>
                               <div class="col-sm-8">
                                 <input type="text" ng-model="product.productTitle" id="productTitle" class="form-control" placeholder="" required ng-maxlength="70"></div>
-                              <div ng-messages="productForm.productTitle.$error" role="alert">
-                                <p class="help-block error-text" ng-message="required">Products title is required.</p>
+                              <div>
+                                <p class="help-block error-text" ng-show="productForm.productDescription.$touched && productForm.productDescription.$error.required" role="alert">Products title is required.</p>
+                                <p class="help-block error-text" ng-show="productForm.productDescription.$touched && productForm.productDescription.$error.maxlength" role="alert">Products title is to long.</p>
                               </div>
                               <div class="col-sm-2">
                                 <div class="tooltip-demo">
-                                  <button type="button" class="btn btn-default" tooltip-placement="top" tooltip="Any information about brand, colour, or size of the product should be added to the title separated by comma. Please make sure, that you don’t use one of the following special signs: /[^\p{L}\p {Nd}\p{P}\p{Sm}\p{Zs}™©®]/u. The characters %, :, & and + can only be used once.">i</button>
+                                  <button type="button" class="btn btn-default" tooltip-placement="top" uib-tooltip="Any information about brand, colour, or size of the product should be added to the title separated by comma. Please make sure, that you don’t use one of the following special signs: /[^\p{L}\p {Nd}\p{P}\p{Sm}\p{Zs}™©®]/u. The characters %, :, & and + can only be used once.">i</button>
                                 </div>
                               </div>
                             </div>
-                            <div class="form-group"><label class="col-sm-2 control-label">Description*</label>
-                              <div class="col-sm-8"><textarea ng-model="product.productDescription" id="productDescription" class="supertext" placeholder="" rows="10" required ng-maxlength="250"></textarea></div>
-                              <div ng-messages="productForm.productDescription.$error" role="alert">
-                                <p class="help-block error-text" ng-message="required">Products description is required.</p>
+                            <div class="form-group" show-errors><label class="col-sm-2 control-label">Description*</label>
+                              <div class="col-sm-8"><textarea name="productDescription" ng-model="product.productDescription" id="productDescription" class="supertext" placeholder="" rows="10" required ng-maxlength="1000"></textarea></div>
+                              <div >
+                                <p class="help-block error-text" ng-show="productForm.productDescription.$touched && productForm.productDescription.$error.required" role="alert">Products description is required.</p>
+                                <p class="help-block error-text" ng-show="productForm.productDescription.$touched && productForm.productDescription.$error.maxlength" role="alert">Products description is to long.</p>
                               </div>
                             </div>
                           </div>
@@ -157,7 +162,11 @@
                           <div class="ibox-content">
                             <div class="form-group"><label class="col-sm-2 control-label">Price*</label>
                               <div class="col-sm-8"><input type="text" pattern="[0-9]+([.][0-9]+)*" class="form-control" ng-model="product.productPrice" id="productPrice" placeholder="" required></div>
-                              <div class="col-sm-2"></div>
+                              <div class="col-sm-2">
+                                <div class="tooltip-demo">
+                                  <button type="button" class="btn btn-default" tooltip-placement="top" uib-tooltip="Please enter prices in the format 12.40 or 2314.05 - there are no commas possible.">i</button>
+                                </div>
+                              </div>
                             </div>
                             <div class="form-group"><label class="col-sm-2 control-label">Tax*</label>
                               <div class="col-sm-8">

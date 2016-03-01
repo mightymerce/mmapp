@@ -497,15 +497,17 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       $scope.error = null;
 
       if (!isValid) {
+        console.log('products.client.controller - update - productForm not valid');
         $scope.$broadcast('show-errors-check-validity', 'productForm');
 
         return false;
       }
 
       var product = $scope.product;
+      product.productItemInStock = $scope.product.productItemInStock;
 
       console.log('products.client.controller - update - product.productId: ' +product.productId);
-      console.log('products.client.controller - update - product.productItemInStock: ' +product.productItemInStock);
+      console.log('products.client.controller - update - product.productItemInStock: ' +$scope.product.productItemInStock);
 
       product.$update(function () {
         $location.path('products/' + product._id + '/edit');
@@ -574,7 +576,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
             $scope.facebookPostsAvailable = true;
           }
           if (Posts[i].product === $stateParams.productId && Posts[i].postChannel === 'Pinterest') {
-            varFacebookPosts += 1;
+            varPinterestPosts += 1;
             $scope.pinterestPostsAvailable = true;
           }
           if (Posts[i].product === $stateParams.productId && Posts[i].postChannel === 'Twitter') {

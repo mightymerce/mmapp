@@ -50,7 +50,7 @@
                               <div class="col-sm-8">
                                 <div class="switch">
                                   <div class="onoffswitch">
-                                    <input type="checkbox" checked class="onoffswitch-checkbox" id="productItemInStock">
+                                    <input type="checkbox" class="onoffswitch-checkbox" id="productItemInStock" ng-model="product.productItemInStock" ng-true-value="1" ng-false-value="0">
                                     <label class="onoffswitch-label" for="productItemInStock">
                                       <span class="onoffswitch-inner"></span>
                                       <span class="onoffswitch-switch"></span>
@@ -73,9 +73,10 @@
                             </div>
                             <div class="form-group"><label class="col-sm-2 control-label">Title*</label>
                               <div class="col-sm-8">
-                                <input type="text" ng-model="productTitle" id="productTitle" class="form-control" placeholder="" required ng-maxlength="70"></div>
-                              <div ng-messages="productForm.productTitle.$error" role="alert">
-                                <p class="help-block error-text" ng-message="required">Products title is required.</p>
+                                <input type="text" name="productTitle" ng-model="productTitle" id="productTitle" class="form-control" placeholder="" required ng-maxlength="70"></div>
+                              <div>
+                                <p class="help-block error-text" ng-show="productForm.productDescription.$touched && productForm.productDescription.$error.required" role="alert">Products title is required.</p>
+                                <p class="help-block error-text" ng-show="productForm.productDescription.$touched && productForm.productDescription.$error.maxlength" role="alert">Products title is to long.</p>
                               </div>
                               <div class="col-sm-2">
                                 <div class="tooltip-demo">
@@ -84,9 +85,10 @@
                               </div>
                             </div>
                             <div class="form-group"><label class="col-sm-2 control-label">Description*</label>
-                              <div class="col-sm-8"><textarea ng-model="productDescription" id="productDescription" class="supertext" placeholder="" rows="10" required ng-maxlength="250"></textarea></div>
-                              <div ng-messages="productForm.productDescription.$error" role="alert">
-                                <p class="help-block error-text" ng-message="required">Products description is required.</p>
+                              <div class="col-sm-8"><textarea name="productDescription" ng-model="productDescription" id="productDescription" class="supertext" placeholder="" rows="10" required ng-maxlength="500"></textarea></div>
+                              <div >
+                                <p class="help-block error-text" ng-show="productForm.productDescription.$touched && productForm.productDescription.$error.required" role="alert">Products description is required.</p>
+                                <p class="help-block error-text" ng-show="productForm.productDescription.$touched && productForm.productDescription.$error.maxlength" role="alert">Products description is to long.</p>
                               </div>
                             </div>
                           </div>
