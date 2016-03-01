@@ -66,6 +66,12 @@ body {
   margin-bottom: 20px;
 }
 
+@media (min-width: 468px) {
+  .img-container-logo{
+    min-height: 316px;
+  }
+}
+
 @media (min-width: 768px) {
   .img-container,
   .img-container-facebook,

@@ -23,6 +23,15 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
     // Called after the user selected a new picture file
     $scope.uploader.onAfterAddingFile = function (fileItem) {
       if ($window.FileReader) {
+
+        var fileExtension = '.' + fileItem.file.name.split('.').pop();
+        var index = $scope.uploader.getIndexOfItem(fileItem);
+
+        fileItem.name = 'crop-' + fileItem.file.name + ' (' + index + ')';
+        fileItem.size = fileItem.file.size;
+
+        $scope.file = fileItem;
+
         var fileReader = new FileReader();
         fileReader.readAsDataURL(fileItem._file);
 
@@ -68,6 +77,55 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
     $scope.cancelUpload = function () {
       $scope.uploader.clearQueue();
       $scope.imageURL = $scope.user.profileImageURL;
+    };
+
+    $scope.uploadLogoPicture = function (fileItem) {
+
+      console.log('change.profile-picture.client.controller - image uploader - Start uploadLogoPicture');
+
+      if(!fileItem)
+      {
+        console.log('change.profile-picture.client.controller - image uploader - no fileitem');
+      } else {
+        // Create blob from cropped file
+        var bloblogo = dataURItoBlob(fileItem.toDataURL());
+        console.log('change.profile-picture.client.controller - image uploader - after set blob');
+        var itemlogo = new FileUploader.FileItem($scope.uploader, $scope.file);
+        console.log('change.profile-picture.client.controller - image uploader - after item created');
+        itemlogo._file = bloblogo;
+        itemlogo.name = 'logo';
+        itemlogo.type = 'image/jpeg';
+
+        $scope.uploader.removeFromQueue(0);
+        $scope.uploader.queue.push(itemlogo);
+
+        // Clear messages
+        $scope.success = $scope.error = null;
+
+
+
+        // Upload all files in queue
+        $scope.uploader.uploadAll();
+
+        console.log('change.profile-picture.client.controller - image uploader - End uploadProductMainPicture');
+      }
+    };
+
+    /**
+     * Converts data uri to Blob. Necessary for uploading.
+     * @see
+     *   http://stackoverflow.com/questions/4998908/convert-data-uri-to-file-then-append-to-formdata
+     * @param  {String} dataURI
+     * @return {Blob}
+     */
+    var dataURItoBlob = function(dataURI) {
+      var binary = atob(dataURI.split(',')[1]);
+      var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+      var array = [];
+      for(var i = 0; i < binary.length; i++) {
+        array.push(binary.charCodeAt(i));
+      }
+      return new Blob([new Uint8Array(array)], {type: mimeString});
     };
   }
 ]);
