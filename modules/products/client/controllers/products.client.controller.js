@@ -27,7 +27,6 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       $scope.basicData = false;
     }
 
-
     if ((!$scope.authentication.user.twitterAccessToken && !$scope.authentication.user.twitterAccessTokenSecret) || ($scope.authentication.user.twitterAccessToken === '' && $scope.authentication.user.twitterAccessTokenSecret === '')) {
       // Load page after Twitter callback
       if ($location.search().oauth_verifier && $location.search().oauth_token) {
@@ -60,52 +59,6 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
         });
       }
     }
-
-    // Load page after Twitter callback
-    if($location.search().code){
-      console.log('product.client.controller - load page after callback Instagram - start');
-      // should return oauth_token & oauth_verifier
-      var instagramCode = $location.search().code;
-      console.log('product.client.controller - load page after callback Instagram - code: ' +instagramCode);
-
-      var callback_url = '';
-
-      if ($location.host() === 'localhost'){
-        callback_url = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/products?this=' + $location.search().this;
-      } else {
-        callback_url = $location.protocol() + '://' + $location.host() + '/products/?this=' + $location.search().this;
-      }
-
-      // get Instagram Access Token
-      var promiseOAuthVerifier = ProductsServices.instagramGetAccessToken(instagramCode, $location.search().this);
-      promiseOAuthVerifier.then(function(promise) {
-
-        // todo store instagram user data for further requests
-        var user = new Users($scope.user);
-        user.instagramAccessToken = promise.access_token;
-
-        user.$update(function (response) {
-          $scope.$broadcast('show-errors-reset', 'userForm');
-
-          // Show user message if tokens stored successful
-          $scope.success = 'Your Instagram account verification was successful. Please click on - Create Post - again.';
-          Authentication.user = response;
-
-          console.log('product.client.controller - load page after callback Instagram - success');
-        }, function (errorResponse) {
-          $scope.error = errorResponse.data.message;
-          console.log('product.client.controller - load page after callback Instagram - error update mm db');
-        });
-
-      });
-    } else {
-      if ($location.search().error)
-      {
-        $scope.error = 'You did not grant mightymerce access to your Instagram account yet.';
-        console.log('product.client.controller - load page after callback Instagram - error');
-      }
-    }
-
 
     console.log('products.client.controller - load ProductsController');
 
@@ -307,45 +260,6 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
         }
       }
 
-      if (postChannel === 'Instagram') {
-        if ((!$scope.authentication.user.instagramAccessToken) || ($scope.authentication.user.instagramAccessToken === ''))
-        {
-          // Instagram get authentication connect
-          console.log('products.client.controller - modalupdateProductPost - Instagram - Start');
-          var callback_url = '';
-
-          if ($location.host() === 'localhost'){
-            callback_url = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/products?this=' + $scope.product._id;
-          } else {
-            callback_url = $location.protocol() + '://' + $location.host() + '/products?this=' + $scope.product._id;
-          }
-          console.log('products.client.controller - modalupdateProductPost - Instagram - callback_url: ' + callback_url);
-          window.open('https://api.instagram.com/oauth/authorize/?client_id=15005e14881a44b7a3021a6e63ca3e04&redirect_uri=' + callback_url + '&response_type=code&scope=likes+comments');
-
-        }
-        else
-        {
-          console.log('products.client.controller - modalupdateProductPost - Instagram - Start - credentials set');
-
-          $scope.modalInstance = $uibModal.open({
-            //animation: $scope.animationsEnabled,
-            templateUrl: 'modules/products/client/views/post.product.modal.view.html',
-            controller: function ($scope, product) {
-              $scope.product = product;
-              $scope.varPostStatus = postStatus;
-              $scope.varPostPublicationDate = postPublicationDate;
-              $scope.varPostChannel = postChannel;
-            },
-            size: size,
-            resolve: {
-              product: function () {
-                return selectedProduct;
-              }
-            }
-          });
-        }
-      }
-
     };
 
     $scope.productCurrency = Currencys.query({
@@ -442,6 +356,10 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
         productFurtherImage5URLDawanda: this.productFurtherImage5URLDawanda,
         productFurtherImage5URLCode: this.productFurtherImage5URLCode,
         productFurtherImage5Alt: this.productFurtherImage5Alt,
+        instagramImageId: this.instagramImageId,
+        instagramImagesLow_resolutionUrl: this.instagramImagesLow_resolutionUrl,
+        instagramImagesStandard_resolutionUrl: this.instagramImagesStandard_resolutionUrl,
+        instagramImagesThumbnailUrl: this.instagramImagesThumbnailUrl,
         productCheckoutURL: linkUrl
       });
 
@@ -594,6 +512,13 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
         $scope.pinterestPostsNo = varPinterestPosts;
         $scope.codeSnippetPostsNo = varCodeSnippetPosts;
         $scope.twitterPostsNo = varTwitterPosts;
+
+        $scope.instagramImageSet = false;
+        if ($scope.product.instagramImageId || !$scope.product.instagramImageId === "")
+        {
+          $scope.instagramImageSet = true;
+        }
+        console.log('products.client.controller - findone() - instagramImageSet: ' +$scope.instagramImageSet);
       });
 
     };
@@ -735,6 +660,23 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
       console.log('products.client.controller - postPostTwitter - Start');
       ProductsServices.postToTwitter($scope.product, $scope.authentication.user.twitterAccessToken, $scope.authentication.user.twitterAccessTokenSecret).then(function(promise) {
+        $scope.success = promise;
+        $scope.hideSpinner = true;
+      });
+    };
+
+
+    // ************************************
+    // **                                **
+    // **        POST to INSTAGRAM       **
+    // **                                **
+    // ************************************
+    //
+    $scope.postPostInstagram = function (isValid) {
+      $scope.hideSpinner = false;
+
+      console.log('products.client.controller - postPostInstagram - Start');
+      ProductsServices.instagramPostComment($scope.product, $scope.authentication.user).then(function(promise) {
         $scope.success = promise;
         $scope.hideSpinner = true;
       });

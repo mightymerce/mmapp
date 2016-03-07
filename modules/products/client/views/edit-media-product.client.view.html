@@ -53,7 +53,7 @@
                                       <th><i class="">Pinterest</i></th>
                                       <th><i class="">Twitter</i></th>
                                       <th><i class="">Code Snippet</i></th>
-                                      <th><i class="">Dawanda</i></th>
+                                      <th><i class="">Instagram</i></th>
                                       <th><i class="">Etsy</i></th>
                                       <th><i class=""></i></th>
                                     </tr>
@@ -65,7 +65,8 @@
                                       <td><div><img ng-src="{{product.productMainImageURLPinterest}}" class="product-images-list"></div></td>
                                       <td><div><img ng-src="{{product.productMainImageURLTwitter}}" class="product-images-list"></div></td>
                                       <td><div><img ng-src="{{product.productMainImageURLCode}}" class="product-images-list"></div></td>
-                                      <td><div>available soon</div></td>
+                                      <td><div><img ng-src="{{product.instagramImagesThumbnailUrl}}" class="product-images-list">
+                                        <br><a class="btn btn-xs btn-warning" ng-click="modalupdateProductPost('md', product, 'Instagram', 'New', '00.00.0000')"><i class="fa fa-instagram"></i> Add Image</a></div></td>
                                       <td><div>available soon</div></td>
                                       <td ng-hide="true"><div ng-hide="showMainImage"><button type="button" class="btn btn-default btn-sm btn-outline" ng-click="showMainImageFunction()">Edit image</button></div>
                                         <div ng-show="showMainImage"><button type="button" class="btn btn-primary btn-sm" ng-click="showMainImageFunction()">Edit image</button></div>
@@ -99,6 +100,10 @@
                                   </table>
                                 </div>
                               </div>
+
+                            </div>
+                            <div class="row">
+                              <small>Note: you can add all images by following the steps below. INSTAGRAM image has to be added by clicking the button in the table above.</small>
                             </div>
                           </div>
                         </div>

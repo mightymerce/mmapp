@@ -15,6 +15,9 @@
           <div ng-show="varPostChannel === 'Twitter'">
             <i class="fa fa-twitter modal-icon"></i>
           </div>
+          <div ng-show="varPostChannel === 'Instagram'">
+            <i class="fa fa-instagram modal-icon"></i>
+          </div>
           <div ng-show="varPostChannel === 'Etsy'">
             <i class="">Etsy</i>
           </div>
@@ -109,6 +112,9 @@
           <div ng-show="varPostChannel === 'Etsy'  && varPostStatus === 'New'">
             <span>Please note: The post will automatically be updated, if you edit the product after the post.</span>
           </div>
+          <div ng-show="varPostChannel === 'Instagram'  && varPostStatus === 'New'">
+            <span>Please note: For Instagram all product information will be added as new comment including a link to the product details page to buy your product.</span>
+          </div>
           <br>
           <div ng-show="error" class="alert alert-success">
             <strong ng-bind="error"></strong>
@@ -146,6 +152,9 @@
           </div>
           <div ng-show="varPostChannel === 'Twitter' && varPostStatus === 'New'">
             <button type="button" class="btn btn-block btn-warning" ng-click="postPostTwitter()">Tweet Product to Twitter</button>
+          </div>
+          <div ng-show="varPostChannel === 'Instagram' && varPostStatus === 'New'">
+            <button type="button" class="btn btn-block btn-warning" ng-click="postPostInstagram()">Add Product details to Instagram</button>
           </div>
           <div ng-show="varPostChannel === 'Etsy' && varPostStatus === 'New'">
             <button type="submit" class="btn btn-warning">Post Product to Etsy</button>
@@ -186,6 +195,16 @@
                 <p><img ng-src="{{product.productMainImageURLFacebook}}" alt="{{product.productMainImageAlt}}"></p>
                 <p><span ng-bind="product.productDescription"></span> </p>
                 <p><a href="#"><span ng-bind="authentication.user.displayName"></span></a></p>
+              </div>
+            </div>
+          </div>
+          <div ng-show="varPostChannel === 'Instagram'">
+            <p><strong>Preview of your Instagram comment </strong><i>(This is not the final look of your comment. Instagram comments are limited to 300 characters. We therefore have to cut off the title and description after 200 characters to finally add the BUY NOW link.)</i></p>
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <p><img ng-src="{{product.instagramImagesStandard_resolutionUrl}}"></p>
+                <p><strong><span ng-bind="authentication.user.displayName"></span></strong> <span ng-bind="product.productTitle"></span><span> für </span><span ng-bind="product.productPrice"></span>
+                  <span>. </span><span ng-bind="product.productDescription"></span><span>   BUY NOW - https://www. ....</span></p>
               </div>
             </div>
           </div>

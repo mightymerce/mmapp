@@ -35,5 +35,6 @@ module.exports = function (app) {
 
   // Instagram connection routes
   app.route('/api/users/instagram/instagramGetAccessToken/:oauth_code/:callback_uri').get(users.instagramGetAccessToken);
-
+  app.route('/api/users/instagram/instagramGetMedia/:access_token').get(users.instagramGetMedia);
+  app.route('/api/users/instagram/instagramPostComment/:access_token/:instagramComment/:productid/:mediaid').get(users.instagramPostComment);
 };

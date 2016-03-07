@@ -14,6 +14,67 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
 
     console.log('productsmedia.client.controller - load ProductsMediaController');
 
+    // Load page after Instagram callback
+    if($location.search().code){
+      console.log('productsmedia.client.controller - load page after callback Instagram - start');
+      // should return oauth_token & oauth_verifier
+      var instagramCode = $location.search().code;
+      console.log('productsmedia.client.controller - load page after callback Instagram - code: ' +instagramCode);
+
+      var callback_url = '';
+
+      if ($location.host() === 'localhost'){
+        callback_url = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/products?this=' + $location.search().this;
+      } else {
+        callback_url = $location.protocol() + '://' + $location.host() + '/products/?this=' + $location.search().this;
+      }
+
+      // get Instagram Access Token
+      var promiseOAuthVerifier = ProductsServices.instagramGetAccessToken(instagramCode, $location.search().this);
+      promiseOAuthVerifier.then(function(promise) {
+
+        console.log('productsmedia.client.controller - load page after callback Instagram - return: ' +promise.access_token);
+
+        // todo store instagram user data for further requests
+        var user = new Users($scope.user);
+        user.instagramAccessToken = promise.access_token;
+
+        user.$update(function (response) {
+          Authentication.user = response;
+
+          // Show user message if tokens stored successful
+          //$scope.success = 'Your Instagram account verification was successful. Please click on - Create Post - again.';
+          $scope.modalInstance = $uibModal.open({
+            //animation: $scope.animationsEnabled,
+            templateUrl: 'modules/products/client/views/media-instagram.product.modal.view.html',
+            controller: function ($scope, product) {
+              $scope.product = product;
+              $scope.varPostStatus = postStatus;
+              $scope.varPostPublicationDate = postPublicationDate;
+              $scope.varPostChannel = postChannel;
+            },
+            size: 'md',
+            resolve: {
+              product: function () {
+                return selectedProduct;
+              }
+            }
+          });
+
+          console.log('productsmedia.client.controller - load page after callback Instagram - success');
+        }, function (errorResponse) {
+          $scope.error = errorResponse.data.message;
+          console.log('productsmedia.client.controller - load page after callback Instagram - error update mm db');
+        });
+
+      });
+    } else {
+      if ($location.search().error)
+      {
+        $scope.error = 'You did not grant mightymerce access to your Instagram account yet.';
+        console.log('productsmedia.client.controller - load page after callback Instagram - error');
+      }
+    }
 
     // Remove existing Products
     $scope.remove = function (product) {
@@ -66,6 +127,101 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
 
       $scope.selectImage = true;
     };
+
+    // ************************************
+    // **                                **
+    // **           Get Image            **
+    // **        from Instagram          **
+    // **                                **
+    // ************************************
+    //
+    $scope.modalupdateProductPost = function (size, selectedProduct, postChannel, postStatus, postPublicationDate) {
+
+      console.log('productsmedia.client.controller - start open modal - ModalUpateProductPost');
+      if (postChannel === 'Instagram') {
+        if ((!$scope.authentication.user.instagramAccessToken) || ($scope.authentication.user.instagramAccessToken === ''))
+        {
+          // Instagram get authentication connect
+          console.log('productsmedia.client.controller - modalupdateProductPost - Instagram - Start');
+          var callback_url = '';
+
+          if ($location.host() === 'localhost'){
+            callback_url = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/products?this=' + $scope.product._id;
+          } else {
+            callback_url = $location.protocol() + '://' + $location.host() + '/products?this=' + $scope.product._id;
+          }
+          console.log('products.client.controller - modalupdateProductPost - Instagram - callback_url: ' + callback_url);
+          window.open('https://api.instagram.com/oauth/authorize/?client_id=15005e14881a44b7a3021a6e63ca3e04&redirect_uri=' + callback_url + '&response_type=code&scope=likes+comments', "_self");
+
+        }
+        else
+        {
+          console.log('productsmedia.client.controller - modalupdateProductPost - Instagram - Start - credentials set');
+
+          console.log('productsmedia.client.controller - modalupdateProductPost - Retrieve media');
+          ProductsServices.instagramGetMedia($scope.authentication.user.instagramAccessToken).then(function(productimages) {
+            console.log('productsmedia.client.controller - modalupdateProductPost - Retrieve media success: ' +productimages);
+            $scope.productimages = productimages;
+
+            for(var i = 0; i < productimages.length; i++) {
+              var data= productimages[i];
+
+              console.log(data.id);
+            }
+
+            if (productimages){
+              $scope.modalInstance = $uibModal.open({
+                //animation: $scope.animationsEnabled,
+                templateUrl: 'modules/products/client/views/media-instagram.product.modal.view.html',
+                controller: function ($scope, product) {
+                  $scope.productimages = productimages;
+                  $scope.varPostStatus = postStatus;
+                  $scope.varPostPublicationDate = postPublicationDate;
+                  $scope.varPostChannel = postChannel;
+                },
+                size: size,
+                resolve: {
+                  product: function () {
+                    return selectedProduct;
+                  }
+                }
+              });
+
+            } else {
+              $scope.error = 'Error loading your Instagram medias. Please try again.'
+            }
+          });
+        }
+      }
+
+    };
+
+
+    $scope.saveInstagramMedia = function (instagramImageId, instagramImagesLow_resolutionUrl, instagramImagesStandard_resolutionUrl, instagramImagesThumbnailUrl) {
+      console.log('productsmedia.client.controller - saveInstagramMedia - Instagram - Start');
+
+      var product = new Products($scope.product);
+
+      product.instagramImageId = instagramImageId;
+      product.instagramImagesLow_resolutionUrl = instagramImagesLow_resolutionUrl;
+      product.instagramImagesStandard_resolutionUrl = instagramImagesStandard_resolutionUrl;
+      product.instagramImagesThumbnailUrl = instagramImagesThumbnailUrl;
+
+      $scope.product.instagramImagesThumbnailUrl = instagramImagesThumbnailUrl;
+
+
+      // Update path in MM DB
+      product.$update(function () {
+        $scope.success = 'Successfully added Instagram media data';
+      }, function (errorResponse) {
+        $scope.error = errorResponse.data.message;
+      });
+      console.log('products.client.controller - saveInstagramMedia - Instagram - update - End');
+
+
+    };
+
+
 
     // ************************************
     // **                                **

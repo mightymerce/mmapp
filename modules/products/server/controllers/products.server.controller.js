@@ -102,6 +102,10 @@ exports.update = function (req, res) {
   product.productFurtherImage5Alt = req.body.productFurtherImage5Alt;
   product.productActive = req.body.productActive;
   product.productCheckoutURL = req.body.productCheckoutURL;
+  product.instagramImageId = req.body.instagramImageId;
+  product.instagramImagesLow_resolutionUrl = req.body.instagramImagesLow_resolutionUrl;
+  product.instagramImagesStandard_resolutionUrl = req.body.instagramImagesStandard_resolutionUrl;
+  product.instagramImagesThumbnailUrl = req.body.instagramImagesThumbnailUrl;
 
   product.save(function (err) {
     if (err) {

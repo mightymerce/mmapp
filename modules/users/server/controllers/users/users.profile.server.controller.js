@@ -21,6 +21,8 @@ var _ = require('lodash'),
 var stripe = require('stripe')('sk_test_AYQBhWDR55fPPfUnYCqa9hSm');
 var oauthSignature = require('oauth-signature');
 
+var ig = require('instagram-node').instagram();
+
 /**
  * Update user details
  */
@@ -39,7 +41,6 @@ exports.update = function (req, res) {
     // user.displayName = user.firstName + ' ' + user.lastName;
 
     console.log('users.profile.server.controller - update - user exist: ' +user._id);
-    console.log('users.profile.server.controller - update - Access Token: ' +user.twitterAccessToken);
     user.save(function (err) {
       if (err) {
         return res.status(400).send({
@@ -527,40 +528,72 @@ exports.twitterTweetStatus = function (req, res) {
 exports.instagramGetAccessToken = function (req, res) {
   console.log('users.profile.server.controller - instagramGetAccessToken - start');
 
+  ig.use({ client_id: '15005e14881a44b7a3021a6e63ca3e04',
+    client_secret: '6ec00b3abfdb4b9ab8fd3ae305226af2' });
+
   var request = require('request');
   var qs = require('querystring');
 
   var url = 'https://api.instagram.com/oauth/access_token';
-  var callback_url = req.protocol + "://" + req.get('host') + '/products?this=' + req.params.callback_uri + '&response_type=code&scope=likes+comments';
+  var callback_url = req.protocol + "://" + req.get('host') + '/products?this=' + req.params.callback_uri;
 
   console.log('users.profile.server.controller - instagramGetAccessToken - callback_uri: ' + callback_url);
   console.log('users.profile.server.controller - instagramGetAccessToken - code: ' + req.params.oauth_code);
-  request.post({
-    url: url,
-    client_id: '15005e14881a44b7a3021a6e63ca3e04',
-    client_secret: '6ec00b3abfdb4b9ab8fd3ae305226af2',
-    grant_type: 'authorization_code',
-    redirect_uri: callback_url,
-    code: req.params.oauth_code
 
-  }, function (error, r, body) {
 
-    // Ideally, you would take the body in the response
-    // and construct a URL that a user clicks on (like a sign in button).
-    // The verifier is only available in the response after a user has
-    // verified with twitter that they are authorizing your app.
-    if(error){
-      return console.log('Error:', error);
+  ig.authorize_user(req.params.oauth_code, callback_url, function(err, result) {
+    if (err) {
+      console.log('users.profile.server.controller - instagramGetAccessToken - error: ' + err.body);
+      res.send(err);
+    } else {
+      res.json(result);
     }
-
-    //Check for right status code
-    if(r.statusCode !== 200){
-      return console.log('Invalid Status Code Returned:', r.statusCode + ' ' + r);
-    }
-
-    var req_data = qs.parse(body);
-    res.json(req_data);
   });
 };
+
+
+/**
+ ** Instagram get Media
+ */
+exports.instagramGetMedia = function (req, res) {
+  console.log('users.profile.server.controller - instagramGetMedia - start');
+
+  ig.use({ access_token: req.params.access_token });
+
+  /* OPTIONS: { [count], [min_timestamp], [max_timestamp], [min_id], [max_id] }; */
+  ig.user_self_media_recent(10, function(err, medias, pagination, remaining, limit) {
+    if (err) {
+      console.log('users.profile.server.controller - instagramGetMedia - error: ' + err.body);
+      res.send(err);
+    } else {
+      console.log('users.profile.server.controller - instagramGetMedia - success');
+      res.json(medias);
+    }
+  });
+};
+
+/**
+ ** Instagram add comment
+ */
+exports.instagramPostComment = function (req, res) {
+  console.log('users.profile.server.controller - instagramPostComment - start');
+
+  var statusTweetURL = req.protocol + "://" + req.get('host') + '/checkouts/' + req.params.productid + '?channel=instagram';
+  var comment = req.params.instagramComment + statusTweetURL;
+
+  ig.use({ access_token: req.params.access_token });
+
+  /* OPTIONS: { [count], [min_timestamp], [max_timestamp], [min_id], [max_id] }; */
+  ig.add_comment(req.params.mediaid, comment, function(err, result, remaining, limit) {
+    if (err) {
+      console.log('users.profile.server.controller - instagramPostComment - error: ' + err.body);
+      res.send(err);
+    } else {
+      console.log('users.profile.server.controller - instagramPostComment - success');
+      res.json('success');
+    }
+  });
+};
+
 
 

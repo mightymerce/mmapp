@@ -84,16 +84,29 @@
                             <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i> Create Post</a>
                             <a class="btn btn-w-m btn-default"><i class="fa fa-amazon"></i> Create Post</a>
                           </div>
-                          <div ng-show="basicData">
-                            <a class="btn btn-w-m btn-warning" ng-click="modalupdateProductPost('md', product, 'Facebook', 'New', '00.00.0000')"><i class="fa fa-facebook"></i> Create Post</a>
-                            <a class="btn btn-w-m btn-warning" ng-click="modalupdateProductPost('md', product, 'Pinterest', 'New', '00.00.0000')"><i class="fa fa-pinterest"></i> Create Pin</a>
-                            <a class="btn btn-w-m btn-warning" ng-click="modalupdateProductPost('md', product, 'Twitter', 'New', '00.00.0000')"><i class="fa fa-twitter"></i> Create Tweet</a>
-                            <a class="btn btn-w-m btn-default" ng-click="modalupdateProductPost('md', product, 'Instagram', 'New', '00.00.0000')"><i class="fa fa-instagram"></i> Create Comment</a>
-                            <a class="btn btn-w-m btn-default"><i class="fa fa-google-plus"></i> Create Post</a>
-                            <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i>Etsy Create Post</a>
-                            <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i>Dawanda Create Post</a>
-                            <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i> Create Post</a>
-                            <a class="btn btn-w-m btn-default"><i class="fa fa-amazon"></i> Create Post</a>
+                          <div class="col-lg-7">
+                            <div ng-show="basicData">
+                              <strong><p>Your available sales channels:</p></strong>
+                              <a class="btn btn-w-m btn-warning" ng-click="modalupdateProductPost('md', product, 'Facebook', 'New', '00.00.0000')"><i class="fa fa-facebook"></i> Create Post</a>
+                              <a class="btn btn-w-m btn-warning" ng-click="modalupdateProductPost('md', product, 'Pinterest', 'New', '00.00.0000')"><i class="fa fa-pinterest"></i> Create Pin</a>
+                              <a class="btn btn-w-m btn-warning" ng-click="modalupdateProductPost('md', product, 'Twitter', 'New', '00.00.0000')"><i class="fa fa-twitter"></i> Create Tweet</a>
+                              <a ng-show="instagramImageSet" class="btn btn-w-m btn-warning" ng-click="modalupdateProductPost('md', product, 'Instagram', 'New', '00.00.0000')"><i class="fa fa-instagram"></i> Create Comment</a>
+                              <a ng-hide="instagramImageSet" class="btn btn-w-m btn-default" ><i class="fa fa-instagram"></i> Create Comment</a>
+                              <p ng-hide="instagramImageSet">Note: Please go to "Images" tab first to add a product image for Instagram!</p>
+                            </div>
+                          </div>
+                          <div class="col-lg-5">
+                            <div ng-show="basicData">
+                              <p>Service comeing soon:</p>
+                              <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i> Code snippet</a>
+                              <br><br>
+                            </div>
+                            <div ng-show="basicData">
+                              <p>Services in dvelopment:</p>
+                              <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i>Etsy Create Post</a>
+                              <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i>Dawanda Create Post</a>
+                              <br><br>
+                            </div>
                           </div>
                         </div>
                       </div>

@@ -269,6 +269,22 @@ var ProductSchema = new Schema({
     type: String,
     default: ''
   },
+  instagramImageId: {
+    type: String,
+    default: ''
+  },
+  instagramImagesLow_resolutionUrl: {
+    type: String,
+    default: ''
+  },
+  instagramImagesStandard_resolutionUrl: {
+    type: String,
+    default: ''
+  },
+  instagramImagesThumbnailUrl: {
+    type: String,
+    default: ''
+  },
   productActive: {
     type: String,
     default: 'active'

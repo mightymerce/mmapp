@@ -456,6 +456,83 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
         });
       },
 
+      instagramGetMedia: function(access_token, callback_uri) {
+        console.log('product.client.service - instagramGetMedia - start');
+
+        var url = '/api/users/instagram/instagramGetMedia/' + access_token;
+        return $http.get(url).then(function (response) {
+          console.log('product.client.service - instagramGetMedia - return value: ' +response.data);
+          return response.data;
+        });
+      },
+
+      instagramPostComment: function(product, user) {
+        console.log('product.client.service - instagramPostComment - start');
+
+        var deferred = $q.defer();
+        var params = {};
+
+        $http.get('/api/currencys/' +product.productCurrency)
+            .success(function (response) {
+              // this callback will be called asynchronously
+              // when the response is available
+
+              var status = product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode + '. ' +product.productDescription;
+              var comment = status.substring(0,200) + '.   BUY NOW ';
+
+              var url = '/api/users/instagram/instagramPostComment/' + user.instagramAccessToken + '/' + comment + '/' + product._id + '/' + product.instagramImageId;
+              $http.get(url).then(function (response) {
+                // Error
+                var responseMessage = response.toString();
+                if (responseMessage.substring(0,6) === 'Error:')
+                {
+                  console.log('products.client.service - instagramPostComment - error connecting to Instagram: ' + response.substring(7));
+                  deferred.reject('There was an error while connecting to your Instagram account. Please try again.');
+                  return deferred.promise;
+                }
+                // Code != 200
+                else if (responseMessage.substring(0,6) === 'Code: ')
+                {
+                  console.log('products.client.service - instagramPostComment - code != 200 connecting to Twitter: ' + response.substring(7));
+                  deferred.reject('Instagram responded but did not grant access. Please verify in your Instagram account.');
+                  return deferred.promise;
+                }
+                else
+                {
+                  console.log('product.client.service - instagramPostComment - return success');
+
+                  // The return value gets picked up by the then in the controller.
+                  // Save post to MM
+                  // Create new Post object
+                  var post = new Posts({
+                    product: product._id,
+                    channel: '963c7fab09f30c482f304279',
+                    postChannel: 'Instagram',
+                    postId: Math.random().toString(36).slice(2), // Instagram does not respond with a id
+                    postStatus: 'Active',
+                    postPublicationDate: new Date(),
+                    postExternalPostKey: 'not available'
+                  });
+
+                  post.$save(function (res) {
+                    console.log('products.client.service - instagramPostComment - Save Post on MM success!');
+                    deferred.resolve('Success posting to Instagram! - Mightymerce Post-Id: ' +res._id);
+                    return deferred.promise;
+                  }, function (errorResponse) {
+                    console.log('products.client.service - instagramPostComment - Save Post on MM error: ' +errorResponse);
+                    deferred.reject(errorResponse);
+                    return deferred.promise;
+                  });
+                }
+              });
+            })
+            .error(function(msg,code) {
+
+            });
+        return deferred.promise;
+
+      },
+
 
       // ************************************
       // **                                **
