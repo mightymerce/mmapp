@@ -60,6 +60,51 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       }
     }
 
+    // Load page after Instagram callback
+    if($location.search().code){
+      console.log('productsmedia.client.controller - load page after callback Instagram - start');
+      // should return oauth_token & oauth_verifier
+      var instagramCode = $location.search().code;
+      console.log('productsmedia.client.controller - load page after callback Instagram - code: ' +instagramCode);
+
+      var callback_url = '';
+
+      if ($location.host() === 'localhost'){
+        callback_url = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/products?this=' + $location.search().this;
+      } else {
+        callback_url = $location.protocol() + '://' + $location.host() + '/products/?this=' + $location.search().this;
+      }
+
+      // get Instagram Access Token
+      var promiseOAuthVerifier = ProductsServices.instagramGetAccessToken(instagramCode, $location.search().this);
+      promiseOAuthVerifier.then(function(promise) {
+
+        console.log('productsmedia.client.controller - load page after callback Instagram - return: ' +promise.access_token);
+
+        // todo store instagram user data for further requests
+        var user = new Users($scope.user);
+        user.instagramAccessToken = promise.access_token;
+
+        user.$update(function (response) {
+          Authentication.user = response;
+          console.log('productsmedia.client.controller - load page after callback Instagram - success');
+          // Redirect to product detail page and open modal there
+          $location.path('products/' + $location.search().code + '/editmedia?instco=success');
+
+        }, function (errorResponse) {
+          $scope.error = errorResponse.data.message;
+          $location.path('products/' + $location.search().code + '/editmedia?instco=error');
+        });
+
+      });
+    } else {
+      if ($location.search().error)
+      {
+        $scope.error = 'You did not grant mightymerce access to your Instagram account yet.';
+        console.log('productsmedia.client.controller - load page after callback Instagram - error');
+      }
+    }
+
     console.log('products.client.controller - load ProductsController');
 
     $scope.modalupdateProductPost = function (size, selectedProduct, postChannel, postStatus, postPublicationDate) {
@@ -215,7 +260,8 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
           var promiseOAuth = ProductsServices.twitterGetOAuthToken($scope.product._id);
           promiseOAuth.then(function successCallback(response) {
-            window.open('https://api.twitter.com/oauth/authenticate?oauth_token=' +response);
+            //window.open('https://api.twitter.com/oauth/authenticate?oauth_token=' +response);
+            $window.location.href('https://api.twitter.com/oauth/authenticate?oauth_token=' +response);
           });
         }
         else
@@ -252,7 +298,8 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
               var promiseOAuth = ProductsServices.twitterGetOAuthToken($scope.product._id);
               promiseOAuth.then(function successCallback(response) {
-                window.open('https://api.twitter.com/oauth/authorize?oauth_token=' +response);
+                //window.open('https://api.twitter.com/oauth/authorize?oauth_token=' +response);
+                $window.location.href('https://api.twitter.com/oauth/authorize?oauth_token=' +response);
               });
             }
 

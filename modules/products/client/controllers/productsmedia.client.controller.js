@@ -15,65 +15,28 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
     console.log('productsmedia.client.controller - load ProductsMediaController');
 
     // Load page after Instagram callback
-    if($location.search().code){
-      console.log('productsmedia.client.controller - load page after callback Instagram - start');
-      // should return oauth_token & oauth_verifier
-      var instagramCode = $location.search().code;
-      console.log('productsmedia.client.controller - load page after callback Instagram - code: ' +instagramCode);
+    if($location.search().instco === 'success'){
+      console.log('product.client.controller - load page after callback Instagram - start');
 
-      var callback_url = '';
-
-      if ($location.host() === 'localhost'){
-        callback_url = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/products?this=' + $location.search().this;
-      } else {
-        callback_url = $location.protocol() + '://' + $location.host() + '/products/?this=' + $location.search().this;
-      }
-
-      // get Instagram Access Token
-      var promiseOAuthVerifier = ProductsServices.instagramGetAccessToken(instagramCode, $location.search().this);
-      promiseOAuthVerifier.then(function(promise) {
-
-        console.log('productsmedia.client.controller - load page after callback Instagram - return: ' +promise.access_token);
-
-        // todo store instagram user data for further requests
-        var user = new Users($scope.user);
-        user.instagramAccessToken = promise.access_token;
-
-        user.$update(function (response) {
-          Authentication.user = response;
-
-          // Show user message if tokens stored successful
-          //$scope.success = 'Your Instagram account verification was successful. Please click on - Create Post - again.';
-          $scope.modalInstance = $uibModal.open({
-            //animation: $scope.animationsEnabled,
-            templateUrl: 'modules/products/client/views/media-instagram.product.modal.view.html',
-            controller: function ($scope, product) {
-              $scope.product = product;
-              $scope.varPostStatus = postStatus;
-              $scope.varPostPublicationDate = postPublicationDate;
-              $scope.varPostChannel = postChannel;
-            },
-            size: 'md',
-            resolve: {
-              product: function () {
-                return selectedProduct;
-              }
-            }
-          });
-
-          console.log('productsmedia.client.controller - load page after callback Instagram - success');
-        }, function (errorResponse) {
-          $scope.error = errorResponse.data.message;
-          console.log('productsmedia.client.controller - load page after callback Instagram - error update mm db');
-        });
-
+      $scope.modalInstance = $uibModal.open({
+        //animation: $scope.animationsEnabled,
+        templateUrl: 'modules/products/client/views/media-instagram.product.modal.view.html',
+        controller: function ($scope, product) {
+          $scope.product = product;
+          $scope.varPostStatus = postStatus;
+          $scope.varPostPublicationDate = postPublicationDate;
+          $scope.varPostChannel = postChannel;
+        },
+        size: 'md',
+        resolve: {
+          product: function () {
+            return selectedProduct;
+          }
+        }
       });
-    } else {
-      if ($location.search().error)
-      {
-        $scope.error = 'You did not grant mightymerce access to your Instagram account yet.';
-        console.log('productsmedia.client.controller - load page after callback Instagram - error');
-      }
+    } else if ($location.search().instco === 'error') {
+      $scope.error = 'You did not grant mightymerce access to your Instagram account yet. Please try again.';
+      console.log('productsmedia.client.controller - load page after callback Instagram - error');
     }
 
     // Remove existing Products
