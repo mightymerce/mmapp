@@ -62,10 +62,10 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
     // Load page after Instagram callback
     if($location.search().code){
-      console.log('productsmedia.client.controller - load page after callback Instagram - start');
+      console.log('products.client.controller - load page after callback Instagram - start');
       // should return oauth_token & oauth_verifier
       var instagramCode = $location.search().code;
-      console.log('productsmedia.client.controller - load page after callback Instagram - code: ' +instagramCode);
+      console.log('products.client.controller - load page after callback Instagram - code: ' +instagramCode);
 
       var callback_url = '';
 
@@ -79,7 +79,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       var promiseOAuthVerifier = ProductsServices.instagramGetAccessToken(instagramCode, $location.search().this);
       promiseOAuthVerifier.then(function(promise) {
 
-        console.log('productsmedia.client.controller - load page after callback Instagram - return: ' +promise.access_token);
+        console.log('products.client.controller - load page after callback Instagram - return: ' +promise.access_token);
 
         // todo store instagram user data for further requests
         var user = new Users($scope.user);
@@ -87,13 +87,25 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
         user.$update(function (response) {
           Authentication.user = response;
-          console.log('productsmedia.client.controller - load page after callback Instagram - success');
+          console.log('products.client.controller - load page after callback Instagram - success');
           // Redirect to product detail page and open modal there
-          $location.path('products/' + $location.search().code + '/editmedia?instco=success');
+          var redirectURL = '';
+          if ($location.host() === 'localhost'){
+            redirectURL = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/products/' + $location.search().this + '/editmedia?instco=success';
+          } else {
+            redirectURL = $location.protocol() + '://' + $location.host() + '/products/' + $location.search().this + '/editmedia?instco=success';
+          }
+          window.open(redirectURL, "_self");
 
         }, function (errorResponse) {
           $scope.error = errorResponse.data.message;
-          $location.path('products/' + $location.search().code + '/editmedia?instco=error');
+          var redirectURL = '';
+          if ($location.host() === 'localhost'){
+            redirectURL = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/products/' + $location.search().this + '/editmedia?instco=error';
+          } else {
+            redirectURL = $location.protocol() + '://' + $location.host() + '/products/' + $location.search().this + '/editmedia?instco=error';
+          }
+          window.open(redirectURL, "_self");
         });
 
       });
@@ -260,8 +272,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
           var promiseOAuth = ProductsServices.twitterGetOAuthToken($scope.product._id);
           promiseOAuth.then(function successCallback(response) {
-            //window.open('https://api.twitter.com/oauth/authenticate?oauth_token=' +response);
-            $window.location.href('https://api.twitter.com/oauth/authenticate?oauth_token=' +response);
+            window.open('https://api.twitter.com/oauth/authenticate?oauth_token=' +response, "_self");
           });
         }
         else
@@ -298,13 +309,34 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
               var promiseOAuth = ProductsServices.twitterGetOAuthToken($scope.product._id);
               promiseOAuth.then(function successCallback(response) {
-                //window.open('https://api.twitter.com/oauth/authorize?oauth_token=' +response);
-                $window.location.href('https://api.twitter.com/oauth/authorize?oauth_token=' +response);
+                window.open('https://api.twitter.com/oauth/authorize?oauth_token=' +response, "_self");
               });
             }
 
           });
         }
+      }
+
+      if (postChannel === 'Instagram') {
+
+        console.log('products.client.controller - modalupdateProductPost - Instagram - open modal');
+
+        $scope.modalInstance = $uibModal.open({
+          //animation: $scope.animationsEnabled,
+          templateUrl: 'modules/products/client/views/post.product.modal.view.html',
+          controller: function ($scope, product) {
+            $scope.product = product;
+            $scope.varPostStatus = postStatus;
+            $scope.varPostPublicationDate = postPublicationDate;
+            $scope.varPostChannel = postChannel;
+          },
+          size: size,
+          resolve: {
+            product: function () {
+              return selectedProduct;
+            }
+          }
+        });
       }
 
     };

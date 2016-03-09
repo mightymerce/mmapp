@@ -14,29 +14,46 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
 
     console.log('productsmedia.client.controller - load ProductsMediaController');
 
-    // Load page after Instagram callback
-    if($location.search().instco === 'success'){
-      console.log('product.client.controller - load page after callback Instagram - start');
+    if (!$scope.loaded) {
+      // Load page after Instagram callback
+      if($location.search().instco === 'success'){
+        console.log('product.client.controller - load page after callback Instagram - start');
 
-      $scope.modalInstance = $uibModal.open({
-        //animation: $scope.animationsEnabled,
-        templateUrl: 'modules/products/client/views/media-instagram.product.modal.view.html',
-        controller: function ($scope, product) {
-          $scope.product = product;
-          $scope.varPostStatus = postStatus;
-          $scope.varPostPublicationDate = postPublicationDate;
-          $scope.varPostChannel = postChannel;
-        },
-        size: 'md',
-        resolve: {
-          product: function () {
-            return selectedProduct;
+        console.log('productsmedia.client.controller - modalupdateProductPost - Retrieve media');
+        ProductsServices.instagramGetMedia($scope.authentication.user.instagramAccessToken).then(function(productimages) {
+          console.log('productsmedia.client.controller - modalupdateProductPost - Retrieve media success: ' +productimages);
+          $scope.productimages = productimages;
+
+          for(var i = 0; i < productimages.length; i++) {
+            var data= productimages[i];
+
+            console.log(data.id);
           }
-        }
-      });
-    } else if ($location.search().instco === 'error') {
-      $scope.error = 'You did not grant mightymerce access to your Instagram account yet. Please try again.';
-      console.log('productsmedia.client.controller - load page after callback Instagram - error');
+
+          if (productimages){
+            $scope.modalInstance = $uibModal.open({
+              //animation: $scope.animationsEnabled,
+              templateUrl: 'modules/products/client/views/media-instagram.product.modal.view.html',
+              controller: function ($scope, product) {
+                $scope.productimages = productimages;
+                $scope.loaded = true;
+              },
+              size: 'md',
+              resolve: {
+                product: function () {
+                  return '';
+                }
+              }
+            });
+
+          } else {
+            $scope.error = 'Error loading your Instagram medias. Please try again.'
+          }
+        });
+      } else if ($location.search().instco === 'error') {
+        $scope.error = 'You did not grant mightymerce access to your Instagram account yet. Please try again.';
+        console.log('productsmedia.client.controller - load page after callback Instagram - error');
+      }
     }
 
     // Remove existing Products
@@ -142,7 +159,7 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
                   $scope.varPostPublicationDate = postPublicationDate;
                   $scope.varPostChannel = postChannel;
                 },
-                size: size,
+                size: 'md',
                 resolve: {
                   product: function () {
                     return selectedProduct;
