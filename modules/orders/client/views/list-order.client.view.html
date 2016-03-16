@@ -53,12 +53,12 @@
                       <td><span ng-bind="order.orderStatus"></span></td>
                       <td>
                         <div ng-show="order.orderStatus === 'SHIPPED'">
-                          <a class="btn btn-outline btn-default btn-sm" ng-click="modalreturnOrder('sm', order)" translate>
+                          <a class="btn btn-outline btn-default btn-sm" ng-click="modalreturnOrder('md', order)" translate>
                             BUTTON-RECEIVE-RETURN
                           </a>
                         </div>
                         <div ng-show="order.orderStatus === 'CREATED'">
-                          <a class="btn btn-warning btn-sm" ng-click="modalshipOrder('sm', order)" translate>
+                          <a class="btn btn-warning btn-sm" ng-click="modalshipOrder('md', order)" translate>
                             BUTTON-SHIP-ORDER
                           </a>
                         </div>
@@ -111,12 +111,12 @@
                     </td>
                     <td>
                       <div ng-show="order.orderStatus === 'SHIPPED'">
-                        <a class="btn btn-outline btn-default btn-xs" ng-click="modalreturnOrder('sm', order)" translate>
+                        <a class="btn btn-outline btn-default btn-xs" ng-click="modalreturnOrder('md', order)" translate>
                           BUTTON-RECEIVE-RETURN
                         </a>
                       </div>
                       <div ng-show="order.orderStatus === 'CREATED'">
-                        <a class="btn btn-warning btn-xs" ng-click="modalshipOrder('sm', order)" translate>
+                        <a class="btn btn-warning btn-xs" ng-click="modalshipOrder('md', order)" translate>
                           BUTTON-SHIP-ORDER
                         </a>
                       </div>

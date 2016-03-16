@@ -4,9 +4,11 @@
  * Module dependencies.
  */
 var ordersPolicy = require('../policies/orders.server.policy');
-var orders = require('../controllers/orders.server.controller');
+
 
 module.exports = function (app) {
+  var orders = require('../controllers/orders.server.controller');
+
   // Orders collection routes
   app.route('/api/orders').all(ordersPolicy.isAllowed)
     .get(orders.list)

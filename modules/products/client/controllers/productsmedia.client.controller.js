@@ -47,7 +47,7 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
             });
 
           } else {
-            $scope.error = 'Error loading your Instagram medias. Please try again.'
+            $scope.error = 'Error loading your Instagram medias. Please try again.';
           }
         });
       } else if ($location.search().instco === 'error') {
@@ -168,7 +168,7 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
               });
 
             } else {
-              $scope.error = 'Error loading your Instagram medias. Please try again.'
+              $scope.error = 'Error loading your Instagram medias. Please try again.';
             }
           });
         }

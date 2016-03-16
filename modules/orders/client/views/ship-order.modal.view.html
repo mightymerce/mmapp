@@ -8,13 +8,19 @@
             <i class="fa fa-cogs modal-icon"></i>
             <h4 class="modal-title" translate>LABEL-SHIP-ORDER</h4>
           </div>
+          <div ng-show="error" class="alert alert-danger">
+            <p ng-bind="error"></p>
+          </div>
+          <div ng-show="success" class="alert alert-success">
+            <p ng-bind="success"></p>
+          </div>
           <div class="modal-body-white">
             <p translate>TEXT-NOTE-TRACKING-ID-LINK</p>
             <input ng-model="orderTrackingNo" id="orderTrackingNo" class="form-control" placeholder="">
           </div>
           <div class="modal-body-white">
             <p translate>TEXT-NOTE-ADD-ADDITIONAL-CUSTOMER-MESSAGE</p>
-            <textarea rows="3" ng-model="ordereMailCustomerShipMessage" id="ordereMailCustomerShipMessage" class="form-control" placeholder=""></textarea>
+            <textarea rows="3" ng-model="ordereMailCustomerShipMessage" id="ordereMailCustomerShipMessage" class="supertext" placeholder="" rows="10"></textarea>
             <br>
           </div>
           <div class="modal-body">

@@ -25,6 +25,9 @@ module.exports = function (app) {
   app.route('/api/auth/userbyactivateurl').get(users.userByActivateURL);
   app.route('/api/auth/updateactivateuser').put(users.updateActivateUser);
 
+  // Send order eMails
+  app.route('/api/auth/sendordersubmit').post(users.sendOrderSubmit);
+
   // Setting the facebook oauth routes
   app.route('/api/auth/facebook').get(users.oauthCall('facebook', {
     scope: ['email']

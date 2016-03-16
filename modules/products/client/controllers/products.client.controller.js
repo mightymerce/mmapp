@@ -77,8 +77,8 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       }
 
       // get Instagram Access Token
-      var promiseOAuthVerifier = ProductsServices.instagramGetAccessToken(instagramCode, $location.search().this);
-      promiseOAuthVerifier.then(function(promise) {
+      var promiseOAuthVerifierInstagram = ProductsServices.instagramGetAccessToken(instagramCode, $location.search().this);
+      promiseOAuthVerifierInstagram.then(function(promise) {
 
         console.log('products.client.controller - load page after callback Instagram - return: ' +promise.access_token);
 
@@ -281,8 +281,8 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
           console.log('products.client.controller - modalupdateProductPost - Twitter - twitterVerifyCredentials - AccessToken: ' +$scope.authentication.user.twitterAccessToken);
 
           //if the user is a returning user, hide the sign in button and display the tweets
-          var promiseOAuth = ProductsServices.twitterVerifyCredentials($scope.authentication.user.twitterAccessToken, $scope.authentication.user.twitterAccessTokenSecret);
-          promiseOAuth.then(function successCallback(response) {
+          var promiseOAuthTwitter = ProductsServices.twitterVerifyCredentials($scope.authentication.user.twitterAccessToken, $scope.authentication.user.twitterAccessTokenSecret);
+          promiseOAuthTwitter.then(function successCallback(response) {
             if (response === 'valid') {
               // user is valid Twitter User
               // OPEN MODAL
@@ -308,8 +308,8 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
               // Twitter connect to get new credentials
               console.log('products.client.controller - modalupdateProductPost - Twitter - get new credentials');
 
-              var promiseOAuth = ProductsServices.twitterGetOAuthToken($scope.product._id);
-              promiseOAuth.then(function successCallback(response) {
+              var promiseOAuthTwitter = ProductsServices.twitterGetOAuthToken($scope.product._id);
+              promiseOAuthTwitter.then(function successCallback(response) {
                 window.open('https://api.twitter.com/oauth/authorize?oauth_token=' +response, "_self");
               });
             }
@@ -626,7 +626,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
         productId: $stateParams.productId
       }, function (product) {
         $scope.instagramImageSet = false;
-        if ($scope.product.instagramImageId || !$scope.product.instagramImageId === "")
+        if ($scope.product.instagramImageId || $scope.product.instagramImageId !== "")
         {
           $scope.instagramImageSet = true;
         }

@@ -596,7 +596,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
 
             // params.message = product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode;
             console.log('product.client.service - getEtsyOAuth - success');
-            return deferred.promise;
+            //return deferred.promise;
           })
           .error(function(msg,code) {
             console.log('product.client.service - getEtsyOAuth - error');

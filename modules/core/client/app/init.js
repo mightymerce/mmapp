@@ -414,7 +414,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
 
       // VIEW ----- ship-order.modal.view.html ------
       // LABELS
-      'LABEL-SHIP-ORDER':'Receive return',
+      'LABEL-SHIP-ORDER':'Ship order',
       'TEXT-NOTE-TRACKING-ID-LINK':'Tracking ID or Link (optional) ',
       'TEXT-NOTE-SHIPPING-NOTE-CUSTOMER-RECEIVE':'Please note: By shipping the order, your customer will automatically receive a standard shipping confirmation.',
 
@@ -938,7 +938,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
 
       // VIEW ----- ship-order.modal.view.html ------
       // LABELS
-      'LABEL-SHIP-ORDER':'Receive return',
+      'LABEL-SHIP-ORDER':'Ship order',
       'TEXT-NOTE-TRACKING-ID-LINK':'Tracking ID or Link (optional) ',
       'TEXT-NOTE-SHIPPING-NOTE-CUSTOMER-RECEIVE':'Please note: By shipping the order, your customer will automatically receive a standard shipping confirmation.',
 
@@ -1106,7 +1106,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).run(function ($ro
   $rootScope.$on('$viewContentLoaded', function(){
 
     var interval = setInterval(function(){
-      if (document.readyState == "complete") {
+      if (document.readyState === "complete") {
         window.scrollTo(0, 0);
         clearInterval(interval);
       }

@@ -127,6 +127,28 @@ angular.module('orders').factory('OrdersServices',
             // or server returns response with an error status.
           });
           return promise;
+        },
+
+        sendOrderSubmit: function sendOrderSubmit(userDisplayname, order, orderDHLID, ordereMailCustomerShipMessage){
+          console.log('orders.client.service - Start sendOrderSubmit');
+
+          var promise = $http.post('/api/auth/sendordersubmit', {
+            userDisplayName: userDisplayname,
+            ordereMail: 'mywagi@gmail.com',
+            //ordereMail: order.ordereMail,
+            orderName: order.orderPayerFirstName + ' ' + order.orderPayerLastName,
+            orderStreet: order.orderShipToStreet,
+            orderStreetNo: '',
+            orderZIP: order.orderShipToZip,
+            orderCity: order.orderShipToCity,
+            orderDHLID: orderDHLID,
+            ordereMailCustomerShipMessage: ordereMailCustomerShipMessage
+
+          }).then(function successCallback(response) {
+            console.log('authentication.client.service - sendOrderSubmit - success ');
+            return response.data;
+          });
+          return promise;
         }
       };
     }

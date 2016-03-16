@@ -40,7 +40,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
         if($scope.product.productItemInStock === '0'){
           //Out of stock and disable Buy button
           $scope.itemOutofStock = true;
-          $scope.error = 'Oups sorry. But this item is so popular and currently out of stock. We already reorded the item and apologize.'
+          $scope.error = 'Oups sorry. But this item is so popular and currently out of stock. We already reorded the item and apologize.';
         }
 
         // ToDo get channel from URL

@@ -338,6 +338,74 @@ exports.getDawandaOAuth = function (req, res, next) {
   });
 };
 
+/**
+ * Send Order Submitted email
+ */
+exports.sendOrderSubmit = function (req, res, next) {
+
+  console.log('orders.server.controller - sendOrderSubmit - start');
+
+  var smtpTransport = nodemailer.createTransport({
+    service: 'gmail',
+    secure: true, // use SSL
+    auth: {
+      user: 'wagner@mightymerce.com',
+      pass: 'pufyeytpdejudtfk'
+    }
+  });
+
+  var inputData = req.body;
+  var userDisplayName = inputData.userDisplayName;
+  var orderName = inputData.orderName;
+  var orderStreet = inputData.orderStreet;
+  var orderStreetNo = inputData.orderStreetNo;
+  var orderZIP = inputData.orderZIP;
+  var orderCity = inputData.orderCity;
+  var orderDHLID = inputData.orderDHLID;
+  var ordereMailCustomerShipMessage = inputData.ordereMailCustomerShipMessage;
+  var ordereMail = inputData.ordereMail;
+
+  if (orderDHLID === '' || !orderDHLID) {
+    orderDHLID = 'Keine';
+  }
+
+
+// setup e-mail data with unicode symbols
+  var mailOptions = {
+    from: 'Mightymermerce | Versendung <noreply@mightymerce.com>', // sender address
+    to: ordereMail, // list of receivers
+    subject: 'Deine Bestellung bei ' + userDisplayName + 'wurde versendet', // Subject line
+    text: 'Lieber Kunde,' +
+    '\n\n' +
+    'wir haben soeben Deine Bestellung per DHL an folgende Adresse verschickt:\n' +
+    orderName + ', ' + orderStreet + ' ' + orderStreetNo + ', ' + orderZIP + ' ' + orderCity +
+    '\n\n' +
+    ordereMailCustomerShipMessage +
+    '\n\n' +
+    'Deine Bestellung hat die DHL - Paketnummer:\n' +
+    orderDHLID +
+    '\n\n' +
+    'Du kannst den Status Deiner Bestellung im Internet unter http://nolp.dhl.de/nextt-online-public/set_identcodes.do?lang=de&zip=60388&idc=' + orderDHLID + ' online verfolgen.' +
+    '\n\n' +
+    'Sollte dieser Link mal nicht funktionieren:\n' +
+    'Sobald Dein Paket bei DHL erfasst worden ist, kannst Du den Status Deines Paketes im Internet unter www.dhl.de mit Angabe der Paketnummer verfolgen. Hierzu kopierst Du einfach die Paketnummer in das Feld "Sendungsverfolgung" und startest über den Button "Jetzt suchen" die Suche.' +
+    'Die Lieferzeiten per DHL betragen innerhalb Deutschlands 1-3 Werktage.' +
+    '\n\n' +
+    'Viele Grüßen\n' +
+    'Dein ' + userDisplayName + '-Team' // plaintext body
+  };
+
+  // send mail with defined transport object
+  smtpTransport.sendMail(mailOptions, function(error, info){
+    if(error){
+      return console.log(error);
+    }
+
+    console.log('orders.server.controller - sendOrderSubmit - sent mail success');
+    return res.json('success');
+  });
+};
+
 
 /**
  * Send activate email

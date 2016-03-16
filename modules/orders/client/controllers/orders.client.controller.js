@@ -176,13 +176,19 @@ angular.module('orders')
       order.ordereMailCustomerShipMessage = $scope.ordereMailCustomerShipMessage;
 
       order.$update(function () {
-        $scope.success = 'Your order has been updated to shipped and an eMail was sent to your customer.';
-        // ToDo send eMail
+        console.log('orders.client.controller - update - start updating order - success MM DB update');
+        OrdersServices.sendOrderSubmit($scope.authentication.user.displayName, order, $scope.orderTrackingNo, $scope.ordereMailCustomerShipMessage).then(function (response) {
+          if(response === 'success')
+          {
+            $scope.success = 'Your order has been updated to shipped and an eMail was sent to your customer.';
 
-        $scope.orderStatus = 'SHIPPED';
-        console.log('orders.client.controller - update - end updating order - success');
-        $scope.modalInstance.$dismiss();
-
+            $scope.orderStatus = 'SHIPPED';
+            console.log('orders.client.controller - update - end updating order - success');
+          }
+          else {
+            $scope.error = 'There was an error informing your customer via eMail. PLease contact your customer individualy.';
+          }
+        });
       }, function (errorResponse) {
         $scope.orderStatus = 'CREATED';
         $scope.error = errorResponse.data.message;
