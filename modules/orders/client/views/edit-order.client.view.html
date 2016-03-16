@@ -1,13 +1,13 @@
 <section ng-controller="OrdersController" ng-init="findOne()">
   <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-      <h2>Order </h2><h2 ng-bind="order._id"></h2>
+      <h2 translate>BREADCRUMB-ORDER</h2>
       <ol class="breadcrumb">
         <li>
-          <a href="index.html">Home</a>
+          <a ui-sref="dashboard" translate>BREADCRUMB-HOME</a>
         </li>
         <li class="active">
-          <strong>Orders</strong>
+          <strong translate>BREADCRUMB-ORDER-DETAIL</strong>
         </li>
       </ol>
     </div>
@@ -27,7 +27,7 @@
                 <i class="fa fa-credit-card fa-5x"></i>
               </div>
               <div class="col-xs-8 text-right">
-                <div><span> Payment Status </span></div>
+                <div><span translate>LABEL-PAYMENT-STATUS</span></div>
                 <div class="stat-percent text-white"><span data-ng-bind="order.orderPaymentStatus"></span></div>
               </div>
             </div>
@@ -40,7 +40,7 @@
                 <i class="fa fa-cogs fa-5x"></i>
               </div>
               <div class="col-xs-8 text-right">
-                <div><span> Order Status </span></div>
+                <div><span translate>LABEL-ORDER-STATUS</span></div>
                 <div class="stat-percent text-white"><span data-ng-bind="order.orderStatus"></span></div>
               </div>
             </div>
@@ -53,7 +53,7 @@
                 <i class="fa fa-calendar fa-5x"></i>
               </div>
               <div class="col-xs-8 text-right">
-                <div><span> Payment Date </span></div>
+                <div><span translate>LABEL-PAYMENT-DATE</span></div>
                 <div class="stat-percent"><span data-ng-bind="order.orderPaymentDate"></span></div>
               </div>
             </div>
@@ -66,7 +66,7 @@
                 <i class="fa fa-feed fa-5x"></i>
               </div>
               <div class="col-xs-8 text-right">
-                <div><span> Ordered via </span></div>
+                <div><span translate>LABEL-ORDERED-VIA</span></div>
                 <div class="stat-percent"><span data-ng-bind="order.orderChannel"></span></div>
               </div>
             </div>
@@ -77,7 +77,7 @@
         <div class="col-lg-4">
           <div class="ibox float-e-margins">
             <div class="ibox-title">
-              <h5>Billing Address</h5>
+              <h5 translate>LABEL-BILLING-ADDRESS</h5>
             </div>
             <div class="ibox-content">
               <address>
@@ -93,7 +93,7 @@
         <div class="col-lg-4">
           <div class="ibox float-e-margins">
             <div class="ibox-title">
-              <h5>Shipping Address</h5>
+              <h5 translate>LABEL-SHIPPING-ADDRESS</h5>
             </div>
             <div class="ibox-content" >
               <address>
@@ -109,7 +109,7 @@
         <div class="col-lg-4">
           <div class="ibox float-e-margins">
             <div class="ibox-title">
-              <h5>eMail Address</h5>
+              <h5 translate>LABEL-EMAIL-ADDRESS</h5>
             </div>
             <div class="ibox-content">
               <address>
@@ -127,8 +127,8 @@
                 <i class="fa fa-money fa-5x"></i>
               </div>
               <div class="col-xs-8 text-right">
-                <div><span> Subtotal </span></div>
-                <div class="stat-percent text-white"><span data-ng-bind="order.orderShipToSubtotalAmount"></span> <span data-ng-bind="order.orderShipToCurrencyCode"></div>
+                <div><span translate>LABEL-SUBTOTAL</span></div>
+                <div class="stat-percent text-white"><span data-ng-bind="order.orderShipToSubtotalAmount"></span> <span data-ng-bind="order.orderShipToCurrencyCode"></span></div>
               </div>
             </div>
           </div>
@@ -140,7 +140,7 @@
                 <i class="fa fa-truck fa-5x"></i>
               </div>
               <div class="col-xs-8 text-right">
-                <div><span> Shipping Costs </span></div>
+                <div><span translate>LABEL-SHIPPING-COST</span></div>
                 <div class="stat-percent text-white"><span data-ng-bind="order.orderShippingCost"></span> <span data-ng-bind="order.orderShipToCurrencyCode"></span></div>
               </div>
             </div>
@@ -153,7 +153,7 @@
                 <i class="fa fa-money fa-5x"></i>
               </div>
               <div class="col-xs-8 text-right">
-                <div><span> Total Amount </span></div>
+                <div><span translate>LABEL-TOTAL-AMOUNT</span></div>
                 <div class="stat-percent"><span data-ng-bind="order.orderShipToTotalAmount"></span> <span data-ng-bind="order.orderShipToCurrencyCode"></span></div>
               </div>
             </div>
@@ -166,7 +166,7 @@
                 <i class="fa fa-university fa-5x"></i>
               </div>
               <div class="col-xs-8 text-right">
-                <div><span> Incl. VAT (</span><span data-ng-bind="order.orderTax"></span><span> %) </span></div>
+                <div><span translate>LABEL-INCL-VAT</span><span data-ng-bind="order.orderTax"></span><span> %) </span></div>
                 <div class="stat-percent"><span data-ng-bind="order.orderTaxAmount"></span> <span data-ng-bind="order.orderShipToCurrencyCode"></span></div>
               </div>
             </div>
@@ -175,18 +175,18 @@
       </div>
       <div class="row">
         <div class="col-lg-12">
-          <div ng-show="order.orderStatus === 'SHIPPED'">
-            <a class="btn btn-outline btn-default btn-xs" ng-click="modalreturnOrder('sm', order)">
-              Receive Return
+          <div class="ibox-content" ng-show="order.orderStatus === 'SHIPPED'">
+            <a class="btn btn-warning btn-block" ng-click="modalreturnOrder('sm', order)" translate>
+              BUTTON-RECEIVE-RETURN
             </a>
           </div>
           <div class="ibox-content" ng-show="order.orderStatus !== 'SHIPPED'">
-            <a class="btn btn-warning btn-block" ng-click="modalshipOrder('sm', order)">
-              Ship order
+            <a class="btn btn-warning btn-block" ng-click="modalshipOrder('sm', order)" translate>
+              BUTTON-SHIP-ORDER
             </a>
           </div>
           <div class="ibox-content-grey" align="center" ng-show="order.orderStatus === 'SHIPPED'">
-            <i class="fa fa-map-marker fa-3x"></i><span> Tracking number </span><strong><span data-ng-bind="order.orderTrackingNo"></span></strong>
+            <i class="fa fa-map-marker fa-3x"></i><span translate>LABEL-TRACKING-NO</span><strong><span data-ng-bind="order.orderTrackingNo"></span></strong>
           </div>
         </div>
       </div>
@@ -195,7 +195,7 @@
           <div class="col-lg-12">
             <div class="ibox float-e-margins">
               <div class="ibox-title">
-                <h5>Ordered products</h5>
+                <h5 translate>LABEL-ORDERED-PRODUCTS</h5>
                 <div class="ibox-tools"></div>
               </div>
               <div class="ibox-content">
@@ -203,10 +203,10 @@
                   <thead>
                   <tr>
                     <th data-toggle="true"></th>
-                    <th data-hide="phone">Product no.</th>
-                    <th data-hide="phone">Product title</th>
-                    <th data-hide="phone">Product price</th>
-                    <th data-hide="phone">Quantity</th>
+                    <th data-hide="phone" translate>LABEL-PRODUCT-NO</th>
+                    <th data-hide="phone" translate>LABEL-PRODUCT-TITLE</th>
+                    <th data-hide="phone" translate>LABEL-PRODUCT-PRICE</th>
+                    <th data-hide="phone" translate>LABEL-QUANTITY</th>
                     <th class="text-right" data-sort-ignore="true"></th>
                   </tr>
                   </thead>
@@ -217,7 +217,7 @@
                     <td><span ng-bind="product.productTitle"></span></td>
                     <td><span ng-bind="product.productPrice"></span></td>
                     <td><span ng-bind="order.orderProductQuantity"></span></td>
-                    <td><button type="button" class="btn btn-outline btn-default btn-xs" ui-sref="products.edit({productId: product._Id})">Go to product</button></td>
+                    <td><button type="button" class="btn btn-outline btn-default btn-xs" ui-sref="products.edit({productId: product._Id})" translate>BUTTON-GO-TO-PRODUCT</button></td>
                   </tr>
                   </tbody>
                 </table>
@@ -231,31 +231,31 @@
           <div class="col-lg-12">
             <div class="ibox float-e-margins">
               <div class="ibox-title">
-                <h5>Payment Details</h5>
+                <h5 translate>LABEL-PAYMENT-DETAILS</h5>
                 <div class="ibox-tools"></div>
               </div>
               <div class="ibox-content">
-                <div class="form-group"><label class="col-sm-2 control-label">Payment Type</label>
+                <div class="form-group"><label class="col-sm-2 control-label" translate>LABEL-PAYMENT-TYPE</label>
                   <div class="col-sm-4">
                     <label ng-bind="order.orderPaymentType" class="col-sm-2 control-label"></label>
                   </div>
                 </div>
-                <div class="form-group"><label class="col-sm-2 control-label">Payment Status</label>
+                <div class="form-group"><label class="col-sm-2 control-label" translate>LABEL-PAYMENT-STATUS</label>
                   <div class="col-sm-4">
                     <label ng-bind="order.orderPaymentStatus" class="col-sm-2 control-label"></label>
                   </div>
                 </div>
-                <div class="form-group"><label class="col-sm-2 control-label">Account ID</label>
+                <div class="form-group"><label class="col-sm-2 control-label" translate>LABEL-ACCOUNT-ID</label>
                   <div class="col-sm-4">
                     <label ng-bind="order.orderPayerID" class="col-sm-2 control-label"></label>
                   </div>
                   <div class="col-sm-2">
                     <div class="tooltip-demo">
-                      <button type="button" class="btn btn-default" tooltip-placement="top" tooltip="To verify payment and to process a return open your PayPal account and enter PayPal Account ID of your customer and/or Transaction ID for this order .">i</button>
+                      <button type="button" class="btn btn-default" tooltip-placement="top" uib-tooltip="{{'TEXT-TOOLTIP-HOW-REVIEW-ORDER' | translate}}">i</button>
                     </div>
                   </div>
                 </div>
-                <div class="form-group"><label class="col-sm-2 control-label">Transaction ID</label>
+                <div class="form-group"><label class="col-sm-2 control-label" translate>LABEL-TRANSACTION-ID</label>
                   <div class="col-sm-4">
                     <label ng-bind="order.orderTransactionID" class="col-sm-2 control-label"></label>
                   </div>
@@ -269,16 +269,16 @@
         <div class="row">
           <div class="col-lg-4">
             <div>
-              <a class="btn btn-outline btn-default" ng-click="modalcancelOrder('sm', order)">
-                Cancel Order
+              <a class="btn btn-outline btn-default" ng-click="modalcancelOrder('sm', order)" translate>
+                BUTTON-CANCEL-ORDER
               </a>
-              <button type="button" class="btn btn-outline btn-default" ui-sref="orders.list">Back to order overview</button>
+              <button type="button" class="btn btn-outline btn-default" ui-sref="orders.list" translate>BUTTON-BACK-ORDER-OVERVIEW</button>
             </div>
           </div>
           <div class="col-lg-8" align="right">
             <div ng-show="order.orderStatus === 'CREATED'">
-              <a class="btn btn-warning" ng-click="modalshipOrder('sm', order)">
-                Ship order
+              <a class="btn btn-warning" ng-click="modalshipOrder('sm', order)" translate>
+                BUTTON-SHIP-ORDER
               </a>
             </div>
           </div>

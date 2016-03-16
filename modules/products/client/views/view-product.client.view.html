@@ -84,7 +84,7 @@
                             <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i> Create Post</a>
                             <a class="btn btn-w-m btn-default"><i class="fa fa-amazon"></i> Create Post</a>
                           </div>
-                          <div class="col-lg-7">
+                          <div class="col-lg-9">
                             <div ng-show="basicData">
                               <strong><p>Your available sales channels:</p></strong>
                               <a class="btn btn-w-m btn-warning" ng-click="modalupdateProductPost('md', product, 'Facebook', 'New', '00.00.0000')"><i class="fa fa-facebook"></i> Create Post</a>
@@ -93,18 +93,18 @@
                               <a ng-show="instagramImageSet" class="btn btn-w-m btn-warning" ng-click="modalupdateProductPost('md', product, 'Instagram', 'New', '00.00.0000')"><i class="fa fa-instagram"></i> Create Comment</a>
                               <a ng-hide="instagramImageSet" class="btn btn-w-m btn-default" ><i class="fa fa-instagram"></i> Create Comment</a>
                               <p ng-hide="instagramImageSet">Note: Please go to "Images" tab first to add a product image for Instagram!</p>
+                              <a class="btn btn-w-m btn-warning" ng-click="modalupdateProductPost('md', product, 'Code', 'New', '00.00.0000')"><i class="fa fa-code"></i> Code snippet</a>
                             </div>
                           </div>
-                          <div class="col-lg-5">
+                          <div class="col-lg-3">
                             <div ng-show="basicData">
                               <p>Service comeing soon:</p>
-                              <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i> Code snippet</a>
+                              <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i>Dawanda Create Post</a>
                               <br><br>
                             </div>
                             <div ng-show="basicData">
-                              <p>Services in dvelopment:</p>
+                              <p>Services in development:</p>
                               <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i>Etsy Create Post</a>
-                              <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i>Dawanda Create Post</a>
                               <br><br>
                             </div>
                           </div>
@@ -132,13 +132,13 @@
                               <td><span ng-bind="post.postStatus"></span></td>
                               <td>
                                 <div ng-show="post.postStatus === 'Active'">
-                                  <a class="btn btn-primary btn-outline btn-sm" ng-click="modalupdateProductPost('md', product, post.postChannel, post.postStatus, post.postPublicationDate)"><i class="fa fa-check"></i> View Post</a>
+                                  <a class="btn btn-primary btn-outline btn-sm" ng-click="modalupdateProductPost('md', product, post.postChannel, post.postStatus, post.postPublicationDate, post.postInformation)"><i class="fa fa-check"></i> View Post</a>
                                 </div>
                                 <div ng-show="post.postStatus === 'Wait'">
-                                  <a class="btn btn-warning btn-outline btn-sm" ng-click="modalupdateProductPost('md', product, post.postChannel, post.postStatus, post.postPublicationDate)"><i class="fa fa-warning"></i> Review Post</a>
+                                  <a class="btn btn-warning btn-outline btn-sm" ng-click="modalupdateProductPost('md', product, post.postChannel, post.postStatus, post.postPublicationDate, post.postInformation)"><i class="fa fa-warning"></i> Review Post</a>
                                 </div>
                                 <div ng-show="post.postStatus === 'Error'">
-                                  <a class="btn btn-danger btn-outline btn-sm" ng-click="modalupdateProductPost('md', product, post.postChannel, post.postStatus, post.postPublicationDate)"><i class="fa fa-pencil"></i> Review Post</a>
+                                  <a class="btn btn-danger btn-outline btn-sm" ng-click="modalupdateProductPost('md', product, post.postChannel, post.postStatus, post.postPublicationDate, post.postInformation)"><i class="fa fa-pencil"></i> Review Post</a>
                                 </div>
                               </td>
                             </tr>

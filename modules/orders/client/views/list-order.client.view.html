@@ -3,13 +3,13 @@
 
   <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-      <h2>Orders</h2>
+      <h2 translate>BREADCRUMB-ORDER</h2>
       <ol class="breadcrumb">
         <li>
-          <a href="index.html">Home</a>
+          <a ui-sref="dashboard" translate>BREADCRUMB-HOME</a>
         </li>
         <li class="active">
-          <strong>Orders</strong>
+          <strong translate>BREADCRUMB-ORDER</strong>
         </li>
       </ol>
     </div>
@@ -29,18 +29,18 @@
             </div>
             <div class="ibox float-e-margins">
               <div class="ibox-title">
-                <h5>Your Open Orders</h5>
+                <h5 translate>LABEL-OPEN-ORDERS</h5>
                 <div class="ibox-tools"></div>
               </div>
               <div class="ibox-content">
                 <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                   <thead>
                     <tr>
-                      <th data-toggle="true">Order ID</th>
-                      <th data-hide="phone">Date</th>
-                      <th data-hide="phone">Customer</th>
-                      <th data-hide="phone">Payment</th>
-                      <th data-hide="phone">Order Status</th>
+                      <th data-toggle="true" translate>LABEL-TABLE-HEADER-ORDER-ID</th>
+                      <th data-hide="phone" translate>LABEL-TABLE-HEADER-DATE</th>
+                      <th data-hide="phone" translate>LABEL-TABLE-HEADER-CUSTOMER</th>
+                      <th data-hide="phone" translate>LABEL-TABLE-HEADER-PAYMENT</th>
+                      <th data-hide="phone" translate>LABEL-TABLE-HEADER-ORDER-STATUS</th>
                       <th class="text-right" data-sort-ignore="true"></th>
                     </tr>
                   </thead>
@@ -53,45 +53,45 @@
                       <td><span ng-bind="order.orderStatus"></span></td>
                       <td>
                         <div ng-show="order.orderStatus === 'SHIPPED'">
-                          <a class="btn btn-outline btn-default btn-sm" ng-click="modalreturnOrder('sm', order)">
-                            Receive Return
+                          <a class="btn btn-outline btn-default btn-sm" ng-click="modalreturnOrder('sm', order)" translate>
+                            BUTTON-RECEIVE-RETURN
                           </a>
                         </div>
                         <div ng-show="order.orderStatus === 'CREATED'">
-                          <a class="btn btn-warning btn-sm" ng-click="modalshipOrder('sm', order)">
-                            Ship order
+                          <a class="btn btn-warning btn-sm" ng-click="modalshipOrder('sm', order)" translate>
+                            BUTTON-SHIP-ORDER
                           </a>
                         </div>
                       </td>
                       <td>
                         <div>
-                          <a class="btn btn-outline btn-default btn-sm" ui-sref="orders.edit({orderId: order._id})">
-                            View details
+                          <a class="btn btn-outline btn-default btn-sm" ui-sref="orders.edit({orderId: order._id})" translate>
+                            BUTTON-VIEW-DETAILS
                           </a>
                         </div>
                       </td>
                     </tr>
                   </tbody>
                 </table>
-                <div class="alert alert-warning text-center" ng-if="orders.$resolved && !orders.length">
-                  No orders have been placed yet.
+                <div class="alert alert-warning text-center" ng-if="orders.$resolved && !orders.length" translate>
+                  MESSAGE-NO-ORDERS-PLACED
                 </div>
               </div>
             </div>
             <div class="ibox float-e-margins">
               <div class="ibox-title">
-                <h5>Your Shipped Orders</h5>
+                <h5 translate>LABEL-SHIPPED-ORDERS</h5>
                 <div class="ibox-tools"></div>
               </div>
               <div class="ibox-content">
                 <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                   <thead>
                   <tr>
-                    <th data-toggle="true">Order ID</th>
-                    <th data-hide="phone">Date</th>
-                    <th data-hide="phone">Customer</th>
-                    <th data-hide="phone">Payment</th>
-                    <th data-hide="phone">Order Status</th>
+                    <th data-toggle="true" translate>LABEL-TABLE-HEADER-ORDER-ID</th>
+                    <th data-hide="phone" translate>LABEL-TABLE-HEADER-DATE</th>
+                    <th data-hide="phone" translate>LABEL-TABLE-HEADER-CUSTOMER</th>
+                    <th data-hide="phone" translate>LABEL-TABLE-HEADER-PAYMENT</th>
+                    <th data-hide="phone" translate>LABEL-TABLE-HEADER-ORDER-STATUS</th>
                     <th class="text-right" data-sort-ignore="true"></th>
                   </tr>
                   </thead>
@@ -104,45 +104,45 @@
                     <td><span ng-bind="order.orderStatus"></span></td>
                     <td>
                       <div>
-                        <a class="btn btn-outline btn-default btn-xs" ui-sref="orders.edit({orderId: order._id})">
-                          View details
+                        <a class="btn btn-outline btn-default btn-xs" ui-sref="orders.edit({orderId: order._id})" translate>
+                          BUTTON-VIEW-DETAILS
                         </a>
                       </div>
                     </td>
                     <td>
                       <div ng-show="order.orderStatus === 'SHIPPED'">
-                        <a class="btn btn-outline btn-default btn-xs" ng-click="modalreturnOrder('sm', order)">
-                          Receive Return
+                        <a class="btn btn-outline btn-default btn-xs" ng-click="modalreturnOrder('sm', order)" translate>
+                          BUTTON-RECEIVE-RETURN
                         </a>
                       </div>
                       <div ng-show="order.orderStatus === 'CREATED'">
-                        <a class="btn btn-warning btn-xs" ng-click="modalshipOrder('sm', order)">
-                          Ship order
+                        <a class="btn btn-warning btn-xs" ng-click="modalshipOrder('sm', order)" translate>
+                          BUTTON-SHIP-ORDER
                         </a>
                       </div>
                     </td>
                   </tr>
                   </tbody>
                 </table>
-                <div class="alert alert-warning text-center" ng-if="orders.$resolved && !orders.length">
-                  No orders have been shipped yet.
+                <div class="alert alert-warning text-center" ng-if="orders.$resolved && !orders.length" translate>
+                  MESSAGE-NO-ORDERS-SHIPPED
                 </div>
               </div>
             </div>
             <div class="ibox float-e-margins">
               <div class="ibox-title">
-                <h5>Your Returned Orders</h5>
+                <h5 translate>LABEL-RETURNED-ORDERS</h5>
                 <div class="ibox-tools"></div>
               </div>
               <div class="ibox-content">
                 <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                   <thead>
                   <tr>
-                    <th data-toggle="true">Order ID</th>
-                    <th data-hide="phone">Date</th>
-                    <th data-hide="phone">Customer</th>
-                    <th data-hide="phone">Payment</th>
-                    <th data-hide="phone">Order Status</th>
+                    <th data-toggle="true" translate>LABEL-TABLE-HEADER-ORDER-ID</th>
+                    <th data-hide="phone" translate>LABEL-TABLE-HEADER-DATE</th>
+                    <th data-hide="phone" translate>LABEL-TABLE-HEADER-CUSTOMER</th>
+                    <th data-hide="phone" translate>LABEL-TABLE-HEADER-PAYMENT</th>
+                    <th data-hide="phone" translate>LABEL-TABLE-HEADER-ORDER-STATUS</th>
                     <th class="text-right" data-sort-ignore="true"></th>
                   </tr>
                   </thead>
@@ -155,28 +155,28 @@
                     <td><span ng-bind="order.orderStatus"></span></td>
                     <td>
                       <div>
-                        <a class="btn btn-outline btn-default btn-xs" ui-sref="orders.edit({orderId: order._id})">
-                          View details
+                        <a class="btn btn-outline btn-default btn-xs" ui-sref="orders.edit({orderId: order._id})" translate>
+                          BUTTON-VIEW-DETAILS
                         </a>
                       </div>
                     </td>
                     <td>
                       <div ng-show="order.orderStatus === 'SHIPPED'">
-                        <a class="btn btn-outline btn-default btn-xs" ng-click="modalreturnOrder('sm', order)">
-                          Receive Return
+                        <a class="btn btn-outline btn-default btn-xs" ng-click="modalreturnOrder('sm', order)" translate>
+                          BUTTON-RECEIVE-RETURN
                         </a>
                       </div>
                       <div ng-show="order.orderStatus === 'CREATED'">
-                        <a class="btn btn-warning btn-xs" ng-click="modalshipOrder('sm', order)">
-                          Ship order
+                        <a class="btn btn-warning btn-xs" ng-click="modalshipOrder('sm', order)" translate>
+                          BUTTON-SHIP-ORDER
                         </a>
                       </div>
                     </td>
                   </tr>
                   </tbody>
                 </table>
-                <div class="alert alert-warning text-center" ng-if="orders.$resolved && !orders.length">
-                  No orders have been returned yet.
+                <div class="alert alert-warning text-center" ng-if="orders.$resolved && !orders.length" translate>
+                  MESSAGE-NO-ORDERS-RETURNED
                 </div>
               </div>
             </div>

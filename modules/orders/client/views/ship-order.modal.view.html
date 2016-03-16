@@ -6,23 +6,23 @@
           <div class="modal-header">
             <button type="button" class="close" ng-click="$dismiss()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             <i class="fa fa-cogs modal-icon"></i>
-            <h4 class="modal-title">Ship order</h4>
+            <h4 class="modal-title" translate>LABEL-SHIP-ORDER</h4>
           </div>
           <div class="modal-body-white">
-            <p>Tracking ID or Link (optional) </p>
+            <p translate>TEXT-NOTE-TRACKING-ID-LINK</p>
             <input ng-model="orderTrackingNo" id="orderTrackingNo" class="form-control" placeholder="">
           </div>
           <div class="modal-body-white">
-            <p>Add an individual message for the customer (optional) </p>
+            <p translate>TEXT-NOTE-ADD-ADDITIONAL-CUSTOMER-MESSAGE</p>
             <textarea rows="3" ng-model="ordereMailCustomerShipMessage" id="ordereMailCustomerShipMessage" class="form-control" placeholder=""></textarea>
             <br>
           </div>
           <div class="modal-body">
-            <span>Please note: By shipping the order, your customer will automatically receive a standard shipping confirmation.</span>
+            <span translate>TEXT-NOTE-SHIPPING-NOTE-CUSTOMER-RECEIVE</span>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-white" ng-click="$dismiss()">Cancel</button>
-            <button type="submit" class="btn btn-primary">Yes, ship order</button>
+            <button type="button" class="btn btn-white" ng-click="$dismiss()" translate>BUTTON-CANCEL</button>
+            <button type="submit" class="btn btn-primary" translate>BUTTON-YES-SHIP-ORDER</button>
           </div>
         </form>
       </div>

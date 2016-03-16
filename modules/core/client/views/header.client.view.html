@@ -11,10 +11,10 @@
         <li class="dropdown" uib-dropdown>
           <ul class="nav navbar-nav" ng-if="menu.shouldRender(authentication.user);">
             <li class="active" ng-show="{{basicData}}">
-              <a aria-expanded="false" role="button" ui-sref="dashboard"> Dashboard</a>
+              <a aria-expanded="false" role="button" ui-sref="dashboard" translate>LABEL-HEADER-DASHBOARD</a>
             </li>
             <li class="active" ng-hide="{{basicData}}">
-              <a aria-expanded="false" role="button" ui-sref="tutorial"> Tutorial</a>
+              <a aria-expanded="false" role="button" ui-sref="tutorial" translate>LABEL-HEADER-TUTORIAL</a>
             </li>
             <li ng-repeat="item in menu.items | orderBy: 'position'" ng-if="item.shouldRender(authentication.user);" ng-switch="item.type" ng-class="{ active: $state.includes(item.state), dropdown: item.type === 'dropdown' }" class="{{item.class}}" uib-dropdown="item.type === 'dropdown'">
               <a ng-switch-when="dropdown" class="dropdown-toggle" uib-dropdown-toggle role="button">{{::item.title}}&nbsp;<span class="caret"></span></a>
@@ -46,8 +46,8 @@
           <li>
             <a ui-sref="orders.list">
               <div>
-                <i class="fa fa-shopping-cart fa-fw"></i> You have {{ noOpenOrders }} open orders
-                <span class="pull-right text-muted small">(Status: CREATED)</span>
+                <i class="fa fa-shopping-cart fa-fw"></i><span translate>TEXT-YOU-HAVE</span> {{ noOpenOrders }} <span translate>TEXT-OPEN-ORDERS</span>
+                <span class="pull-right text-muted small" translate>TEXT-STATUS-CREATED</span>
               </div>
             </a>
           </li>
@@ -56,8 +56,8 @@
             <div class="dropdown-messages-box" ui-sref="orders.edit({orderId: order._id})">
               <div class="media-body ">
                 <small class="pull-right text-navy" ng-bind="order.orderDate | date:'mediumDate'"></small>
-                 customer: <strong>{{order.orderCustomer}}</strong> order amount: <strong>{{order.orderShipToTotalAmount}} €</strong>. <br>
-                <small class="text-muted"> via Channel: {{order.orderChannel}}</small>
+                  <span translate>LABEL-CUSTOMER</span>: <strong>{{order.orderCustomer}}</strong> <span translate>LABEL-ORDER-AMOUNT</span>: <strong>{{order.orderShipToTotalAmount}} €</strong>. <br>
+                <small class="text-muted"><span translate>LABEL-VIA-CHANNEL</span>: {{order.orderChannel}}</small>
               </div>
             </div>
           </li>
@@ -65,7 +65,7 @@
           <li>
             <div class="text-center link-block">
               <a ui-sref="orders.list">
-                <strong>See All Ordres</strong>
+                <strong translate>LABEL-SEE-ALL-ORDERS</strong>
                 <i class="fa fa-angle-right"></i>
               </a>
             </div>
@@ -77,7 +77,7 @@
       <ul class="nav navbar-top-links navbar-right" ng-hide="!authentication.user">
         <li>
           <a ng-click="signout()">
-            <i class="fa fa-sign-out"></i> Log out
+            <i class="fa fa-sign-out"></i> <span translate>LABEL-LOGOUT</span>
           </a>
         </li>
       </ul>
@@ -88,19 +88,19 @@
           </a>
           <ul class="dropdown-menu" uib-dropdown-menu="" role="menu">
             <li ui-sref-active="active">
-              <a ui-sref="profile">Profile</a>
+              <a ui-sref="profile" translate>LABEL-PROFILE</a>
             </li>
             <li ui-sref-active="active">
-              <a ui-sref="logo">Logo</a>
+              <a ui-sref="logo" translate>LABEL-LOGO</a>
             </li>
             <li ui-sref-active="active">
-              <a ui-sref="payment">Payment</a>
+              <a ui-sref="payment" translate>LABEL-PAYMENT</a>
             </li>
             <li ui-sref-active="active">
-              <a ui-sref="subscription">Subscription</a>
+              <a ui-sref="subscription" translate>LABEL-SUBSCRIPTION</a>
             </li>
             <li ui-sref-active="active" ng-show="authentication.user.provider === 'local'">
-              <a ui-sref="settings.password">Change Password</a>
+              <a ui-sref="settings.password" translate>LABEL-CHANGE-PASSWORD</a>
             </li>
             <li class="divider"></li>
           </ul>
@@ -108,11 +108,11 @@
       </ul>
       <ul class="nav navbar-nav navbar-right" ng-hide="authentication.user">
         <li ui-sref-active="active">
-          <a ui-sref="authentication.signup">Sign Up</a>
+          <a ui-sref="authentication.signup" translate>BUTTON-TEXT-SIGNUP</a>
         </li>
         <li class="divider-vertical"></li>
         <li ui-sref-active="active">
-          <a ui-sref="authentication.signin">Sign In</a>
+          <a ui-sref="authentication.signin" translate>BUTTON-TEXT-SIGNIN</a>
         </li>
       </ul>
 

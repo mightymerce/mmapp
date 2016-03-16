@@ -53,44 +53,42 @@
                               <div class="row">
                                 <div class="col-xs-2">
                                   <div ng-show="facebookPostsAvailable" class="widget style1 navy-bg" align="center">
-                                    <i class="fa fa-facebook fa-3x"></i><span> Posts: <strong>{{ facebookPostsNo }}</strong></span>
+                                    <i class="fa fa-facebook fa-2x"></i><span> Posts: <strong>{{ facebookPostsNo }}</strong></span>
                                   </div>
                                   <div ng-show="!facebookPostsAvailable" class="widget style1 red-bg" align="center">
-                                    <i class="fa fa-facebook fa-3x"></i><span> Posts: <strong>{{ facebookPostsNo }}</strong></span>
+                                    <i class="fa fa-facebook fa-2x"></i><span> Posts: <strong>{{ facebookPostsNo }}</strong></span>
                                   </div>
                                 </div>
                                 <div class="col-xs-2">
                                   <div ng-show="pinterestPostsAvailable" class="widget style1 navy-bg" align="center">
-                                    <i class="fa fa-pinterest fa-3x"></i><span> Pins: <strong>{{ pinterestPostsNo }}</strong></span>
+                                    <i class="fa fa-pinterest fa-2x"></i><span> Pins: <strong>{{ pinterestPostsNo }}</strong></span>
                                   </div>
                                   <div ng-show="!pinterestPostsAvailable" class="widget style1 red-bg" align="center">
-                                    <i class="fa fa-pinterest fa-3x"></i><span> Pins: <strong>{{ pinterestPostsNo }}</strong></span>
+                                    <i class="fa fa-pinterest fa-2x"></i><span> Pins: <strong>{{ pinterestPostsNo }}</strong></span>
                                   </div>
                                 </div>
                                 <div class="col-xs-2">
                                   <div  ng-show="twitterPostsAvailable" class="widget style1 navy-bg" align="center">
-                                    <i class="fa fa-twitter fa-3x"></i><span> Tweets: <strong>{{ twitterPostsNo }}</strong></span>
+                                    <i class="fa fa-twitter fa-2x"></i><span> Tweets: <strong>{{ twitterPostsNo }}</strong></span>
                                   </div>
                                   <div  ng-show="!twitterPostsAvailable" class="widget style1 red-bg" align="center">
-                                    <i class="fa fa-twitter fa-3x"></i><span> Tweets: <strong>{{ twitterPostsNo }}</strong></span>
+                                    <i class="fa fa-twitter fa-2x"></i><span> Tweets: <strong>{{ twitterPostsNo }}</strong></span>
                                   </div>
                                 </div>
                                 <div class="col-xs-2">
-                                  <div class="widget style1 gray-bg" align="center">
-                                    <i class="fa fa-instagram fa-3x"></i><span> Comments: <strong>0</strong></span>
+                                  <div  ng-show="instagramPostsAvailable" class="widget style1 navy-bg" align="center">
+                                    <i class="fa fa-instagram fa-2x"></i><span> Comment: <strong>{{ instagramPostsNo }}</strong></span>
                                   </div>
-                                </div>
-                                <div class="col-xs-2">
-                                  <div class="widget style1 gray-bg" align="center">
-                                    <i class="fa fa-google-plus fa-3x"></i><span> Posts: <strong>0</strong></span>
+                                  <div  ng-show="!instagramPostsAvailable" class="widget style1 red-bg" align="center">
+                                    <i class="fa fa-instagram fa-2x"></i><span> Comment: <strong>{{ instagramPostsNo }}</strong></span>
                                   </div>
                                 </div>
                                 <div class="col-xs-2">
                                   <div ng-show="codeSnippetPostsAvailable" class="widget style1 navy-bg" align="center">
-                                    <i class="fa fa-code fa-3x"></i><span> Posts: <strong>{{ codeSnippetPostsNo }}</strong></span>
+                                    <i class="fa fa-code fa-2x"></i><span> Posts: <strong>{{ codeSnippetPostsNo }}</strong></span>
                                   </div>
                                   <div ng-show="!codeSnippetPostsAvailable" class="widget style1 red-bg" align="center">
-                                    <i class="fa fa-code fa-3x"></i><span> Posts: <strong>{{ codeSnippetPostsNo }}</strong></span>
+                                    <i class="fa fa-code fa-2x"></i><span> Posts: <strong>{{ codeSnippetPostsNo }}</strong></span>
                                   </div>
                                 </div>
                               </div>

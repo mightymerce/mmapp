@@ -2,16 +2,16 @@
 
   <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-      <h2>User</h2>
+      <h2 translate>HEADLINE-ACCOUNT-AREA</h2>
       <ol class="breadcrumb">
         <li>
-          <a href="index.html">Home</a>
+          <a ui-sref="dashboard" translate>BREADCRUMB-HOME</a>
         </li>
         <li>
           <span ng-bind="authentication.user.displayName"></span>
         </li>
         <li class="active">
-          <strong>Profile</strong>
+          <strong translate>HEADLINE-SUB-EDIT-PROFILE</strong>
         </li>
       </ol>
     </div>
@@ -31,61 +31,61 @@
               <p ng-bind="success"></p>
             </div>
             <div class="ibox-title">
-              <h5>Company Details</h5>
+              <h5 translate>HEADLINE-SUB-COMPANY-DETAILS</h5>
               <div class="ibox-tools"></div>
             </div>
             <div class="ibox-content">
               <div>
-                <p class="">
-                  For the receipt of a monthly invoice, please provide your company’s address details.
+                <p class="" translate>
+                  NOTE-PROVIDE-COMPANY-DETAILS
                 </p>
               </div>
-              <div class="form-group"><label class="col-sm-2 control-label">Company Name*</label>
+              <div class="form-group"><label class="col-sm-2 control-label" translate>LABEL-COMPANY-NAME</label>*
                 <div class="col-sm-8">
                   <input type="text" ng-bind="user.displayName" ng-model="user.displayName" id="displayName" class="form-control" placeholder="" required></div>
                 <div ng-messages="profileForm.displayName.$error" role="alert">
-                  <p class="help-block error-text" ng-message="required">Company Name is required.</p>
+                  <p class="help-block error-text" ng-message="required" translate>VALIDATION-COMPANY-NAME-REQ</p>
                 </div>
                 <div class="col-sm-2">
                 </div>
               </div>
-              <div class="form-group"><label class="col-sm-2 control-label">First Name*</label>
+              <div class="form-group"><label class="col-sm-2 control-label" translate>LABEL-FIRST-NAME</label>*
                 <div class="col-sm-8">
                   <input type="text" ng-bind="user.firstName" ng-model="user.firstName" id="firstName" class="form-control" placeholder="" required></div>
                 <div ng-messages="profileForm.firstName.$error" role="alert">
-                  <p class="help-block error-text" ng-message="required">First Name is required.</p>
+                  <p class="help-block error-text" ng-message="required" translate>VALIDATION-FIRST-NAME-REQ</p>
                 </div>
                 <div class="col-sm-2">
                 </div>
               </div>
-              <div class="form-group"><label class="col-sm-2 control-label">Last Name*</label>
+              <div class="form-group"><label class="col-sm-2 control-label" translate>LABEL-LAST-NAME</label>*
                 <div class="col-sm-8"><input ng-bind="user.lastName" ng-model="user.lastName" id="lastName" class="form-control" placeholder="" required></div>
                 <div ng-messages="profileForm.lastName.$error" role="alert">
-                  <p class="help-block error-text" ng-message="required">Last Name is required.</p>
+                  <p class="help-block error-text" ng-message="required" translate>VALIDATION-LAST-NAME-REQ</p>
                 </div>
               </div>
-              <div class="form-group"><label class="col-sm-2 control-label">Street*</label>
+              <div class="form-group"><label class="col-sm-2 control-label" translate>LABEL-STREET</label>*
                 <div class="col-sm-8"><input ng-bind="user.street" ng-model="user.street" id="street" class="form-control" placeholder="" required></div>
                 <div ng-messages="profileForm.street.$error" role="alert">
-                  <p class="help-block error-text" ng-message="required">Street is required.</p>
+                  <p class="help-block error-text" ng-message="required" translate>VALIDATION-STREET-REQ</p>
                 </div>
               </div>
-              <div class="form-group"><label class="col-sm-2 control-label">Street No.*</label>
+              <div class="form-group"><label class="col-sm-2 control-label" translate>LABEL-STREET-NO</label>*
                 <div class="col-sm-8"><input ng-bind="user.streetno" ng-model="user.streetno" id="streetno" class="form-control" placeholder="" required></div>
                 <div ng-messages="profileForm.streetno.$error" role="alert">
-                  <p class="help-block error-text" ng-message="required">Street No. is required.</p>
+                  <p class="help-block error-text" ng-message="required" translate>VALIDATION-STREET-NO-REQ</p>
                 </div>
               </div>
-              <div class="form-group"><label class="col-sm-2 control-label">Zip Code*</label>
+              <div class="form-group"><label class="col-sm-2 control-label" translate>LABEL-ZIP-CODE</label>*
                 <div class="col-sm-8"><input ng-bind="user.zipcode" ng-model="user.zipcode" id="zipcode" class="form-control" placeholder="" required></div>
                 <div ng-messages="profileForm.zipcode.$error" role="alert">
-                  <p class="help-block error-text" ng-message="required">Zip Code is required.</p>
+                  <p class="help-block error-text" ng-message="required" translate>VALIDATION-ZIP-CODE-REQ</p>
                 </div>
               </div>
-              <div class="form-group"><label class="col-sm-2 control-label">City*</label>
+              <div class="form-group"><label class="col-sm-2 control-label" translate>LABEL-CITY</label>*
                 <div class="col-sm-8"><input ng-model="user.city" ng-model="user.city" id="city" class="form-control" placeholder="" required></div>
                 <div ng-messages="profileForm.city.$error" role="alert">
-                  <p class="help-block error-text" ng-message="required">City is required.</p>
+                  <p class="help-block error-text" ng-message="required" translate>VALIDATION-CITY-REQ</p>
                 </div>
               </div>
             </div>
@@ -95,8 +95,8 @@
         <div class="col-lg-12">
           <div class="ibox float-e-margins">
             <div align="right">
-              <a ng-hide="basicData" ui-sref="tutorial" class="btn btn-w-m btn-warning btn-outline">Return to tutorial</a>
-              <button type="submit" class="btn btn-w-m btn-warning">Update profile data</button>
+              <a ng-hide="basicData" ui-sref="tutorial" class="btn btn-w-m btn-warning btn-outline" translate>BUTTON-BACK-TUTORIAL</a>
+              <button type="submit" class="btn btn-w-m btn-warning" translate>BUTTON-UPDATE-PROFILE-DATA</button>
             </div>
           </div>
         </div>

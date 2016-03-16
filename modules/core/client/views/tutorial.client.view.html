@@ -6,10 +6,8 @@
         <div class="col-lg-12">
           <div class="ibox float-e-margins">
             <div class="ibox-content gray-bg" align="center">
-              <h2>Welcome <span ng-bind="authentication.user.displayName"></span></h2>
-              <p>Take these 5 steps and you are ready to sell products on your
-                customer’s favorite social channels and market places.
-              </p>
+              <h2><span translate>LABEL-WELCOME</span> <span ng-bind="authentication.user.displayName"></span></h2>
+              <p translate>MESSAGE-EXPLAIN-TUTORIAL</p>
             </div>
           </div>
         </div>
@@ -29,16 +27,16 @@
                   </div>
 
                   <div class="vertical-timeline-content">
-                    <h2>Add your company details</h2>
-                    <p>The basics. Please add your company details.</p>
-                    <div  class="text-navy" ng-show="showCompanyDetailsComplete">
-                      <h2>Completed <i class="fa fa-check"></i></h2>
+                    <h2 translate>LABEL-ADD-COMPANY-DETAILS</h2>
+                    <p translate>The basics. Please add your company details.</p>
+                    <div class="text-navy" ng-show="showCompanyDetailsComplete">
+                      <h2><span translate>LABEL-COMPLETED</span> <i class="fa fa-check"></i></h2>
                     </div>
                     <div ng-show="showCompanyDetails">
-                      <a href="#" class="btn btn-warning" ui-sref="profile">Maintain company data</a>
+                      <a href="#" class="btn btn-warning" ui-sref="profile" translate>LABEL-MAINTAIN-COMPANY-DATA</a>
                     </div>
                     <div ng-show="showCompanyDetailsComplete">
-                      <a href="#" class="btn btn-primary btn-outline" ui-sref="profile">Maintain company data</a>
+                      <a href="#" class="btn btn-primary btn-outline" ui-sref="profile" translate>LABEL-MAINTAIN-COMPANY-DATA</a>
                     </div>
                   </div>
                 </div>
@@ -52,16 +50,16 @@
                   </div>
 
                   <div class="vertical-timeline-content">
-                    <h2>Maintain your legal data</h2>
-                    <p>Please add your terms and conditions, return policies, data policies and impress to make sure that your offer complies with legal regulatory.</p>
+                    <h2 translate>LABEL-ADD-LEGAL-DATA</h2>
+                    <p translate>LABEL-NOTE-ADD-TERMS-AND-CONDITIONS</p>
                     <div  class="text-navy" ng-show="showLegalDetailsComplete">
-                      <h2>Completed <i class="fa fa-check"></i></h2>
+                      <h2><span translate>LABEL-COMPLETED</span> <i class="fa fa-check"></i></h2>
                     </div>
                     <div ng-show="showLegalDetails">
-                      <a href="#" class="btn btn-warning" ui-sref="legals.create">Maintain legal data</a>
+                      <a href="#" class="btn btn-warning" ui-sref="legals.create" translate>LABEL-MAINTAIN-LEGAL-DATA</a>
                     </div>
                     <div ng-show="showLegalDetailsComplete">
-                      <a href="#" class="btn btn-primary btn-outline" ui-sref="legals.create">Maintain legal data</a>
+                      <a href="#" class="btn btn-primary btn-outline" ui-sref="legals.create" translate>LABEL-MAINTAIN-LEGAL-DATA</a>
                     </div>
                   </div>
                 </div>
@@ -75,17 +73,16 @@
                   </div>
 
                   <div class="vertical-timeline-content">
-                    <h2>Connect your PayPal account</h2>
-                    <p>Activate your PayPal account to facilitate checkout for your customers and to enable payments to your account.
-                    </p>
+                    <h2 translate>LABEL-ADD-PAYPAL</h2>
+                    <p translate>LABEL-NOTE-ADD-PAYPAL</p>
                     <div class="text-navy" ng-show="showPaypalDetailsComplete">
-                      <h2>Completed <i class="fa fa-check"></i></h2>
+                      <h2><span translate>LABEL-COMPLETED</span> <i class="fa fa-check"></i></h2>
                     </div>
                     <div ng-show="showPaypalDetails">
-                      <a href="#" class="btn btn-warning" ui-sref="payment">Connect to Paypal</a>
+                      <a href="#" class="btn btn-warning" ui-sref="payment" translate>LABEL-CONNECT-TO-PAYPAL</a>
                     </div>
                     <div ng-show="showPaypalDetailsComplete">
-                      <a href="#" class="btn btn-primary btn-outline" ui-sref="payment">Connect to Paypal</a>
+                      <a href="#" class="btn btn-primary btn-outline" ui-sref="payment" translate>LABEL-CONNECT-TO-PAYPAL</a>
                     </div>
                   </div>
                 </div>
@@ -99,18 +96,17 @@
                   </div>
 
                   <div class="vertical-timeline-content">
-                    <h2>Add your delivery options</h2>
-                    <p>Enable customers to select their preferred delivery option by adding your delivery options.</p>
-                    <p>Note: We added a standard delivery option for 3,50 € when setting up your account. In case that
-                    doesn't fit to your delivery costs, you easily can change this option - by clicking on "Maintain delivery options".</p>
+                    <h2 translate>LABEL-ADD-DELIVERY-OPTION</h2>
+                    <p translate>LABEL-NOTE-ADD-DELIVERY-OPTION</p>
+                    <p translate>LABEL-NOTE-HINT-ADDED-DELIVERY-OPTION</p>
                     <div class="text-navy" ng-show="showDeliveryDetailsComplete">
-                      <h2>Completed <i class="fa fa-check"></i></h2>
+                      <h2><span translate>LABEL-COMPLETED</span> <i class="fa fa-check"></i></h2>
                     </div>
                     <div ng-show="showDeliveryDetails">
-                      <a href="#" class="btn btn-warning" ui-sref="deliverys.list">Verify delivery options</a>
+                      <a href="#" class="btn btn-warning" ui-sref="deliverys.list" translate>LABEL-VERIFY-DELIVERY-OPTION</a>
                     </div>
                     <div ng-show="showDeliveryDetailsComplete">
-                      <a href="#" class="btn btn-primary btn-outline" ui-sref="deliverys.list">Maintain delivery options</a>
+                      <a href="#" class="btn btn-primary btn-outline" ui-sref="deliverys.list" translate>LABEL-VERIFY-DELIVERY-OPTION</a>
                     </div>
                   </div>
                 </div>
@@ -124,16 +120,16 @@
                   </div>
 
                   <div class="vertical-timeline-content">
-                    <h2>Maintain your first product </h2>
-                    <p>Maintain title, description, and pricing of your first product. Add an image of your product that is appealing to your customers.. </p>
+                    <h2 translate>LABEL-MAINTAIN-FIRST-PRODUCT</h2>
+                    <p translate>LABEL-NOTE-MAINTAIN-FIRST-PRODUCT</p>
                     <div class="text-navy" ng-show="showProductCreateComplete">
-                      <h2>Completed <i class="fa fa-check"></i></h2>
+                      <h2><span translate>LABEL-COMPLETED</span> <i class="fa fa-check"></i></h2>
                     </div>
                     <div ng-show="showProductCreate">
-                      <a href="#" class="btn btn-warning" ui-sref="products.create">Maintain product</a>
+                      <a href="#" class="btn btn-warning" ui-sref="products.create" translate>LABEL-MAINTAIN-PRODUCT</a>
                     </div>
                     <div ng-show="showProductCreateComplete">
-                      <a href="#" class="btn btn-primary btn-outline" ui-sref="products.create">Maintain product</a>
+                      <a href="#" class="btn btn-primary btn-outline" ui-sref="products.create" translate>LABEL-MAINTAIN-PRODUCT</a>
                     </div>
                   </div>
                 </div>

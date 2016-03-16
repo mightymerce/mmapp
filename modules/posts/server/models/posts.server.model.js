@@ -46,6 +46,11 @@ var PostSchema = new Schema({
     default: '',
     trim: true
   },
+  postInformation: {
+    type: String,
+    default: '',
+    trim: true
+  },
   user: {
     type: Schema.ObjectId,
     ref: 'User'

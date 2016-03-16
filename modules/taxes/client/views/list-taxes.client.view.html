@@ -1,16 +1,16 @@
 <section ng-controller="TaxesController" ng-init="find()">
   <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-      <h2>Shop Settings</h2>
+      <h2 translate>BREADCRUMB-SHOP-SETTINGS</h2>
       <ol class="breadcrumb">
         <li>
-          <a href="index.html">Home</a>
+          <span translate>HEADLINE-ACCOUNT-AREA</span>
         </li>
         <li>
-          <strong>Settings</strong>
+          <span translate>BREADCRUMB-SETTINGS</span>
         </li>
         <li class="active">
-          <strong>Taxes</strong>
+          <strong translate>BREADCRUMB-TAXES</strong>
         </li>
       </ol>
     </div>
@@ -24,15 +24,15 @@
         <div class="col-lg-12">
           <div class="ibox float-e-margins">
             <div class="ibox-title">
-              <h5>Tax rows</h5>
+              <h5 translate>LABEL-TAXES-OPTION</h5>
               <div class="ibox-tools"></div>
             </div>
             <div class="ibox-content">
               <table class="table table-hover">
                 <thead>
                 <tr>
-                  <th data-toggle="true">Code</th>
-                  <th data-toggle="true">Value</th>
+                  <th data-toggle="true" translate>LABEL-TABLE-HEADER-TAXES-CODE</th>
+                  <th data-toggle="true" translate>LABEL-TABLE-HEADER-TAXES-VALUE</th>
                 </tr>
                 </thead>
                 <tbody data-ng-repeat="taxe in taxes">
@@ -42,21 +42,21 @@
                   <td class="text-right">
                     <div class="btn-group">
                       <a class="btn-white btn-xs" ui-sref="taxes.edit({taxesId: taxe._id})">
-                        <i class="fa fa-cogs"></i> Edit tax option
+                        <i class="fa fa-cogs"></i> <span translate>BUTTON-EDIT-TAXRATE-OPTION</span>
                       </a>
                     </div>
                   </td>
                 </tr>
                 </tbody>
               </table>
-              <div class="alert alert-warning text-center" ng-if="taxes.$resolved && !taxes.length">
-                No tax row yet, why don't you <a ui-sref="taxes.create">create one</a>?
+              <div class="alert alert-warning text-center" ng-if="taxes.$resolved && !taxes.length" translate>
+                MESSAGE-NO-TAXES <a ui-sref="taxes.create" translate>MESSAGE-NO-CREATE-ONE</a>?
               </div>
             </div>
           </div>
           <div align="right">
-            <a class="btn btn-w-m btn-warning" ui-sref="taxes.create">
-              Add new tax option
+            <a class="btn btn-w-m btn-warning" ui-sref="taxes.create" translate>
+              BUTTON-ADD-NEW-TAXRATE
             </a>
           </div>
         </div>

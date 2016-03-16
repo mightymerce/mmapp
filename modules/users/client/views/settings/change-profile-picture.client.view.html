@@ -1,16 +1,16 @@
-<section class="row" ng-controller="ChangeProfilePictureController" id="profilePictureControllerID">
+<section ng-controller="ChangeProfilePictureController" id="profilePictureControllerID">
   <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
       <h2>User</h2>
       <ol class="breadcrumb">
         <li>
-          <a href="index.html">Home</a>
+          <a ui-sref="dashboard" translate>BREADCRUMB-HOME</a>
         </li>
         <li>
           <span ng-bind="authentication.user.displayName"></span>
         </li>
         <li class="active">
-          <strong>Brand Logo</strong>
+          <strong translate>BREADCRUMB-LOGO</strong>
         </li>
       </ol>
     </div>
@@ -24,7 +24,7 @@
         <div class="col-lg-4">
           <div class="ibox float-e-margins">
             <div class="ibox-title">
-              <h5>Your current Logo</h5>
+              <h5 translate>HEADLINE-SUB-YOUR-CURRENT-LOGO</h5>
               <div class="ibox-tools"></div>
             </div>
             <div class="ibox-content">
@@ -37,7 +37,7 @@
         <div class="col-lg-8">
           <div class="ibox float-e-margins">
             <div class="ibox-title">
-              <h5>Upload new Logo</h5>
+              <h5 translate>HEADLINE-SUB-UPLOAD-NEW-LOGO</h5>
               <div class="ibox-tools"></div>
             </div>
             <div class="ibox-content">
@@ -51,8 +51,8 @@
                   </div>
                   <div class="col-lg-3">
                     <div>
-                      <h2>Preview image</h2>
-                      <p>Note: Best fit for Logo image ...px / ...px</p>
+                      <h2 translate>LABEL-PREVIEW-IMAGE</h2>
+                      <p translate>LABEL-NOTE-BEST-FIT-LOGO</p>
                       <br>
                     </div>
                     <!-- <h3 class="page-header">Preview:</h3> -->
@@ -134,10 +134,10 @@
                     <div class="text-center form-group" ng-show="uploader.queue.length">
                       <button type="button" class="btn btn-warning" data-method="getCroppedCanvas">
                                 <span class="docs-tooltip" data-toggle="tooltip" title="Upload now!">
-                                </span><i class="glyphicon glyphicon-upload"></i> Save images
+                                </span><i class="glyphicon glyphicon-upload" translate></i>BUTTON-SAVE-IMAGE
                       </button>
                       <!-- <button class="btn btn-primary" ng-click="uploadProfilePicture();">Upload</button> -->
-                      <button class="btn btn-default" ng-click="cancelUpload();">Cancel</button>
+                      <button class="btn btn-default" ng-click="cancelUpload();" translate>BUTTON-CANCEL</button>
                     </div>
                   </div><!-- /.docs-buttons -->
                   <div class="col-md-3 docs-toggles" ng-hide="true">
@@ -150,15 +150,15 @@
                 <div class="row">
                   <div class="col-lg-7">
                     <div class="text-center form-group" ng-hide="uploader.queue.length">
-                      <label title="Upload image file" for="inputImage" class="btn btn-warning btn-block btn-file">
-                        Select Image <input type="file" accept="image/*" name="file" id="inputImage" class="hide" nv-file-select uploader="uploader">
+                      <label title="Upload image file" for="inputImage" class="btn btn-warning btn-block btn-file" translate>
+                        BUTTON-SELECT-IMAGE<input type="file" accept="image/*" name="file" id="inputImage" class="hide" nv-file-select uploader="uploader">
                       </label>
                     </div>
                     <div ng-show="error" class="alert alert-danger">
                       <p ng-bind="error"></p>
                     </div>
                     <div ng-show="success" class="alert alert-success">
-                      <strong>Logo changed Successfully</strong>
+                      <strong translate>MESSAGE-SUCCESS-LOGO-CHANGED</strong>
                     </div>
                   </div>
                 </div>

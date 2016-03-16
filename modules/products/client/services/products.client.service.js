@@ -195,7 +195,8 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                   postId: response.id,
                   postStatus: 'Active',
                   postPublicationDate: new Date(),
-                  postExternalPostKey: response.id
+                  postExternalPostKey: response.id,
+                  postInformation: ''
                 });
 
                 // Save post to MM
@@ -313,7 +314,8 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                   postId: 'xxx', //response.id,
                   postStatus: 'Active',
                   postPublicationDate: new Date(),
-                  postExternalPostKey: '' //response.id
+                  postExternalPostKey: '', //response.id
+                  postInformation: ''
                 });
                 // Save post to MM
                 post.$save(function (response) {
@@ -388,7 +390,8 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                   postId: response.data.id,
                   postStatus: 'Active',
                   postPublicationDate: new Date(),
-                  postExternalPostKey: response.data.id_str
+                  postExternalPostKey: response.data.id_str,
+                  postInformation: ''
                 });
 
                 post.$save(function (res) {
@@ -511,7 +514,8 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                     postId: Math.random().toString(36).slice(2), // Instagram does not respond with a id
                     postStatus: 'Active',
                     postPublicationDate: new Date(),
-                    postExternalPostKey: 'not available'
+                    postExternalPostKey: 'not available',
+                    postInformation: ''
                   });
 
                   post.$save(function (res) {
@@ -533,6 +537,45 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
 
       },
 
+      // ************************************
+      // **                                **
+      // **         Code Snippet           **
+      // **           services             **
+      // **                                **
+      // ************************************
+      //
+      //
+      codesnippetPostComment: function(product, postInformation) {
+        console.log('product.client.service - codesnippetPostComment - start');
+
+        var deferred = $q.defer();
+
+        // Save post to MM
+        // Create new Post object
+        var post = new Posts({
+          product: product._id,
+          channel: '963c7fab09f30c482f304279',
+          postChannel: 'Code',
+          postId: Math.random().toString(36).slice(2), // Instagram does not respond with a id
+          postStatus: 'Active',
+          postPublicationDate: new Date(),
+          postExternalPostKey: 'not available',
+          postInformation: postInformation
+        });
+
+        post.$save(function (res) {
+          console.log('products.client.service - codesnippetPostComment - Save Post on MM success!');
+          deferred.resolve('Success saving your comment! - Mightymerce Post-Id: ' +res._id);
+          return deferred.promise;
+        }, function (errorResponse) {
+          console.log('products.client.service - codesnippetPostComment - Save Post on MM error: ' +errorResponse);
+          deferred.reject(errorResponse);
+          return deferred.promise;
+        });
+
+        return deferred.promise;
+
+      },
 
       // ************************************
       // **                                **

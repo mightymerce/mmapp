@@ -1,16 +1,16 @@
 <section ng-controller="DeliverysController">
   <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-      <h2>Settings</h2>
+      <h2 translate>BREADCRUMB-SHOP-SETTINGS</h2>
       <ol class="breadcrumb">
         <li>
-          <a href="index.html">Home</a>
+          <span translate>HEADLINE-ACCOUNT-AREA</span>
         </li>
         <li>
-          <strong>Settings</strong>
+          <strong translate>BREADCRUMB-SETTINGS</strong>
         </li>
         <li class="active">
-          <strong>Delivery - Create</strong>
+          <strong translate>BREADCRUMB-DELIVERY-CREATE</strong>
         </li>
       </ol>
     </div>
@@ -30,43 +30,43 @@
           </div>
           <div class="ibox float-e-margins">
             <div class="ibox-title">
-              <h5>Delivery option</h5>
+              <h5 translate>LABEL-DELIVERY-OPTION</h5>
               <div class="ibox-tools"></div>
             </div>
             <div class="ibox-content">
-              <div class="form-group"><label class="col-sm-2 control-label">Delivery Title*</label>
+              <div class="form-group"><label class="col-sm-2 control-label" translate>LABEL-DELIVERY-TITLE</label>*
                 <div class="col-sm-8">
                   <input type="text" ng-model="deliveryTitle" id="deliveryTitle" class="form-control" placeholder="" required></div>
                 <div ng-messages="deliveryForm.deliveryTitle.$error" role="alert">
-                  <p class="help-block error-text" ng-message="required">Delivery title is required.</p>
+                  <p class="help-block error-text" ng-message="required" translate>VALIDATION-DELIVERY-TITLE</p>
                 </div>
                 <div class="col-sm-2">
                 </div>
               </div>
-              <div class="form-group"><label class="col-sm-2 control-label">Delivery Duration*</label>
+              <div class="form-group"><label class="col-sm-2 control-label" translate>LABEL-DELIVERY-DURATION</label>*
                 <div class="col-sm-8">
                   <input type="text" ng-model="deliveryTime" id="deliveryTime" class="form-control" placeholder="" required></div>
                 <div ng-messages="deliveryForm.deliveryTime.$error" role="alert">
-                  <p class="help-block error-text" ng-message="required">Delivery Duration is required.</p>
+                  <p class="help-block error-text" ng-message="required" translate>VALIDATION-DELIVERY-DURATION</p>
                 </div>
                 <div class="col-sm-2">
                 </div>
               </div>
-              <div class="form-group"><label class="col-sm-2 control-label">Delivery Country*</label>
+              <div class="form-group"><label class="col-sm-2 control-label" translate>LABEL-DELIVERY-COUNTRY</label>*
                 <div class="col-sm-8"><input ng-model="deliveryCountry" id="deliveryCountry" class="form-control" placeholder="" required></div>
                 <div ng-messages="deliveryForm.deliveryCountry.$error" role="alert">
-                  <p class="help-block error-text" ng-message="required">Delivery Country is required.</p>
+                  <p class="help-block error-text" ng-message="required" translate>VALIDATION-DELIVERY-COUNTRY</p>
                 </div>
               </div>
-              <div class="form-group"><label class="col-sm-2 control-label">Delivery Cost*</label>
+              <div class="form-group"><label class="col-sm-2 control-label" translate>LABEL-DELIVERY-COST</label>*
                 <div class="col-sm-8"><input ng-model="deliveryCost" type="text" pattern="[0-9]+([.][0-9]+)*" id="deliveryCost" class="form-control" placeholder="" required></div>
                 <div class="col-sm-2">
                   <div class="tooltip-demo">
-                    <button type="button" class="btn btn-default" tooltip-placement="top" uib-tooltip="Please enter delivery costs in the format 3.40 or 0.55 - there are no commas possible.">i</button>
+                    <button type="button" class="btn btn-default" tooltip-placement="top" uib-tooltip="{{'LABEL-TOOLTIP-COST-FORMAT' | translate}}">i</button>
                   </div>
                 </div>
                 <div ng-messages="deliveryForm.deliveryCost.$error" role="alert">
-                  <p class="help-block error-text" ng-message="required">Delivery Cost is required.</p>
+                  <p class="help-block error-text" ng-message="required" translate>VALIDATION-DELIVERY-COST</p>
                 </div>
               </div>
             </div>
@@ -76,8 +76,8 @@
         <div class="col-lg-12">
           <div class="ibox float-e-margins">
             <div align="right">
-              <a ng-hide="basicData" ui-sref="tutorial" class="btn btn-w-m btn-warning btn-outline">Return to tutorial</a>
-              <button type="submit" class="btn btn-w-m btn-warning">Save delivery data</button>
+              <a ng-hide="basicData" ui-sref="tutorial" class="btn btn-w-m btn-warning btn-outline" translate>BUTTON-BACK-TUTORIAL</a>
+              <button type="submit" class="btn btn-w-m btn-warning" translate>BUTTON-SAVE-DELIVERY</button>
             </div>
           </div>
         </div>

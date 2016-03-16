@@ -4,7 +4,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-8 col-sm-offset-2 text">
-            <h1 class="h1-login">mightymerce Registrierung</h1>
+            <h1 class="h1-login" translate>HEADLINE-SIGNUP</h1>
           </div>
         </div>
         <div class="row">
@@ -14,8 +14,7 @@
                 <a href="#" class="navbar-brand"><img alt="mightymerce.com - social commerce" class="" src="/modules/core/client/img/brand/mm_logo_grey_high.png"/></a>
               </div>
               <div class="form-top-left">
-                <h2>Verkaufe deine Produkte ganz einfach über die sozialen Kanäle und Marktplätze. Und das alles über eine zentrale Stelle. Ganz einfach. Versprochen.
-                </h2>
+                <h2 translate>HEADLINE-SUB-SIGNUP-WELCOME</h2>
               </div>
               <div class="form-top-right">
                 <i class="fa fa-pencil"></i>
@@ -25,20 +24,20 @@
               <form name="userForm" ng-submit="signup(userForm.$valid)" novalidate autocomplete="off" class="registration-form">
                 <fieldset>
                   <div class="form-group" show-errors>
-                    <input type="text" id="displayname" name="displayname" class="form-control" ng-model="credentials.displayName" placeholder="shop name" required>
+                    <input type="text" id="displayname" name="displayname" class="form-control" ng-model="credentials.displayName" placeholder="{{'PLACEHOLDER-LABEL-SHOPNAME' | translate}}" required>
                   </div>
                   <div class="form-group" show-errors>
-                    <input type="text" id="username" name="username" class="form-control" ng-model="credentials.username" placeholder="Email" lowercase required>
+                    <input type="text" id="username" name="username" class="form-control" ng-model="credentials.username" placeholder="{{'PLACEHOLDER-LABEL-EMAIL' | translate}}" lowercase required>
                   </div>
                   <div ng-show="false" class="form-group" show-errors>
                     <input type="text" name="email" placeholder="Email" class="form-email form-control" id="email" ng-model="credentials.email" lowercase>
                     <div ng-messages="userForm.email.$error" role="alert">
-                      <p class="help-block error-text" ng-message="required">Email required.</p>
-                      <p class="help-block error-text" ng-message="email">Email not valid.</p>
+                      <p class="help-block error-text" ng-message="required" translate>VALIDATION-REQ-EMAIL</p>
+                      <p class="help-block error-text" ng-message="email" translate>VALIDATION-VALID-EMAIL</p>
                     </div>
                   </div>
                   <div class="form-group" show-errors>
-                    <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="password" popover="{{popoverMsg}}" popover-trigger="focus" password-validator required>
+                    <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="{{'PLACEHOLDER-LABEL-PASSWORD' | translate}}" popover="{{popoverMsg}}" popover-trigger="focus" password-validator required>
                     <div ng-messages="userForm.password.$error" role="alert">
                       <div ng-repeat="passwordError in passwordErrors">
                         <p class="help-block error-text" ng-show="userForm.password.$error.requirements">{{passwordError}}</p>
@@ -46,13 +45,13 @@
                     </div>
                   </div>
                   <div class="form-group" ng-show="!userForm.password.$error.required">
-                    <label>Password requirements</label>
-                    <progressbar value="requirementsProgress" type="{{requirementsColor}}"><span style="color:white; white-space:nowrap;">{{requirementsProgress}}%</span></progressbar>
+                    <label translate>VALIDATION-REQUIREMENTS-PASSWORD</label>
+                    <uib-progressbar value="requirementsProgress" type="{{requirementsColor}}"><span style="color:white; white-space:nowrap;">{{requirementsProgress}}%</span></uib-progressbar>
                   </div>
                   <div class="text-center form-group">
-                    <button type="submit" class="btn buttonlogin">Sign up</button>
-                    &nbsp; or&nbsp;
-                    <a class="a-login" ui-sref="home">Sign in</a>
+                    <button type="submit" class="btn buttonlogin" translate>BUTTON-TEXT-SIGNUP</button>
+                    &nbsp;<span translate>LABEL-OR</span>&nbsp;
+                    <a class="a-login" ui-sref="home" translate>BUTTON-TEXT-SIGNIN</a>
                   </div>
                   <br>
                   <div ng-show="error" class="alert alert-danger">

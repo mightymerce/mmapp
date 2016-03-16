@@ -1,16 +1,16 @@
 <section ng-controller="CurrencysController">
   <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-      <h2>Settings</h2>
+      <h2 translate>BREADCRUMB-SHOP-SETTINGS</h2>
       <ol class="breadcrumb">
         <li>
-          <a href="index.html">Home</a>
+          <span translate>HEADLINE-ACCOUNT-AREA</span>
         </li>
         <li>
-          <strong>Settings</strong>
+          <strong translate>BREADCRUMB-SETTINGS</strong>
         </li>
         <li class="active">
-          <strong>Currency - Create</strong>
+          <strong translate>BREADCRUMB-CURRENCY-CREATE</strong>
         </li>
       </ol>
     </div>
@@ -24,24 +24,24 @@
         <div class="col-lg-12">
           <div class="ibox float-e-margins">
             <div class="ibox-title">
-              <h5>Currency option</h5>
+              <h5 translate>LABEL-CURRENCY-OPTION</h5>
               <div class="ibox-tools"></div>
             </div>
             <div class="ibox-content">
-              <div class="form-group"><label class="col-sm-2 control-label">Currency Code*</label>
+              <div class="form-group"><label class="col-sm-2 control-label" translate>LABEL-CURRENCY-CODE</label>*
                 <div class="col-sm-8">
                   <input type="text" ng-model="currencyCode" id="currencyCode" class="form-control" placeholder="" required></div>
                 <div ng-messages="currencyForm.currencyCode.$error" role="alert">
-                  <p class="help-block error-text" ng-message="required">Currency Code is required.</p>
+                  <p class="help-block error-text" ng-message="required" translate>VALIDATION-CURRENCY-CODE</p>
                 </div>
                 <div class="col-sm-2">
                 </div>
               </div>
-              <div class="form-group"><label class="col-sm-2 control-label">Currency Value*</label>
+              <div class="form-group"><label class="col-sm-2 control-label" translate>LABEL-CURRENCY-VALUE</label>*
                 <div class="col-sm-8">
                   <input type="text" ng-model="currencyValue" id="currencyValue" class="form-control" placeholder="" required></div>
                 <div ng-messages="currencyForm.currencyValue.$error" role="alert">
-                  <p class="help-block error-text" ng-message="required">Currency Value is required.</p>
+                  <p class="help-block error-text" ng-message="required" translate>VALIDATION-CURRENCY-VALUE</p>
                 </div>
                 <div class="col-sm-2">
                 </div>
@@ -53,7 +53,7 @@
         <div class="col-lg-12">
           <div class="ibox float-e-margins">
             <div class="form-group" align="right">
-              <button type="submit" class="btn btn-w-m btn-warning">Save currency data</button>
+              <button type="submit" class="btn btn-w-m btn-warning" translate>BUTTON-SAVE-CURRENCY</button>
             </div>
           </div>
         </div>

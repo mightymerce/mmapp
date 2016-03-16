@@ -18,6 +18,9 @@
           <div ng-show="varPostChannel === 'Instagram'">
             <i class="fa fa-instagram modal-icon"></i>
           </div>
+          <div ng-show="varPostChannel === 'Code'">
+            <i class="fa fa-code modal-icon"></i>
+          </div>
           <div ng-show="varPostChannel === 'Etsy'">
             <i class="">Etsy</i>
           </div>
@@ -26,6 +29,7 @@
           <div class="modal-body-green">
             <p><strong><span>Status post: </span></strong><span ng-bind="varPostStatus"></span></p>
             <p><strong><span>Posted on: </span></strong><span ng-bind="varPostPublicationDate"></span></p>
+            <p ng-show="varPostChannel === 'Code'"><strong><span>Your comment: </span></strong><span ng-bind="varPostComment"></span></p>
           </div>
         </div>
         <div ng-show="varPostStatus === 'Wait'">
@@ -115,6 +119,9 @@
           <div ng-show="varPostChannel === 'Instagram'  && varPostStatus === 'New'">
             <span>Please note: For Instagram all product information will be added as new comment including a link to the product details page to buy your product.</span>
           </div>
+          <div ng-show="varPostChannel === 'Code'  && varPostStatus === 'New'">
+            <span><strong>Instruction:</strong> Please copy the following code to any side you would like to make your product buyable. If you would like to remember where you put the code snippet you can add a comment in the input field and click 'Save Code Snippet Information'.</span>
+          </div>
           <br>
           <div ng-show="error" class="alert alert-success">
             <strong ng-bind="error"></strong>
@@ -155,6 +162,20 @@
           </div>
           <div ng-show="varPostChannel === 'Instagram' && varPostStatus === 'New'">
             <button type="button" class="btn btn-block btn-warning" ng-click="postPostInstagram()">Add Product details to Instagram</button>
+          </div>
+          <div ng-show="varPostChannel === 'Code' && varPostStatus === 'New'">
+            <div>
+              <textarea placeholder="{{copycode}}" class="supertext" ng-bind="copycode" rows="10"></textarea>
+            </div>
+            <br><br>
+            <div>
+              <p>I would like to save information about where I placed the code snippet:</p>
+              <textarea placeholder="e.g. My website" class="supertext" ng-model="postInformation" rows="2"></textarea>
+            </div>
+            <br>
+            <div>
+              <button type="button" class="btn btn-block btn-warning" ng-click="postPostCode()">Save Code Snippet Information</button>
+            </div>
           </div>
           <div ng-show="varPostChannel === 'Etsy' && varPostStatus === 'New'">
             <button type="submit" class="btn btn-warning">Post Product to Etsy</button>
@@ -209,7 +230,40 @@
             </div>
           </div>
           <div ng-show="varPostChannel === 'Code'">
-            <img ng-src="{{product.productMainImageURLCode}}" alt="{{product.productMainImageAlt}}" class="product-images-list">
+            <p><strong>Preview of your code snippet </strong><i>(This is not the final look of your snippet)</i></p>
+
+            <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="col-sm-6 col-md-4">
+                  <div class="thumbnail" >
+                    <img ng-src="{{product.productMainImageURLFacebook}}" class="img-responsive">
+                    <div class="caption">
+                      <div class="row">
+                        <div class="col-md-6 col-xs-6">
+                          <h3>{{product.productTitle}}</h3>
+                          </div>
+                        <div class="col-md-6 col-xs-6 price">
+                          <h3><label>{{product.productPrice}} {{productCurrency.currencyCode}}</label></h3>
+                          </div>
+                        </div>
+                      <p>{{product.productDescription}}</p>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <a ng-href="{{linkUrl}}" class="btn btn-warning btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Buy now!</a>
+                          </div>
+                        </div>
+                      <p> </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+            <!-- Optionales Theme -->
+            <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
           </div>
         </div>
       </form>

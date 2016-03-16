@@ -15,6 +15,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       $state.go('home', $state.previous.params);
     }
 
+
     // check if all tutorial fields are set
     if ($scope.authentication.user.tutorialCompanyDetail === '1' &&
         $scope.authentication.user.tutorialLegalDetail === '1' &&
@@ -119,7 +120,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
     console.log('products.client.controller - load ProductsController');
 
-    $scope.modalupdateProductPost = function (size, selectedProduct, postChannel, postStatus, postPublicationDate) {
+    $scope.modalupdateProductPost = function (size, selectedProduct, postChannel, postStatus, postPublicationDate, postComment) {
 
       console.log('products.client.controller - start open modal - ModalUpateProductPost');
       if (postChannel === 'Facebook') {
@@ -339,6 +340,84 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
         });
       }
 
+      if (postChannel === 'Code') {
+
+        console.log('products.client.controller - modalupdateProductPost - Code - open modal');
+
+        $scope.currency = Currencys.query({
+          _id: $scope.product.productCurrency
+        });
+
+        var linkUrl = $location.protocol() + '://' + $location.host();
+        if($location.host() === 'localhost'){
+          linkUrl = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/checkouts/' + $scope.product._id + '?channel=code';
+        } else {
+          linkUrl = $location.protocol() + '://' + $location.host() + '/checkouts/' + $scope.product._id + '?channel=code';
+        }
+        $scope.linkUrl = linkUrl;
+
+        var linkMainImageUrl = $location.protocol() + '://' + $location.host();
+        if($location.host() === 'localhost'){
+          linkMainImageUrl = $location.protocol() + '://' + $location.host() + ':' + $location.port() + $scope.product.productMainImageURLFacebook.substring(1);
+        } else {
+          linkMainImageUrl = $location.protocol() + '://' + $location.host() + $scope.product.productMainImageURLFacebook.substring(1);
+        }
+        $scope.linkMainImageUrl = linkMainImageUrl;
+
+        var price = $scope.product.productPrice + ' ' + $scope.currency.currencyCode;
+        $scope.price = price;
+
+        $scope.modalInstance = $uibModal.open({
+          //animation: $scope.animationsEnabled,
+          templateUrl: 'modules/products/client/views/post.product.modal.view.html',
+          controller: function ($scope, product) {
+
+            $scope.product = product;
+            $scope.varPostStatus = postStatus;
+            $scope.varPostPublicationDate = postPublicationDate;
+            $scope.varPostChannel = postChannel;
+            $scope.varPostComment = postComment;
+            $scope.copycode = '<div class="container">' +
+                '<div class="row">' +
+                  '<div class="col-md-12">' +
+                    '<div class="col-sm-6 col-md-4">' +
+                      '<div class="thumbnail" >' +
+                        '<img src="' + linkMainImageUrl + '" class="img-responsive">' +
+                        '<div class="caption">' +
+                          '<div class="row">' +
+                            '<div class="col-md-6 col-xs-6">' +
+                              '<h3>' + $scope.product.productTitle + '</h3>' +
+                            '</div>' +
+                            '<div class="col-md-6 col-xs-6 price">' +
+                              '<h3><label>' + price + '</label></h3>' +
+                            '</div>' +
+                          '</div>' +
+                          '<p>' + $scope.product.productDescription + '</p>' +
+                          '<div class="row">' +
+                            '<div class="col-md-6">' +
+                              '<a href="' + linkUrl + '" class="btn btn-warning btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Buy now!</a>' +
+                            '</div>' +
+                          '</div>' +
+                          '<p> </p>' +
+                        '</div>' +
+                      '</div>' +
+                    '</div>' +
+                  '</div>' +
+                '</div>' +
+                '</div>' +
+                '<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">' +
+                '<!-- Optionales Theme -->' +
+                '<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">';
+          },
+          size: size,
+          resolve: {
+            product: function () {
+              return selectedProduct;
+            }
+          }
+        });
+      }
+
     };
 
     $scope.productCurrency = Currencys.query({
@@ -545,6 +624,12 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
     $scope.findOne = function () {
       $scope.product = Products.get({
         productId: $stateParams.productId
+      }, function (product) {
+        $scope.instagramImageSet = false;
+        if ($scope.product.instagramImageId || !$scope.product.instagramImageId === "")
+        {
+          $scope.instagramImageSet = true;
+        }
       });
 
       $scope.productSelectId = $stateParams.productId;
@@ -559,11 +644,13 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       $scope.pinterestPostsAvailable = false;
       $scope.codeSnippetPostsAvailable = false;
       $scope.twitterPostsAvailable = false;
+      $scope.instagramPostsAvailable = false;
 
       var varFacebookPosts = 0;
       var varPinterestPosts = 0;
       var varCodeSnippetPosts = 0;
       var varTwitterPosts = 0;
+      var varInstagramPosts = 0;
 
       ProductsServices.getPosts($scope.authentication.user._id,$stateParams.productId).then(function (Posts) {
         $scope.posts = Posts;
@@ -580,23 +667,23 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
             varTwitterPosts += 1;
             $scope.twitterPostsAvailable = true;
           }
-          if (Posts[i].product === $stateParams.productId && Posts[i].postChannel === 'CodeSnippet') {
+          if (Posts[i].product === $stateParams.productId && Posts[i].postChannel === 'Code') {
             varCodeSnippetPosts += 1;
             $scope.codeSnippetPostsAvailable = true;
           }
+          if (Posts[i].product === $stateParams.productId && Posts[i].postChannel === 'Instagram') {
+            varInstagramPosts += 1;
+            $scope.instagramPostsAvailable = true;
+          }
         }
-        console.log('products.client.controller - findone() - varFacebookPosts: ' +varFacebookPosts);
 
         $scope.facebookPostsNo = varFacebookPosts;
         $scope.pinterestPostsNo = varPinterestPosts;
         $scope.codeSnippetPostsNo = varCodeSnippetPosts;
         $scope.twitterPostsNo = varTwitterPosts;
+        $scope.instagramPostsNo = varInstagramPosts;
 
-        $scope.instagramImageSet = false;
-        if ($scope.product.instagramImageId || !$scope.product.instagramImageId === "")
-        {
-          $scope.instagramImageSet = true;
-        }
+
         console.log('products.client.controller - findone() - instagramImageSet: ' +$scope.instagramImageSet);
       });
 
@@ -756,6 +843,22 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
       console.log('products.client.controller - postPostInstagram - Start');
       ProductsServices.instagramPostComment($scope.product, $scope.authentication.user).then(function(promise) {
+        $scope.success = promise;
+        $scope.hideSpinner = true;
+      });
+    };
+
+    // ************************************
+    // **                                **
+    // **        POST to Code Snippet    **
+    // **                                **
+    // ************************************
+    //
+    $scope.postPostCode = function (isValid) {
+      $scope.hideSpinner = false;
+
+      console.log('products.client.controller - postPostCode - Start');
+      ProductsServices.codesnippetPostComment($scope.product, $scope.postInformation).then(function(promise) {
         $scope.success = promise;
         $scope.hideSpinner = true;
       });

@@ -2,16 +2,16 @@
 
   <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-      <h2>User</h2>
+      <h2 translate>HEADLINE-ACCOUNT-AREA</h2>
       <ol class="breadcrumb">
         <li>
-          <a href="index.html">Home</a>
+          <a ui-sref="dashboard" translate>BREADCRUMB-HOME</a>
         </li>
         <li>
           <span ng-bind="authentication.user.displayName"></span>
         </li>
         <li class="active">
-          <strong>Subscription</strong>
+          <strong translate>HEADLINE-SUB-SUBSCRIPTION</strong>
         </li>
       </ol>
     </div>
@@ -40,41 +40,40 @@
 
                 <div class="x_content">
                   <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-lg-12">
                       <div class="jumbotron">
-                        <h1>Your subscription</h1>
-                        <p>Based on the growth of your business your are able to manage your subscriptions by upgrading or downsizing your plans.</p>
+                        <h1 translate>HEADLINE-SUB-YOUR-SUBSCRIPTION</h1>
+                        <p translate>TEXT-YOUR-SUBSCRIPTION</p>
                       </div>
                     </div>
 
-                    <div class="col-md-12">
-
+                    <div class="col-lg-12">
                       <!-- price element -->
                       <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="pricing ui-ribbon-container">
                           <div class="ui-ribbon-wrapper">
-                            <div class="ui-ribbon-yourplan" ng-show="yourPlanFree">
-                              Your plan
+                            <div class="ui-ribbon-yourplan" ng-show="yourPlanFree" translate>
+                              LABEL-YOUR-SUBSCRIPTION
                             </div>
                           </div>
                           <div class="titleselected">
                             <h2> </h2>
-                            <h1>FREE</h1>
+                            <h1 translate>LABEL-FREE-SUBSCRIPTION</h1>
 
                           </div>
                           <div class="x_content">
                             <div class="">
                               <div class="pricing_features">
                                 <ul class="list-unstyled text-left">
-                                  <li><i class="fa fa-check text-success"></i> 5 different products <strong> to sell</strong></li>
-                                  <li><i class="fa fa-check text-success"></i> All available<strong> sales channels</strong> </li>
+                                  <li><i class="fa fa-check text-success"></i> <span translate>LABEL-FIVE-PRODUCTS </span><strong> <span translate>LABEL-TO-SELL</span></strong></li>
+                                  <li><i class="fa fa-check text-success"></i> <span translate>LABEL-ALL-AVAILABLE </span><strong> <span translate>LABEL-SALES-CHANNELS</span></strong> </li>
                                 </ul>
                               </div>
                             </div>
                             <div class="pricing_footer">
 
-                              <a ng-show="upgradeSubscriptionFree" class="btn btn-default btn-block" disabled>Return to free subscription now!</a>
-                              <button ng-click="cancelStripeSubscriptionBasic()" ng-hide="upgradeSubscriptionFree" class="btn btn-warning btn-block">Return to free subscription now!</button>
+                              <a ng-show="upgradeSubscriptionFree" class="btn btn-default btn-block" disabled translate>BUTTON-RETURN-FREE-SUBSCRIPTION</a>
+                              <button ng-click="cancelStripeSubscriptionBasic()" ng-hide="upgradeSubscriptionFree" class="btn btn-warning btn-block" translate>BUTTON-RETURN-FREE-SUBSCRIPTION</button>
 
                             </div>
                           </div>
@@ -88,29 +87,29 @@
                       <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="pricing ui-ribbon-container">
                           <div class="ui-ribbon-wrapper">
-                            <div class="ui-ribbon-yourplan" ng-show="yourPlanBasic">
-                              Your plan
+                            <div class="ui-ribbon-yourplan" ng-show="yourPlanBasic" translate>
+                              LABEL-YOUR-SUBSCRIPTION
                             </div>
                           </div>
                           <div class="title">
-                            <h2>Basic</h2>
+                            <h2 translate>LABEL-SUBSCRIPTION-BASIC</h2>
                             <h1>19 €</h1>
-                            <span>Monthly</span>
+                            <span translate>LABEL-SUBSCRIPTION-MONTHLY</span>
                           </div>
                           <div class="x_content">
                             <div class="">
                               <div class="pricing_features">
                                 <ul class="list-unstyled text-left">
-                                  <li><i class="fa fa-check text-success"></i> 10 different products <strong> to sell</strong></li>
-                                  <li><i class="fa fa-check text-success"></i> All available<strong> sales channels</strong> </li>
+                                  <li><i class="fa fa-check text-success"></i> <span translate>LABEL-TEN-PRODUCTS </span><strong> <span translate>LABEL-TO-SELL</span></strong></li>
+                                  <li><i class="fa fa-check text-success"></i> <span translate>LABEL-ALL-AVAILABLE </span><strong> <span translate>LABEL-SALES-CHANNELS</span></strong> </li>
                                 </ul>
                               </div>
                             </div>
                             <div class="pricing_footer">
 
-                              <a ng-show="upgradeSubscriptionBasicDefault" class="btn btn-default btn-block" disabled>Upgrade subscription now!</a>
-                              <button id="customButtonBasic" ng-show="upgradeSubscriptionBasic" class="btn btn-warning btn-block">Upgrade subscription now!</button>
-                              <button ng-show="downgradeSubscriptionBasic" ng-click="createStripeSubscriptionBasic('mmbasic','','')" class="btn btn-warning btn-block">Downgrade subscription now!</button>
+                              <a ng-show="upgradeSubscriptionBasicDefault" class="btn btn-default btn-block" disabled translate>BUTTON-UPGRADE-SUBSCRIPTION</a>
+                              <button id="customButtonBasic" ng-show="upgradeSubscriptionBasic" class="btn btn-warning btn-block" translate>BUTTON-UPGRADE-SUBSCRIPTION</button>
+                              <button ng-show="downgradeSubscriptionBasic" ng-click="createStripeSubscriptionBasic('mmbasic','','')" class="btn btn-warning btn-block" translate>BUTTON-DOWNGRADE-SUBSCRIPTION</button>
 
                               <script>
                                 var handlerBasic = StripeCheckout.configure({
@@ -151,33 +150,33 @@
                       <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="pricing ui-ribbon-container">
                           <div class="ui-ribbon-wrapper">
-                            <div class="ui-ribbon-yourplan" ng-show="yourPlanProfessional">
-                              Your plan
+                            <div class="ui-ribbon-yourplan" ng-show="yourPlanProfessional" translate>
+                              LABEL-YOUR-SUBSCRIPTION
                             </div>
-                            <div class="ui-ribbon" ng-show="favouritePlan">
-                              Most popular
+                            <div class="ui-ribbon" ng-show="favouritePlan" translate>
+                              LABEL-MOST-POPULAR
                             </div>
                           </div>
                           <div class="title">
-                            <h2>Professional</h2>
+                            <h2 translate>LABEL-SUBSCRIPTION-PROFESSIONAL</h2>
                             <h1>59 €</h1>
-                            <span>Monthly</span>
+                            <span translate>LABEL-SUBSCRIPTION-MONTHLY</span>
                           </div>
                           <div class="x_content">
                             <div class="">
                               <div class="pricing_features">
                                 <ul class="list-unstyled text-left">
-                                  <li><i class="fa fa-check text-success"></i> 100 different products <strong> to sell</strong></li>
-                                  <li><i class="fa fa-check text-success"></i> All available<strong> sales channels</strong> </li>
+                                  <li><i class="fa fa-check text-success"></i> <span translate>LABEL-HUNDRED-PRODUCTS </span><strong> <span translate>LABEL-TO-SELL</span></strong></li>
+                                  <li><i class="fa fa-check text-success"></i> <span translate>LABEL-ALL-AVAILABLE </span><strong> <span translate>LABEL-SALES-CHANNELS</span></strong> </li>
                                 </ul>
                               </div>
                             </div>
                             <div class="pricing_footer">
 
-                              <a ng-show="upgradeSubscriptionProfessionalDefault" class="btn btn-default btn-block" disabled>Upgrade subscription now!</a>
-                              <button id="customButtonProfessional" ng-show="upgradeSubscriptionProfessional" class="btn btn-warning btn-block">Upgrade subscription now!</button>
-                              <button ng-show="downgradeSubscriptionProfessional" ng-click="createStripeSubscriptionBasic('mmprofessional','','')" class="btn btn-warning btn-block">Downgrade subscription now!</button>
-                              <button ng-show="upgradeExistingSubscriptionProfessional" ng-click="createStripeSubscriptionBasic('mmprofessional','','')" class="btn btn-warning btn-block">Upgrade subscription now!</button>
+                              <a ng-show="upgradeSubscriptionProfessionalDefault" class="btn btn-default btn-block" disabled translate>BUTTON-UPGRADE-SUBSCRIPTION</a>
+                              <button id="customButtonProfessional" ng-show="upgradeSubscriptionProfessional" class="btn btn-warning btn-block" translate>BUTTON-UPGRADE-SUBSCRIPTION</button>
+                              <button ng-show="downgradeSubscriptionProfessional" ng-click="createStripeSubscriptionBasic('mmprofessional','','')" class="btn btn-warning btn-block" translate>BUTTON-DOWNGRADE-SUBSCRIPTION</button>
+                              <button ng-show="upgradeExistingSubscriptionProfessional" ng-click="createStripeSubscriptionBasic('mmprofessional','','')" class="btn btn-warning btn-block" translate>BUTTON-UPGRADE-SUBSCRIPTION</button>
                               <script>
                                 var handlerProfessional = StripeCheckout.configure({
                                   key: 'pk_test_ddjMazisTUr7jFeihO8C4s7L',
@@ -217,29 +216,29 @@
                       <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="pricing ui-ribbon-container">
                           <div class="ui-ribbon-wrapper">
-                            <div class="ui-ribbon-yourplan" ng-show="yourPlanUnlimited">
-                              Your plan
+                            <div class="ui-ribbon-yourplan" ng-show="yourPlanUnlimited" translate>
+                              LABEL-YOUR-SUBSCRIPTION
                             </div>
                           </div>
                           <div class="title">
-                            <h2>Unlimited</h2>
+                            <h2 translate>LABEL-SUBSCRIPTION-UNLIMITED</h2>
                             <h1>159 €</h1>
-                            <span>Monthly</span>
+                            <span translate>LABEL-SUBSCRIPTION-MONTHLY</span>
                           </div>
                           <div class="x_content">
                             <div class="">
                               <div class="pricing_features">
                                 <ul class="list-unstyled text-left">
-                                  <li><i class="fa fa-check text-success"></i> Unlimited different products <strong> to sell</strong></li>
-                                  <li><i class="fa fa-check text-success"></i> All available<strong> sales channels</strong> </li>
+                                  <li><i class="fa fa-check text-success"></i> <span translate>LABEL-UNLIMITED-PRODUCTS </span><strong> <span translate>LABEL-TO-SELL</span></strong></li>
+                                  <li><i class="fa fa-check text-success"></i> <span translate>LABEL-ALL-AVAILABLE </span><strong> <span translate>LABEL-SALES-CHANNELS</span></strong> </li>
                                 </ul>
                               </div>
                             </div>
                             <div class="pricing_footer">
 
-                              <a ng-show="upgradeSubscriptionUnlimitedDefault" class="btn btn-default btn-block" disabled>Upgrade subscription now!</a>
-                              <button id="customButtonUnlimited" ng-show="upgradeSubscriptionUnlimited" class="btn btn-warning btn-block">Upgrade subscription now!</button>
-                              <button ng-show="upgradeExistingSubscriptionUnlimited" ng-click="createStripeSubscriptionBasic('mmunlimited','','')" class="btn btn-warning btn-block">Upgrade subscription now!</button>
+                              <a ng-show="upgradeSubscriptionUnlimitedDefault" class="btn btn-default btn-block" disabled translate>BUTTON-UPGRADE-SUBSCRIPTION</a>
+                              <button id="customButtonUnlimited" ng-show="upgradeSubscriptionUnlimited" class="btn btn-warning btn-block" translate>BUTTON-UPGRADE-SUBSCRIPTION</button>
+                              <button ng-show="upgradeExistingSubscriptionUnlimited" ng-click="createStripeSubscriptionBasic('mmunlimited','','')" class="btn btn-warning btn-block"translate>BUTTON-UPGRADE-SUBSCRIPTION</button>
 
                               <script>
                                 var handlerUnlimited = StripeCheckout.configure({
@@ -275,13 +274,11 @@
                         </div>
                       </div>
                       <!-- price element -->
-                    </div>
 
+                    </div>
                   </div>
                 </div>
-
               </div>
-
             </div>
           </div>
         </div>

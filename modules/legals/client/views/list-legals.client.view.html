@@ -2,16 +2,16 @@
 
   <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-      <h2>Shop Settings</h2>
+      <h2 translate>BREADCRUMB-SHOP-SETTINGS</h2>
       <ol class="breadcrumb">
         <li>
-          <a href="index.html">Home</a>
+          <span translate>HEADLINE-ACCOUNT-AREA</span>
         </li>
         <li>
-          <strong>Settings</strong>
+          <strong translate>BREADCRUMB-SETTINGS</strong>
         </li>
         <li class="active">
-          <strong>Legal</strong>
+          <strong translate>BREADCRUMB-LEGAL</strong>
         </li>
       </ol>
     </div>
@@ -31,78 +31,78 @@
           </div>
           <div class="ibox float-e-margins">
             <div class="ibox-title">
-              <h5>Legal options</h5>
+              <h5 translate>LABEL-LEGAL-OPTION</h5>
               <div class="ibox-tools"></div>
             </div>
             <div class="ibox-content">
               <table class="table table-hover">
                 <thead>
                 <tr>
-                  <th data-toggle="true">Title</th>
-                  <th data-toggle="true">Purpose</th>
+                  <th data-toggle="true" translate>LABEL-TABLE-HEADER-LEGAL-TITLE</th>
+                  <th data-toggle="true" translate>LABEL-TABLE-HEADER-LEGAL-PURPOSE</th>
                   <th class="text-right" data-sort-ignore="true"></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                  <td><span>Privacy Policy</span></td>
+                  <td><span translate>LABEL-LEGAL-PRIVACYPOLICY</span></td>
                   <td><span data-ng-bind="legal.legalPrivacyPolicy"></span></td>
                   <td class="text-right">
                     <div class="btn-group">
                       <a class="btn-warning btn-sm" ui-sref="legals.edit({legalId: legal._id})">
-                        <i class="fa fa-cogs"></i> Edit
+                        <i class="fa fa-cogs"></i> <span translate>BUTTON-EDIT</span>
                       </a>
                     </div>
                   </td>
                 </tr>
                 <tr>
-                  <td><span>Return Policy</span></td>
+                  <td><span translate>LABEL-LEGAL-RETURNPOLICY</span></td>
                   <td><span data-ng-bind="legal.legalReturnPolicy"></span></td>
                   <td class="text-right">
                     <div class="btn-group">
                       <a class="btn-warning btn-sm" ui-sref="legals.editreturnpolicy({legalId: legal._id})">
-                        <i class="fa fa-cogs"></i> Edit
+                        <i class="fa fa-cogs"></i> <span translate>BUTTON-EDIT</span>
                       </a>
                     </div>
                   </td>
                 </tr>
                 <tr>
-                  <td><span>Terms and Conditions</span></td>
+                  <td><span translate>LABEL-LEGAL-TERMSANDCONDITIONS</span></td>
                   <td><span data-ng-bind="legal.legalTermsandConditions"></span></td>
                   <td class="text-right">
                     <div class="btn-group">
                       <a class="btn-warning btn-sm" ui-sref="legals.edittermsandconditions({legalId: legal._id})">
-                        <i class="fa fa-cogs"></i> Edit
+                        <i class="fa fa-cogs"></i> <span translate>BUTTON-EDIT</span>
                       </a>
                     </div>
                   </td>
                 </tr>
                 <tr>
-                  <td><span>Imprint</span></td>
+                  <td><span translate>LABEL-LEGAL-IMPRINT</span></td>
                   <td><span data-ng-bind="legal.legalImprint"></span></td>
                   <td class="text-right">
                     <div class="btn-group">
                       <a class="btn-warning btn-sm" ui-sref="legals.editimprint({legalId: legal._id})">
-                        <i class="fa fa-cogs"></i> Edit
+                        <i class="fa fa-cogs"></i> <span translate>BUTTON-EDIT</span>
                       </a>
                     </div>
                   </td>
                 </tr>
                 <tr>
-                  <td><span>Copyright</span></td>
+                  <td><span translate>LABEL-LEGAL-COPYRIGHT</span></td>
                   <td><span data-ng-bind="legal.legalCopyright"></span></td>
                   <td class="text-right">
                     <div class="btn-group">
                       <a class="btn-warning btn-sm" ui-sref="legals.editcopyright({legalId: _id})">
-                        <i class="fa fa-cogs"></i> Edit
+                        <i class="fa fa-cogs"></i> <span translate>BUTTON-EDIT</span>
                       </a>
                     </div>
                   </td>
                 </tr>
                 </tbody>
               </table>
-              <div class="alert alert-danger text-center" ng-if="!legal.legalPrivacyPolicy.length">
-                Your legal information is required. Please maintain all information!
+              <div class="alert alert-danger text-center" ng-if="!legal.legalPrivacyPolicy.length" translate>
+                TEXT-LEGAL-NOTE-INF-REQUIRED
               </div>
             </div>
           </div>

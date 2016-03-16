@@ -1,5 +1,21 @@
 <section ng-controller="CheckoutsController" id="CheckoutsControllerID" ng-init="findOne()">
 
+  <div itemscope itemtype="http://schema.org/Product">
+    <span itemprop="brand" content="{{user.displayName}}"></span>
+    <span itemprop="name" content="{{product.productTitle}}"></span>
+    <span itemprop="description" content="{{product.productDescription}}"></span>
+    <img itemprop="image" content="{{user.profileImageURL}}" />
+    <meta itemprop="gtin14" content="00886227537143" />
+    <meta itemprop="sku" content="{{product.productId}}" />
+
+    <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+      <meta itemprop="priceCurrency" content="EUR" />
+      <span itemprop="price" content="{{product.productPrice}}"></span>
+      <meta itemprop="itemCondition" itemtype="http://schema.org/OfferItemCondition" content="http://schema.org/NewCondition"/>
+      <meta itemprop="availability" content="http://schema.org/InStock"/>
+    </div>
+  </div>
+
   <div class="app app-dock">
 
     <!-- content -->

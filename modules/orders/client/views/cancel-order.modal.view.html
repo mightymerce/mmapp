@@ -5,19 +5,19 @@
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
           <i class="fa fa-close modal-icon"></i>
-          <h4 class="modal-title">Cancel order</h4>
+          <h4 class="modal-title" translate>LABEL-CANCEL-ORDER</h4>
         </div>
         <div class="modal-body-white">
-          <p>Add an individual message for the customer (optional) </p>
+          <p translate>TEXT-NOTE-ADD-ADDITIONAL-CUSTOMER-MESSAGE</p>
           <textarea rows="3" id="cancelOrderMessage" class="form-control" placeholder=""></textarea>
         </div>
         <div class="modal-body">
-          <span>Please note: If you cancel an order make sure to refund already paid items.</span>
+          <span translate>TEXT-NOTE-MAKE-SURE-TO-REFUND</span>
           <br>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" ng-click="cancelOrder()">Yes, cancel order</button>
+          <button type="button" class="btn btn-white" data-dismiss="modal" translate>BUTTON-CLOSE</button>
+          <button type="button" class="btn btn-primary" ng-click="cancelOrder()" translate>BUTTON-CANCEL-ORDER</button>
         </div>
       </div>
     </div>
