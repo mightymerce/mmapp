@@ -23,6 +23,12 @@
             <div class="form-bottom">
               <form name="userForm" ng-submit="signin(userForm.$valid)" class="signin" novalidate autocomplete="off">
                 <fieldset>
+                  <div ng-show="error" class="alert alert-danger">
+                    <p ng-bind="error"></p>
+                  </div>
+                  <div ng-show="success" class="alert alert-success">
+                    <p ng-bind="success"></p>
+                  </div>
                   <div class="form-group" show-errors>
                     <label class="sr-only" for="username" translate>LABEL-EMAIL</label>
                     <input type="text" name="username" ng-model="credentials.username" placeholder="{{'PLACEHOLDER-LABEL-EMAIL' | translate}}" class="form-username form-control" id="username" lowercase required>
@@ -40,12 +46,6 @@
                     <a class="a-login" ui-sref="authentication.signup" translate>BUTTON-TEXT-SIGNUP</a> or <a class="a-login" ui-sref="password.forgot" translate>BUTTON-TEXT-FORGOTPWD</a>
                   </div>
                   <br>
-                  <div ng-show="error" class="alert alert-danger">
-                    <p ng-bind="error"></p>
-                  </div>
-                  <div ng-show="success" class="alert alert-success">
-                    <p ng-bind="success"></p>
-                  </div>
                 </fieldset>
               </form>
             </div>
