@@ -69,6 +69,11 @@ angular.module('core').controller('HomeController', ['$scope', '$route', '$locat
     function getTotalOrderVolume(ordersForCalcs) {
       console.log('Start getTotalOderVolume');
       var total = 0;
+      var totalFacebook = 0;
+      var totalTwitter = 0;
+      var totalInstagram = 0;
+      var totalPinterest = 0;
+      var totalCode = 0;
       var d = new Date();
       var m = d.getMonth();
 
@@ -85,8 +90,24 @@ angular.module('core').controller('HomeController', ['$scope', '$route', '$locat
 
           if(orderCreationMonth === m){
             total += parseFloat(order.orderShipToTotalAmount);
+            if(order.orderChannel === 'facebook')
+            { totalFacebook += parseFloat(order.orderShipToTotalAmount); }
+            if(order.orderChannel === 'twitter')
+            { totalTwitter += parseFloat(order.orderShipToTotalAmount); }
+            if(order.orderChannel === 'pinterest')
+            { totalPinterest += parseFloat(order.orderShipToTotalAmount); }
+            if(order.orderChannel === 'instagram')
+            { totalInstagram += parseFloat(order.orderShipToTotalAmount); }
+            if(order.orderChannel === 'code')
+            { totalCode += parseFloat(order.orderShipToTotalAmount); }
           }
         }
+        $scope.volTotalMonthFacebook = totalFacebook;
+        $scope.volTotalMonthTwitter = totalTwitter;
+        $scope.volTotalMonthPinterest = totalPinterest;
+        $scope.volTotalMonthInstagram = totalInstagram;
+        $scope.volTotalMonthCode = totalCode;
+
         return total;
       }
     }

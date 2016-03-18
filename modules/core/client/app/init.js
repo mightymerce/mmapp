@@ -1061,11 +1061,15 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
 
 
       // NEW
+      //signup
       'LABEL-ACCEPT-TERMS-HINT-I':'Mit Klick auf "Registrieren" erklärst du dich mit unseren ',
       'LABEL-ACCEPT-TERMS-HINT-II':' einverstanden und bestätigst uns, dass du unsere ',
       'LABEL-ACCEPT-TERMS-HINT-III':'  gelesen hast. Um deinen Besuch auf unserer Webseite so angenehm wie möglich zu gestalten, verwenden wir Cookies. ',
       'LABEL-TERMS-AND-CONDITION-LONG':'Allgemeinen Geschäftsbedingungen',
-      'LABEL-DATA-PROTECTION-LONG':'Datenschutzerklärung'
+      'LABEL-DATA-PROTECTION-LONG':'Datenschutzerklärung',
+
+      //home
+      'LABEL-ORDERS-VOLUME-CHANNEL':'Orders Volume per Channel'
   });
 
     /*

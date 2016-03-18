@@ -20,7 +20,7 @@
                 <th class="text-right" data-sort-ignore="true"></th>
               </tr>
               </thead>
-              <tbody data-ng-repeat="order in orders | limitTo: 5 | orderBy:'-created' | filter: {orderStatus: 'CREATED'}">
+              <tbody data-ng-repeat="order in orders | orderBy:'-created' | filter: {orderStatus: 'CREATED'}  | limitTo: 5">
               <tr>
                 <td><span data-ng-bind="order.orderId" ui-sref="orders.view({orderId: order._id})"></span></td>
                 <td><span ng-bind="order.orderDate | date:'mediumDate'"></span></td>
@@ -67,7 +67,7 @@
           <div class="ibox-content">
             <div>
               <span class="pull-right text-right">
-                <small translate>TEXT-AVERAGE-VALUE-SALES<strong>{{ volOrdersPerMonth / noOrdersPerMonth}} €</strong></small>
+                <small translate>TEXT-AVERAGE-VALUE-SALES</small> <small><strong>{{ volOrdersPerMonth / noOrdersPerMonth}} €</strong></small>
                 <br/>
                 <span translate>TEXT-ALL-SALES-YEAR</span> €
               </span>
@@ -96,7 +96,7 @@
         <div class="ibox float-e-margins">
           <div class="ibox-title">
             <span class="label label-primary pull-right" translate>LABEL-MONTH</span>
-            <h5><i class="fa fa-facebook-square"></i> <span translate>BREADCRUMB-ORDER</span></h5>
+            <h5><i class="fa fa-tags"></i> <span translate>BREADCRUMB-ORDER</span></h5>
           </div>
           <div class="ibox-content">
             <h1 class="no-margins">{{ noOrdersPerMonth }}</h1>
@@ -106,7 +106,7 @@
           </div>
           <div class="ibox-title">
             <span class="label label-primary pull-right" translate>LABEL-MONTH</span>
-            <h5><i class="fa fa-pinterest-square"></i> <span translate>LABEL-ORDERS-VOLUME</span></h5>
+            <h5><i class="fa fa-euro"></i> <span translate>LABEL-ORDERS-VOLUME</span></h5>
           </div>
           <div class="ibox-content">
             <h1 class="no-margins">{{ totalOrderVolume }} €</h1>
@@ -114,19 +114,39 @@
             <div class="stat-percent font-bold text-navy"><i class="fa fa-level-up"></i></div>
             <small translate>LABEL-ORDERS-VOLUME-THIS-MONTH</small>
           </div>
-        </div>
-        <div class="widget style1 navy-bg">
-          <div class="row">
-            <div class="col-xs-4">
-              <i class="fa fa-instagram fa-5x"></i>
-            </div>
-            <div class="col-xs-8 text-right">
-              <span translate>LABEL-TODAY-ORDERS</span>
-
-              <h2 class="font-bold" id="noOrdersPerDay">{{ noOrdersPerDay }}</h2>
-              <div class="stat-percent text-white"><i class="fa fa-level-up"></i></div>
-            </div>
-
+          <div class="ibox-title">
+            <span class="label label-primary pull-right" translate>LABEL-MONTH</span>
+            <h5><i class="fa fa-euro"></i> <span translate>LABEL-ORDERS-VOLUME-CHANNEL</span></h5>
+          </div>
+          <div class="ibox-content">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>
+                    <i class="fa fa-facebook"></i>
+                    <small>{{ volTotalMonthFacebook }} €</small>
+                  </td>
+                  <td>
+                    <i class="fa fa-pinterest"></i>
+                    <small>{{ volTotalMonthPinterest }} €</small>
+                  </td>
+                  <td>
+                    <i class="fa fa-instagram"></i>
+                    <small>{{ volTotalMonthInstagram }} €</small>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <i class="fa fa-twitter"></i>
+                    <small>{{ volTotalMonthTwitter }} €</small>
+                  </td>
+                  <td>
+                    <i class="fa fa-code"></i>
+                    <small>{{ volTotalMonthCode }} €</small>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -283,7 +303,7 @@
       setTimeout(function() {
         var varScope = angular.element(document.getElementById('HomeController')).scope().getNoOrdersPerMonth();
 
-        var varOrderMonth1 = 65;
+        var varOrderMonth1 = 3267;
         var varOrderMonth2 = varScope;
 
     var lineData = {
@@ -307,7 +327,7 @@
           pointStrokeColor: "#fff",
           pointHighlightFill: "#fff",
           pointHighlightStroke: "rgba(26,179,148,1)",
-          data: [varOrderMonth1, varOrderMonth2, 0, 0, 0, 0, 0]
+          data: [varOrderMonth1, 4538, 2164, 0, 0, 0, 0]
         }
       ]
     };

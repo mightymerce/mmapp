@@ -52,7 +52,7 @@
             </a>
           </li>
           <li class="divider"></li>
-          <li data-ng-repeat="order in orders | limitTo: 5 | orderBy:'-created' | filter: {orderStatus: 'CREATED'}">
+          <li data-ng-repeat="order in orders | orderBy:'-created' | filter: {orderStatus: 'CREATED'} | limitTo: 5">
             <div class="dropdown-messages-box" ui-sref="orders.edit({orderId: order._id})">
               <div class="media-body ">
                 <small class="pull-right text-navy" ng-bind="order.orderDate | date:'mediumDate'"></small>
