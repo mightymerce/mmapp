@@ -2,9 +2,10 @@
 
 // Orders controller
 angular.module('orders')
-    .controller('OrdersController', ['$scope', '$state', '$stateParams', '$location', 'Authentication', 'Products', '$uibModal', '$http', 'Orders', 'OrdersServices', 'OrdersUpdateServices',
-  function ($scope, $state, $stateParams, $location, Authentication, Products, $uibModal, $http, Orders, OrdersServices, OrdersUpdateServices) {
+    .controller('OrdersController', ['$scope', '$state', '$stateParams', '$location', 'Authentication', 'Products', 'Users', '$uibModal', '$http', 'Orders', 'OrdersServices', 'OrdersUpdateServices',
+  function ($scope, $state, $stateParams, $location, Authentication, Products, Users, $uibModal, $http, Orders, OrdersServices, OrdersUpdateServices) {
     $scope.authentication = Authentication;
+    $scope.user = Authentication.user;
 
     // If user is signed in then redirect back home
     if (!$scope.authentication.user) {
@@ -43,7 +44,14 @@ angular.module('orders')
         //animation: $scope.animationsEnabled,
         templateUrl: 'modules/orders/client/views/ship-order.modal.view.html',
         controller: function ($scope, order) {
+          $scope.authentication = Authentication;
+          $scope.user = Authentication.user;
           $scope.order = order;
+          console.log('orders.client.controller - open modalcancelOrder - before call service');
+          OrdersServices.getCarriers().then(function (Carriers) {
+            console.log('orders.client.controller - open modalcancelOrder - carriers returned: ' +Carriers);
+            $scope.carriers = Carriers.data;
+          });
 
         },
         size: size,
@@ -65,7 +73,6 @@ angular.module('orders')
         templateUrl: 'modules/orders/client/views/receive-return-order.modal.view.html',
         controller: function ($scope, order) {
           $scope.order = order;
-
         },
         size: size,
         resolve: {
@@ -155,44 +162,7 @@ angular.module('orders')
 
     // Shipped Order
     $scope.update = function (isValid) {
-      $scope.error = null;
 
-      console.log('orders.client.controller - update - start updating order');
-
-      if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'orderForm');
-        return false;
-      }
-
-      var order = new Orders({
-      });
-
-      order._id = $scope.order._id;
-
-      // Order values to be updated
-      $scope.orderStatus = 'SHIPPED';
-      order.orderStatus = 'SHIPPED';
-      order.orderTrackingNo = $scope.orderTrackingNo;
-      order.ordereMailCustomerShipMessage = $scope.ordereMailCustomerShipMessage;
-
-      order.$update(function () {
-        console.log('orders.client.controller - update - start updating order - success MM DB update');
-        OrdersServices.sendOrderSubmit($scope.authentication.user.displayName, order, $scope.orderTrackingNo, $scope.ordereMailCustomerShipMessage).then(function (response) {
-          if(response === 'success')
-          {
-            $scope.success = 'Your order has been updated to shipped and an eMail was sent to your customer.';
-
-            $scope.orderStatus = 'SHIPPED';
-            console.log('orders.client.controller - update - end updating order - success');
-          }
-          else {
-            $scope.error = 'There was an error informing your customer via eMail. PLease contact your customer individualy.';
-          }
-        });
-      }, function (errorResponse) {
-        $scope.orderStatus = 'CREATED';
-        $scope.error = errorResponse.data.message;
-      });
     };
 
 
@@ -262,14 +232,175 @@ angular.module('orders')
     };
 
     // Ship order -> update Status, TrackingID and send customer message
-    $scope.shipOrder = function() {
-      OrdersServices.updateOrder($scope.order);
+    $scope.shipOrder = function(isValid) {
+      console.log('orders.client.controller - shipOrder - start');
 
-      // ToDo - send email in case Textfield is filled
+      // Update user if API_Key not yet available
+      if (!$scope.authentication.user.shipCloudAPI_Key) {
+        var user = new Users({
+        });
 
-      console.log('orders.client.controller - shipOrder - success');
-      $scope.modalInstance.$dismiss();
-      $scope.success = 'Your order has been updated to shipped and an eMail was sent to your customer.';
+        user.shipCloudAPI_Key = $scope.user.shipCloudAPI_Key;
+        user.$update(function () {
+
+          var shipment = JSON.stringify('{"from": ' +
+              '{"company": ' + $scope.authentication.user.displayName + ',' +
+              '"first_name": ' + $scope.authentication.user.firstName + ',' +
+              '"last_name": ' + $scope.authentication.user.lastName + ',' +
+              '"street": ' + $scope.authentication.user.street + ',' +
+              '"street_no": ' + $scope.authentication.user.streetno + ',' +
+              '"city": ' + $scope.authentication.user.city + ',' +
+              '"zip_code": ' + $scope.authentication.user.zipcode + ',' +
+              '"country": "DE"' +
+              '},' +
+              '"to": {' +
+              '"company": "",' +
+              '"first_name": "",' +
+              '"last_name": $scope.order.orderShipToName,' +
+              '"street": $scope.order.orderShipToStreet,' +
+              '"street_no": "",' +
+              '"city": $scope.order.orderShipToCity,' +
+              '"zip_code": $scope.order.orderShipToZip,' +
+              '"country": $scope.order.orderShipToCntryCode' +
+              '},' +
+              '"package": {' +
+              '"weight": $scope.parcelWeight,' +
+              '"length": $scope.parcelLength,' +
+              '"width": $scope.parcelWidth,' +
+              '"height": $scope.parcelHight' +
+              '},' +
+              '"carrier": $scope.parcelService,' +
+              '"service": "standard",' +
+              '"reference_number": $scope.orderId,' +
+              '"notification_email": $scope.ordereMail,' +
+              '"create_shipping_label": true' +
+              '}');
+
+          console.log('orders.client.controller - shipOrder - shipment: ' +shipment);
+
+          OrdersServices.createShipment(shipment).then(function (response) {
+            $scope.error = null;
+
+            console.log('orders.client.controller - update - start updating order');
+
+            var order = new Orders({
+            });
+
+            order._id = $scope.order._id;
+
+            // Order values to be updated
+            $scope.orderStatus = 'SHIPPED';
+            order.orderStatus = 'SHIPPED';
+            order.orderTrackingNo = $scope.orderTrackingNo;
+            order.ordereMailCustomerShipMessage = $scope.ordereMailCustomerShipMessage;
+            order.orderShipCloudcarrier = $scope.parcelService;
+            if(response.carrier_label_url){order.orderShipCloudcarrier_label_url = response.carrier_label_url;}
+            if(response.carrier_tracking_no){order.orderShipCloudcarrier_tracking_no = response.carrier_tracking_no;}
+            if(response.carrier_tracking_url){order.orderShipCloudcarrier_tracking_url = response.carrier_tracking_url;}
+            if(response.id){order.orderShipCloudid = response.id;}
+            if(response.price){order.orderShipCloudprice = response.price;}
+
+            order.$update(function () {
+              console.log('orders.client.controller - update - start updating order - success MM DB update');
+              OrdersServices.sendOrderSubmit($scope.authentication.user.displayName, order, $scope.orderTrackingNo, $scope.ordereMailCustomerShipMessage).then(function (response) {
+                if(response === 'success')
+                {
+                  $scope.success = 'Your order has been updated to shipped and an eMail was sent to your customer. You will find your shipping label here: ' +response.label_url;
+
+                  $scope.orderStatus = 'SHIPPED';
+                  console.log('orders.client.controller - update - end updating order - success');
+                }
+                else {
+                  $scope.error = 'There was an error informing your customer via eMail. PLease contact your customer individualy.';
+                }
+              });
+            }, function (errorResponse) {
+              $scope.orderStatus = 'CREATED';
+              $scope.error = errorResponse.data.message;
+            });
+          });
+          console.log('orders.client.controller - shipOrder - success');
+
+        }, function (errorResponse) {
+
+        });
+      } else {
+
+        var shipment = '{"from": ' +
+            '{"company": "' + $scope.authentication.user.displayName + '",' +
+            '"first_name": "' + $scope.authentication.user.firstName + '",' +
+            '"last_name": "' + $scope.authentication.user.lastName + '",' +
+            '"street": "' + $scope.authentication.user.street + '",' +
+            '"street_no": "' + $scope.authentication.user.streetno + '",' +
+            '"city": "' + $scope.authentication.user.city + '",' +
+            '"zip_code": "' + $scope.authentication.user.zipcode + '",' +
+            '"country": "DE"' +
+            '},' +
+            '"to": {' +
+            '"company": "' + $scope.order.orderShipToName + '",' +
+            '"first_name": "' + $scope.order.orderShipToName + '",' +
+            '"last_name": "' + $scope.order.orderShipToName + '",' +
+            '"street": "' + $scope.order.orderShipToStreet + ',' +
+            '"street_no": "",' +
+            '"city": "' + $scope.order.orderShipToCity + '",' +
+            '"zip_code": "' + $scope.order.orderShipToZip + '",' +
+            '"country": "' + $scope.order.orderShipToCntryCode + '"' +
+            '},' +
+            '"package": {' +
+            '"weight": ' + $scope.parcelWeight + ',' +
+            '"length": ' + $scope.parcelLength + ',' +
+            '"width": ' + $scope.parcelWidth + ',' +
+            '"height": ' + $scope.parcelHight + '' +
+            '},' +
+            '"carrier": "' + $scope.parcelService + '",' +
+            '"service": "standard",' +
+            '"reference_number": "' + $scope.orderId  + '",' +
+            '"notification_email": "' + $scope.ordereMail + '",' +
+            '"create_shipping_label": true' +
+            '}';
+
+        OrdersServices.createShipment(shipment).then(function (response) {
+          $scope.error = null;
+
+          console.log('orders.client.controller - update - start updating order');
+
+          var order = new Orders({
+          });
+
+          order._id = $scope.order._id;
+
+          // Order values to be updated
+          $scope.orderStatus = 'SHIPPED';
+          order.orderStatus = 'SHIPPED';
+          order.ordereMailCustomerShipMessage = $scope.ordereMailCustomerShipMessage;
+          order.orderShipCloudcarrier = $scope.parcelService;
+          if(response.label_url){order.orderShipCloudcarrier_label_url = response.label_url;}
+          if(response.carrier_tracking_no){order.orderShipCloudcarrier_tracking_no = response.carrier_tracking_no;}
+          if(response.tracking_url){order.orderShipCloudcarrier_tracking_url = response.tracking_url;}
+          if(response.id){order.orderShipCloudid = response.id;}
+          if(response.price){order.orderShipCloudprice = response.price;}
+
+          order.$update(function () {
+            console.log('orders.client.controller - update - start updating order - success MM DB update');
+            OrdersServices.sendOrderSubmit($scope.authentication.user.displayName, order, $scope.orderTrackingNo, $scope.ordereMailCustomerShipMessage).then(function (response) {
+              if(response === 'success')
+              {
+                $scope.success = 'Your order has been updated to shipped and an eMail was sent to your customer. You will find your shipping label here: ' +response.label_url;
+
+                $scope.orderStatus = 'SHIPPED';
+                console.log('orders.client.controller - update - end updating order - success');
+              }
+              else {
+                $scope.error = 'There was an error informing your customer via eMail. PLease contact your customer individualy.';
+              }
+            });
+          }, function (errorResponse) {
+            $scope.orderStatus = 'CREATED';
+            $scope.error = errorResponse.data.message;
+          });
+        });
+        console.log('orders.client.controller - shipOrder - success');
+      }
     };
 
     $scope.cancelModal = function () {

@@ -115,3 +115,102 @@ exports.orderByID = function (req, res, next, id) {
     next();
   });
 };
+
+
+/**
+ * shipcloud - createShipment
+ */
+exports.createShipment = function (req, res) {
+  console.log('orders.server.controller - createShipment - start');
+
+  var request = require('request');
+  var qs = require('querystring');
+  var timestampValue = Math.floor(new Date() / 1000);
+  //var api_key = process.env.API_KEY;
+  var api_key = req.user.shipCloudAPI_Key;
+  console.log('orders.server.controller - createShipment - api_key: ' +api_key);
+  var auth = 'Basic ' + new Buffer(api_key).toString('base64');
+
+  var header =
+  {
+    'Authorization': auth,
+    'Content-Type': 'application/json; charset=utf-8'
+  };
+
+  var url = 'https://api.shipcloud.io/v1/shipments';
+
+  var shipment = req.body.data;
+  console.log('Shipment: ' + shipment);
+
+  request.post({
+    params: shipment,
+    url: url,
+    headers: header
+  }, function (error, r, body) {
+
+    // Ideally, you would take the body in the response
+    // and construct a URL that a user clicks on (like a sign in button).
+    // The verifier is only available in the response after a user has
+    // verified with twitter that they are authorizing your app.
+    if(error){
+      return console.log('Error:', error);
+    }
+
+    //Check for right status code
+    if(r.statusCode !== 200){
+      console.log('Invalid Status Code Returned:', r.statusCode + ' ' + r);
+      res.json(r);
+    }
+    else {
+      var req_data = qs.parse(body);
+      console.log('Returned values:', body);
+      res.send(body);
+    }
+  });
+};
+
+
+/**
+ * shipcloud - getCarriers
+ */
+exports.getCarriers = function (req, res) {
+  console.log('orders.server.controller - getCarriers - start');
+
+  var request = require('request');
+  var qs = require('querystring');
+  var timestampValue = Math.floor(new Date() / 1000);
+  var api_key = '6871c2bb258255adfeb61fac9ad137a4'; // Sandbox Key
+  var auth = 'Basic ' + new Buffer(api_key).toString('base64');
+
+  var header =
+  {
+    'Authorization': auth,
+    'Content-Type': 'application/x-www-form-urlencoded'
+  };
+
+  var url = 'https://api.shipcloud.io/v1/carriers';
+
+  request.get({
+    url: url,
+    headers: header
+  }, function (error, r, body) {
+
+    // Ideally, you would take the body in the response
+    // and construct a URL that a user clicks on (like a sign in button).
+    // The verifier is only available in the response after a user has
+    // verified with twitter that they are authorizing your app.
+    if(error){
+      return console.log('Error:', error);
+    }
+
+    //Check for right status code
+    if(r.statusCode !== 200){
+      console.log('Invalid Status Code Returned:', r.statusCode + ' ' + r);
+      res.json(r);
+    }
+    else {
+      var req_data = qs.parse(body);
+      res.send(body);
+    }
+  });
+};

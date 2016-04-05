@@ -2,19 +2,19 @@
 
   <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-4">
-      <h2>Edit product</h2>
+      <h2 translate>BREADCRUMB-EDIT-PRODUCTS</h2>
       <ol class="breadcrumb">
         <li>
-          <a href="dashboard">Home</a>
+          <a href="dashboard" translate>LABEL-HEADER-DASHBOARD</a>
         </li>
         <li>
-          <a href="products">Products</a>
+          <a href="products" translate>BREADCRUMB-PRODUCTS</a>
         </li>
         <li>
-          <a href="">Edit product</a>
+          <a href="" translate>BREADCRUMB-EDIT-PRODUCTS</a>
         </li>
         <li class="active">
-          <strong>Images</strong>
+          <strong translate>BUTTON-TAB-IMAGES</strong>
         </li>
       </ol>
     </div>
@@ -25,30 +25,86 @@
       <div class="col-lg-12">
         <div class="tabs-container">
           <ul class="nav nav-tabs">
-            <li class=""><a data-toggle="tab" ui-sref="products.edit({productId: product._id})"> Main data</a></li>
-            <li class="active"><a data-toggle="tab">Images</a></li>
-            <li class="" ng-hide="true"><a data-toggle="tab" ui-sref="products.editchannel({productId: product._id})">Sales channel data</a></li>
-            <li class=""><a data-toggle="tab" ui-sref="products.view({productId: product._id})">Posts &nbsp;&nbsp;&nbsp;<span class="label label-warning">NEW</span></a></li>
+            <li class=""><a data-toggle="tab" ui-sref="products.edit({productId: product._id})" translate>BUTTON-TAB-MAIN-DATA</a></li>
+            <li class="active"><a data-toggle="tab" translate>BUTTON-TAB-IMAGES</a></li>
+            <li class="" ng-hide="true"><a data-toggle="tab" ui-sref="products.editchannel({productId: product._id})" translate>BUTTON-TAB-DAWANDA-PRODUCT</a></li>
+            <li class=""><a data-toggle="tab" ui-sref="products.view({productId: product._id})"><span translate>BREADCRUMB-POSTS</span> &nbsp;&nbsp;&nbsp;<span class="label label-warning" translate>BUTTON-TAB-NEW</span></a></li>
           </ul>
           <div class="tab-content">
             <div id="tab-1" class="tab-pane active">
               <div class="panel-body">
+
+                <!-- start introduction -->
                 <div class="row">
                   <div class="wrapper wrapper-content">
                     <div class="col-lg-12">
                       <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                          <h3>Your product images</h3>
+                          <h3 translate>LABEL-HOW-TO-ADD-IMAGES</h3>
+                          <div class="ibox-tools">
+                            <a class="collapse-link">
+                              <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" uib-dropdown href="#">
+                              <i class="fa fa-wrench"></i>
+                            </a>
+                          </div>
+                        </div>
+                        <div class="ibox-content">
+                          <div class="container">
+                            <div class="row">
+                              <div class="col-lg-5">
+                                <span translate>NOTE-HOW-TO-ADD-IMAGES</span>
+                              </div>
+                              <div class="col-lg-5">
+                                <ul class="todo-list">
+                                  <li>
+                                    <span class="m-l-xs"><strong translate>LABEL-STEP1</strong></span>&nbsp;<span translate>LABEL-STEP1-EXPLANATION</span>
+                                  </li>
+                                  <li>
+                                    <span class="m-l-xs"><strong translate>LABEL-STEP2</strong></span>&nbsp;<span translate>LABEL-STEP2-EXPLANATION</span>
+                                  </li>
+                                  <li>
+                                    <span class="m-l-xs"><strong translate>LABEL-STEP3</strong></span>&nbsp;<span translate>LABEL-STEP3-EXPLANATION</span>
+                                  </li>
+                                  <li>
+                                    <span class="m-l-xs"><strong translate>LABEL-STEP-FINALLY</strong></span>&nbsp;<span translate>LABEL-STEP-FINALLY-EXPLANATION</span>
+                                  </li>
+                                </ul>
+                                <br>
+                                <div>
+                                  <div class="col-sm-2">
+                                    <button type="button" class="btn btn-outline btn-primary m-r-sm fa fa-warning"></button>
+                                  </div>
+                                  <div class="col-sm-8">
+                                    <small class="m-l-xs" translate>NOTE-CASE-CROPPER-NOT-ACTIVE</small>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- start images table -->
+                <div class="row">
+                  <div class="wrapper wrapper-content">
+                    <div class="col-lg-12">
+                      <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                          <h3 translate>LABEL-YOUR-PRODUCT-IMAGES</h3>
                         </div>
                         <div class="ibox-content">
                           <div class="container">
                             <div class="row">
                               <div  class="form-group">
-                                <div class="col-lg-11">
+                                <div class="col-lg-10">
                                   <table class="table table-striped">
                                     <thead>
                                     <tr>
-                                      <th>Main</th>
+                                      <th><span translate>LABEL-MAIN-IMAGE</span></th>
                                       <th><i class="">Facebook</i></th>
                                       <th><i class="">Pinterest</i></th>
                                       <th><i class="">Twitter</i></th>
@@ -66,10 +122,10 @@
                                       <td><div><img ng-src="{{product.productMainImageURLTwitter}}" class="product-images-list"></div></td>
                                       <td><div><img ng-src="{{product.productMainImageURLCode}}" class="product-images-list"></div></td>
                                       <td><div><img ng-src="{{product.instagramImagesThumbnailUrl}}" class="product-images-list">
-                                        <br><a class="btn btn-xs btn-warning" ng-click="modalupdateProductPost('md', product, 'Instagram', 'New', '00.00.0000')"><i class="fa fa-instagram"></i> Add Image</a></div></td>
-                                      <td><div>available soon</div></td>
-                                      <td ng-hide="true"><div ng-hide="showMainImage"><button type="button" class="btn btn-default btn-sm btn-outline" ng-click="showMainImageFunction()">Edit image</button></div>
-                                        <div ng-show="showMainImage"><button type="button" class="btn btn-primary btn-sm" ng-click="showMainImageFunction()">Edit image</button></div>
+                                        <br><a class="btn btn-xs btn-warning" ng-click="modalupdateProductPost('md', product, 'Instagram', 'New', '00.00.0000')"><i class="fa fa-instagram"></i>&nbsp;<span translate>BUTTON-ADD-IMAGE</span></a></div></td>
+                                      <td><div><span translate>LABEL-SOON-AVAILABLE</span></div></td>
+                                      <td ng-hide="true"><div ng-hide="showMainImage"><button type="button" class="btn btn-default btn-sm btn-outline" ng-click="showMainImageFunction()"><span translate>BUTTON-EDIT-IMAGE</span></button></div>
+                                        <div ng-show="showMainImage"><button type="button" class="btn btn-primary btn-sm" ng-click="showMainImageFunction()"><span translate>BUTTON-EDIT-IMAGE</span></button></div>
                                       </td>
                                     </tr>
                                     <tr ng-hide="true">
@@ -78,10 +134,10 @@
                                       <td><div><img ng-src="{{product.productFurtherImage1URLPinterest}}" class="product-images-list"></div></td>
                                       <td><div><img ng-src="{{product.productFurtherImage1URLTwitter}}" class="product-images-list"></div></td>
                                       <td><div><img ng-src="{{product.productFurtherImage1URLCode}}" class="product-images-list"></div></td>
-                                      <td><div>available soon</div></td>
-                                      <td><div>available soon</div></td>
-                                      <td><div ng-hide="insertFurtherImage1"><button type="button" class="btn btn-default btn-sm btn-outline" ng-click="showFurtherImage1Function()">Edit image</button></div>
-                                        <div ng-show="insertFurtherImage1"><button type="button" class="btn btn-primary btn-sm" ng-click="showFurtherImage1Function()">Edit image</button></div>
+                                      <td><div><span translate>LABEL-SOON-AVAILABLE</span></div></td>
+                                      <td><div><span translate>LABEL-SOON-AVAILABLE</span></div></td>
+                                      <td><div ng-hide="insertFurtherImage1"><button type="button" class="btn btn-default btn-sm btn-outline" ng-click="showFurtherImage1Function()"><span translate>BUTTON-EDIT-IMAGE</span></button></div>
+                                        <div ng-show="insertFurtherImage1"><button type="button" class="btn btn-primary btn-sm" ng-click="showFurtherImage1Function()"><span translate>BUTTON-EDIT-IMAGE</span></button></div>
                                       </td>
                                     </tr>
                                     <tr ng-hide="true">
@@ -90,10 +146,10 @@
                                       <td><div><img ng-src="{{product.productFurtherImage2URLPinterest}}" class="product-images-list"></div></td>
                                       <td><div><img ng-src="{{product.productFurtherImage2URLTwitter}}" class="product-images-list"></div></td>
                                       <td><div><img ng-src="{{product.productFurtherImage2URLCode}}" class="product-images-list"></div></td>
-                                      <td><div>available soon</div></td>
-                                      <td><div>available soon</div></td>
-                                      <td><div ng-hide="insertFurtherImage2"><button type="button" class="btn btn-default btn-sm btn-outline" ng-click="showFurtherImage2Function()">Edit image</button></div>
-                                        <div ng-show="insertFurtherImage2"><button type="button" class="btn btn-primary btn-sm" ng-click="showFurtherImage2Function()">Edit image</button></div>
+                                      <td><div><span translate>LABEL-SOON-AVAILABLE</span></div></td>
+                                      <td><div><span translate>LABEL-SOON-AVAILABLE</span></div></td>
+                                      <td><div ng-hide="insertFurtherImage2"><button type="button" class="btn btn-default btn-sm btn-outline" ng-click="showFurtherImage2Function()"><span translate>BUTTON-EDIT-IMAGE</span></button></div>
+                                        <div ng-show="insertFurtherImage2"><button type="button" class="btn btn-primary btn-sm" ng-click="showFurtherImage2Function()"><span translate>BUTTON-EDIT-IMAGE</span></button></div>
                                       </td>
                                     </tr>
                                     </tbody>
@@ -103,66 +159,7 @@
 
                             </div>
                             <div class="row">
-                              <small>Note: you can add all images by following the steps below. INSTAGRAM image has to be added by clicking the button in the table above.</small>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- start introduction -->
-                <div class="row">
-                  <div class="wrapper wrapper-content">
-                    <div class="col-lg-12">
-                      <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                          <h3>Introduction about how to add / maintain your product images</h3>
-                          <div class="ibox-tools">
-                            <a class="collapse-link">
-                              <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" uib-dropdown href="#">
-                              <i class="fa fa-wrench"></i>
-                            </a>
-                          </div>
-                        </div>
-                        <div class="ibox-content">
-                          <div class="container">
-                            <div class="row">
-                              <div class="col-lg-5">
-                                <div class="jumbotron">
-                                  <h1>Product Images</h1>
-                                  <p>Please select your main product image by clicking on "Select Image". There you will be able to zoom and rotate images and finally crop images based on your favorite view.</p>
-                                </div>
-                              </div>
-                              <div class="col-lg-6">
-                                <h2>Maintain your products - TODO List</h2>
-                                <small>Note: you can use default crop settings and skip step 2.</small>
-                                <ul class="todo-list">
-                                  <li>
-                                    <button type="button" class="btn btn-primary m-r-sm fa fa-check-square"></button>
-                                    <span class="m-l-xs"><strong>Step 1:</strong> Upload an image by clicking on "Select Image"</span>
-                                  </li>
-                                  <li>
-                                    <button type="button" class="btn btn-primary m-r-sm fa fa-check-square"></button>
-                                    <span class="m-l-xs"><strong>Step 2:</strong> Verify all images cropping areas</span>
-                                  </li>
-                                  <li>
-                                    <button type="button" class="btn btn-primary m-r-sm fa fa-check-square"></button>
-                                    <span class="m-l-xs"><strong>Step 3:</strong> Maintain Alt Text for your product image</span>
-                                  </li>
-                                  <li>
-                                    <button type="button" class="btn btn-primary m-r-sm fa fa-check-square"></button>
-                                    <span class="m-l-xs"><strong>Finally:</strong> Click on "Save Images"</span>
-                                  </li>
-                                  <li>
-                                    <button type="button" class="btn btn-primary m-r-sm fa fa-warning"></button>
-                                    <span class="m-l-xs">Note: In case the cropper is not active please reload page. We know about the problem and are currently trying to fix it.</span>
-                                  </li>
-                                </ul>
-                                <br>
-                              </div>
+                              <small translate>NOTE-HOW-TO-PROCEED-ADD-IMAGE</small>
                             </div>
                           </div>
                         </div>
@@ -176,18 +173,21 @@
                     <div class="col-lg-12">
                       <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                          <h3>Step 1: Upload your product image</h3>
+                          <h3><span translate>LABEL-STEP1</span>&nbsp;<span translate>LABEL-STEP1-EXPLANATION</span></h3>
                         </div>
                         <div class="ibox-content">
                           <div class="container">
                             <div class="row">
-                              <div class="col-lg-11">
+                              <div class="col-lg-5">
+                                <span translate>LABEL-UPLOAD-NEW-IMAGE-TO-REPLACE-EXISTING</span>
+                              </div>
+                              <div class="col-lg-5">
                                 <p align="left">
                                   <label ng-show="selectImage" title="Upload image file" for="inputImage" class="btn btn-warning btn-block btn-file">
-                                    Select Image <input type="file" accept="image/*" name="file" id="inputImage" class="hide" nv-file-select uploader="uploader">
+                                    <span translate>BUTTON-SELECT-IMAGE</span><input type="file" accept="image/*" name="file" id="inputImage" class="hide" nv-file-select uploader="uploader">
                                   </label>
                                   <label ng-hide="selectImage" title="You have not selected the images you'd like to maintain." class="btn btn-default btn-block">
-                                    Select Image
+                                    <span translate>BUTTON-SELECT-IMAGE</span>
                                   </label>
                                 </p>
                               </div>
@@ -204,24 +204,24 @@
                     <div class="col-lg-12">
                       <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                          <h3>Step 2: Verify and change your cropping area for individual channel images</h3>
+                          <h3><span translate>LABEL-STEP2</span>&nbsp;<span translate>LABEL-STEP2-EXPLANATION-LONG</span></h3>
                         </div>
 
                         <div class="ibox-content">
                           <div class="container">
 
                             <div class="row">
-                              <div class="col-md-11">
+                              <div class="col-md-10">
                                 <div class="panel panel-success">
                                   <div class="panel-heading">
-                                    <h2>Maintain Facebook Image</h2>
+                                    <h2 translate>LABEL-MAINTAIN-FACEBOOK-IMAGE</h2>
                                   </div>
                                   <div class="panel-body">
 
                                     <!-- Content -->
                                     <div class="container">
                                       <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-5">
                                           <!-- <h3 class="page-header">Demo:</h3> -->
                                           <div class="img-container">
                                             <img src="../../../../modules/products/client/img/photo_not_available.png" alt="Picture">
@@ -229,8 +229,8 @@
                                         </div>
                                         <div class="col-md-5">
                                           <div>
-                                            <h2>Preview image</h2>
-                                            <p>Note: Best fit for facebook image 1200px / 627px</p>
+                                            <h2 translate>LABEL-PREVIEW-IMAGE</h2>
+                                            <p translate>LABEL-BEST-FIT-FACEBOOK</p>
                                             <br>
                                           </div>
                                           <!-- <h3 class="page-header">Preview:</h3> -->
@@ -324,17 +324,17 @@
                             </div> <!-- row panel end -->
 
                             <div class="row">
-                              <div class="col-md-11">
+                              <div class="col-md-10">
                                 <div class="panel panel-danger">
                                   <div class="panel-heading">
-                                    <h2>Maintain Pinterest Image</h2>
+                                    <h2 translate>LABEL-MAINTAIN-PINTEREST-IMAGE</h2>
                                   </div>
                                   <div class="panel-body">
 
                                     <!-- Content -->
                                     <div class="container">
                                       <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-5">
                                           <!-- <h3 class="page-header">Demo:</h3> -->
                                           <div class="img-container-facebook">
                                             <img src="../../../../modules/products/client/img/photo_not_available.png" alt="Picture">
@@ -342,8 +342,8 @@
                                         </div>
                                         <div class="col-md-5">
                                           <div>
-                                            <h2>Preview image</h2>
-                                            <p>Note: Best fit for pinterest image 736px / 1104px</p>
+                                            <h2 translate>LABEL-PREVIEW-IMAGE</h2>
+                                            <p translate>LABEL-BEST-FIT-PINTEREST</p>
                                             <br>
                                           </div>
                                           <!-- <h3 class="page-header">Preview:</h3> -->
@@ -431,17 +431,17 @@
                             </div> <!-- row panel end -->
 
                             <div class="row">
-                              <div class="col-md-11">
+                              <div class="col-md-10">
                                 <div class="panel panel-success">
                                   <div class="panel-heading">
-                                    <h2>Maintain Twitter Image</h2>
+                                    <h2 translate>LABEL-MAINTAIN-TWITTER-IMAGE</h2>
                                   </div>
                                   <div class="panel-body">
 
                                     <!-- Content -->
                                     <div class="container">
                                       <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-5">
                                           <!-- <h3 class="page-header">Demo:</h3> -->
                                           <div class="img-container-twitter">
                                             <img src="../../../../modules/products/client/img/photo_not_available.png" alt="Picture">
@@ -449,8 +449,8 @@
                                         </div>
                                         <div class="col-md-5">
                                           <div>
-                                            <h2>Preview image</h2>
-                                            <p>Note: Best fit for twitter image 1024px / 512px</p>
+                                            <h2 translate>LABEL-PREVIEW-IMAGE</h2>
+                                            <p translate>LABEL-BEST-FIT-TWITTER</p>
                                             <br>
                                           </div>
                                           <!-- <h3 class="page-header">Preview:</h3> -->
@@ -548,22 +548,22 @@
                     <div class="col-lg-12">
                       <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                          <h3>Step 3: Maintain Alt Text for your product image</h3>
+                          <h3><span translate>LABEL-STEP3</span>&nbsp;<span translate>LABEL-STEP3-EXPLANATION</span></h3>
                         </div>
                         <div class="ibox-content">
                           <div class="container">
                             <div class="row">
                               <div class="col-md-11">
                                 <br>
-                                <div class="col-sm-2"><label class="control-label">Alt Text*</label></div>
+                                <div class="col-sm-2"><label class="control-label"><span translate>LABEL-ALT-TEXT</span>*</label></div>
                                 <div class="col-sm-5">
                                   <input type="text" name="productMainImageAlt" ng-model="productMainImageAlt" id="productMainImageAlt" class="form-control" placeholder="" required>
                                   <div ng-messages="productForm.productMainImageAlt.$error" role="alert">
-                                    <p class="help-block error-text" ng-message="required">Alt Text is required</p>
+                                    <p class="help-block error-text" ng-message="required"><span translate>VALIDATION-ALT-TEXT-REQ</span></p>
                                   </div>
                                 </div>
                                 <div class="col-sm-5">
-                                  <button type="button" class="btn btn-default" tooltip-placement="top" tooltip="Give a brief description of the image. This is important as the text is displayed if the image may not be loaded is relevant to partially sighted visitors to get an idea of what is displayed will be considered by search engines">i</button>
+                                  <button type="button" class="btn btn-default" tooltip-placement="top" uib-tooltip="{{'NOTE-TOOLTIP-DESCRIPTION-FALLBACK-IMAGE' | translate}}">i</button>
                                 </div>
                               </div>
                             </div>
@@ -579,7 +579,7 @@
                     <div class="col-lg-12">
                       <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                          <h3>Finally: Save your product image</h3>
+                          <h3><span translate>LABEL-STEP-FINALLY</span>&nbsp;<span translate>LABEL-STEP-FINALLY-EXPLANATION</span></h3>
                         </div>
                         <div class="ibox-content">
                           <div class="container">
@@ -590,11 +590,11 @@
                                   <table class="table">
                                     <thead>
                                     <tr>
-                                      <th width="20%">Original File Name</th>
-                                      <th ng-show="uploader.isHTML5">Size</th>
-                                      <th ng-show="uploader.isHTML5">Progress</th>
-                                      <th>Status</th>
-                                      <th>Actions</th>
+                                      <th width="20%"><span translate>LABEL-ORIGINAL-FILE-NAME</span></th>
+                                      <th ng-show="uploader.isHTML5"><span translate>LABEL-FILE-SIZE</span></th>
+                                      <th ng-show="uploader.isHTML5"><span translate>LABEL-PROGRESS-UPLOAD</span></th>
+                                      <th><span translate>LABEL-FILE-UPLOAD-STATUS</span></th>
+                                      <th><span translate>LABEL-FILE-UPLOAD-ACTIONS</span></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -624,14 +624,14 @@
                                         <div class="row" id="actions_">
                                           <div class="docs-buttons">
                                             <button ng-hide="true" type="button" class="btn btn-success" ng-click="uploadProductMainPicture(item)" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
-                                              <span class="glyphicon glyphicon-upload"></span> Upload all main images
+                                              <span class="glyphicon glyphicon-upload"></span>&nbsp;<span translate>BUTTON-UPLOAD-ALL-MAIN-IMAGES</span>
                                               <strong ng-bind="file"></strong>
                                             </button>
                                             <button ng-hide="true" type="button" class="btn btn-default btn-outline" ng-click="item.cancel()" ng-disabled="!item.isUploading">
-                                              <span class="glyphicon glyphicon-ban-circle"></span> stop upload
+                                              <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate>BUTTON-STOP-UPLOAD</span>
                                             </button>
                                             <button type="button" class="btn btn-default btn-outline" ng-click="item.remove()">
-                                              <span class="glyphicon glyphicon-trash"></span> Remove from upload list
+                                              <span class="glyphicon glyphicon-trash"></span>&nbsp;<span translate>BUTTON-REMOVE-FROM-UPLOAD-LIST</span>
                                             </button>
                                           </div>
                                         </div>
@@ -648,7 +648,7 @@
                                           <div class="btn-group btn-group-crop">
                                             <button type="button" class="btn btn-warning" data-method="getCroppedCanvas">
                                 <span class="docs-tooltip" data-toggle="tooltip" title="Upload now!">
-                                </span><i class="glyphicon glyphicon-upload"></i> Save images
+                                </span><i class="glyphicon glyphicon-upload"></i>&nbsp;<span translate>BUTTON-SAVE-IMAGES</span>
                                             </button>
                                           </div>
                                         </div><!-- /.docs-buttons -->
@@ -662,7 +662,7 @@
                                   <div align="right" ng-hide="uploader.queue.length">
                                     <button type="button" class="btn btn-default" data-method="getCroppedCanvas" disabled>
                         <span class="docs-tooltip" data-toggle="tooltip" title="Select your images before you can upload.">
-                        </span><i class="glyphicon glyphicon-upload"></i> Save images
+                        </span><i class="glyphicon glyphicon-upload"></i>&nbsp;<span translate>BUTTON-SAVE-IMAGES</span>
                                     </button>
                                   </div>
                                 </div>

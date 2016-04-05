@@ -30,6 +30,10 @@ module.exports = function (app) {
       .put(orders.update)
       .delete(orders.delete);
 
+  // Services with shipcloud
+  app.route('/api/orders/shipcloud/getCarriers').get(orders.getCarriers);
+  app.route('/api/orders/shipcloud/createShipment').post(orders.createShipment);
+
   // Finish by binding the order middleware
   app.param('orderId', orders.orderByID);
 };

@@ -34,6 +34,9 @@ module.exports = {
   app: {
     title: defaultEnvConfig.app.title + ' - Development Environment'
   },
+  shipcloud: {
+    API_KEY: process.env.API_KEY || '6871c2bb258255adfeb61fac9ad137a4'
+  },
   facebook: {
     clientID: process.env.FACEBOOK_ID || '1683578941900764',
     clientSecret: process.env.FACEBOOK_SECRET || 'd0c66ce4aab7893047db84b01dd6c44d',

@@ -20,7 +20,7 @@ function Paypal(apiUsername, apiPassword, signature, debug) {
 	this.url = 'https://' + (debug ? 'api-3t.paypal.com' : 'api-3t.paypal.com') + '/nvp';
 	this.redirect = 'https://' + (debug ? 'www.paypal.com/cgi-bin/webscr' : 'www.paypal.com/cgi-bin/webscr');
 
-	//this.redirect = 'https://' + (debug ? 'www.paypal.com/checkoutnow' : 'www.paypal.com/checkoutnow');
+	//this.redirect = 'https://' + (debug ? 'www.paypal.com/checkoutnow/' : 'www.paypal.com/checkoutnow/');
 
 	// Sandbox environment
 	//this.url = 'https://' + (debug ? 'api-3t.sandbox.paypal.com' : 'api-3t.paypal.com') + '/nvp';
@@ -96,7 +96,7 @@ Paypal.prototype.getExpressCheckoutDetails = function(token, doPayment, callback
 		}
 
 		var params = self.params();
-		params.PAYMENTACTION = 'Sale';
+		params.PAYMENTACTION = 'Order';
 		params.PAYERID = data.PAYERID;
 		params.TOKEN = token;
 		params.PAYMENTREQUEST_0_AMT = data.PAYMENTREQUEST_0_AMT;
@@ -198,16 +198,16 @@ Paypal.prototype.setExpressCheckoutPayment = function(email, invoiceNumber, amou
 	params.PAYMENTREQUEST_0_CURRENCYCODE = currency;
 	params.PAYMENTREQUEST_0_INVNUM = invoiceNumber;
 	params.PAYMENTREQUEST_0_CUSTOM = invoiceNumber + '|' + params.PAYMENTREQUEST_0_AMT + '|' + currency;
-	params.PAYMENTREQUEST_0_PAYMENTACTION = 'Sale';
+	params.PAYMENTREQUEST_0_PAYMENTACTION = 'Order';
 	params.PAYMENTREQUEST_0_ITEMAMT = prepareNumber(cartSubtotalAmount);
-	params.PAYMENTREQUEST_0_SHIPPINGAMT = cartshipping;
+	params.PAYMENTREQUEST_0_SHIPPINGAMT = prepareNumber(cartshipping);
 
 	params = _.extend(params, this.getItemsParams());
 
 	params.RETURNURL = returnUrl;
 	params.CANCELURL = cancelUrl;
 
-	params.NOSHIPPING = 1;
+	params.NOSHIPPING = 2;
 	params.ALLOWNOTE = 0;
 	params.REQCONFIRMSHIPPING = 0;
 	params.METHOD = 'SetExpressCheckout';

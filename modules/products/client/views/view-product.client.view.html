@@ -1,19 +1,19 @@
 <section ng-controller="ProductsController" ng-init="findOne()">
   <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-4">
-      <h2>Edit product</h2>
+      <h2 translate>BREADCRUMB-EDIT-PRODUCTS</h2>
       <ol class="breadcrumb">
         <li>
-          <a href="dashboard">Home</a>
+          <a href="dashboard" translate>LABEL-HEADER-DASHBOARD</a>
         </li>
         <li>
-          <a href="products">Products</a>
+          <a href="products" translate>BREADCRUMB-PRODUCTS</a>
         </li>
         <li>
-          <a href="">Edit product</a>
+          <a href="" translate>BREADCRUMB-EDIT-PRODUCTS</a>
         </li>
         <li class="active">
-          <strong>Posts</strong>
+          <strong translate>BUTTON-TAB-MAIN-DATA</strong>
         </li>
       </ol>
     </div>
@@ -25,10 +25,10 @@
       <div class="col-lg-12">
         <div class="tabs-container">
           <ul class="nav nav-tabs">
-            <li class=""><a data-toggle="tab" ui-sref="products.edit({productId: product._id})"> Main data</a></li>
-            <li class=""><a data-toggle="tab" ui-sref="products.editmedia({productId: product._id})">Images</a></li>
-            <li class="" ng-hide="true"><a data-toggle="tab" ui-sref="products.editchannel({productId: product._id})">Sales channel data</a></li>
-            <li class="active"><a data-toggle="tab">Posts &nbsp;&nbsp;&nbsp;<span class="label label-warning">NEW</span></a></li>
+            <li class=""><a data-toggle="tab" ui-sref="products.edit({productId: product._id})" translate>BUTTON-TAB-MAIN-DATA</a></li>
+            <li class=""><a data-toggle="tab" ui-sref="products.editmedia({productId: product._id})" translate>BUTTON-TAB-IMAGES</a></li>
+            <li class="" ng-hide="true"><a data-toggle="tab" ui-sref="products.editchannel({productId: product._id})" translate>BUTTON-TAB-DAWANDA-PRODUCT</a></li>
+            <li class="active"><a data-toggle="tab"><span translate>BREADCRUMB-POSTS</span><span> &nbsp;&nbsp;&nbsp;</span><span class="label label-warning" translate>BUTTON-TAB-NEW</span></a></li>
           </ul>
           <div class="tab-content">
             <div id="tab-1" class="tab-pane active">
@@ -48,9 +48,9 @@
                           <table class="table table-hover">
                             <thead>
                             <tr>
-                              <th data-toggle="true">Image</th>
-                              <th data-toggle="true">Product number</th>
-                              <th data-hide="phone">Product title</th>
+                              <th data-toggle="true" translate>LABEL-IMAGE</th>
+                              <th data-toggle="true" translate>LABEL-PRODUCT-NO</th>
+                              <th data-hide="phone" translate>LABEL-PRODUCT-TITLE</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -72,39 +72,39 @@
                         <div class="ibox-content">
                           <div ng-hide="basicData">
                             <div class="alert alert-danger">
-                              <p>Please finalize the tutorial before you post your first product!</p>
+                              <p translate>NOTE-FINALIZE-TUTORIAL</p>
                             </div>
-                            <a class="btn btn-w-m btn-default"><i class="fa fa-facebook"></i> Create Post</a>
-                            <a class="btn btn-w-m btn-default"><i class="fa fa-pinterest"></i> Create Pin</a>
-                            <a class="btn btn-w-m btn-default"><i class="fa fa-twitter"></i> Create Tweet</a>
-                            <a class="btn btn-w-m btn-default"><i class="fa fa-instagram"></i> Create Comment</a>
-                            <a class="btn btn-w-m btn-default"><i class="fa fa-google-plus"></i> Create Post</a>
-                            <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i> Etsy Create Post</a>
-                            <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i> Dawanda Create Post</a>
-                            <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i> Create Post</a>
-                            <a class="btn btn-w-m btn-default"><i class="fa fa-amazon"></i> Create Post</a>
+                            <a class="btn btn-w-m btn-default"><i class="fa fa-facebook"></i><span translate>BUTTON-CREATE-POST</span></a>
+                            <a class="btn btn-w-m btn-default"><i class="fa fa-pinterest"></i><span translate>BUTTON-CREATE-PIN</span></a>
+                            <a class="btn btn-w-m btn-default"><i class="fa fa-twitter"></i><span translate>BUTTON-CREATE-TWEET</span></a>
+                            <a class="btn btn-w-m btn-default"><i class="fa fa-instagram"></i><span translate>BUTTON-CREATE-COMMENT</span></a>
+                            <a class="btn btn-w-m btn-default"><i class="fa fa-google-plus"></i><span translate>BUTTON-CREATE-POST</span></a>
+                            <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i><span translate>BUTTON-CREATE-POST-ETSY</span></a>
+                            <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i><span translate>BUTTON-CREATE-POST-DAWANDA</span></a>
+                            <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i><span translate>BUTTON-CREATE-POST</span></a>
+                            <a class="btn btn-w-m btn-default"><i class="fa fa-amazon"></i><span translate>BUTTON-CREATE-POST</span></a>
                           </div>
                           <div class="col-lg-9">
                             <div ng-show="basicData">
-                              <strong><p>Your available sales channels:</p></strong>
-                              <a class="btn btn-w-m btn-warning" ng-click="modalupdateProductPost('md', product, 'Facebook', 'New', '00.00.0000')"><i class="fa fa-facebook"></i> Create Post</a>
-                              <a class="btn btn-w-m btn-warning" ng-click="modalupdateProductPost('md', product, 'Pinterest', 'New', '00.00.0000')"><i class="fa fa-pinterest"></i> Create Pin</a>
-                              <a class="btn btn-w-m btn-warning" ng-click="modalupdateProductPost('md', product, 'Twitter', 'New', '00.00.0000')"><i class="fa fa-twitter"></i> Create Tweet</a>
-                              <a ng-show="instagramImageSet" class="btn btn-w-m btn-warning" ng-click="modalupdateProductPost('md', product, 'Instagram', 'New', '00.00.0000')"><i class="fa fa-instagram"></i> Create Comment</a>
-                              <a ng-hide="instagramImageSet" class="btn btn-w-m btn-default" ><i class="fa fa-instagram"></i> Create Comment</a>
-                              <p ng-hide="instagramImageSet">Note: Please go to "Images" tab first to add a product image for Instagram!</p>
-                              <a class="btn btn-w-m btn-warning" ng-click="modalupdateProductPost('md', product, 'Code', 'New', '00.00.0000')"><i class="fa fa-code"></i> Code snippet</a>
+                              <strong><p translate>NOTE-YOUR-SALES-CHANNELS</p></strong>
+                              <a class="btn btn-w-m btn-warning" ng-click="modalupdateProductPost('md', product, 'Facebook', 'New', '00.00.0000')"><i class="fa fa-facebook"></i><span translate>BUTTON-CREATE-POST</span></a>
+                              <a class="btn btn-w-m btn-warning" ng-click="modalupdateProductPost('md', product, 'Pinterest', 'New', '00.00.0000')"><i class="fa fa-pinterest"></i><span translate>BUTTON-CREATE-PIN</span></a>
+                              <a class="btn btn-w-m btn-warning" ng-click="modalupdateProductPost('md', product, 'Twitter', 'New', '00.00.0000')"><i class="fa fa-twitter"></i><span translate>BUTTON-CREATE-TWEET</span></a>
+                              <a ng-show="instagramImageSet" class="btn btn-w-m btn-warning" ng-click="modalupdateProductPost('md', product, 'Instagram', 'New', '00.00.0000')"><i class="fa fa-instagram"></i><span translate>BUTTON-CREATE-COMMENT</span></a>
+                              <a ng-hide="instagramImageSet" class="btn btn-w-m btn-default" ><i class="fa fa-instagram"></i><span translate>BUTTON-CREATE-COMMENT</span></a>
+                              <p ng-hide="instagramImageSet" translate>NOTE-ADD-IMAGES-FIRST</p>
+                              <a class="btn btn-w-m btn-warning" ng-click="modalupdateProductPost('md', product, 'Code', 'New', '00.00.0000')"><i class="fa fa-code"></i><span translate>BUTTON-CREATE-POST-CODE-SNIPPET</span></a>
                             </div>
                           </div>
                           <div class="col-lg-3">
                             <div ng-show="basicData">
-                              <p>Service comeing soon:</p>
-                              <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i>Dawanda Create Post</a>
+                              <p translate>NOTE-SERVICE-COMEING-SOON</p>
+                              <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i><span translate>BUTTON-CREATE-POST-DAWANDA</span></a>
                               <br><br>
                             </div>
                             <div ng-show="basicData">
-                              <p>Services in development:</p>
-                              <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i>Etsy Create Post</a>
+                              <p translate>NOTE-SERVICE-IN-DEVELOPMENT</p>
+                              <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i><span translate>BUTTON-CREATE-POST-ETSY</span></a>
                               <br><br>
                             </div>
                           </div>
@@ -119,10 +119,10 @@
                           <table class="table table-hover">
                             <thead>
                             <tr>
-                              <th data-hide="phone">Post Date</th>
-                              <th data-hide="phone">Post Channel</th>
-                              <th data-hide="phone">Post Status</th>
-                              <th data-hide="phone">Action</th>
+                              <th data-hide="phone" translate>LABEL-POST-DATE</th>
+                              <th data-hide="phone" translate>LABEL-POST-CHANNEL</th>
+                              <th data-hide="phone" translate>LABEL-POST-STATUS</th>
+                              <th data-hide="phone" translate>LABEL-POST-ACTION</th>
                             </tr>
                             </thead>
                             <tbody data-ng-repeat="post in posts | filter: {product: productSelectId }">
@@ -132,20 +132,20 @@
                               <td><span ng-bind="post.postStatus"></span></td>
                               <td>
                                 <div ng-show="post.postStatus === 'Active'">
-                                  <a class="btn btn-primary btn-outline btn-sm" ng-click="modalupdateProductPost('md', product, post.postChannel, post.postStatus, post.postPublicationDate, post.postInformation)"><i class="fa fa-check"></i> View Post</a>
+                                  <a class="btn btn-primary btn-outline btn-sm" ng-click="modalupdateProductPost('md', product, post.postChannel, post.postStatus, post.postPublicationDate, post.postInformation)"><i class="fa fa-check"></i><span translate>BUTTON-VIEW-POST</span></a>
                                 </div>
                                 <div ng-show="post.postStatus === 'Wait'">
-                                  <a class="btn btn-warning btn-outline btn-sm" ng-click="modalupdateProductPost('md', product, post.postChannel, post.postStatus, post.postPublicationDate, post.postInformation)"><i class="fa fa-warning"></i> Review Post</a>
+                                  <a class="btn btn-warning btn-outline btn-sm" ng-click="modalupdateProductPost('md', product, post.postChannel, post.postStatus, post.postPublicationDate, post.postInformation)"><i class="fa fa-warning"></i><span translate>BUTTON-REVIEW-POST</span></a>
                                 </div>
                                 <div ng-show="post.postStatus === 'Error'">
-                                  <a class="btn btn-danger btn-outline btn-sm" ng-click="modalupdateProductPost('md', product, post.postChannel, post.postStatus, post.postPublicationDate, post.postInformation)"><i class="fa fa-pencil"></i> Review Post</a>
+                                  <a class="btn btn-danger btn-outline btn-sm" ng-click="modalupdateProductPost('md', product, post.postChannel, post.postStatus, post.postPublicationDate, post.postInformation)"><i class="fa fa-pencil"></i><span translate>BUTTON-REVIEW-POST</span></a>
                                 </div>
                               </td>
                             </tr>
                             </tbody>
                           </table>
-                          <div class="alert alert-warning text-center" ng-if="posts.$resolved && !posts.length">
-                            You have not posted this product so far. To post this product just click on "Create Post" for the corresponding channel!
+                          <div class="alert alert-warning text-center" ng-if="posts.$resolved && !posts.length" translate>
+                            NOTE-NOT-POSTED-PRODUCT-SO-FAR
                           </div>
                         </div>
                       </div>

@@ -15,20 +15,67 @@
             <p ng-bind="success"></p>
           </div>
           <div class="modal-body-white">
-            <p translate>TEXT-NOTE-TRACKING-ID-LINK</p>
-            <input ng-model="orderTrackingNo" id="orderTrackingNo" class="form-control" placeholder="">
+            <p><span translate>ERROR-NOTE-SHIP-CLOUD-INFORMATION-I</span>
+              <a href="https://www.shipcloud.io/">shipcloud</a>
+              <span translate>ERROR-NOTE-SHIP-CLOUD-INFORMATION-II</span>
+            </p>
+            <h3 translate>LABEL-SHIPPING-SERVICE</h3>
+            <label class="col-sm-6 control-label"><span>ShipCloud API-Key</span></label>
+            <div class="col-sm-6">
+              <input type="text" ng-bind="user.shipCloudAPI_Key" ng-model="user.shipCloudAPI_Key" id="shipCloudAPI_Key" name="shipCloudAPI_Key" class="form-control" placeholder="z.B. adfe39903ejafldj...">
+              <input ng-hide="true" type="text" ng-model="shipment" id="shipment" name="shipment" class="form-control"></div>
+            <div>
+              <p class="help-block error-text" ng-show="orderUpdateForm.shipCloudAPI_Key.$touched && orderUpdateForm.shipCloudAPI_Key.$error.required" role="alert"><span translate>VALIDATION-PRODUCT-TITLE-REQ</span></p>
+              <p class="help-block error-text" ng-show="orderUpdateForm.shipCloudAPI_Key.$touched && orderUpdateForm.shipCloudAPI_Key.$error.maxlength" role="alert"><span translate>VALIDATION-PRODUCT-TITLE-TO-LONG</span></p>
+            </div>
           </div>
           <div class="modal-body-white">
-            <p translate>TEXT-NOTE-ADD-ADDITIONAL-CUSTOMER-MESSAGE</p>
-            <textarea rows="3" ng-model="ordereMailCustomerShipMessage" id="ordereMailCustomerShipMessage" class="supertext" placeholder="" rows="10"></textarea>
-            <br>
+            <label class="col-sm-6 control-label"><span translate>LABEL-SELECT-SHIPPING-PROVIDER</span></label>
+            <div class="col-sm-6">
+              <select class="form-control" ng-model="parcelService" name="parcelService" id="parcelService">
+                <option ng-repeat="option in carriers" value="{{option.name}}">{{option.display_name}}</option>
+              </select>
+            </div>
           </div>
-          <div class="modal-body">
-            <span translate>TEXT-NOTE-SHIPPING-NOTE-CUSTOMER-RECEIVE</span>
+          <div class="modal-body-white">
+            <h3 translate>LABEL-SHIPPING-INFORMATION</h3>
+            <label class="col-sm-3 control-label"><span translate>LABEL-SHIPPING-PARCEL-INFORMATION-LENGTH</span></label>
+            <div class="col-sm-3">
+              <input type="text" ng-model="parcelLength" id="parcelLength" name="parcelLength" class="form-control" placeholder="30" required ng-maxlength="3"></div>
+            <label class="col-sm-3 control-label"><span translate>LABEL-SHIPPING-PARCEL-INFORMATION-WIDTH</span></label>
+            <div class="col-sm-3">
+              <input type="text" ng-model="parcelWidth" id="parcelWidth" name="parcelWidth" class="form-control" placeholder="30" required ng-maxlength="3"></div>
+          </div>
+          <div class="modal-body-white">
+            <label class="col-sm-3 control-label"><span translate>LABEL-SHIPPING-PARCEL-INFORMATION-HIGHT</span>*</label>
+            <div class="col-sm-3">
+              <input type="text" ng-model="parcelHight" id="parcelHight" name="parcelHight" class="form-control" placeholder="30" required ng-maxlength="3"></div>
+            <label class="col-sm-3 control-label"><span translate>LABEL-SHIPPING-PARCEL-INFORMATION-WEIGHT</span></label>
+            <div class="col-sm-3">
+              <input type="text" ng-model="parcelWeight" id="parcelWeight" name="parcelWeight" class="form-control" placeholder="30" required ng-maxlength="3"></div>
+          </div>
+          <br>
+          <div class="modal-body-white">
+            <h3 translate>LABEL-SHIPPING-FURTHER-INFORMATION</h3>
+            <p translate>ERROR-NOTE-FURTHER-INFORMATION</p>
+            <label class="col-sm-6 control-label"><span translate>TEXT-NOTE-TRACKING-ID-LINK</span></label>
+            <div class="col-sm-6">
+              <input ng-model="orderTrackingNo" id="orderTrackingNo" class="form-control" placeholder="">
+            </div>
+          </div>
+          <div class="modal-body-white">
+            <label class="col-sm-6 control-label"><span translate>TEXT-NOTE-ADD-ADDITIONAL-CUSTOMER-MESSAGE</span></label>
+            <div class="col-sm-6">
+              <textarea rows="3" ng-model="ordereMailCustomerShipMessage" id="ordereMailCustomerShipMessage" class="supertext" placeholder=""></textarea>
+            </div>
+          </div>
+          <br><br>
+          <div class="modal-body-white">
+            <p translate>TEXT-NOTE-SHIPPING-NOTE-CUSTOMER-RECEIVE</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-white" ng-click="$dismiss()" translate>BUTTON-CANCEL</button>
-            <button type="submit" class="btn btn-primary" translate>BUTTON-YES-SHIP-ORDER</button>
+            <button type="button" class="btn btn-primary" ng-click="shipOrder(orderUpdateForm.$valid)" translate>BUTTON-YES-SHIP-ORDER</button>
           </div>
         </form>
       </div>

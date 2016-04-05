@@ -36,6 +36,9 @@ module.exports = {
       }
     }
   },
+  shipcloud: {
+    API_KEY: process.env.API_KEY || 'd3eaf1c82d56d52dd1584eddfaab17c2'
+  },
   facebook: {
     clientID: process.env.FACEBOOK_ID || '1679726155619376',
     clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',

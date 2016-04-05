@@ -1,19 +1,19 @@
 <section ng-controller="ProductsController" ng-init="findOne()">
   <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-4">
-      <h2>Edit product</h2>
+      <h2 translate>BREADCRUMB-EDIT-PRODUCTS</h2>
       <ol class="breadcrumb">
         <li>
-          <a href="dashboard">Home</a>
+          <a href="dashboard" translate>LABEL-HEADER-DASHBOARD</a>
         </li>
         <li>
-          <a href="products">Products</a>
+          <a href="products" translate>BREADCRUMB-PRODUCTS</a>
         </li>
         <li>
-          <a href="">Edit product</a>
+          <a href="" translate>BREADCRUMB-EDIT-PRODUCTS</a>
         </li>
         <li class="active">
-          <strong>Main data</strong>
+          <strong translate>BREADCRUMB-MAIN-DATA</strong>
         </li>
       </ol>
     </div>
@@ -24,10 +24,10 @@
       <div class="col-lg-12">
         <div class="tabs-container">
           <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" ui-sref="products.edit({productId: product._id})">Main data</a></li>
-            <li class=""><a data-toggle="tab" ui-sref="products.editmedia({productId: product._id})">Images</a></li>
-            <li class="" ng-hide="true"><a data-toggle="tab" ui-sref="products.editchannel({productId: product._id})">Sales channel data</a></li>
-            <li class=""><a data-toggle="tab" ui-sref="products.view({productId: product._id})">Posts &nbsp;&nbsp;&nbsp;<span class="label label-warning">NEW</span></a></li>
+            <li class="active"><a data-toggle="tab" ui-sref="products.edit({productId: product._id})" translate>BUTTON-TAB-MAIN-DATA</a></li>
+            <li class=""><a data-toggle="tab" ui-sref="products.editmedia({productId: product._id})" translate>BUTTON-TAB-IMAGES</a></li>
+            <li class="" ng-hide="true"><a data-toggle="tab" ui-sref="products.editchannel({productId: product._id})" translate>BUTTON-TAB-DAWANDA-PRODUCT</a></li>
+            <li class=""><a data-toggle="tab" ui-sref="products.view({productId: product._id})"><span translate>BREADCRUMB-POSTS</span> &nbsp;&nbsp;&nbsp;<span class="label label-warning" translate>BUTTON-TAB-NEW</span></a></li>
           </ul>
           <div class="tab-content">
             <div id="tab-1" class="tab-pane active">
@@ -46,7 +46,7 @@
                         <div class="ibox float-e-margins">
                           <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                              <h3>Product is active on: </h3>
+                              <h3 translate>LABEL-PRODUCT-ACTIVE-ON</h3>
                               <div ibox-tools></div>
                             </div>
                             <div class="ibox-content">
@@ -98,11 +98,11 @@
 
                         <div class="ibox float-e-margins">
                           <div class="ibox-title">
-                            <h3>Describe your product</h3>
+                            <h3 translate>LABEL-DESCRIBE-YOUR-PRODUCT</h3>
                             <div class="ibox-tools"></div>
                           </div>
                           <div class="ibox-content">
-                            <div class="form-group"><label class="col-sm-2 control-label">Is in stock*</label>
+                            <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-IN-STOCK</span>*</label>
                               <div class="col-sm-8">
                                 <div class="switch">
                                   <div class="onoffswitch">
@@ -116,35 +116,35 @@
                               </div>
                               <div class="col-sm-2">
                                 <div class="tooltip-demo">
-                                  <button type="button" class="btn btn-default" tooltip-placement="top" uib-tooltip="If your item is no longer in stock, the product will still be visible in the posted channels - but not buyable for the customer. In case the item is backordered, you might want to add a note for your customers in the title or description field.">i</button>
+                                  <button type="button" class="btn btn-default" tooltip-placement="top" uib-tooltip="{{'LABEL-TOOLTIP-ITEM-NO-LONGER-IN-STOCK' | translate}}">i</button>
                                 </div>
                               </div>
                             </div>
-                            <div class="form-group" show-errors><label class="col-sm-2 control-label">ID*</label>
+                            <div class="form-group" show-errors><label class="col-sm-2 control-label"><span translate>LABEL-IN-ID</span>*</label>
                               <div class="col-sm-8">
                                 <input type="text" name="productId" ng-model="product.productId" id="productId" class="form-control" placeholder="" required></div>
                               <div ng-messages="productForm.productId.$error" role="alert">
-                                <p class="help-block error-text" ng-message="required">Products ID is required.</p>
+                                <p class="help-block error-text" ng-message="required"><span translate>VALIDATION-PRODUCT-ID-REQ</span></p>
                               </div>
                             </div>
-                            <div class="form-group"><label class="col-sm-2 control-label">Title*</label>
+                            <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-TITLE</span>*</label>
                               <div class="col-sm-8">
                                 <input type="text" ng-model="product.productTitle" id="productTitle" class="form-control" placeholder="" required ng-maxlength="70"></div>
                               <div>
-                                <p class="help-block error-text" ng-show="productForm.productDescription.$touched && productForm.productDescription.$error.required" role="alert">Products title is required.</p>
-                                <p class="help-block error-text" ng-show="productForm.productDescription.$touched && productForm.productDescription.$error.maxlength" role="alert">Products title is to long.</p>
+                                <p class="help-block error-text" ng-show="productForm.productTitle.$touched && productForm.productTitle.$error.required" role="alert"><span translate>VALIDATION-PRODUCT-TITLE-REQ</span></p>
+                                <p class="help-block error-text" ng-show="productForm.productTitle.$touched && productForm.productTitle.$error.maxlength" role="alert"><span translate>VALIDATION-PRODUCT-TITLE-TO-LONG</span></p>
                               </div>
                               <div class="col-sm-2">
                                 <div class="tooltip-demo">
-                                  <button type="button" class="btn btn-default" tooltip-placement="top" uib-tooltip="Any information about brand, colour, or size of the product should be added to the title separated by comma. Please make sure, that you don’t use one of the following special signs: /[^\p{L}\p {Nd}\p{P}\p{Sm}\p{Zs}™©®]/u. The characters %, :, & and + can only be used once.">i</button>
+                                  <button type="button" class="btn btn-default" tooltip-placement="top" uib-tooltip="{{'LABEL-TOOLTIP-PRODUCT-TITLE' | translate}}">i</button>
                                 </div>
                               </div>
                             </div>
-                            <div class="form-group" show-errors><label class="col-sm-2 control-label">Description*</label>
+                            <div class="form-group" show-errors><label class="col-sm-2 control-label"><span translate>LABEL-DESCRIPTION</span>*</label>
                               <div class="col-sm-8"><textarea name="productDescription" ng-model="product.productDescription" id="productDescription" class="supertext" placeholder="" rows="10" required ng-maxlength="1000"></textarea></div>
                               <div >
-                                <p class="help-block error-text" ng-show="productForm.productDescription.$touched && productForm.productDescription.$error.required" role="alert">Products description is required.</p>
-                                <p class="help-block error-text" ng-show="productForm.productDescription.$touched && productForm.productDescription.$error.maxlength" role="alert">Products description is to long.</p>
+                                <p class="help-block error-text" ng-show="productForm.productDescription.$touched && productForm.productDescription.$error.required" role="alert"><span translate>VALIDATION-PRODUCT-DESCRIPTION-REQ</span></p>
+                                <p class="help-block error-text" ng-show="productForm.productDescription.$touched && productForm.productDescription.$error.maxlength" role="alert"><span translate>VALIDATION-PRODUCT-DESCRIPTION-TO-LONG</span></p>
                               </div>
                             </div>
                           </div>
@@ -154,30 +154,30 @@
                       <div class="col-lg-12">
                         <div class="ibox float-e-margins">
                           <div class="ibox-title">
-                            <h3>Set the price of your product</h3>
+                            <h3 translate>LABEL-SET-PRICE-PRODUCT</h3>
                             <div class="ibox-tools"></div>
                           </div>
                           <div class="ibox-content">
-                            <div class="form-group"><label class="col-sm-2 control-label">Price*</label>
+                            <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-PRICE</span>*</label>
                               <div class="col-sm-8"><input type="text" pattern="[0-9]+([.][0-9]+)*" class="form-control" ng-model="product.productPrice" id="productPrice" placeholder="" required></div>
                               <div class="col-sm-2">
                                 <div class="tooltip-demo">
-                                  <button type="button" class="btn btn-default" tooltip-placement="top" uib-tooltip="Please enter prices in the format 12.40 or 2314.05 - there are no commas possible.">i</button>
+                                  <button type="button" class="btn btn-default" tooltip-placement="top" uib-tooltip="{{'LABEL-TOOLTIP-PRODUCT-PRICE' | translate}}">i</button>
                                 </div>
                               </div>
                             </div>
-                            <div class="form-group"><label class="col-sm-2 control-label">Tax*</label>
+                            <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-TAX</span>*</label>
                               <div class="col-sm-8">
                                 <select class="form-control" name="productTax" id="productTax" ng-model="product.productTax" required>
                                   <option ng-repeat="option in productTax" value="{{option._id}}">{{option.taxRate}} %</option>
                                 </select>
                               </div>
                               <div ng-messages="productForm.productTax.$error" role="alert">
-                                <p class="help-block error-text" ng-message="required">Products tax is required.</p>
+                                <p class="help-block error-text" ng-message="required"><span translate>VALIDATION-PRODUCT-TAX-REQ</span></p>
                               </div>
                               <div class="col-sm-2"></div>
                             </div>
-                            <div class="form-group"><label class="col-sm-2 control-label">Currency*</label>
+                            <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-CURRENCY</span>*</label>
                               <div class="col-sm-8">
                                 <select class="form-control" name="productCurrency" id="productCurrency" ng-model="product.productCurrency" required>
                                   <option ng-repeat="option in productCurrency" value="{{option._id}}">{{option.currencyCode}}</option>
@@ -210,19 +210,19 @@
                       <div class="col-lg-12">
                         <div class="ibox float-e-margins">
                           <div class="ibox-title">
-                            <h3>Select applicable shipping option for your product</h3>
+                            <h3 translate>LABEL-SELECT-SHIPPING-OPTION</h3>
                             <div class="ibox-tools"></div>
                           </div>
                           <div class="ibox-content">
                             <fieldset class="form-horizontal">
-                              <div class="form-group"><label class="col-sm-2 control-label">Shipping Option*</label>
+                              <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-SHIPPING-OPTION</span>*</label>
                                 <div class="col-sm-8">
                                   <select class="form-control" name="productShippingoption" id="productShippingoption" ng-model="product.productShippingoption" required>
                                     <option ng-repeat="option in productShippingoption" value="{{option._id}}">{{option.deliveryTitle}} - {{option.deliveryTime}}</option>
                                   </select>
                                 </div>
                                 <div ng-messages="productForm.productShippingoption.$error" role="alert">
-                                  <p class="help-block error-text" ng-message="required">Products tax is required.</p>
+                                  <p class="help-block error-text" ng-message="required"><span translate>VALIDATION-PRODUCT-SHIPPING-OPTION-REQ</span></p>
                                 </div>
                                 <div class="col-sm-4"></div>
                               </div>
@@ -233,16 +233,15 @@
                       <div class="col-lg-12">
                         <div class="ibox float-e-margins">
                           <div align="right">
-                            <button type="submit" class="btn btn-w-m btn-warning" value="Create product">Update product</button>
+                            <button type="submit" class="btn btn-w-m btn-warning" value="Create product" translate>BUTTON-UPDATE-PRODUCT</button>
                           </div>
                         </div>
                       </div>
                       <div class="col-lg-12">
                         <div class="ibox float-e-margins">
                           <div>
-                            <span><strong>Please note if you have already posted the product:</strong>
-                              Any changes made to the product details and medias will be updated in all selected channels to which the product has been posted - except for facebook.
-                              If you want changes to appear on facebook, you’ll need to post the product again. </span>
+                            <span><strong translate>NOTE-ALREADY-POSTED-PRODUCT</strong></span>
+                            <span translate>NOTE-UPDATE-PRODUCT-CHANGES-IN-CHANNELS</span>
                           </div>
                         </div>
                       </div>

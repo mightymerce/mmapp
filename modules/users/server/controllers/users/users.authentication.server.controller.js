@@ -307,37 +307,6 @@ exports.updateActivateUser = function (req, res, next) {
 };
 
 
-exports.getDawandaOAuth = function (req, res, next) {
-  console.log('products.server.controller - getDawandaOAuth - start');
-
-  var client = require('http');
-  var options = {
-    host: 'http://de.dawanda.com',
-    path: '/api/v1/oauth/request_token',
-    api_key: 'OnKajypXQtvwLe9LzzyT',
-    api_secret: 'q7FoM4VW5yprPq8v7e9bJUqiU99oYzagTkEqGCQ7',
-    country: 'de',
-    method: 'GET' //POST,PUT,DELETE etc
-  };
-
-  console.log('products.server.controller - getDawandaOAuth - start request');
-
-  //handle request;
-  var httpRequest = client.request(options, function(response){
-    console.log("Code: "+response.statusCode+ "\n Headers: "+response.headers);
-    response.on('data', function (chunk) {
-      console.log(chunk);
-    });
-    response.on('end',function(){
-      console.log("\nResponse ended\n");
-    });
-    response.on('error', function(err){
-      console.log("Error Occurred: "+err.message);
-    });
-
-  });
-};
-
 /**
  * Send Order Submitted email
  */
@@ -364,10 +333,33 @@ exports.sendOrderSubmit = function (req, res, next) {
   var orderDHLID = inputData.orderDHLID;
   var ordereMailCustomerShipMessage = inputData.ordereMailCustomerShipMessage;
   var ordereMail = inputData.ordereMail;
+  var orderShipCloudcarrier_tracking_no = inputData.orderShipCloudcarrier_tracking_no;
+  var orderShipCloudcarrier_tracking_url = inputData.orderShipCloudcarrier_tracking_url;
+  var orderShipCloudcarrier = inputData.parcelService;
+  var trackingURL = '';
+  var hint = '';
+  var paketverfolgung = '';
 
-  if (orderDHLID === '' || !orderDHLID) {
+  // Tracking ID
+  if (orderDHLID === '' || !orderDHLID || !orderShipCloudcarrier_tracking_no) {
     orderDHLID = 'Keine';
   }
+  if (orderShipCloudcarrier_tracking_no) {
+    orderDHLID = orderShipCloudcarrier_tracking_no;
+  }
+
+  // Tracking URL
+  if (orderShipCloudcarrier_tracking_url) {
+    trackingURL = orderShipCloudcarrier_tracking_url;
+    paketverfolgung = 'Du kannst den Status Deiner Bestellung im Internet unter ' + trackingURL + ' online verfolgen.';
+  } else if (orderDHLID) {
+    trackingURL = 'http://nolp.dhl.de/nextt-online-public/set_identcodes.do?lang=de&zip=' + orderZIP + '&idc=' + orderDHLID;
+    paketverfolgung = 'Du kannst den Status Deiner Bestellung im Internet unter ' + trackingURL + ' online verfolgen.';
+    hint = 'Sollte dieser Link mal nicht funktionieren:\n' +
+        'Sobald Dein Paket bei DHL erfasst worden ist, kannst Du den Status Deines Paketes im Internet unter www.dhl.de mit Angabe der Paketnummer verfolgen. Hierzu kopierst Du einfach die Paketnummer in das Feld "Sendungsverfolgung" und startest über den Button "Jetzt suchen" die Suche.' +
+        'Die Lieferzeiten per DHL betragen innerhalb Deutschlands 1-3 Werktage.';
+  }
+
 
 
 // setup e-mail data with unicode symbols
@@ -377,19 +369,17 @@ exports.sendOrderSubmit = function (req, res, next) {
     subject: 'Deine Bestellung bei ' + userDisplayName + 'wurde versendet', // Subject line
     text: 'Lieber Kunde,' +
     '\n\n' +
-    'wir haben soeben Deine Bestellung per DHL an folgende Adresse verschickt:\n' +
+    'wir haben soeben Deine Bestellung per ' + orderShipCloudcarrier + ' an folgende Adresse verschickt:\n' +
     orderName + ', ' + orderStreet + ' ' + orderStreetNo + ', ' + orderZIP + ' ' + orderCity +
     '\n\n' +
     ordereMailCustomerShipMessage +
     '\n\n' +
-    'Deine Bestellung hat die DHL - Paketnummer:\n' +
+    'Deine Bestellung hat die Paketnummer:\n' +
     orderDHLID +
     '\n\n' +
-    'Du kannst den Status Deiner Bestellung im Internet unter http://nolp.dhl.de/nextt-online-public/set_identcodes.do?lang=de&zip=60388&idc=' + orderDHLID + ' online verfolgen.' +
+    paketverfolgung +
     '\n\n' +
-    'Sollte dieser Link mal nicht funktionieren:\n' +
-    'Sobald Dein Paket bei DHL erfasst worden ist, kannst Du den Status Deines Paketes im Internet unter www.dhl.de mit Angabe der Paketnummer verfolgen. Hierzu kopierst Du einfach die Paketnummer in das Feld "Sendungsverfolgung" und startest über den Button "Jetzt suchen" die Suche.' +
-    'Die Lieferzeiten per DHL betragen innerhalb Deutschlands 1-3 Werktage.' +
+    hint+
     '\n\n' +
     'Viele Grüßen\n' +
     'Dein ' + userDisplayName + '-Team' // plaintext body

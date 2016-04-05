@@ -5,14 +5,14 @@
       <form name="postForm" class="form-horizontal" novalidate>
         <div class="modal-header">
           <button type="button" class="close" ng-click="$dismiss()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <h4 class="modal-title">Your medias on</h4>
+          <h4 class="modal-title" translate>LABEL-YOUR-MEDIA-ON</h4>
           <div>
             <i class="fa fa-instagram modal-icon"></i>
           </div>
         </div>
         <div>
           <div class="modal-body-green">
-            <p><span>Those are your recent Instagram images. Please select your product picture.</span></p>
+            <p><span translate>NOTE-YOUR-IMAGES-ON-INSTAGAM</span></p>
           </div>
         </div>
         <div class="modal-body">
@@ -27,8 +27,8 @@
           <table class="table table-hover">
             <thead>
             <tr>
-              <th data-toggle="true">Image</th>
-              <th data-toggle="true">Text</th>
+              <th data-toggle="true" translate>LABEL-IMAGE</th>
+              <th data-toggle="true" translate>LABEL-TEXT</th>
               <th class="text-right" data-sort-ignore="true"></th>
               <th class="text-right" data-sort-ignore="true"></th>
             </tr>
@@ -45,7 +45,7 @@
               </td>
               <td class="text-right">
                 <div>
-                  <button type="button" class="btn btn-sm btn-warning" ng-click="saveInstagramMedia(productimage.id, productimage.images.low_resolution.url, productimage.images.standard_resolution.url, productimage.images.thumbnail.url)"> Select Image</button>
+                  <button type="button" class="btn btn-sm btn-warning" ng-click="saveInstagramMedia(productimage.id, productimage.images.low_resolution.url, productimage.images.standard_resolution.url, productimage.images.thumbnail.url)" translate>BUTTON-SELECT-IMAGE</button>
                   <!--  <a class="btn btn-warning btn-sm" ui-sref="products.view({productId: product._id})">
                     <i class="fa fa-cloud-upload"></i> Select Image
                   </a>

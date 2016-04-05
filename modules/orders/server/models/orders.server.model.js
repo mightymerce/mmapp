@@ -163,6 +163,36 @@ var OrderSchema = new Schema({
     default: '',
     trim: true
   },
+  orderShipCloudid: {
+    type: String,
+    default: '',
+    trim: true
+  },
+  orderShipCloudcarrier_tracking_no: {
+    type: String,
+    default: '',
+    trim: true
+  },
+  orderShipCloudcarrier_tracking_url: {
+    type: String,
+    default: '',
+    trim: true
+  },
+  orderShipCloudcarrier_label_url: {
+    type: String,
+    default: '',
+    trim: true
+  },
+  orderShipCloudprice: {
+    type: String,
+    default: '',
+    trim: true
+  },
+  orderShipCloudcarrier: {
+    type: String,
+    default: '',
+    trim: true
+  },
   orderTrackingNo: {
     type: String,
     default: '',

@@ -5,7 +5,7 @@
       <form name="postForm" class="form-horizontal" ng-submit="postPost(postForm.$valid)" novalidate>
         <div class="modal-header">
           <button type="button" class="close" ng-click="$dismiss()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <h4 class="modal-title">Your post to</h4>
+          <h4 class="modal-title" translate>LABEL-YOUR-POST-TO</h4>
           <div ng-show="varPostChannel === 'Facebook'">
             <i class="fa fa-facebook modal-icon"></i>
           </div>
@@ -27,21 +27,21 @@
         </div>
         <div ng-show="varPostStatus === 'Active'">
           <div class="modal-body-green">
-            <p><strong><span>Status post: </span></strong><span ng-bind="varPostStatus"></span></p>
-            <p><strong><span>Posted on: </span></strong><span ng-bind="varPostPublicationDate"></span></p>
-            <p ng-show="varPostChannel === 'Code'"><strong><span>Your comment: </span></strong><span ng-bind="varPostComment"></span></p>
+            <p><strong><span translate>LABEL-POST-STATUS</span><span>: </span></strong><span ng-bind="varPostStatus"></span></p>
+            <p><strong><span translate>LABEL-POSTED-ON</span><span>: </span></strong><span ng-bind="varPostPublicationDate"></span></p>
+            <p ng-show="varPostChannel === 'Code'"><strong><span>LABEL-YOUR-COMMENT</span><span>: </span></strong><span ng-bind="varPostComment"></span></p>
           </div>
         </div>
         <div ng-show="varPostStatus === 'Wait'">
           <div class="modal-body-yellow">
-            <p><strong><span>Status post: </span></strong><span ng-bind="varPostStatus"></span></p>
-            <p><strong><span>Posted on: </span></strong><span ng-bind="varPostPublicationDate"></span></p>
+            <p><strong><span translate>LABEL-POST-STATUS</span><span>: </span></strong><span ng-bind="varPostStatus"></span></p>
+            <p><strong><span translate>LABEL-POSTED-ON</span><span>: </span></strong><span ng-bind="varPostPublicationDate"></span></p>
           </div>
         </div>
         <div ng-show="varPostStatus === 'Error'">
           <div class="modal-body-red">
-            <p><strong><span>Status post: </span></strong><span ng-bind="varPostStatus"></span></p>
-            <p><strong><span>Posted on: </span></strong><span ng-bind="varPostPublicationDate"></span></p>
+            <p><strong><span translate>LABEL-POST-STATUS</span><span>: </span></strong><span ng-bind="varPostStatus"></span></p>
+            <p><strong><span translate>LABEL-POSTED-ON</span><span>: </span></strong><span ng-bind="varPostPublicationDate"></span></p>
           </div>
         </div>
         <div class="modal-body">
@@ -68,16 +68,16 @@
             </div>
           </div>
           <div ng-show="varPostChannel === 'Facebook' && varPostStatus === 'Wait'">
-            <span>Please note: There is currently no update functionality available for Facebook posts.</span>
+            <span translate>NOTE-CURRENTLY-NO-UPDATE-FACEBOOK-POST</span>
           </div>
           <div ng-show="varPostChannel === 'Facebook' && varPostStatus === 'Error'">
-            <span>Your access token has expired. Please log in to your account and try again to post your product.</span>
+            <span translate>NOTE-ACCESS-TOKEN-EXPIRED-FACEBOOK</span>
           </div>
           <div ng-show="varPostChannel === 'Facebook' && varPostStatus === 'Active'">
-            <span>Please note: There is currently no update functionality available for Facebook posts.</span>
+            <span translate>NOTE-CURRENTLY-NO-UPDATE-FACEBOOK-POST</span>
           </div>
           <div ng-show="varPostChannel === 'Facebook' && varPostStatus === 'New'">
-            <span>Please note: Posts to Facebook may not be updated after the post.</span>
+            <span translate>NOTE-CURRENTLY-NO-UPDATE-FACEBOOK-POST</span>
             <a href="#" class="pull-right"></a>
           </div>
           <div ng-show="varPostChannel === 'Pinterest'  && varPostStatus === 'Wait'">
@@ -87,10 +87,10 @@
             <span>TBD</span>
           </div>
           <div ng-show="varPostChannel === 'Pinterest'  && varPostStatus === 'Active'">
-            <span>Please note: The post will automatically be updated, if you edit the product after the post. You may cancel a post, which removes the product from the channel.</span>
+            <span translate>NOTE-POST-WILL-AUTOMATICALLY-BE-UPDATED</span>
           </div>
           <div ng-show="varPostChannel === 'Pinterest'  && varPostStatus === 'New'">
-            <span>Please note: The post will automatically be updated, if you edit the product after the post.</span>
+            <span translate>NOTE-POST-WILL-AUTOMATICALLY-BE-UPDATED</span>
           </div>
           <div ng-show="varPostChannel === 'Twitter'  && varPostStatus === 'Wait'">
             <span>Please note: TBD.</span>
@@ -99,10 +99,10 @@
             <span>TBD</span>
           </div>
           <div ng-show="varPostChannel === 'Twitter'  && varPostStatus === 'Active'">
-            <span>Please note: There is currently no update functionality available for Twitter tweets.</span>
+            <span translate>NOTE-CURRENTLY-NO-UPDATE-TWITTER-POST</span>
           </div>
           <div ng-show="varPostChannel === 'Twitter' && varPostStatus === 'New'">
-            <span>Please note: Posts to Twitter may not be updated after the post.</span>
+            <span translate>NOTE-CURRENTLY-NO-UPDATE-TWITTER-POST</span>
           </div>
           <div ng-show="varPostChannel === 'Etsy' && varPostStatus === 'Wait'">
             <span>Please note: TBD.</span>
@@ -111,57 +111,57 @@
             <span>TBD</span>
           </div>
           <div ng-show="varPostChannel === 'Etsy'  && varPostStatus === 'Active'">
-            <span>Please note: The post will automatically be updated, if you edit the product after the post. You may cancel a post, which removes the product from the channel.</span>
+            <span translate>NOTE-POST-WILL-AUTOMATICALLY-BE-UPDATED</span>
           </div>
           <div ng-show="varPostChannel === 'Etsy'  && varPostStatus === 'New'">
-            <span>Please note: The post will automatically be updated, if you edit the product after the post.</span>
+            <span translate>NOTE-POST-WILL-AUTOMATICALLY-BE-UPDATED</span>
           </div>
           <div ng-show="varPostChannel === 'Instagram'  && varPostStatus === 'New'">
-            <span>Please note: For Instagram all product information will be added as new comment including a link to the product details page to buy your product.</span>
+            <span translate>NOTE-INSTAGRAM-POST-AS-COMMENT</span>
           </div>
           <div ng-show="varPostChannel === 'Code'  && varPostStatus === 'New'">
-            <span><strong>Instruction:</strong> Please copy the following code to any side you would like to make your product buyable. If you would like to remember where you put the code snippet you can add a comment in the input field and click 'Save Code Snippet Information'.</span>
+            <span><strong><span translate>LABEL-INSTRUCTION</span><span>: </span></strong><span translate>NOTE-COPY-CODE-SNIPET-TO-ANY-SIDE</span></span>
           </div>
           <br>
           <div ng-show="error" class="alert alert-success">
             <strong ng-bind="error"></strong>
           </div>
           <div ng-show="varPostStatus === 'Error'">
-            <button type="submit" class="btn btn-warning">Try post again</button>
+            <button type="submit" class="btn btn-warning" translate>BUTTON-TRY-POST-AGAIN</button>
           </div>
           <div ng-show="varPostChannel === 'Facebook' && varPostStatus === 'Wait'">
-            <button type="submit" class="btn btn-warning">Try post again</button>
+            <button type="submit" class="btn btn-warning" translate>BUTTON-TRY-POST-AGAIN</button>
           </div>
           <div ng-show="varPostChannel === 'Pinterest' && varPostStatus === 'Wait'">
-            <button type="button" class="btn btn-warning" ng-click="postPostPinterest()">Try post again</button>
+            <button type="button" class="btn btn-warning" ng-click="postPostPinterest()" translate>BUTTON-TRY-POST-AGAIN</button>
           </div>
           <div ng-show="varPostChannel === 'Twitter' && varPostStatus === 'Wait'">
-            <button type="button" class="btn btn-warning" ng-click="postPostTwitter()">Try tweet again</button>
+            <button type="button" class="btn btn-warning" ng-click="postPostTwitter()" translate>BUTTON-TRY-TWEET-AGAIN</button>
           </div>
           <div ng-show="varPostChannel === 'Facebook' && varPostStatus === 'Active'">
-            <button type="submit" class="btn btn-block btn-warning">Post product as new post again</button>
+            <button type="submit" class="btn btn-block btn-warning" translate>BUTTON-POST-PRODUCT-AGAIN</button>
           </div>
           <div ng-show="varPostChannel === 'Pinterest' && varPostStatus === 'Active'">
-            <button type="button" class="btn btn-block btn-warning" ng-click="postPostPinterest()">Pin product as new pin again</button>
+            <button type="button" class="btn btn-block btn-warning" ng-click="postPostPinterest()" translate>BUTTON-PIN-PRODUCT-AGAIN</button>
           </div>
           <div ng-show="varPostChannel === 'Twitter' && varPostStatus === 'Active'">
-            <button type="button" class="btn btn-block btn-warning" ng-click="postPostTwitter()">Tweet product as new tweet again</button>
+            <button type="button" class="btn btn-block btn-warning" ng-click="postPostTwitter()" translate>BUTTON-TWEET-PRODUCT-AGAIN</button>
           </div>
           <div ng-show="varPostChannel === 'Twitter' && varPostStatus === 'Wait'">
-            <button type="button" class="btn btn-warning" ng-click="postPostTwitter()">Try tweet again</button>
+            <button type="button" class="btn btn-warning" ng-click="postPostTwitter()" translate>BUTTON-TRY-TWEET-AGAIN</button>
           </div>
           <div ng-show="varPostChannel === 'Facebook' && varPostStatus === 'New'">
-            <button type="submit" ng-show="hideSpinner" class="btn btn-block btn-warning">Post Product to Facebook</button>
+            <button type="submit" ng-show="hideSpinner" class="btn btn-block btn-warning" translate>BUTTON-POST-PRODUCT-TO-FACEBOOK</button>
           </div>
           <div ng-show="varPostChannel === 'Pinterest' && varPostStatus === 'New'">
-            <button type="button" class="btn btn-block btn-warning" ng-click="postPostPinterest()">Pin your product to Pinterest</button>
+            <button type="button" class="btn btn-block btn-warning" ng-click="postPostPinterest()" translate>BUTTON-PIN-PRODUCT-TO-PINTEREST</button>
             <!-- <a data-pin-do="buttonPin" href="https://www.pinterest.com/pin/create/button/?url=http://localhost:3000/checkouts/{{ product._id }}&media={{ product.productMainImageURL }}&description={{ product.productDescription }}" data-pin-height="28"></a> -->
           </div>
           <div ng-show="varPostChannel === 'Twitter' && varPostStatus === 'New'">
-            <button type="button" class="btn btn-block btn-warning" ng-click="postPostTwitter()">Tweet Product to Twitter</button>
+            <button type="button" class="btn btn-block btn-warning" ng-click="postPostTwitter()" translate>BUTTON-TWEET-PRODUCT-TO-TWITTER</button>
           </div>
           <div ng-show="varPostChannel === 'Instagram' && varPostStatus === 'New'">
-            <button type="button" class="btn btn-block btn-warning" ng-click="postPostInstagram()">Add Product details to Instagram</button>
+            <button type="button" class="btn btn-block btn-warning" ng-click="postPostInstagram()" translate>BUTTON-ADD-DETAILS-TO-INSTAGRAM</button>
           </div>
           <div ng-show="varPostChannel === 'Code' && varPostStatus === 'New'">
             <div>
@@ -169,32 +169,32 @@
             </div>
             <br><br>
             <div>
-              <p>I would like to save information about where I placed the code snippet:</p>
+              <p translate>NOTE-INFORMATION-WHERE-SAVE-CODE-SNIPET</p>
               <textarea placeholder="e.g. My website" class="supertext" ng-model="postInformation" rows="2"></textarea>
             </div>
             <br>
             <div>
-              <button type="button" class="btn btn-block btn-warning" ng-click="postPostCode()">Save Code Snippet Information</button>
+              <button type="button" class="btn btn-block btn-warning" ng-click="postPostCode()" translate>Save Code Snippet Information</button>
             </div>
           </div>
           <div ng-show="varPostChannel === 'Etsy' && varPostStatus === 'New'">
-            <button type="submit" class="btn btn-warning">Post Product to Etsy</button>
+            <button type="submit" class="btn btn-warning" translate>BUTTON-POST-PRODUCT-TO-ETSY</button>
           </div>
         </div>
         <div class="modal-body-white">
           <div ng-show="varPostChannel === 'Facebook'">
-            <p><strong>Preview of your post </strong><i>(This is not the final look of your post)</i></p>
+            <p><strong translate>LABEL-PREVIEW-POST</strong><i translate>NOTE-NOT-FINAL-LOOK-OF-POST</i></p>
             <div class="panel panel-default">
               <div class="panel-body">
                 <p><img ng-src="{{product.productMainImageURLFacebook}}" alt="{{product.productMainImageAlt}}"></p>
-                <h2 style="font-family: Georgia, serif;"><span ng-bind="product.productTitle"></span> für <span ng-bind="product.productPrice"></span></h2>
+                <h2 style="font-family: Georgia, serif;"><span ng-bind="product.productTitle"></span>&nbsp;<span translate>LABEL-FOR</span>&nbsp;<span ng-bind="product.productPrice"></span></h2>
                 <p><span ng-bind="product.productDescription"></span> </p>
-                <p><a href="#"><span ng-bind="authentication.user.displayName"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>BUY NOW</span></a></p>
+                <p><a href="#"><span ng-bind="authentication.user.displayName"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span translate>LABEL-BUY-NOW</span></a></p>
               </div>
             </div>
           </div>
           <div ng-show="varPostChannel === 'Pinterest'">
-            <p><strong>Preview of your pin </strong><i>(This is not the final look of your pin)</i></p>
+            <p><strong translate>LABEL-PREVIEW-PIN</strong>&nbsp;<i translate>NOTE-NOT-FINAL-LOOK-OF-PIN</i></p>
             <div class="pin">
               <p><strong><span ng-bind="authentication.user.displayName"></span></strong></p>
               <p><strong><span ng-bind="product.productPrice"></span></strong></p>
@@ -202,17 +202,17 @@
               <br>
               <img ng-src="{{product.productMainImageURLPinterest}}" alt="{{product.productMainImageAlt}}">
               <br>
-              <p><span>Sold by</span></p>
+              <p><span translate>LABEL-SOLD-BY</span></p>
               <p><strong><span>shopmightymerce.com</span></strong></p>
               <br>
               <p><span ng-bind="product.productDescription"></span></p>
             </div>
           </div>
           <div ng-show="varPostChannel === 'Twitter'">
-            <p><strong>Preview of your tweet </strong><i>(This is not the final look of your tweet)</i></p>
+            <p><strong translate>LABEL-PREVIEW-TWEET</strong>&nbsp;<i translate>NOTE-NOT-FINAL-LOOK-OF-TWEET</i></p>
             <div class="panel panel-default">
               <div class="panel-body">
-                <h2 style="font-family: Georgia, serif;"><span ng-bind="product.productTitle"></span> für <span ng-bind="product.productPrice"></span></h2>
+                <h2 style="font-family: Georgia, serif;"><span ng-bind="product.productTitle"></span>&nbsp;<span translate>LABEL-FOR</span>&nbsp;<span ng-bind="product.productPrice"></span></h2>
                 <p><img ng-src="{{product.productMainImageURLFacebook}}" alt="{{product.productMainImageAlt}}"></p>
                 <p><span ng-bind="product.productDescription"></span> </p>
                 <p><a href="#"><span ng-bind="authentication.user.displayName"></span></a></p>
@@ -220,17 +220,17 @@
             </div>
           </div>
           <div ng-show="varPostChannel === 'Instagram'">
-            <p><strong>Preview of your Instagram comment </strong><i>(This is not the final look of your comment. Instagram comments are limited to 300 characters. We therefore have to cut off the title and description after 200 characters to finally add the BUY NOW link.)</i></p>
+            <p><strong translate>LABEL-PREVIEW-INSTAGRAM</strong>&nbsp;<i translate>NOTE-NOT-FINAL-LOOK-OF-INSTAGRAM-COMMENT</i></p>
             <div class="panel panel-default">
               <div class="panel-body">
                 <p><img ng-src="{{product.instagramImagesStandard_resolutionUrl}}"></p>
-                <p><strong><span ng-bind="authentication.user.displayName"></span></strong> <span ng-bind="product.productTitle"></span><span> für </span><span ng-bind="product.productPrice"></span>
-                  <span>. </span><span ng-bind="product.productDescription"></span><span>   BUY NOW - https://www. ....</span></p>
+                <p><strong><span ng-bind="authentication.user.displayName"></span></strong> <span ng-bind="product.productTitle"></span>&nbsp;<span translate>LABEL-FOR</span>&nbsp;<span ng-bind="product.productPrice"></span>
+                  <span>. </span><span ng-bind="product.productDescription"></span>&nbsp;&nbsp;&nbsp;<span translate>LABEL-BUY-NOW</span><span> - https://www. ....</span></p>
               </div>
             </div>
           </div>
           <div ng-show="varPostChannel === 'Code'">
-            <p><strong>Preview of your code snippet </strong><i>(This is not the final look of your snippet)</i></p>
+            <p><strong translate>LABEL-PREVIEW-CODE-SNIPET</strong>&nbsp;<i translate>NOTE-NOT-FINAL-LOOK-OF-CODE-SNIPET</i></p>
 
             <div class="container">
             <div class="row">

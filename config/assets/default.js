@@ -80,7 +80,7 @@ module.exports = {
         'public/lib/plugin/slimscroll/jquery.slimscroll.min.js',
 
         // Metis Menu
-        'public/lib/plugin/metisMenu/metisMenu.min.js',
+        'public/lib/plugin/metisMenu/jquery.metisMenu.js',
 
         // Peity
         'public/lib/plugin/peity/jquery.peity.min.js',

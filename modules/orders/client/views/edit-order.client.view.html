@@ -176,12 +176,12 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="ibox-content" ng-show="order.orderStatus === 'SHIPPED'">
-            <a class="btn btn-warning btn-block" ng-click="modalreturnOrder('sm', order)" translate>
+            <a class="btn btn-warning btn-block" ng-click="modalreturnOrder('md', order)" translate>
               BUTTON-RECEIVE-RETURN
             </a>
           </div>
           <div class="ibox-content" ng-show="order.orderStatus !== 'SHIPPED'">
-            <a class="btn btn-warning btn-block" ng-click="modalshipOrder('sm', order)" translate>
+            <a class="btn btn-warning btn-block" ng-click="modalshipOrder('md', order)" translate>
               BUTTON-SHIP-ORDER
             </a>
           </div>
@@ -269,7 +269,7 @@
         <div class="row">
           <div class="col-lg-4">
             <div>
-              <a class="btn btn-outline btn-default" ng-click="modalcancelOrder('sm', order)" translate>
+              <a class="btn btn-outline btn-default" ng-click="modalcancelOrder('md', order)" translate>
                 BUTTON-CANCEL-ORDER
               </a>
               <button type="button" class="btn btn-outline btn-default" ui-sref="orders.list" translate>BUTTON-BACK-ORDER-OVERVIEW</button>
@@ -277,7 +277,7 @@
           </div>
           <div class="col-lg-8" align="right">
             <div ng-show="order.orderStatus === 'CREATED'">
-              <a class="btn btn-warning" ng-click="modalshipOrder('sm', order)" translate>
+              <a class="btn btn-warning" ng-click="modalshipOrder('md', order)" translate>
                 BUTTON-SHIP-ORDER
               </a>
             </div>

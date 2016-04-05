@@ -52,7 +52,7 @@
             </a>
           </li>
           <li class="divider"></li>
-          <li data-ng-repeat="order in orders | orderBy:'-created' | filter: {orderStatus: 'CREATED'} | limitTo: 5">
+          <li data-ng-repeat="order in orders | limitTo: 5 | orderBy:'-created' | filter: {orderStatus: 'CREATED'}">
             <div class="dropdown-messages-box" ui-sref="orders.edit({orderId: order._id})">
               <div class="media-body ">
                 <small class="pull-right text-navy" ng-bind="order.orderDate | date:'mediumDate'"></small>
@@ -80,6 +80,11 @@
             <i class="fa fa-sign-out"></i> <span translate>LABEL-LOGOUT</span>
           </a>
         </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="" ng-click="changeLang('en-EN')">EN</a></li>
+        <li><a href="">|</a></li>
+        <li><a href="" ng-click="changeLang('de-DE')">DE</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right" ng-show="authentication.user">
         <li class="dropdown" uib-dropdown>

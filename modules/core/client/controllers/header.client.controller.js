@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('HeaderController', ['$http', '$scope', '$state', '$location', 'Authentication', 'Menus', 'Orders',
-  function ($http, $scope, $state, $location, Authentication, Menus, Orders) {
+angular.module('core').controller('HeaderController', ['$http', '$scope', '$state', '$location', '$translate', 'Authentication', 'Menus', 'Orders',
+  function ($http, $scope, $state, $location, $translate, Authentication, Menus, Orders) {
 
     // Expose view variables
     $scope.$state = $state;
@@ -36,6 +36,14 @@ angular.module('core').controller('HeaderController', ['$http', '$scope', '$stat
       $scope.basicData = false;
       console.log('header.client.controller - onLoad - show tutorial ');
     }
+
+    $scope.changeLang = function (key) {
+      $translate.use(key).then(function (key) {
+        console.log("Sprache zu " + key + " gewechselt.");
+      }, function (key) {
+        console.log("Irgendwas lief schief.");
+      });
+    };
 
     // Get the topbar menu
     $scope.menu = Menus.getMenu('topbar');

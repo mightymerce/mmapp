@@ -189,7 +189,27 @@ var UserSchema = new Schema({
     type: String,
     default: ''
   },
+  dawandaAccessToken: {
+    type: String,
+    default: ''
+  },
+  dawandaAccessTokenSecret: {
+    type: String,
+    default: ''
+  },
+  etsyAccessToken: {
+    type: String,
+    default: ''
+  },
+  etsyAccessTokenSecret: {
+    type: String,
+    default: ''
+  },
   instagramAccessToken: {
+    type: String,
+    default: ''
+  },
+  shipCloudAPI_Key: {
     type: String,
     default: ''
   },
