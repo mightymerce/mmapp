@@ -222,7 +222,7 @@ Paypal.prototype.setExpressCheckoutPayment = function(email, invoiceNumber, amou
 
 		if (data.ACK === 'Success') {
 			callback(null, { 
-				redirectUrl: self.redirect + '?cmd=_express-checkout&useraction=commit&token=' + data.TOKEN,
+				redirectUrl: self.redirect + '?cmd=_express-checkout&token=' + data.TOKEN,
 				//redirectUrl: self.redirect + '?token=' + data.TOKEN,
 				token: data.TOKEN 
 			});
