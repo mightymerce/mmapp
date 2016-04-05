@@ -96,7 +96,7 @@ Paypal.prototype.getExpressCheckoutDetails = function(token, doPayment, callback
 		}
 
 		var params = self.params();
-		params.PAYMENTREQUEST_0_PAYMENTACTION = 'Order';
+		params.PAYMENTREQUEST_0_PAYMENTACTION = 'Sale';
 		params.PAYERID = data.PAYERID;
 		params.TOKEN = token;
 		params.PAYMENTREQUEST_0_AMT = data.PAYMENTREQUEST_0_AMT;
@@ -198,7 +198,7 @@ Paypal.prototype.setExpressCheckoutPayment = function(email, invoiceNumber, amou
 	params.PAYMENTREQUEST_0_CURRENCYCODE = currency;
 	params.PAYMENTREQUEST_0_INVNUM = invoiceNumber;
 	params.PAYMENTREQUEST_0_CUSTOM = invoiceNumber + '|' + params.PAYMENTREQUEST_0_AMT + '|' + currency;
-	params.PAYMENTREQUEST_0_PAYMENTACTION = 'Order';
+	params.PAYMENTREQUEST_0_PAYMENTACTION = 'Sale';
 	params.PAYMENTREQUEST_0_ITEMAMT = prepareNumber(cartSubtotalAmount);
 	params.PAYMENTREQUEST_0_SHIPPINGAMT = prepareNumber(cartshipping);
 
