@@ -46,8 +46,6 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
         // ToDo get channel from URL
         $cookieStore.put('order.channel', $location.search().channel);
 
-        console.log('checkouts.client.controller - findOne - productTitle: ' +$scope.product.productTitle);
-
         ChoutServices.getCurrency($scope.product.productCurrency).then(function (Currencys){
 
           // Set Metatags
@@ -434,8 +432,8 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
           $scope.orderShipToName = data.PAYMENTREQUEST_0_SHIPTONAME;
           $scope.orderShipToStreet = data.PAYMENTREQUEST_0_SHIPTOSTREET;
           $scope.orderShipToCity = data.PAYMENTREQUEST_0_SHIPTOCITY;
-          $scope.orderShipToState = data.PAYMENTREQUEST_n_SHIPTOSTATE;
-          $scope.orderShipToCntryCode = data.PAYMENTREQUEST_n_SHIPTOCOUNTRYCODE;
+          $scope.orderShipToState = data.PAYMENTREQUEST_0_SHIPTOSTATE;
+          $scope.orderShipToCntryCode = data.PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE;
           $scope.orderShipToZip = data.PAYMENTREQUEST_0_SHIPTOZIP;
           $scope.orderShipToAdressStatus = ''; //$cookieStore.get('paypal.PAYMENTREQUEST_0_ADDRESSSTATUS');
           $scope.orderShipToTotalAmount = $cookieStore.get('paypal.PAYMENTREQUEST_0_AMT');

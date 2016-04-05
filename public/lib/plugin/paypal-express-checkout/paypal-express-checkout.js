@@ -93,31 +93,33 @@ Paypal.prototype.getExpressCheckoutDetails = function(token, doPayment, callback
 
 		if (!doPayment) {
 			return callback(null, data);
+
+		} else {
+
+			var params = self.params();
+			params.PAYMENTREQUEST_0_PAYMENTACTION = 'Sale';
+			params.PAYERID = data.PAYERID;
+			params.TOKEN = token;
+			params.PAYMENTREQUEST_0_AMT = data.PAYMENTREQUEST_0_AMT;
+			params.PAYMENTREQUEST_0_CURRENCYCODE = data.PAYMENTREQUEST_0_CURRENCYCODE;
+			params.PAYMENTREQUEST_0_ITEMAMT = data.PAYMENTREQUEST_0_ITEMAMT;
+			params.METHOD = 'DoExpressCheckoutPayment';
+
+			self.request(self.url, 'POST', params, function(err, data2) {
+				if (err) {
+					callback(err, data2);
+					return;
+				}
+
+				if (data.ACK  !== 'Success') {
+					return callback(new Error('Error DoExpressCheckoutPayment'), data2);
+				}
+
+
+				// Combine results of getExpressCheckout and DoExpress checkout payment.
+				callback(null, _.extend(data, data2));
+			});
 		}
-
-		var params = self.params();
-		params.PAYMENTREQUEST_0_PAYMENTACTION = 'Sale';
-		params.PAYERID = data.PAYERID;
-		params.TOKEN = token;
-		params.PAYMENTREQUEST_0_AMT = data.PAYMENTREQUEST_0_AMT;
-		params.PAYMENTREQUEST_0_CURRENCYCODE = data.PAYMENTREQUEST_0_CURRENCYCODE;
-		params.PAYMENTREQUEST_0_ITEMAMT = data.PAYMENTREQUEST_0_ITEMAMT;
-		params.METHOD = 'DoExpressCheckoutPayment';
-
-		self.request(self.url, 'POST', params, function(err, data2) {
-			if (err) {
-				callback(err, data2);
-				return;
-			}
-
-			if (data.ACK  !== 'Success') {
-				return callback(new Error('Error DoExpressCheckoutPayment'), data2);
-			}
-
-
-			// Combine results of getExpressCheckout and DoExpress checkout payment.
-			callback(null, _.extend(data, data2));
-		});
 	});
 
 	return self;
