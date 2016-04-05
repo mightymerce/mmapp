@@ -250,7 +250,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
 
           console.log('checkouts.client.controller - paypalSetExpressCheckout - profileImageURL: ' +$scope.user.profileImageURL);
           console.log('checkouts.client.controller - paypalSetExpressCheckout - returnURL: ' +data.redirectUrl);
-          $window.open(data.redirectUrl);
+          $window.open(data.redirectUrl, "_self");
 
 
           // Playing with integratd checkout

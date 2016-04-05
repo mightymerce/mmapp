@@ -131,7 +131,7 @@ exports.paypalSetExpressCheckout = function (req, res) {
 
   // create paypal object in sandbox mode. If you want non-sandbox remove tha last param.
   var paypal = PayPal.create(req.params.USER, req.params.PWD, req.params.SIGNATURE, true);
-  paypal.setPayOptions(req.params.brandName, null, req.params.brandLogoUrl, '00ff00', 'eeeeee', 0, 2, 1);
+  paypal.setPayOptions(req.params.brandName, null, req.params.brandLogoUrl, '00ff00', 'eeeeee', 0, 0, 0);
 
   console.log('checkout.server.controller - paypalSetExpressCheckout - setProducts');
 

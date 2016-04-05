@@ -96,7 +96,7 @@ Paypal.prototype.getExpressCheckoutDetails = function(token, doPayment, callback
 		}
 
 		var params = self.params();
-		params.PAYMENTACTION = 'Order';
+		params.PAYMENTREQUEST_0_PAYMENTACTION = 'Order';
 		params.PAYERID = data.PAYERID;
 		params.TOKEN = token;
 		params.PAYMENTREQUEST_0_AMT = data.PAYMENTREQUEST_0_AMT;
@@ -203,16 +203,16 @@ Paypal.prototype.setExpressCheckoutPayment = function(email, invoiceNumber, amou
 	params.PAYMENTREQUEST_0_SHIPPINGAMT = prepareNumber(cartshipping);
 
 	params = _.extend(params, this.getItemsParams());
+	params = _.extend(params, this.payOptions);
 
 	params.RETURNURL = returnUrl;
 	params.CANCELURL = cancelUrl;
 
-	params.NOSHIPPING = 2;
-	params.ALLOWNOTE = 0;
-	params.REQCONFIRMSHIPPING = 0;
-	params.METHOD = 'SetExpressCheckout';
+	//params.NOSHIPPING = 2;
+	//params.ALLOWNOTE = 0;
+	//params.REQCONFIRMSHIPPING = 0;
 
-	params = _.extend(params, this.payOptions);
+	params.METHOD = 'SetExpressCheckout';
 	
 	self.request(self.url, 'POST', params, function(err, data) {
 		if (err) {
@@ -290,15 +290,15 @@ Paypal.prototype.setPayOptions = function(brandName, hdrImageUrl, logoUrl, backg
 	}
 
 	if (requireShipping !== undefined) {
-		this.payOptions.REQCONFIRMSHIPPING = requireShipping ? 1 : 0;
+		this.payOptions.REQCONFIRMSHIPPING = requireShipping;
 	}
 
 	if (noShipping !== undefined) {
-		this.payOptions.NOSHIPPING = noShipping ? 1 : 0;
+		this.payOptions.NOSHIPPING = noShipping;
 	}
 
 	if (allowNote !== undefined) {
-		this.payOptions.ALLOWNOTE = allowNote ? 1 : 0;
+		this.payOptions.ALLOWNOTE = allowNote;
 	}
 
 	return this;
