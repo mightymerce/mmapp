@@ -123,7 +123,52 @@ var OrderSchema = new Schema({
     default: '',
     trim: true
   },
+  orderShipToCntryName: {
+    type: String,
+    default: '',
+    trim: true
+  },
   orderShipToZip: {
+    type: String,
+    default: '',
+    trim: true
+  },
+  orderBillToFirstName: {
+    type: String,
+    default: '',
+    trim: true
+  },
+  orderBillToLastName: {
+    type: String,
+    default: '',
+    trim: true
+  },
+  orderBillToStreet: {
+    type: String,
+    default: '',
+    trim: true
+  },
+  orderBillToCity: {
+    type: String,
+    default: '',
+    trim: true
+  },
+  orderBillToState: {
+    type: String,
+    default: '',
+    trim: true
+  },
+  orderBillToCntryCode: {
+    type: String,
+    default: '',
+    trim: true
+  },
+  orderBillToCntryName: {
+    type: String,
+    default: '',
+    trim: true
+  },
+  orderBillToZip: {
     type: String,
     default: '',
     trim: true

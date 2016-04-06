@@ -33,8 +33,8 @@ function calculatePrices() {
     } else {
     	singlePrice = singlePriceData;
     }
-    //console.log(singlePrice);
-    //console.log(typeof singlePrice);
+    //console.log('singlePrice: ' + singlePrice);
+    //console.log('singlePrice typeof: ' + typeof singlePrice);
 
     var shippingData = $('.lbl-shipping').data('value');
     var shipping;
@@ -46,11 +46,18 @@ function calculatePrices() {
     //console.log(shipping);
     //console.log(typeof shipping);
 
-    var amount = $('.amount').val();
+    var amount;
+    if ($('.amount').val()) {
+        amount = $('.amount').val();
+    } else {
+        amount = $('.lbl-quantity').data('value');
+    }
+
     var subtotal = amount * singlePrice;
     var total = subtotal + shipping;
     var vat = total * 19 / 100;
     //console.log('Amount: ' +amount);
+    //console.log('singlePrice: ' +singlePrice);
     //console.log('Subtotal: ' +subtotal);
     //console.log('Total: ' +total);
 
@@ -62,7 +69,7 @@ function calculatePrices() {
     $('.lbl-shipping').text(parseCurrency(parseFloat(shipping)) + ' €');
     $('.lbl-subtotal').text(parseCurrency(parseFloat(subtotal)) + ' €');
     $('#PAYMENTREQUEST_0_ITEMAMT').val(parseCurrencyForPP(parseFloat(subtotal)));
-    $('.lbl-total').text(parseCurrency(parseFloat(total)));
+    $('.lbl-total').text(parseCurrency(parseFloat(total)) + ' €');
     $('.lbl-total-PP').val(parseCurrencyForPP(total));
     $('.lbl-shipping-PP').val(parseCurrencyForPP(shipping));
     $('.lbl-itemprice-PP').val(parseCurrencyForPP(singlePrice));
@@ -128,7 +135,11 @@ $(document).ready(function() {
             moreText: '(read more)',
             lessText: '(read less)'
         });
-    }, 1000);
+    }, 5000);
+
+
+    $('.billing-address').hide(400);
+
 });
 
 
@@ -138,17 +149,15 @@ $(document).ready(function() {
 */
 $('.address-identical').change(function() {
     if(this.checked) {
-        $('.shipping-address').hide(400);
+        $('.billing-address').hide(400);
     }
     else{
-        $('.shipping-address').show(400);
+        $('.billing-address').show(400);
     }
 });
 
 
-$('#details-form').validator();
-
-$('#details-form').validator().on('submit', function (e) {
+$('#details-form').validator(function (e) {
   if (e.isDefaultPrevented()) {
     scrollToDiv('#belowpicture', 0);
   } else {

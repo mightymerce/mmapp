@@ -378,6 +378,9 @@ var JsNumberFormatter = {
             console.log('Applying group mask...');
         }
         var formatterIntPartStr = options.groupMask.apply(integerPartStr);
+        if (formatterIntPartStr.length < 1) {
+            formatterIntPartStr = 0;
+        }
         
         // apply decimal mask
         if (log) {

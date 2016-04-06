@@ -15,6 +15,7 @@
                 <div class="bg-light lter b-b wrapper-md wrapper-p5" id="belowpicture">
                   <span class="text-muted step-headline">Summary</span>
                 </div>
+                <button class="single-price" ng-bind="L_PAYMENTREQUEST_0_AMT0" data-value="{{L_PAYMENTREQUEST_0_AMT0}}" hidden></button>
 
                 <div class="panel-body wrapper-md">
 
@@ -30,28 +31,33 @@
                       </div>
 
                       <div class="row">
+                        <div class="col-xs-12 col-md-6 shipping-address">
+                          <h3>Shipping address</h3>
+                          <div class="review-shipping-name">{{PAYMENTREQUEST_0_SHIPTONAME}}</div>
+                          <div class="review-shipping-address">{{PAYMENTREQUEST_0_SHIPTOSTREET}}</div>
+                          <div class="review-shipping-address">{{PAYMENTREQUEST_0_SHIPTOZIP}}</div>
+                          <div class="review-shipping-address">{{PAYMENTREQUEST_0_SHIPTOCITY}}</div>
+                          <div class="review-shipping-address">{{PAYMENTREQUEST_0_SHIPTOSTATE}}</div>
+                          <div class="review-shipping-address">{{PAYMENTREQUEST_0_SHIPTOCOUNTRYNAME}}</div>
+                        </div>
                         <div class="col-xs-12 col-md-6">
                           <h3>Billing address</h3>
-                          <div class="review-billling-name"></div>
-                          <div class="review-billing-address"></div>
-                        </div>
-                        <div class="col-xs-12 col-md-6 shipping-address" style="display:none">
-                          <h3>Shipping address</h3>
-                          <div class="review-shipping-name">{{paypal.PAYMENTREQUEST_0_SHIPTONAME}}</div>
-                          <div class="review-shipping-address">{{paypal.PAYMENTREQUEST_0_SHIPTOSTREET}}</div>
-                          <div class="review-shipping-address">{{paypal.PAYMENTREQUEST_0_SHIPTOZIP}}</div>
-                          <div class="review-shipping-address">{{paypal.PAYMENTREQUEST_0_SHIPTOCITY}}</div>
-                          <div class="review-shipping-address">{{paypal.PAYMENTREQUEST_0_SHIPTOSTATE}}</div>
-                          <div class="review-shipping-address">{{paypal.PAYMENTREQUEST_0_SHIPTOCOUNTRYNAME}}</div>
+                          <div class="review-shipping-name">{{orderBillToFirstName}} {{orderBillToLastName}}</div>
+                          <div class="review-shipping-address">{{orderBillToStreet}}</div>
+                          <div class="review-shipping-address">{{orderBillToZip}}</div>
+                          <div class="review-shipping-address">{{orderBillToCity}}</div>
+                          <div class="review-shipping-address">{{orderBillToState}}</div>
+                          <div class="review-shipping-address">{{orderBillToCntryName}}</div>
                         </div>
                       </div>
+                      <br>
                       <h3>Shipping option</h3>
                       <div class="row">
                         <div class="col-xs-12">
-                          <div class="review-shipping-option"></div>
+                          <div class="review-shipping-option">{{deliveryTitle}} - {{deliveryTime}}</div>
                         </div>
                       </div>
-
+                      <br>
                       <h3 class="js-headline topline">{{productTitle}}</h3>
                       <div class="row">
                         <div class="col-xs-12">
@@ -65,27 +71,27 @@
                             <tbody>
                             <tr>
                               <td>Quantity</td>
-                              <td><span class="lbl-quantity">{{L_PAYMENTREQUEST_0_QTY0}}</span></td>
+                              <td><span class="lbl-quantity" ng-bind="L_PAYMENTREQUEST_0_QTY0" data-value="{{L_PAYMENTREQUEST_0_QTY0}}"></span></td>
                             </tr>
                             <tr>
                               <td>Price per item</td>
-                              <td><span class="lbl-priceperitem">{{PAYMENTREQUEST_0_ITEMAMT}}</span></td>
+                              <td><span class="lbl-priceperitem"></span></td>
                             </tr>
                             <tr>
                               <td>Subtotal</td>
-                              <td><span class="lbl-subtotal">{{PAYMENTREQUEST_0_AMT}}</span></td>
+                              <td><span class="lbl-subtotal"></span></td>
                             </tr>
                             <tr>
-                              <td>Shipping ({{delivery.deliveryTitle}})</td>
-                              <td><span class="lbl-shipping">{{PAYMENTREQUEST_0_SHIPPINGAMT}}</span></td>
+                              <td>Shipping ({{deliveryTitle}})</td>
+                              <td><span class="lbl-shipping" ng-bind="PAYMENTREQUEST_0_SHIPPINGAMT" data-value="{{PAYMENTREQUEST_0_SHIPPINGAMT}}"></span></td>
                             </tr>
                             <tr class="total">
                               <td>Total</td>
-                              <td><span class="lbl-total"></span>{{PAYMENTREQUEST_0_AMT}}</td>
+                              <td><span class="lbl-total"></span></td>
                             </tr>
                             <tr class="small">
                               <td>incl. VAT</td>
-                              <td><span class="lbl-vat"></span>{{vat}}</td>
+                              <td><span class="lbl-vat"></span></td>
                             </tr>
                             </tbody>
                           </table>

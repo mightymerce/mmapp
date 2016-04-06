@@ -17,7 +17,7 @@
                     </a>
                   </div>
                   <img ng-src="{{productMainImageURL}}" class="teaser-img" />
-                  <button class="btn m-b-xs w-xs btn-info single-price" ></button>
+                  <button class="btn m-b-xs w-xs btn-info single-price" ng-bind="paypal.L_PAYMENTREQUEST_0_AMT0" data-value="{{paypal.L_PAYMENTREQUEST_0_AMT0}}"></button>
 
                   <div class="bg-light lter b-b wrapper-md wrapper-p5" id="belowpicture">
                     <span class="text-muted step-headline">Review your order</span>
@@ -25,15 +25,10 @@
 
                   <div class="panel-body wrapper-md">
 
-                    <div class="review">
+                    <div class="review" id="details-form">
                       <div class="col-lg-8 col-lg-offset-2">
                         <div class="row">
-                          <div class="col-xs-12 col-md-6">
-                            <h3>Billing address</h3>
-                            <div class="review-billling-name"></div>
-                            <div class="review-billing-address"></div>
-                          </div>
-                          <div class="col-xs-12 col-md-6 shipping-address">
+                          <div class="col-xs-12 col-md-12 shipping-address">
                             <h3>Shipping address</h3>
                             <div class="review-shipping-name">{{paypal.PAYMENTREQUEST_0_SHIPTONAME}}</div>
                             <div class="review-shipping-address">{{paypal.PAYMENTREQUEST_0_SHIPTOSTREET}}</div>
@@ -43,6 +38,73 @@
                             <div class="review-shipping-address">{{paypal.PAYMENTREQUEST_0_SHIPTOCOUNTRYNAME}}</div>
                           </div>
                         </div>
+                        <div class="row">
+                          <div class="col-xs-12 col-md-12">
+                            <h3>Billing address</h3>
+                            <div class="review-billing-name">
+                              <label><input type="checkbox" ng-model="addressidentical.value1" name="address-identical" id="address-identical" value="true" class="address-identical" checked>
+                              Billing address is identical</label>
+                            </div>
+                            <br>
+                            <div class="row">
+                              <div class="review-billing-name billing-address">
+                                <label class="col-xs-2 col-md-2 control-label"><span>First Name</span></label>
+                                <div class="col-xs-10 col-md-10">
+                                  <input type="text" name="orderBillToFirstName" ng-model="orderBillToFirstName" id="orderBillToFirstName" class="form-control" placeholder="" >
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="review-billing-name billing-address">
+                                <label class="col-xs-2 col-md-2 control-label"><span>Last Name</span></label>
+                                <div class="col-xs-10 col-md-10">
+                                  <input type="text" name="orderBillToLastName" ng-model="orderBillToLastName" id="orderBillToLastName" class="form-control" placeholder="" >
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="review-billing-address billing-address">
+                                <label class="col-xs-2 col-md-2 control-label"><span>Street</span></label>
+                                <div class="col-xs-10 col-md-10">
+                                  <input type="text" name="orderBillToStreet" ng-model="orderBillToStreet" id="orderBillToStreet" class="form-control" placeholder="" >
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="review-billing-address billing-address form-group">
+                                <label class="col-xs-2 col-md-2 control-label"><span>ZIP</span></label>
+                                <div class="col-xs-10 col-md-10">
+                                  <input type="text" name="billingToZip" ng-model="billingToZip" id="billingToZip" class="form-control" placeholder="" >
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="review-billing-address billing-address form-group">
+                                <label class="col-xs-2 col-md-2 control-label"><span>City</span></label>
+                                <div class="col-xs-10 col-md-10">
+                                  <input type="text" name="orderBillToCity" ng-model="orderBillToCity" id="orderBillToCity" class="form-control" placeholder="" >
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="review-billing-address billing-address form-group">
+                                <label class="col-xs-2 col-md-2 control-label"><span>State</span></label>
+                                <div class="col-xs-10 col-md-10">
+                                  <input type="text" name="orderBillToState" ng-model="orderBillToState" id="orderBillToState" class="form-control" placeholder="" >
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="review-billing-address billing-address form-group">
+                                <label class="col-xs-2 col-md-2 control-label"><span>Country</span></label>
+                                <div class="col-xs-10 col-md-10">
+                                  <input type="text" name="orderBillToZip" ng-model="orderBillToZip" id="orderBillToZip" class="form-control" placeholder="Germany" disabled >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <br>
                         <h3>Shipping option</h3>
                         <div class="row">
                           <div class="col-xs-12">
@@ -86,7 +148,7 @@
                               <tbody>
                               <tr>
                                 <td>Quantity</td>
-                                <td><span class="lbl-quantity"></span><span class="amount" hidden></span></td>
+                                <td><span class="lbl-quantity" ng-bind="paypal.L_PAYMENTREQUEST_0_QTY0" data-value="{{paypal.L_PAYMENTREQUEST_0_QTY0}}"></span><span class="amount" hidden ng-bind="paypal.L_PAYMENTREQUEST_0_QTY0" data-value="paypal.L_PAYMENTREQUEST_0_QTY0"></span></td>
                               </tr>
                               <tr>
                                 <td>Price per item</td>
@@ -97,22 +159,21 @@
                                 <td><span class="lbl-subtotal"></span></td>
                               </tr>
                               <tr>
-                                <td>Shipping ({{delivery.deliveryTitle}})</td>
-                                <td><span class="lbl-shipping"></span></td>
+                                <td>Shipping ({{deliveryTitle}})</td>
+                                <td><span class="lbl-shipping" ng-bind="paypal.PAYMENTREQUEST_0_SHIPPINGAMT" data-value="{{paypal.PAYMENTREQUEST_0_SHIPPINGAMT}}"></span></td>
                               </tr>
                               <tr class="total">
                                 <td>Total</td>
-                                <td><span class="lbl-total"></span><span> €</span></td>
+                                <td><span class="lbl-total"></span><span></span></td>
                               </tr>
                               <tr class="small">
                                 <td>incl. VAT</td>
-                                <td><span class="lbl-vat"></span>{{vat}}</td>
+                                <td><span class="lbl-vat"></span></td>
                               </tr>
                               </tbody>
                             </table>
                           </div>
                         </div>
-
 
                         <div class="form-group">
                           <div class="row">

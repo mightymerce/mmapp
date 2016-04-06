@@ -81,10 +81,10 @@
             </div>
             <div class="ibox-content">
               <address>
-                <strong>Max Mustermann</strong><br>
-                Musterstrasse 5a<br>
-                60678 Frankfurt a. M.<br>
-                Deutschland<br>
+                <strong><span data-ng-bind="order.orderBillToFirstName"></span>&nbsp;<span data-ng-bind="order.orderBillToLastName"></span></strong><br>
+                <span data-ng-bind="order.orderBillToStreet"></span><br>
+                <span data-ng-bind="order.orderBillToZip"></span>&nbsp;<span data-ng-bind="order.orderBillToCity"></span><br>
+                <span data-ng-bind="order.orderBillToCntryCode"></span><br>
                 <abbr title="Phone" class="fa fa-phone"></abbr> +49
               </address>
             </div>
@@ -99,7 +99,7 @@
               <address>
                 <strong><span data-ng-bind="order.orderShipToName"></span></strong><br>
                   <span data-ng-bind="order.orderShipToStreet"></span><br>
-                  <span data-ng-bind="order.orderShipToZip"></span><span data-ng-bind="order.orderShipToCity"></span><br>
+                  <span data-ng-bind="order.orderShipToZip"></span>&nbsp;<span data-ng-bind="order.orderShipToCity"></span><br>
                   <span data-ng-bind="order.orderShipToCntryCode"></span><br>
                 <abbr title="Phone" class="fa fa-phone"></abbr> +49
               </address>

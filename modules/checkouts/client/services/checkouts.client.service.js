@@ -93,7 +93,6 @@ angular.module('checkouts').factory('ChoutServices', ['$http', '$q',
         return promise;
       },
       getCurrency: function getCurrency(id) {
-        console.log('checkouts.client.service.js - GetCurrency - Productid: ' +id);
         var promise = $http({
           method: 'GET',
           url: '/api/currencys/' +id
@@ -110,7 +109,6 @@ angular.module('checkouts').factory('ChoutServices', ['$http', '$q',
         return promise;
       },
       getUser: function getUser(id) {
-        console.log('checkouts.client.service.js - GetUser - Userid: ' +id);
         var promise = $http({
           method: 'GET',
           url: '/api/users/' +id
@@ -127,7 +125,6 @@ angular.module('checkouts').factory('ChoutServices', ['$http', '$q',
         return promise;
       },
       getDelivery: function getDelivery(id) {
-        console.log('checkouts.client.service.js - GetDelivery - Deliveryid: ' +id);
         var promise = $http({
           method: 'GET',
           url: '/api/deliverys/' +id
@@ -144,7 +141,6 @@ angular.module('checkouts').factory('ChoutServices', ['$http', '$q',
         return promise;
       },
       getLegal: function getLegal(id) {
-        console.log('checkouts.client.service.js - GetLegal - Legalid: ' +id);
         var promise = $http({
           method: 'GET',
           url: '/api/legals?user=' +id
