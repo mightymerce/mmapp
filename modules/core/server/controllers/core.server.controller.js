@@ -1179,7 +1179,7 @@ exports.sendmail = function (req, res) {
   html = html + '	            </table></td>		';
   html = html + '	        </tr>		';
   html = html + '	        <tr>		';
-  html = html + '	          <td class="eBody pdBt16 alignLeft" style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 16px;padding-bottom: 16px;padding-left: 16px;padding-right: 16px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;text-align: left;width: 512px;color: #242424;background-color: #ffffff;"><p style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 24px;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;font-size: 14px;line-height: 22px;text-align: left;">Hello John Klem,</p>		';
+  html = html + '	          <td class="eBody pdBt16 alignLeft" style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 16px;padding-bottom: 16px;padding-left: 16px;padding-right: 16px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;text-align: left;width: 512px;color: #242424;background-color: #ffffff;"><p style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 24px;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;font-size: 14px;line-height: 22px;text-align: left;">Hello ' + inputData.orderCustomer + ',</p>		';
   html = html + '	            <p style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 24px;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;font-size: 14px;line-height: 22px;text-align: left;">Here is a summary of your recent order made on <strong>' + inputData.orderDate + '</strong>.</p>		';
   html = html + '	            <table border="0" cellpadding="0" cellspacing="0" class="defaultBtn" style="margin-top: 0;margin-left: 0;margin-right: auto;margin-bottom: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;">		';
   html = html + '	              <tr>		';
@@ -1346,9 +1346,9 @@ exports.sendmail = function (req, res) {
 
   // setup e-mail data with unicode symbols
   var mailOptions = {
-    from: 'noreply <noreply@mightymerce.com>', // sender address
-    to: 'wagner@mightymerce.com', // list of receivers
-    subject: 'Your order confirmation - ' + inputData.orderSellerProfileDisplayName, // Subject line
+    from: 'Mightymermerce | Bestellbestätigung <noreply@mightymerce.com>', // sender address
+    to: inputData.ordereMAIL, // list of receivers
+    subject: 'Deine Bestellung bei - ' + inputData.orderSellerProfileDisplayName, // Subject line
     text: text, // plaintext body
     html: html
   };

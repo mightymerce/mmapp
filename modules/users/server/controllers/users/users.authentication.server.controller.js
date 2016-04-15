@@ -342,7 +342,7 @@ exports.sendOrderSubmit = function (req, res, next) {
 
   // Tracking ID
   if (orderDHLID === '' || !orderDHLID || !orderShipCloudcarrier_tracking_no) {
-    orderDHLID = 'Keine';
+    orderDHLID = '- Liegt nicht vor -';
   }
   if (orderShipCloudcarrier_tracking_no) {
     orderDHLID = orderShipCloudcarrier_tracking_no;
@@ -352,7 +352,11 @@ exports.sendOrderSubmit = function (req, res, next) {
   if (orderShipCloudcarrier_tracking_url) {
     trackingURL = orderShipCloudcarrier_tracking_url;
     paketverfolgung = 'Du kannst den Status Deiner Bestellung im Internet unter ' + trackingURL + ' online verfolgen.';
-  } else if (orderDHLID) {
+  } else if (orderDHLID === '' || !orderDHLID) {
+    trackingURL = '';
+    paketverfolgung = '';
+    hint = 'Es liegen leider keine Informationen für eine Paketverfolgung vor.\n';
+  }else if (orderDHLID) {
     trackingURL = 'http://nolp.dhl.de/nextt-online-public/set_identcodes.do?lang=de&zip=' + orderZIP + '&idc=' + orderDHLID;
     paketverfolgung = 'Du kannst den Status Deiner Bestellung im Internet unter ' + trackingURL + ' online verfolgen.';
     hint = 'Sollte dieser Link mal nicht funktionieren:\n' +
@@ -360,16 +364,25 @@ exports.sendOrderSubmit = function (req, res, next) {
         'Die Lieferzeiten per DHL betragen innerhalb Deutschlands 1-3 Werktage.';
   }
 
+  if (!orderShipCloudcarrier || orderShipCloudcarrier === '')
+  {
+    orderShipCloudcarrier = ' - Information liegt leider nicht vor - ';
+  }
+
+  if (!ordereMailCustomerShipMessage || ordereMailCustomerShipMessage === '')
+  {
+    ordereMailCustomerShipMessage = '';
+  }
 
 
 // setup e-mail data with unicode symbols
   var mailOptions = {
     from: 'Mightymermerce | Versendung <noreply@mightymerce.com>', // sender address
     to: ordereMail, // list of receivers
-    subject: 'Deine Bestellung bei ' + userDisplayName + 'wurde versendet', // Subject line
+    subject: 'Deine Bestellung bei ' + userDisplayName + ' wurde versendet', // Subject line
     text: 'Lieber Kunde,' +
     '\n\n' +
-    'wir haben soeben Deine Bestellung per ' + orderShipCloudcarrier + ' an folgende Adresse verschickt:\n' +
+    'wir haben soeben Deine Bestellung per ' + orderShipCloudcarrier + ' an folgende Adresse versendet:\n' +
     orderName + ', ' + orderStreet + ' ' + orderStreetNo + ', ' + orderZIP + ' ' + orderCity +
     '\n\n' +
     ordereMailCustomerShipMessage +
