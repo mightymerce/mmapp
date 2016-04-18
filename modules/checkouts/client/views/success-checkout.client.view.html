@@ -64,7 +64,6 @@
                           <p class="js-content">{{productDescription}}</p>
                         </div>
                       </div>
-
                       <div class="row">
                         <div class="table-responsive col-xs-12 m-t-md m-b-md">
                           <table class="table b-light">
@@ -75,11 +74,11 @@
                             </tr>
                             <tr>
                               <td>Price per item</td>
-                              <td><span class="lbl-priceperitem"></span></td>
+                              <td><span class="lbl-priceperitem" ng-bind="PAYMENTREQUEST_0_ITEMAMT" data-value="{{PAYMENTREQUEST_0_ITEMAMT}}"></span></td>
                             </tr>
                             <tr>
                               <td>Subtotal</td>
-                              <td><span class="lbl-subtotal"></span></td>
+                              <td><span class="lbl-subtotal" ng-bind="subtotal" data-value="{{subtotal}}"></span></td>
                             </tr>
                             <tr>
                               <td>Shipping ({{deliveryTitle}})</td>
@@ -87,11 +86,11 @@
                             </tr>
                             <tr class="total">
                               <td>Total</td>
-                              <td><span class="lbl-total"></span></td>
+                              <td><span class="lbl-total" ng-bind="PAYMENTREQUEST_0_AMT" data-value="{{PAYMENTREQUEST_0_AMT}}"></span></td>
                             </tr>
                             <tr class="small">
                               <td>incl. VAT</td>
-                              <td><span class="lbl-vat"></span></td>
+                              <td><span class="lbl-vat" ng-bind="vat" data-value="{{vat}}"></span></td>
                             </tr>
                             </tbody>
                           </table>

@@ -23,9 +23,14 @@ module.exports = function (app) {
   app.route('/api/users/stripeCancelSubscription/:CUSID/:SUBID').get(users.stripeCancelSubscription);
 
   // Etsy connection routes
-  //app.route('/api/products/getetsytoken').get(products.getEtsyOAuth());
+  app.route('/api/users/etsy/etsyGetOAuthToken/:productId').get(users.etsyGetOAuthToken);
+  app.route('/api/users/etsy/etsyGetAccessToken/:oauth_verifier/:oauth_token/:oauth_token_secret').get(users.etsyGetAccessToken);
+  app.route('/api/users/etsy/etsyGetMyProducts/:oauth_AccessToken/:oauth_AccessTokenSecret').get(users.etsyGetMyProducts);
+
   // Dawanda connection routes
-  //app.route('/api/users/auth/getdawanda').get(users.getDawandaOAuth);
+  app.route('/api/users/dawanda/dawandaGetOAuthToken/:productId').get(users.dawandaGetOAuthToken);
+  app.route('/api/users/dawanda/dawandaGetAccessToken/:oauth_verifier/:oauth_token').get(users.dawandaGetAccessToken);
+  app.route('/api/users/dawanda/dawandaGetMyProducts/:oauth_AccessToken/:oauth_AccessTokenSecret').get(users.dawandaGetMyProducts);
 
   // Twitter connection routes
   app.route('/api/users/twitter/twitterGetOAuthToken/:productId').get(users.twitterGetOAuthToken);

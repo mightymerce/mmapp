@@ -596,4 +596,257 @@ exports.instagramPostComment = function (req, res) {
 };
 
 
+/**
+ * Dawanda get oauthtoken
+ */
+exports.dawandaGetOAuthToken = function (req, res) {
+  console.log('users.profile.server.controller - dawandaGetOAuthToken - start');
+
+  var request = require('request');
+  var qs = require('querystring');
+
+  var callback_url = req.protocol + "://" + req.get('host') + '/products/' + req.params.productId + '/editchannel';
+  var oauth =
+  {
+    callback: callback_url,
+    consumer_key: 'OnKajypXQtvwLe9LzzyT',
+    consumer_secret: 'q7FoM4VW5yprPq8v7e9bJUqiU99oYzagTkEqGCQ7'
+
+  };
+  var url = 'http://de.dawanda.com/oauth/request_token';
+
+  request.post({
+    url: url,
+    oauth: oauth
+  }, function (e, r, body) {
+    // Ideally, you would take the body in the response
+    // and construct a URL that a user clicks on (like a sign in button).
+    // The verifier is only available in the response after a user has
+    // verified with twitter that they are authorizing your app.
+
+    var req_data = qs.parse(body);
+    res.json(req_data.oauth_token);
+  });
+
+};
+
+
+/**
+ * Dawanda get AccessToken
+ */
+exports.dawandaGetAccessToken = function (req, res) {
+  console.log('users.profile.server.controller - dawandaGetAccessToken - start');
+
+  var request = require('request');
+  var qs = require('querystring');
+  var oauth =
+  {
+    token: req.params.oauth_token,
+    verifier: req.params.oauth_verifier
+  };
+  var url = 'http://de.dawanda.com/oauth/access_token';
+
+  request.post({
+    url: url,
+    oauth: oauth
+  }, function (error, r, body) {
+
+    // Ideally, you would take the body in the response
+    // and construct a URL that a user clicks on (like a sign in button).
+    // The verifier is only available in the response after a user has
+    // verified with twitter that they are authorizing your app.
+    if(error){
+      return console.log('Error:', error);
+    }
+
+    //Check for right status code
+    if(r.statusCode !== 200){
+      return console.log('Invalid Status Code Returned:', r.statusCode + ' ' + r.statusText);
+    }
+
+    var req_data = qs.parse(body);
+    res.json(req_data);
+  });
+
+};
+
+/**
+ * Dawanda getMyProducts
+ */
+exports.dawandaGetMyProducts = function (req, res) {
+  console.log('users.profile.server.controller - dawandaGetMyProducts - start');
+
+  var request = require('request');
+  var qs = require('querystring');
+  var timestampValue = Math.floor(new Date() / 1000);
+  var oauth =
+  {
+    //consumer_key: req.params.oauth_AccessToken,
+    consumer_key: req.params.oauth_AccessToken,
+    nonce: timestampValue,
+    timestamp: timestampValue,
+    version:1.1
+  };
+
+  var url = 'https://dawanda.com/seller_api/products?v=1.1';
+
+
+  var params =
+  {
+    signature_method: 'HMAC-SHA1',
+    offset: 0,
+    limit: 200,
+    'X-Dawanda-Auth': 'be2f1b59af546199f79d63b1e1f3018301f5cdc5'
+  };
+
+  request.get({
+    url: url,
+    headers:params,
+    oauth: oauth
+  }, function (error, r, body) {
+
+    // Ideally, you would take the body in the response
+    // and construct a URL that a user clicks on (like a sign in button).
+    // The verifier is only available in the response after a user has
+    // verified with twitter that they are authorizing your app.
+    if(error){
+      return console.log('Error:', error);
+    }
+
+    //Check for right status code
+    if(r.statusCode !== 200){
+      console.log('Invalid Status Code Returned:', r.statusCode + ' ' + r);
+    }
+
+    var req_data = qs.parse(body);
+    res.json(r);
+  });
+
+};
+
+/**
+ * Etsy get oauthtoken
+ */
+exports.etsyGetOAuthToken = function (req, res) {
+  console.log('users.profile.server.controller - etsyGetOAuthToken - start');
+
+  var request = require('request');
+  var qs = require('querystring');
+
+  var callback_url = req.protocol + "://" + req.get('host') + '/products/' + req.params.productId + '/editetsy';
+  var oauth =
+  {
+    callback: callback_url,
+    consumer_key: 'hwvqyaq0k013gq6bkz8lc38x',
+    consumer_secret: 'ovdktra6f4'
+
+  };
+  var url = 'https://openapi.etsy.com/v2/oauth/request_token?scope=email_r%20listings_r%20listings_w%20transactions_r%20transactions_w';
+
+  request.post({
+    url: url,
+    oauth: oauth
+  }, function (e, r, body) {
+    // Ideally, you would take the body in the response
+    // and construct a URL that a user clicks on (like a sign in button).
+    // The verifier is only available in the response after a user has
+    // verified with twitter that they are authorizing your app.
+
+    var req_data = qs.parse(body);
+    res.json(req_data);
+  });
+
+};
+
+
+/**
+ * Etsy get AccessToken
+ */
+exports.etsyGetAccessToken = function (req, res) {
+  console.log('users.profile.server.controller - etsyGetAccessToken - start');
+
+  var request = require('request');
+  var qs = require('querystring');
+  var oauth =
+  {
+    consumer_key: 'hwvqyaq0k013gq6bkz8lc38x',
+    consumer_secret: 'ovdktra6f4',
+    token: req.params.oauth_token,
+    token_secret: req.params.oauth_token_secret,
+    verifier: req.params.oauth_verifier
+  };
+  var url = 'https://openapi.etsy.com/v2/oauth/access_token';
+
+  request.post({
+    url: url,
+    oauth: oauth
+  }, function (error, r, body) {
+
+    // Ideally, you would take the body in the response
+    // and construct a URL that a user clicks on (like a sign in button).
+    // The verifier is only available in the response after a user has
+    // verified with twitter that they are authorizing your app.
+    if(error){
+      return console.log('Error:', error);
+    }
+
+    //Check for right status code
+    if(r.statusCode !== 200){
+      console.log('Invalid Status Code Returned:', r.statusCode + ' ' + r.statusText);
+      res.json(r);
+    }
+    else {
+      var req_data = qs.parse(body);
+      res.json(req_data);
+    }
+  });
+};
+
+
+/**
+ * Etsy getMyProducts
+ */
+exports.etsyGetMyProducts = function (req, res) {
+  console.log('users.profile.server.controller - etsyGetMyProducts - start');
+
+  var request = require('request');
+  var qs = require('querystring');
+  var timestampValue = Math.floor(new Date() / 1000);
+  var oauth =
+  {
+    consumer_key: 'hwvqyaq0k013gq6bkz8lc38x',
+    consumer_secret: 'ovdktra6f4',
+    signature_method: 'HMAC-SHA1',
+    token: req.params.oauth_AccessToken,
+    token_secret: req.params.oauth_AccessTokenSecret
+  };
+
+  var url = 'https://openapi.etsy.com/v2/listings/active';
+
+  request.get({
+    url: url,
+    oauth: oauth
+  }, function (error, r, body) {
+
+    // Ideally, you would take the body in the response
+    // and construct a URL that a user clicks on (like a sign in button).
+    // The verifier is only available in the response after a user has
+    // verified with twitter that they are authorizing your app.
+    if(error){
+      return console.log('Error:', error);
+    }
+
+    //Check for right status code
+    if(r.statusCode !== 200){
+      console.log('Invalid Status Code Returned:', r.statusCode + ' ' + r);
+      res.json(r);
+    }
+    else {
+      var req_data = qs.parse(body);
+      res.json(req_data);
+    }
+  });
+
+};
+
 

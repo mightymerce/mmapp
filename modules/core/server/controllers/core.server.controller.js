@@ -1158,8 +1158,8 @@ exports.sendmail = function (req, res) {
   html = html + '	<style type="text/css">		';
   html = html + '	</style>		';
   html = html + '	</head>		';
-  html = html + '	<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;height: 100%;width: 100%;min-height: 1000px;background-color: #f2f2f2;">		';
-  html = html + '	<div class="emailSummary" style="mso-hide: all;display: none !important;font-size: 0 !important;max-height: 0 !important;line-height: 0 !important;padding: 0 !important;overflow: hidden !important;float: none !important;width: 0 !important;height: 0 !important;">Short teaser of your emails content for preview area.</div>		';
+  html = html + '	<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;height: 100%;width: 100%;min-height: 1000px;background-color: #f2f2f2;">';
+  html = html + '	<div class="emailSummary" style="mso-hide: all;display: none !important;font-size: 0 !important;max-height: 0 !important;line-height: 0 !important;padding: 0 !important;overflow: hidden !important;float: none !important;width: 0 !important;height: 0 !important;">Here is a summary of your recent order made on <strong>' + inputData.orderDate + '</strong>.</div>		';
   html = html + '	<table id="emailBody" width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;height: 100%;width: 100%;min-height: 1000px;background-color: #f2f2f2;">		';
   html = html + '	  <tr>		';
   html = html + '	    <td align="center" valign="top" class="emailBodyCell" style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 32px;padding-bottom: 32px;padding-left: 16px;padding-right: 16px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;height: 100%;width: 100%;min-height: 1000px;background-color: #f2f2f2;"><table width="544" border="0" cellpadding="0" cellspacing="0" class="eBox" style="margin-top: 0;margin-left: auto;margin-right: auto;margin-bottom: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;width: 544px;">		';
@@ -1347,7 +1347,7 @@ exports.sendmail = function (req, res) {
   // setup e-mail data with unicode symbols
   var mailOptions = {
     from: 'Mightymermerce | Bestellbestätigung <noreply@mightymerce.com>', // sender address
-    to: inputData.ordereMAIL, // list of receivers
+    to: inputData.ordereMail, // list of receivers
     subject: 'Deine Bestellung bei - ' + inputData.orderSellerProfileDisplayName, // Subject line
     text: text, // plaintext body
     html: html
