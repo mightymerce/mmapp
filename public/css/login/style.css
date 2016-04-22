@@ -6,7 +6,7 @@
     color: #888;
     line-height: 30px;
     text-align: center;
-	background-color: #136DBC;
+	background-color: #15A881;
 	background-size: 100% 100%;
 }
 
@@ -252,10 +252,17 @@ only screen and (                min-resolution: 2dppx) {
 */
 	/* logo */
 	.navbar-brandlogin {
-		background-image: url(../../../../../modules/core/client/img/brand/mm_Logo.png) !important;
+		background-image: url(../../../../../modules/core/client/img/brand/mm_logo_white.png) !important;
 		background-repeat: no-repeat !important;
 		background-size: 123px 49px !important;
 		background-color: transparent !important;
+	}
+	.logo-nav {
+		float: left;
+		list-style: none;
+		padding-right: 10px;
+		padding-top: 12px;
+		padding-left: 10px;
 	}
 
 
