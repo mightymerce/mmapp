@@ -33,7 +33,7 @@ angular.module('legals').controller('LegalsController', ['$scope', '$stateParams
         legalReturnPolicy: this.legalReturnPolicy,
         legalTermsandConditions: this.legalTermsandConditions,
         legalImprint: this.legalImprint,
-        legalCopyright: this.legalCopyright,
+        legalCopyright: this.legalCopyright
       });
 
       // Redirect after save
@@ -94,6 +94,9 @@ angular.module('legals').controller('LegalsController', ['$scope', '$stateParams
       legal.legalTermsandConditions = $scope.legal.legalTermsandConditions;
       legal.legalImprint = $scope.legal.legalImprint;
       legal.legalCopyright = $scope.legal.legalCopyright;
+
+      console.log('$scope.legal.legalCopyright: ' +$scope.legal.legalCopyright);
+      console.log('Stringify Legal: ' + JSON.stringify(legal));
 
       legal.$update(function () {
         $scope.success = 'You successfully updated your legal option.';

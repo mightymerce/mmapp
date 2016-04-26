@@ -6,7 +6,7 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
     $scope.imageURL = $scope.user.profileImageURL;
 
     // Create file uploader instance
-    $scope.uploader = new FileUploader({
+    var uploader = $scope.uploader = new FileUploader({
       url: 'api/users/picture',
       alias: 'newProfilePicture'
     });
@@ -21,7 +21,7 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
     });
 
     // Called after the user selected a new picture file
-    $scope.uploader.onAfterAddingFile = function (fileItem) {
+    uploader.onAfterAddingFile = function (fileItem) {
       if ($window.FileReader) {
 
         var fileExtension = '.' + fileItem.file.name.split('.').pop();
@@ -56,7 +56,7 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
     };
 
     // Called after the user has failed to uploaded a new picture
-    $scope.uploader.onErrorItem = function (fileItem, response, status, headers) {
+    uploader.onErrorItem = function (fileItem, response, status, headers) {
       // Clear upload buttons
       $scope.cancelUpload();
 

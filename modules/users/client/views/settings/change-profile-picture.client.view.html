@@ -1,4 +1,4 @@
-<section ng-controller="ChangeProfilePictureController" id="profilePictureControllerID">
+<section ng-controller="ChangeProfilePictureController" id="profilePictureControllerID" uploader="uploader">
   <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
       <h2>User</h2>
@@ -134,7 +134,7 @@
                     <div class="text-center form-group" ng-show="uploader.queue.length">
                       <button type="button" class="btn btn-warning" data-method="getCroppedCanvas">
                                 <span class="docs-tooltip" data-toggle="tooltip" title="Upload now!">
-                                </span><i class="glyphicon glyphicon-upload" translate></i>BUTTON-SAVE-IMAGE
+                                </span><i class="glyphicon glyphicon-upload"></i>&nbsp;<span translate>BUTTON-SAVE-IMAGE</span>
                       </button>
                       <!-- <button class="btn btn-primary" ng-click="uploadProfilePicture();">Upload</button> -->
                       <button class="btn btn-default" ng-click="cancelUpload();" translate>BUTTON-CANCEL</button>
@@ -150,8 +150,8 @@
                 <div class="row">
                   <div class="col-lg-7">
                     <div class="text-center form-group" ng-hide="uploader.queue.length">
-                      <label title="Upload image file" for="inputImage" class="btn btn-warning btn-block btn-file" translate>
-                        BUTTON-SELECT-IMAGE-LOGO<input type="file" accept="image/*" name="file" id="inputImage" class="hide" nv-file-select uploader="uploader">
+                      <label title="Upload image file" for="inputImage" class="btn btn-warning btn-block btn-file">
+                        <span translate>BUTTON-SELECT-IMAGE-LOGO</span><input type="file" accept="image/*" name="file" id="inputImage" class="hide" nv-file-select uploader="uploader">
                       </label>
                     </div>
                     <div ng-show="error" class="alert alert-danger">

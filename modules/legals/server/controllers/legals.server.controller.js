@@ -48,6 +48,8 @@ exports.update = function (req, res) {
   legal.legalImprint = req.body.legalImprint;
   legal.legalCopyright = req.body.legalCopyright;
 
+  console.log('$scope.legal.legalCopyright: ' +req.body.legalCopyright);
+
   legal.save(function (err) {
     if (err) {
       return res.status(400).send({
