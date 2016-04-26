@@ -78,7 +78,6 @@ angular.module('legals').controller('LegalsController', ['$scope', '$stateParams
 
     // Update existing Legal
     $scope.update = function (isValid) {
-      console.log('legal.client.controller - update - start');
       $scope.error = null;
 
       if (!isValid) {
@@ -95,9 +94,6 @@ angular.module('legals').controller('LegalsController', ['$scope', '$stateParams
       legal.legalImprint = $scope.legal.legalImprint;
       legal.legalCopyright = $scope.legal.legalCopyright;
 
-      console.log('$scope.legal.legalCopyright: ' +$scope.legal.legalCopyright);
-      console.log('Stringify Legal: ' + JSON.stringify(legal));
-
       legal.$update(function () {
         $scope.success = 'You successfully updated your legal option.';
       }, function (errorResponse) {
@@ -107,14 +103,11 @@ angular.module('legals').controller('LegalsController', ['$scope', '$stateParams
 
     // Find a list of Legals
     $scope.find = function () {
-      console.log('legals.client.controller - find - user id: ' +$scope.authentication.user._id);
 
       var legal = Legals.get({
         user: $scope.authentication.user._id
       });
       $scope.legal = legal;
-      console.log('legals.client.controller - find - legalCopyright: ' +legal.legalImprint);
-      console.log('legals.client.controller - find - legal.legalCopyright: ' +$scope.legal.legalCopyright);
     };
 
     // Find existing Legal
