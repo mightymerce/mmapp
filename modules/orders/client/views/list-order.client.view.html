@@ -49,7 +49,7 @@
                       <td><span data-ng-bind="order.orderId" ui-sref="orders.view({orderId: order._id})"></span></td>
                       <td><span ng-bind="order.orderDate | date:'mediumDate'"></span></td>
                       <td><span ng-bind="order.orderCustomer"></span></td>
-                      <td><span ng-bind="order.orderPayment"></span></td>
+                      <td><span ng-bind="order.orderPaymentType"></span></td>
                       <td><span ng-bind="order.orderStatus"></span></td>
                       <td>
                         <div ng-show="order.orderStatus === 'SHIPPED'">

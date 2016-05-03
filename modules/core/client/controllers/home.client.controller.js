@@ -180,34 +180,338 @@ angular.module('core').controller('HomeController', ['$scope', '$route', '$locat
 
 
     // Helper - orders per month for graph only
-    $scope.getNoOrdersPerMonth = function(){
+    $scope.getNoOrdersPerMonth1 = function(){
       var total = 0;
       var totalVol = 0;
       var dat = new Date();
 
-      var m = dat.getMonth();
       var y = dat.getYear();
-
-      console.log('home.client.controller - getNoOrdersPerMonth - noOrders:' +$scope.ordersForCalcs.length);
-
 
       for(var i = 0; i < $scope.ordersForCalcs.length; i++){
         var order = $scope.ordersForCalcs[i];
         var orderCreationDate = new Date(order.created);
 
-        var orderCreationMonth = orderCreationDate.getMonth();
+        var orderCreationMonth = orderCreationDate.getMonth()+1;
         var orderCreationYear = orderCreationDate.getYear();
 
-        if(orderCreationMonth === m && orderCreationYear === y){
+        if(orderCreationMonth === 1 && orderCreationYear === y){
           total += 1;
           totalVol += order.orderShipToTotalAmount;
         }
       }
-      console.log('home.client.controller - getNoOrdersPerMonth - return:' +total);
+      console.log('home.client.controller - getNoOrdersPerMonth1 - noOrders:' +total);
+      console.log('home.client.controller - getNoOrdersPerMonth1 - return:' +total);
       $scope.noOrdersPerMonth = parseInt(total, 10);
       $scope.volOrdersPerMonth = parseInt(totalVol, 10);
 
-      return total;
+      return totalVol;
+    };
+
+    $scope.getNoOrdersPerMonth2 = function(){
+      var total = 0;
+      var totalVol = 0;
+      var dat = new Date();
+
+      var y = dat.getYear();
+
+      for(var i = 0; i < $scope.ordersForCalcs.length; i++){
+        var order = $scope.ordersForCalcs[i];
+        var orderCreationDate = new Date(order.created);
+
+        var orderCreationMonth = orderCreationDate.getMonth()+1;
+        var orderCreationYear = orderCreationDate.getYear();
+
+        if(orderCreationMonth === 2 && orderCreationYear === y){
+          total += 1;
+          totalVol += order.orderShipToTotalAmount;
+        }
+      }
+      console.log('home.client.controller - getNoOrdersPerMonth2 - noOrders:' +total);
+      console.log('home.client.controller - getNoOrdersPerMonth2 - return:' +total);
+      $scope.noOrdersPerMonth = parseInt(total, 10);
+      $scope.volOrdersPerMonth = parseInt(totalVol, 10);
+
+      return totalVol;
+    };
+
+    // Helper - orders per month for graph only
+    $scope.getNoOrdersPerMonth3 = function(){
+      var total = 0;
+      var totalVol = 0;
+      var dat = new Date();
+
+      var y = dat.getYear();
+
+      for(var i = 0; i < $scope.ordersForCalcs.length; i++){
+        var order = $scope.ordersForCalcs[i];
+        var orderCreationDate = new Date(order.created);
+
+        var orderCreationMonth = orderCreationDate.getMonth()+1;
+        var orderCreationYear = orderCreationDate.getYear();
+
+        if(orderCreationMonth === 3 && orderCreationYear === y){
+          total += 1;
+          totalVol += parseInt(order.orderShipToTotalAmount, 10);
+        }
+      }
+      console.log('home.client.controller - getNoOrdersPerMonth3 - noOrders:' +total);
+      console.log('home.client.controller - getNoOrdersPerMonth3 - return:' +totalVol);
+      $scope.noOrdersPerMonth = parseInt(total, 10);
+      $scope.volOrdersPerMonth = parseInt(totalVol, 10);
+
+      return totalVol;
+    };
+
+    // Helper - orders per month for graph only
+    $scope.getNoOrdersPerMonth4 = function(){
+      var total = 0;
+      var totalVol = 0;
+      var dat = new Date();
+
+      var y = dat.getYear();
+
+      for(var i = 0; i < $scope.ordersForCalcs.length; i++){
+        var order = $scope.ordersForCalcs[i];
+        var orderCreationDate = new Date(order.created);
+
+        var orderCreationMonth = orderCreationDate.getMonth()+1;
+        var orderCreationYear = orderCreationDate.getYear();
+
+        if(orderCreationMonth === 4 && orderCreationYear === y){
+          total += 1;
+          totalVol += parseInt(order.orderShipToTotalAmount, 10);
+        }
+      }
+      console.log('home.client.controller - getNoOrdersPerMonth4 - noOrders:' +total);
+      console.log('home.client.controller - getNoOrdersPerMonth4 - return:' +totalVol);
+      $scope.noOrdersPerMonth = parseInt(total, 10);
+      $scope.volOrdersPerMonth = parseInt(totalVol, 10);
+
+      return totalVol;
+    };
+
+    // Helper - orders per month for graph only
+    $scope.getNoOrdersPerMonth5 = function(){
+      var total = 0;
+      var totalVol = 0;
+      var dat = new Date();
+
+      var y = dat.getYear();
+
+      for(var i = 0; i < $scope.ordersForCalcs.length; i++){
+        var order = $scope.ordersForCalcs[i];
+        var orderCreationDate = new Date(order.created);
+
+        var orderCreationMonth = orderCreationDate.getMonth()+1;
+        var orderCreationYear = orderCreationDate.getYear();
+
+        if(orderCreationMonth === 5 && orderCreationYear === y){
+          total += 1;
+          totalVol += parseInt(order.orderShipToTotalAmount, 10);
+        }
+      }
+      console.log('home.client.controller - getNoOrdersPerMonth5 - noOrders:' +total);
+      console.log('home.client.controller - getNoOrdersPerMonth5 - return:' +totalVol);
+      $scope.noOrdersPerMonth = parseInt(total, 10);
+      $scope.volOrdersPerMonth = parseInt(totalVol, 10);
+
+      return totalVol;
+    };
+
+    // Helper - orders per month for graph only
+    $scope.getNoOrdersPerMonth6 = function(){
+      var total = 0;
+      var totalVol = 0;
+      var dat = new Date();
+
+      var y = dat.getYear();
+
+      for(var i = 0; i < $scope.ordersForCalcs.length; i++){
+        var order = $scope.ordersForCalcs[i];
+        var orderCreationDate = new Date(order.created);
+
+        var orderCreationMonth = orderCreationDate.getMonth()+1;
+        var orderCreationYear = orderCreationDate.getYear();
+
+        if(orderCreationMonth === 6 && orderCreationYear === y){
+          total += 1;
+          totalVol += parseInt(order.orderShipToTotalAmount, 10);
+        }
+      }
+      console.log('home.client.controller - getNoOrdersPerMonth6 - noOrders:' +total);
+      console.log('home.client.controller - getNoOrdersPerMonth6 - return:' +totalVol);
+      $scope.noOrdersPerMonth = parseInt(total, 10);
+      $scope.volOrdersPerMonth = parseInt(totalVol, 10);
+
+      return totalVol;
+    };
+
+    // Helper - orders per month for graph only
+    $scope.getNoOrdersPerMonth7 = function(){
+      var total = 0;
+      var totalVol = 0;
+      var dat = new Date();
+
+      var y = dat.getYear();
+
+      for(var i = 0; i < $scope.ordersForCalcs.length; i++){
+        var order = $scope.ordersForCalcs[i];
+        var orderCreationDate = new Date(order.created);
+
+        var orderCreationMonth = orderCreationDate.getMonth()+1;
+        var orderCreationYear = orderCreationDate.getYear();
+
+        if(orderCreationMonth === 7 && orderCreationYear === y){
+          total += 1;
+          totalVol += parseInt(order.orderShipToTotalAmount, 10);
+        }
+      }
+      console.log('home.client.controller - getNoOrdersPerMonth7 - noOrders:' +total);
+      console.log('home.client.controller - getNoOrdersPerMonth7 - return:' +totalVol);
+      $scope.noOrdersPerMonth = parseInt(total, 10);
+      $scope.volOrdersPerMonth = parseInt(totalVol, 10);
+
+      return totalVol;
+    };
+
+    // Helper - orders per month for graph only
+    $scope.getNoOrdersPerMonth8 = function(){
+      var total = 0;
+      var totalVol = 0;
+      var dat = new Date();
+
+      var y = dat.getYear();
+
+      for(var i = 0; i < $scope.ordersForCalcs.length; i++){
+        var order = $scope.ordersForCalcs[i];
+        var orderCreationDate = new Date(order.created);
+
+        var orderCreationMonth = orderCreationDate.getMonth()+1;
+        var orderCreationYear = orderCreationDate.getYear();
+
+        if(orderCreationMonth === 8 && orderCreationYear === y){
+          total += 1;
+          totalVol += parseInt(order.orderShipToTotalAmount, 10);
+        }
+      }
+      console.log('home.client.controller - getNoOrdersPerMonth8 - noOrders:' +total);
+      console.log('home.client.controller - getNoOrdersPerMonth8 - return:' +totalVol);
+      $scope.noOrdersPerMonth = parseInt(total, 10);
+      $scope.volOrdersPerMonth = parseInt(totalVol, 10);
+
+      return totalVol;
+    };
+
+    // Helper - orders per month for graph only
+    $scope.getNoOrdersPerMonth9 = function(){
+      var total = 0;
+      var totalVol = 0;
+      var dat = new Date();
+
+      var y = dat.getYear();
+
+      for(var i = 0; i < $scope.ordersForCalcs.length; i++){
+        var order = $scope.ordersForCalcs[i];
+        var orderCreationDate = new Date(order.created);
+
+        var orderCreationMonth = orderCreationDate.getMonth()+1;
+        var orderCreationYear = orderCreationDate.getYear();
+
+        if(orderCreationMonth === 9 && orderCreationYear === y){
+          total += 1;
+          totalVol += parseInt(order.orderShipToTotalAmount, 10);
+        }
+      }
+      console.log('home.client.controller - getNoOrdersPerMonth9 - noOrders:' +total);
+      console.log('home.client.controller - getNoOrdersPerMonth9 - return:' +totalVol);
+      $scope.noOrdersPerMonth = parseInt(total, 10);
+      $scope.volOrdersPerMonth = parseInt(totalVol, 10);
+
+      return totalVol;
+    };
+
+    // Helper - orders per month for graph only
+    $scope.getNoOrdersPerMonth10 = function(){
+      var total = 0;
+      var totalVol = 0;
+      var dat = new Date();
+
+      var y = dat.getYear();
+
+      for(var i = 0; i < $scope.ordersForCalcs.length; i++){
+        var order = $scope.ordersForCalcs[i];
+        var orderCreationDate = new Date(order.created);
+
+        var orderCreationMonth = orderCreationDate.getMonth()+1;
+        var orderCreationYear = orderCreationDate.getYear();
+
+        if(orderCreationMonth === 10 && orderCreationYear === y){
+          total += 1;
+          totalVol += parseInt(order.orderShipToTotalAmount, 10);
+        }
+      }
+      console.log('home.client.controller - getNoOrdersPerMonth10 - noOrders:' +total);
+      console.log('home.client.controller - getNoOrdersPerMonth10 - return:' +totalVol);
+      $scope.noOrdersPerMonth = parseInt(total, 10);
+      $scope.volOrdersPerMonth = parseInt(totalVol, 10);
+
+      return totalVol;
+    };
+
+    // Helper - orders per month for graph only
+    $scope.getNoOrdersPerMonth11 = function(){
+      var total = 0;
+      var totalVol = 0;
+      var dat = new Date();
+
+      var y = dat.getYear();
+
+      for(var i = 0; i < $scope.ordersForCalcs.length; i++){
+        var order = $scope.ordersForCalcs[i];
+        var orderCreationDate = new Date(order.created);
+
+        var orderCreationMonth = orderCreationDate.getMonth()+1;
+        var orderCreationYear = orderCreationDate.getYear();
+
+        if(orderCreationMonth === 11 && orderCreationYear === y){
+          total += 1;
+          totalVol += parseInt(order.orderShipToTotalAmount, 10);
+        }
+      }
+      console.log('home.client.controller - getNoOrdersPerMonth11 - noOrders:' +total);
+      console.log('home.client.controller - getNoOrdersPerMonth11 - return:' +totalVol);
+      $scope.noOrdersPerMonth = parseInt(total, 10);
+      $scope.volOrdersPerMonth = parseInt(totalVol, 10);
+
+      return totalVol;
+    };
+
+    // Helper - orders per month for graph only
+    $scope.getNoOrdersPerMonth12 = function(){
+      var total = 0;
+      var totalVol = 0;
+      var dat = new Date();
+
+      var y = dat.getYear();
+
+      for(var i = 0; i < $scope.ordersForCalcs.length; i++){
+        var order = $scope.ordersForCalcs[i];
+        var orderCreationDate = new Date(order.created);
+
+        var orderCreationMonth = orderCreationDate.getMonth()+1;
+        var orderCreationYear = orderCreationDate.getYear();
+
+        if(orderCreationMonth === 12 && orderCreationYear === y){
+          total += 1;
+          totalVol += parseInt(order.orderShipToTotalAmount, 10);
+        }
+      }
+      console.log('home.client.controller - getNoOrdersPerMonth12 - noOrders:' +total);
+      console.log('home.client.controller - getNoOrdersPerMonth12 - return:' +totalVol);
+      $scope.noOrdersPerMonth = parseInt(total, 10);
+      $scope.volOrdersPerMonth = parseInt(totalVol, 10);
+
+      return totalVol;
     };
 
   }

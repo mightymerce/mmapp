@@ -25,7 +25,7 @@
                 <td><span data-ng-bind="order.orderId" ui-sref="orders.view({orderId: order._id})"></span></td>
                 <td><span ng-bind="order.orderDate | date:'mediumDate'"></span></td>
                 <td><span ng-bind="order.orderCustomer"></span></td>
-                <td><span ng-bind="order.orderPayment"></span></td>
+                <td><span ng-bind="order.orderPaymentType"></span></td>
                 <td><span ng-bind="order.orderStatus"></span></td>
                 <td>
                   <div>
@@ -67,12 +67,12 @@
           <div class="ibox-content">
             <div>
               <span class="pull-right text-right">
-                <small translate>TEXT-AVERAGE-VALUE-SALES</small> <small><strong>{{ volOrdersPerMonth / noOrdersPerMonth}} €</strong></small>
+                <small translate>TEXT-AVERAGE-VALUE-SALES</small> <small><strong>{{ volOrdersPerMonth / noOrdersPerMonth | currency:"€ "}}</strong></small>
                 <br/>
                 <span translate>TEXT-ALL-SALES-YEAR</span> €
               </span>
 
-              <h1 class="m-b-xs">{{ totalOrderVolume }} €</h1>
+              <h1 class="m-b-xs">{{ totalOrderVolume | currency:"€ " }}</h1>
 
               <h3 class="font-bold no-margins" translate>
                 LABEL-THIS-MONTH-REVENUE
@@ -109,7 +109,7 @@
             <h5><i class="fa fa-euro"></i> <span translate>LABEL-ORDERS-VOLUME</span></h5>
           </div>
           <div class="ibox-content">
-            <h1 class="no-margins">{{ totalOrderVolume }} €</h1>
+            <h1 class="no-margins">{{totalOrderVolume | currency:"€ "}}</h1>
 
             <div class="stat-percent font-bold text-navy"><i class="fa fa-level-up"></i></div>
             <small translate>LABEL-ORDERS-VOLUME-THIS-MONTH</small>
@@ -124,21 +124,21 @@
                 <tr>
                   <td>
                     <i class="fa fa-facebook"></i>
-                    <small>{{ volTotalMonthFacebook }} €</small>
+                    <small>{{ volTotalMonthFacebook | currency:"€ " }} €</small>
                   </td>
                   <td>
                     <i class="fa fa-pinterest"></i>
-                    <small>{{ volTotalMonthPinterest }} €</small>
+                    <small>{{ volTotalMonthPinterest | currency:"€ " }} €</small>
                   </td>
                   <td>
                     <i class="fa fa-instagram"></i>
-                    <small>{{ volTotalMonthInstagram }} €</small>
+                    <small>{{ volTotalMonthInstagram | currency:"€ " }} €</small>
                   </td>
                 </tr>
                 <tr>
                   <td>
                     <i class="fa fa-twitter"></i>
-                    <small>{{ volTotalMonthTwitter }} €</small>
+                    <small>{{ volTotalMonthTwitter | currency:"€ " }} €</small>
                   </td>
                   <td>
                     <i class="fa fa-code"></i>
@@ -301,33 +301,55 @@
 
 
       setTimeout(function() {
-        var varScope = angular.element(document.getElementById('HomeController')).scope().getNoOrdersPerMonth();
+        var varScope1 = angular.element(document.getElementById('HomeController')).scope().getNoOrdersPerMonth1();
+        var varScope2 = angular.element(document.getElementById('HomeController')).scope().getNoOrdersPerMonth2();
+        var varScope3 = angular.element(document.getElementById('HomeController')).scope().getNoOrdersPerMonth3();
+        var varScope4 = angular.element(document.getElementById('HomeController')).scope().getNoOrdersPerMonth4();
+        var varScope5 = angular.element(document.getElementById('HomeController')).scope().getNoOrdersPerMonth5();
+        var varScope6 = angular.element(document.getElementById('HomeController')).scope().getNoOrdersPerMonth6();
+        var varScope7 = angular.element(document.getElementById('HomeController')).scope().getNoOrdersPerMonth7();
+        var varScope8 = angular.element(document.getElementById('HomeController')).scope().getNoOrdersPerMonth8();
+        var varScope9 = angular.element(document.getElementById('HomeController')).scope().getNoOrdersPerMonth9();
+        var varScope10 = angular.element(document.getElementById('HomeController')).scope().getNoOrdersPerMonth10();
+        var varScope11 = angular.element(document.getElementById('HomeController')).scope().getNoOrdersPerMonth11();
+        var varScope12 = angular.element(document.getElementById('HomeController')).scope().getNoOrdersPerMonth12();
 
-        var varOrderMonth1 = 3267;
-        var varOrderMonth2 = varScope;
+        var varOrderMonth1 = varScope1;
+        var varOrderMonth2 = varScope2;
+        var varOrderMonth3 = varScope3;
+        var varOrderMonth4 = varScope4;
+        var varOrderMonth5 = varScope5;
+        var varOrderMonth6 = varScope6;
+        var varOrderMonth7 = varScope7;
+        var varOrderMonth8 = varScope8;
+        var varOrderMonth9 = varScope9;
+        var varOrderMonth10 = varScope10;
+        var varOrderMonth11 = varScope11;
+        var varOrderMonth12 = varScope12;
 
+        
     var lineData = {
-      labels: ["January", "February", "March", "April", "May", "June", "July"],
+      labels: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
       datasets: [
         {
-          label: "Example dataset",
+          label: "Letztes Jahr",
           fillColor: "rgba(220,220,220,0.5)",
           strokeColor: "rgba(220,220,220,1)",
           pointColor: "rgba(220,220,220,1)",
           pointStrokeColor: "#fff",
           pointHighlightFill: "#fff",
           pointHighlightStroke: "rgba(220,220,220,1)",
-          data: [65, 59, 80, 81, 56, 55, 40]
+          data: [0, 0, 0, 0, 0, 0, 0]
         },
         {
-          label: "Example dataset",
+          label: "Aktuelles Jahr",
           fillColor: "rgba(26,179,148,0.5)",
           strokeColor: "rgba(26,179,148,0.7)",
           pointColor: "rgba(26,179,148,1)",
           pointStrokeColor: "#fff",
           pointHighlightFill: "#fff",
           pointHighlightStroke: "rgba(26,179,148,1)",
-          data: [varOrderMonth1, 4538, 2164, 0, 0, 0, 0]
+          data: [varOrderMonth1, varOrderMonth2, varOrderMonth3, varOrderMonth4, varOrderMonth5, varOrderMonth6, varOrderMonth7, varOrderMonth8, varOrderMonth9, varOrderMonth10, varOrderMonth11, varOrderMonth12]
         }
       ]
     };
