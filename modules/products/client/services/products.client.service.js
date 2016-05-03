@@ -184,8 +184,8 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
             // Make post to facebook and wait for answer
             FB.api('/me/feed', 'post', params, function (response) {
               if (!response || response.error) {
-                console.log('product.client.service - postToWall - error occured post to Facebook' + response.error.message);
-                deferred.reject(response.error.message);
+                console.log('product.client.service - postToWall - error occured post to Facebook');
+                deferred.reject('There was an error creating Facebook post. Please try again!');
               } else {
                 // Create new Post object
                 var post = new Posts({
@@ -299,11 +299,33 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
             var note = product.productTitle + ' für ' +product.productPrice + ' ' +response.currencyCode + ' ' + product.productDescription;
 
             var PDK = $window.PDK;
-            // Make post to facebook and wait for answer
+            // Make post to pinterest and wait for answer
             PDK.pin(image_url, note, link, function(response) {
-              if (!response || response.error) {
-                console.log('product.client.service - postToPinterest - error occured post to Pinterest' + response.error.message);
-                deferred.reject(response.error.message);
+              // Pinterest so far does not provide any response
+              if (!response) {
+                // Create new Post object
+                var post = new Posts({
+                  product: product._id,
+                  channel: '563c7fab09f30c482f304273',
+                  postChannel: 'Pinterest',
+                  postId: Math.random().toString(36).slice(2), // Pinterest does not respond with a id
+                  postStatus: 'Active',
+                  postPublicationDate: new Date(),
+                  postExternalPostKey: 'not available',
+                  postInformation: ''
+                });
+                // Save post to MM
+                post.$save(function (response) {
+                  console.log('products.client.service - postToPinterest - Save Post on MM success!');
+                  deferred.resolve('Success posting to Pinterest! - Mightymerce Post-Id: ' + response._id);
+                  return deferred.promise;
+                }, function (errorResponse) {
+                  console.log('products.client.service - postToPinterest - Save Post on MM error: ' + errorResponse);
+                  deferred.reject(errorResponse);
+                  return deferred.promise;
+                });
+                //console.log('product.client.service - postToPinterest - error occured post to Pinterest' + response.error.message);
+                //deferred.reject(response.error.message);
               } else {
 
                 // Create new Post object
@@ -586,22 +608,33 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
       //
       //
 
-      getEtsyOAuth: function() {
-        console.log('product.client.service - getEtsyOAuth - start');
-        $http.get('/api/users/auth/getdawanda')
-        //$http.get('/api/currencys')
-          .success(function (response) {
-            // this callback will be called asynchronously
-            // when the response is available
+      etsyGetOAuthToken: function(productId) {
+        console.log('product.client.service - etsyGetOAuthToken - start');
+        var url = '/api/users/etsy/etsyGetOAuthToken/' +productId;
+        return $http.get(url).then(function (response) {
+          console.log('product.client.service - etsyGetOAuthToken - return value: ' +response.data);
+          return response.data;
+        });
+      },
 
-            // params.message = product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode;
-            console.log('product.client.service - getEtsyOAuth - success');
-            //return deferred.promise;
-          })
-          .error(function(msg,code) {
-            console.log('product.client.service - getEtsyOAuth - error');
+      etsyGetAccessToken: function(oauth_Verifier, oauth_Token, oauth_Token_Secret) {
+        console.log('product.client.service - etsyGetAccessToken - start');
 
-          });
+        var url = '/api/users/etsy/etsyGetAccessToken/' +oauth_Verifier + '/' +oauth_Token + '/' +oauth_Token_Secret;
+        return $http.get(url).then(function (response) {
+          console.log('product.client.service - etsyGetAccessToken - return value: ' +response.data);
+          return response.data;
+        });
+      },
+
+      etsyGetMyProducts: function(oauth_AccessToken, oauth_AccessTokenSecret) {
+        console.log('product.client.service - etsyGetMyProducts - start');
+
+        var url = '/api/users/etsy/etsyGetMyProducts/' +oauth_AccessToken + '/' +oauth_AccessTokenSecret;
+        return $http.get(url).then(function (response) {
+          console.log('product.client.service - etsyGetMyProducts - return value: ' +response.data);
+          return response.data;
+        });
       },
 
       // ************************************
@@ -613,24 +646,35 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
       //
       //
 
-      getDawandaOAuth: function getDawandaOAuth() {
-        console.log('product.client.service - getDawandaOAuth - start');
-        var promise = $http({
-          method: 'GET',
-          url: '/api/users/auth/getdawanda'
-        }).then(function successCallback(response) {
-          // this callback will be called asynchronously
-          // when the response is available
-          console.log('product.client.service - getDawandaOAuth - success');
-          // The return value gets picked up by the then in the controller.
-          return response;
-        }, function errorCallback(response) {
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-          console.log('product.client.service - getDawandaOAuth - error');
+      dawandaGetOAuthToken: function(productId) {
+        console.log('product.client.service - dawandaGetOAuthToken - start');
+        var url = '/api/users/dawanda/dawandaGetOAuthToken/' +productId;
+        return $http.get(url).then(function (response) {
+          console.log('product.client.service - dawandaGetOAuthToken - return value: ' +response.data);
+          return response.data;
         });
-        return promise;
+      },
+
+      dawandaGetAccessToken: function(oauth_Verifier, oauth_Token) {
+        console.log('product.client.service - dawandaGetAccessToken - start');
+
+        var url = '/api/users/dawanda/dawandaGetAccessToken/' +oauth_Verifier + '/' +oauth_Token;
+        return $http.get(url).then(function (response) {
+          console.log('product.client.service - dawandaGetAccessToken - return value: ' +response.data);
+          return response.data;
+        });
+      },
+
+      dawandaGetMyProducts: function(oauth_AccessToken, oauth_AccessTokenSecret) {
+        console.log('product.client.service - dawandaGetMyProducts - start');
+
+        var url = '/api/users/dawanda/dawandaGetMyProducts/' +oauth_AccessToken + '/' +oauth_AccessTokenSecret;
+        return $http.get(url).then(function (response) {
+          console.log('product.client.service - dawandaGetMyProducts - return value: ' +response.data);
+          return response.data;
+        });
       }
+
     };
   }
 ]);
