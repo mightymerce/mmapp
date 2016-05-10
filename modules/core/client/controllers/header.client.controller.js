@@ -37,6 +37,9 @@ angular.module('core').controller('HeaderController', ['$http', '$scope', '$stat
       console.log('header.client.controller - onLoad - show tutorial ');
     }
 
+    $scope.$watch('basicData', function() {
+    });
+
     $scope.changeLang = function (key) {
       $translate.use(key).then(function (key) {
         console.log("Sprache zu " + key + " gewechselt.");

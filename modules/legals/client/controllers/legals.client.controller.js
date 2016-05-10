@@ -17,6 +17,9 @@ angular.module('legals').controller('LegalsController', ['$scope', '$stateParams
       $scope.basicData = false;
     }
 
+    $scope.$watch('basicData', function() {
+    });
+
     // Create new Legal
     $scope.create = function (isValid) {
       $scope.error = null;
@@ -95,6 +98,28 @@ angular.module('legals').controller('LegalsController', ['$scope', '$stateParams
       legal.legalCopyright = $scope.legal.legalCopyright;
 
       legal.$update(function () {
+        // in case create update for tutorial
+        if ($scope.authentication.user.tutorialLegalDetail === '0') {
+          var user = new Users($scope.user);
+
+          // in case all fields are filled set flag for legals to '1'
+          if ($scope.legal.legalPrivacyPolicy !== "" &&
+            $scope.legal.legalReturnPolicy !== "" &&
+            $scope.legal.legalTermsandConditions !== "" &&
+            $scope.legal.legalImprint !== "" &&
+            $scope.legal.legalCopyright !== "") {
+
+            user.tutorialLegalDetail = '1';
+
+            user.$update(function (response) {
+              console.log('edit-profile.client.controller - updateUser - tutorial flag');
+              $scope.authentication.user.tutorialLegalDetail = '1';
+              Authentication.user.tutorialLegalDetail = '1';
+            }, function (errorResponse) {
+              console.log('edit-profile.client.controller - updateUser - tutorial flag error');
+            });
+          }
+        }
         $scope.success = 'You successfully updated your legal option.';
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
