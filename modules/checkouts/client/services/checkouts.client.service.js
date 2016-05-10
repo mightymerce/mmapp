@@ -197,6 +197,7 @@ angular.module('checkouts').factory('ChoutServices', ['$http', '$q',
           orderId: data.orderId,
           orderDate: data.orderDate,
           orderChannel: data.orderChannel,
+          orderSellereMail: data.useremail,
 
           // Seller information
           orderSellerProfileImageURL: data.profileImageURL,

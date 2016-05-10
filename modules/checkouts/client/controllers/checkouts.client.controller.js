@@ -232,6 +232,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
           */
           console.log('checkouts.client.controller - paypalSetExpressCheckout and open Paypal window URL: ' +data.redirectUrl);
           $cookieStore.put('paypal.user.profileImageURL', $scope.user.profileImageURL);
+          $cookieStore.put('$scope.user.email', $scope.user.email);
           $cookieStore.put('paypal.product.productMainImageURL', $scope.product.productMainImageURL);
           $cookieStore.put('paypal.product.productId', $scope.product._id);
           $cookieStore.put('paypal.user.displayName', $scope.user.displayName);
@@ -432,6 +433,8 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
           $scope.orderProductPrice = $cookieStore.get('paypal.product.productPrice');
 
           $scope.legal = $cookieStore.get('user.legals');
+
+          $scope.useremail = $cookieStore.get('paypal.user.email');
 
 
           // If billing address same as shipping address checked

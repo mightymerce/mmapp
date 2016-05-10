@@ -1181,11 +1181,12 @@ exports.sendmail = function (req, res) {
   html = html + '	        <tr>		';
   html = html + '	          <td class="eBody pdBt16 alignLeft" style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 16px;padding-bottom: 16px;padding-left: 16px;padding-right: 16px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;text-align: left;width: 512px;color: #242424;background-color: #ffffff;"><p style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 24px;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;font-size: 14px;line-height: 22px;text-align: left;">Hello ' + inputData.orderCustomer + ',</p>		';
   html = html + '	            <p style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 24px;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;font-size: 14px;line-height: 22px;text-align: left;">Here is a summary of your recent order made on <strong>' + inputData.orderDate + '</strong>.</p>		';
-  html = html + '	            <table border="0" cellpadding="0" cellspacing="0" class="defaultBtn" style="margin-top: 0;margin-left: 0;margin-right: auto;margin-bottom: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;">		';
-  html = html + '	              <tr>		';
-  html = html + '	                <td class="btnMain" style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 12px;padding-bottom: 12px;padding-left: 22px;padding-right: 22px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;background-color: #7d7d7d;height: 20px;font-size: 18px;line-height: 20px;mso-line-height-rule: exactly;text-align: center;vertical-align: middle;"><a href="#" style="padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;color: #ffffff;"><span style="text-decoration: none;color: #ffffff;">Order Details</span></a></td>		';
-  html = html + '	              </tr>		';
-  html = html + '	            </table></td>		';
+  //html = html + '	            <table border="0" cellpadding="0" cellspacing="0" class="defaultBtn" style="margin-top: 0;margin-left: 0;margin-right: auto;margin-bottom: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;">		';
+  //html = html + '	              <tr>		';
+  //html = html + '	                <td class="btnMain" style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 12px;padding-bottom: 12px;padding-left: 22px;padding-right: 22px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;background-color: #7d7d7d;height: 20px;font-size: 18px;line-height: 20px;mso-line-height-rule: exactly;text-align: center;vertical-align: middle;"><a href="#" style="padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;color: #ffffff;"><span style="text-decoration: none;color: #ffffff;">Order Details</span></a></td>		';
+  //html = html + '	              </tr>		';
+  //html = html + '	            </table>';
+  html = html + '             </td>		';
   html = html + '	          <!-- end .eBody--> 		';
   html = html + '	        </tr>		';
   html = html + '	        <tr>		';
@@ -1353,11 +1354,41 @@ exports.sendmail = function (req, res) {
     html: html
   };
 
+  console.log('eMail Buyer: ' + inputData.ordereMail);
+
 // send mail with defined transport object
   smtpTransport.sendMail(mailOptions, function(error, info){
     if(error){
       return console.log(error);
     }
     console.log('Message sent: ' + info.response);
+  });
+
+  var smtpTransportSeller = nodemailer.createTransport({
+    service: 'gmail',
+    secure: true, // use SSL
+    auth: {
+      user: 'wagner@mightymerce.com',
+      pass: 'pufyeytpdejudtfk'
+    }
+  });
+
+  // setup e-mail data with unicode symbols
+  var mailOptionsSeller = {
+    from: 'Mightymermerce | Bestelleingang <noreply@mightymerce.com>', // sender address
+    to: inputData.orderSellereMail, // list of receivers
+    subject: 'Neue Bestellung bei mightymerce', // Subject line
+    text: text, // plaintext body
+    html: html
+  };
+
+  console.log('eMail Seller: ' + inputData.orderSellereMail);
+
+  // send mail with defined transport object
+  smtpTransportSeller.sendMail(mailOptionsSeller, function(error, info){
+    if(error){
+      return console.log(error);
+    }
+    console.log('Message sent to Seller: ' + info.response);
   });
 };
