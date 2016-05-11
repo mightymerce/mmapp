@@ -186,7 +186,7 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
         var currentDate = new Date();
         $http.post('/api/auth/sendactivateemail', {
           usereMail: $scope.credentials.email,
-          userDate: $filter('date')(currentDate, 'short', 'de_DE')
+          userDate: $filter('date')(currentDate, 'dd.MM.yyyy')
 
         }).success(function(data, status, headers, config) {
           console.log('authentication.client.controller - signup - sendactivationmail - success ' +data.activateURL);
