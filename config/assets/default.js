@@ -34,7 +34,10 @@ module.exports = {
 
         // Inspinia
         'public/css/animate.css',
-        'public/css/style.css'
+        'public/css/style.css',
+
+        // Social Media Icon - Shariff
+        'public/lib/plugin/shariff/shariff.min.css'
         //'public/css/style.min.css',
 
         // Checkout
@@ -139,7 +142,10 @@ module.exports = {
         'public/lib/plugin/jsnumberformatter/jsnumberformatter.locale.decimal.superset.js',
         'public/lib/plugin/checkout/jquery.shorten.js',
         'public/lib/plugin/checkout/validator.min.js',
-        'public/lib/plugin/checkout/script.js'
+        'public/lib/plugin/checkout/script.js',
+
+        // Social Media Icon - Sharrif
+        'public/lib/plugin/shariff/shariff.min.js'
 
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']

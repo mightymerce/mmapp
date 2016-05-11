@@ -73,8 +73,8 @@ exports.forgot = function (req, res, next) {
     function (emailHTML, user, done) {
       var mailOptions = {
         to: user.email,
-        from: config.mailer.from,
-        subject: 'mightymerce - Password Reset',
+        from: 'mightymermerce | Passwort zurücksetzen <noreply@mightymerce.com>', // config.mailer.from,
+        subject: 'mightymerce - Dein Link zum Zurücksetzen des Passworts',
         html: emailHTML
       };
       smtpTransport.sendMail(mailOptions, function (err) {
@@ -184,8 +184,8 @@ exports.reset = function (req, res, next) {
     function (emailHTML, user, done) {
       var mailOptions = {
         to: user.email,
-        from: config.mailer.from,
-        subject: 'Your password has been changed',
+        from: 'mightymermerce | Passwort geändert <noreply@mightymerce.com>', // config.mailer.from, //mightymerce | Passwort geändert
+        subject: 'Dein Passwort wurde geändert',
         html: emailHTML
       };
 

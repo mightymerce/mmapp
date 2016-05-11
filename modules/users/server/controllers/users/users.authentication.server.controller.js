@@ -441,7 +441,7 @@ exports.sendactivateemail = function (req, res, next) {
   html = html + '	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
   html = html + '	<meta name="viewport" content="width=device-width">';
   html = html + '	<meta name="format-detection" content="address=no;email=no;telephone=no">';
-  html = html + '	<title>Welcome to mightymerce</title>';
+  html = html + '	<title>Willkommen bei mightymerce</title>';
   html = html + '	<style type="text/css">		';
   html = html + '	/* Modified:30/01/2016 */		';
   html = html + '	/* Global Reset */		';
@@ -1532,7 +1532,7 @@ exports.sendactivateemail = function (req, res, next) {
   html = html + '	</style>';
   html = html + '	</head>';
   html = html + '	<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;height: 100%;width: 100%;min-height: 1000px;background-color: #f2f2f2;">		';
-  html = html + '	<div class="emailSummary" style="mso-hide: all;display: none !important;font-size: 0 !important;max-height: 0 !important;line-height: 0 !important;padding: 0 !important;overflow: hidden !important;float: none !important;width: 0 !important;height: 0 !important;">You just registered at mightymerce. Please verify your eMail address by clicking the link.</div>		';
+  html = html + '	<div class="emailSummary" style="mso-hide: all;display: none !important;font-size: 0 !important;max-height: 0 !important;line-height: 0 !important;padding: 0 !important;overflow: hidden !important;float: none !important;width: 0 !important;height: 0 !important;">Wir freuen uns, dass du dabei bist. Bitte bestätige deine Registrierung.</div>		';
   html = html + '	<table id="emailBody" width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;height: 100%;width: 100%;min-height: 1000px;background-color: #f2f2f2;">		';
   html = html + '	  <tr>		';
   html = html + '	    <td align="center" valign="top" class="emailBodyCell" style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 32px;padding-bottom: 32px;padding-left: 16px;padding-right: 16px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;height: 100%;width: 100%;min-height: 1000px;background-color: #f2f2f2;"><table width="544" border="0" cellpadding="0" cellspacing="0" class="eBox" style="margin-top: 0;margin-left: auto;margin-right: auto;margin-bottom: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;width: 544px;">		';
@@ -1552,7 +1552,7 @@ exports.sendactivateemail = function (req, res, next) {
   html = html + '	            </table></td>		';
   html = html + '	        </tr>		';
   html = html + '	        <tr>		';
-  html = html + '	          <td class="highlight pdTp32" style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 32px;padding-bottom: 0;padding-left: 16px;padding-right: 16px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;width: 512px;text-align: center;background-color: #fafafa;border-bottom: 1px solid #ebebeb;"><h1 style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 5px;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;font-size: 24px;line-height: 36px;font-weight: bold;color: #242424;"><span style="color: #242424;">Welcome to mightymerce</span></h1>		';
+  html = html + '	          <td class="highlight pdTp32" style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 32px;padding-bottom: 0;padding-left: 16px;padding-right: 16px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;width: 512px;text-align: center;background-color: #fafafa;border-bottom: 1px solid #ebebeb;"><h1 style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 5px;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;font-size: 24px;line-height: 36px;font-weight: bold;color: #242424;"><span style="color: #242424;">Willkommen bei mightymerce</span></h1>		';
   html = html + '	            <table border="0" align="center" cellpadding="0" cellspacing="0" class="profilePicture" style="margin-top: 0;margin-left: auto;margin-right: auto;margin-bottom: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;text-align: center;width: 64px;height: 64px;">		';
   html = html + '	              <tr>		';
   html = html + '	                <td style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 10px;padding-bottom: 6px;padding-left: 0;padding-right: 0;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;"><img src="https://www.shopmightymerce.com/modules/core/client/img/user_icon.png" width="64" height="64" alt="Your Profile Picture" style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;height: auto;width: auto;line-height: 100%;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;"></td>		';
@@ -1563,13 +1563,14 @@ exports.sendactivateemail = function (req, res, next) {
   html = html + '	          <!-- end .highlight--> 		';
   html = html + '	        </tr>		';
   html = html + '	        <tr>		';
-  html = html + '	          <td class="eBody alignCenter pdTp32" style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 32px;padding-bottom: 0;padding-left: 16px;padding-right: 16px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;text-align: center;width: 512px;color: #242424;background-color: #ffffff;"><p style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 24px;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;text-align: center;font-size: 14px;line-height: 22px;">You are ready to setup your new mightymerce account.<br>		';
-  html = html + '	              Click the button below  to...</p>		';
+  html = html + '	          <td class="eBody alignCenter pdTp32" style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 32px;padding-bottom: 0;padding-left: 16px;padding-right: 16px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;text-align: center;width: 512px;color: #242424;background-color: #ffffff;"><p style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 24px;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;text-align: center;font-size: 14px;line-height: 22px;">Wir freuen uns, dass du dabei bist. Bitte bestätige noch deine Registrierung, um Teil des Social Commerce zu werden und deine Follower zu Kunden zu machen.<br>		';
+  html = html + '	              </p>		';
   html = html + '	            <table border="0" cellpadding="0" cellspacing="0" class="mainBtn" style="margin-top: 0;margin-left: auto;margin-right: auto;margin-bottom: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;">		';
   html = html + '	              <tr>		';
-  html = html + '	                <td align="center" valign="middle" class="btnMain" style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 12px;padding-bottom: 12px;padding-left: 22px;padding-right: 22px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;background-color: #f6ba78;height: 20px;font-size: 18px;line-height: 20px;mso-line-height-rule: exactly;text-align: center;vertical-align: middle;"><a href="' + link + '" style="padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;color: #ffffff;font-weight: bold;"><span style="text-decoration: none;color: #ffffff;">Activate your Account</span></a></td>		';
+  html = html + '	                <td align="center" valign="middle" class="btnMain" style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 12px;padding-bottom: 12px;padding-left: 22px;padding-right: 22px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;background-color: #f6ba78;height: 20px;font-size: 18px;line-height: 20px;mso-line-height-rule: exactly;text-align: center;vertical-align: middle;"><a href="' + link + '" style="padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;color: #ffffff;font-weight: bold;"><span style="text-decoration: none;color: #ffffff;">Registrierung bestätigen</span></a></td>		';
   html = html + '	              </tr>		';
-  html = html + '	            </table>		';
+  html = html + '	            </table><p style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 24px;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;text-align: center;font-size: 14px;line-height: 22px;">Du hast keinen Account beantragt und hast unsere E-Mail irrtümlich erhalten? Bitte informiere uns darüber und sende uns eine Nachricht an info@mightymerce.com <br>		';
+  html = html + '	              </p>		';
   //html = html + '	            <table align="center" border="0" cellpadding="0" cellspacing="0" class="subtleBtn" style="margin-top: 0;margin-left: auto;margin-right: auto;margin-bottom: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;">		';
   //html = html + '	              <tr>		';
   //html = html + '	                <td style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 16px;padding-bottom: 32px;padding-left: 0;padding-right: 0;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;font-size: 14px;color: #898989;"><a href="' + linkcancel + '" style="padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;color: #898989;"><span style="text-decoration: none;color: #898989;">Cancel subscription request</span></a></td>		';
@@ -1597,9 +1598,9 @@ exports.sendactivateemail = function (req, res, next) {
 
   // setup e-mail data with unicode symbols
   var mailOptions = {
-    from: 'Mightymermerce | activation <noreply@mightymerce.com>', // sender address
+    from: 'mightymermerce | Registrierung bestätigen <noreply@mightymerce.com>', // sender address
     to: inputData.usereMail, // list of receivers
-    subject: 'Your activation email for mightymerce. Start converting your followers into customers', // Subject line
+    subject: 'Bitte bestätige deine Registrierung und werde Teil des Social Commerce', // Subject line
     text: '', // plaintext body
     html: html
   };
@@ -1647,7 +1648,7 @@ exports.sendwelcomeemail = function (req, res, next) {
   html = html + '	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
   html = html + '	<meta name="viewport" content="width=device-width">';
   html = html + '	<meta name="format-detection" content="address=no;email=no;telephone=no">';
-  html = html + '	<title>Welcome to mightymerce</title>';
+  html = html + '	<title>Willkommen bei mightymerce</title>';
   html = html + '	<style type="text/css">';
   html = html + '	/* Modified:30/10/2014 */		';
   html = html + '	/* Global Reset */		';
@@ -2739,7 +2740,7 @@ exports.sendwelcomeemail = function (req, res, next) {
   html = html + '	</style>		';
   html = html + '	</head>		';
   html = html + '	<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;height: 100%;width: 100%;min-height: 1000px;background-color: #f2f2f2;">		';
-  html = html + '	<div class="emailSummary" style="mso-hide: all;display: none !important;font-size: 0 !important;max-height: 0 !important;line-height: 0 !important;padding: 0 !important;overflow: hidden !important;float: none !important;width: 0 !important;height: 0 !important;">Your account is now activated. Start selling your products.</div>		';
+  html = html + '	<div class="emailSummary" style="mso-hide: all;display: none !important;font-size: 0 !important;max-height: 0 !important;line-height: 0 !important;padding: 0 !important;overflow: hidden !important;float: none !important;width: 0 !important;height: 0 !important;">Log dich gleich ein und starte den Verkauf in deinen Sozialen Netzwerken.</div>		';
   html = html + '	<table id="emailBody" width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;height: 100%;width: 100%;min-height: 1000px;background-color: #f2f2f2;">		';
   html = html + '	  <tr>		';
   html = html + '	    <td align="center" valign="top" class="emailBodyCell" style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 32px;padding-bottom: 32px;padding-left: 16px;padding-right: 16px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;height: 100%;width: 100%;min-height: 1000px;background-color: #f2f2f2;"><table width="544" border="0" cellpadding="0" cellspacing="0" class="eBox" style="margin-top: 0;margin-left: auto;margin-right: auto;margin-bottom: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;width: 544px;">		';
@@ -2759,7 +2760,7 @@ exports.sendwelcomeemail = function (req, res, next) {
   html = html + '	            </table></td>		';
   html = html + '	        </tr>		';
   html = html + '	        <tr>		';
-  html = html + '	          <td class="highlight pdTp32" style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 32px;padding-bottom: 0;padding-left: 16px;padding-right: 16px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;width: 512px;text-align: center;background-color: #fafafa;border-bottom: 1px solid #ebebeb;"><h1 style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 5px;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;font-size: 24px;line-height: 36px;font-weight: bold;color: #242424;"><span style="color: #242424;">Welcome to mightymerce</span></h1>		';
+  html = html + '	          <td class="highlight pdTp32" style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 32px;padding-bottom: 0;padding-left: 16px;padding-right: 16px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;width: 512px;text-align: center;background-color: #fafafa;border-bottom: 1px solid #ebebeb;"><h1 style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 5px;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;font-size: 24px;line-height: 36px;font-weight: bold;color: #242424;"><span style="color: #242424;">Dein mightymerce Account wurde erstellt </span></h1>		';
   html = html + '	            <table border="0" align="center" cellpadding="0" cellspacing="0" class="profilePicture" style="margin-top: 0;margin-left: auto;margin-right: auto;margin-bottom: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;text-align: center;width: 64px;height: 64px;">		';
   html = html + '	              <tr>		';
   html = html + '	                <td style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 10px;padding-bottom: 6px;padding-left: 0;padding-right: 0;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;"><img src="https://www.shopmightymerce.com/modules/core/client/img/user_icon.png" width="64" height="64" alt="Your Profile Picture" style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;height: auto;width: auto;line-height: 100%;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;"></td>		';
@@ -2770,13 +2771,14 @@ exports.sendwelcomeemail = function (req, res, next) {
   html = html + '	          <!-- end .highlight--> 		';
   html = html + '	        </tr>		';
   html = html + '	        <tr>		';
-  html = html + '	          <td class="eBody alignCenter pdTp32" style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 32px;padding-bottom: 0;padding-left: 16px;padding-right: 16px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;text-align: center;width: 512px;color: #242424;background-color: #ffffff;"><p style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 24px;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;text-align: center;font-size: 14px;line-height: 22px;">You successfully activated your mightymerce account.<br>		';
-  html = html + '	              Click the button to start selling your products ...</p>		';
+  html = html + '	          <td class="eBody alignCenter pdTp32" style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 32px;padding-bottom: 0;padding-left: 16px;padding-right: 16px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;text-align: center;width: 512px;color: #242424;background-color: #ffffff;"><p style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 24px;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;text-align: center;font-size: 14px;line-height: 22px;">Log dich gleich ein. Unser Tutorial zeigt dir in wenigen Schritten, wie du in deinen Sozialen Netzwerken verkaufst.<br>		';
+  html = html + '	              </p>		';
   html = html + '	            <table border="0" cellpadding="0" cellspacing="0" class="mainBtn" style="margin-top: 0;margin-left: auto;margin-right: auto;margin-bottom: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;">		';
   html = html + '	              <tr>		';
-  html = html + '	                <td align="center" valign="middle" class="btnMain" style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 12px;padding-bottom: 12px;padding-left: 22px;padding-right: 22px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;background-color: #f6ba78;height: 20px;font-size: 18px;line-height: 20px;mso-line-height-rule: exactly;text-align: center;vertical-align: middle;"><a href="' + link + '" style="padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;color: #ffffff;font-weight: bold;"><span style="text-decoration: none;color: #ffffff;">Go to your mightymerce store</span></a></td>		';
+  html = html + '	                <td align="center" valign="middle" class="btnMain" style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 12px;padding-bottom: 12px;padding-left: 22px;padding-right: 22px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;background-color: #f6ba78;height: 20px;font-size: 18px;line-height: 20px;mso-line-height-rule: exactly;text-align: center;vertical-align: middle;"><a href="' + link + '" style="padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;color: #ffffff;font-weight: bold;"><span style="text-decoration: none;color: #ffffff;">Account aufrufen</span></a></td>		';
   html = html + '	              </tr>		';
-  html = html + '	            </table>		';
+  html = html + '	            </table><p style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 24px;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;text-align: center;font-size: 14px;line-height: 22px;">Du hast Fragen oder Anregungen? Wir freuen uns jederzeit über dein Feedback an info@mightymerce.com<br>		';
+  html = html + '	              </p>		';
   html = html + '	            <table align="center" border="0" cellpadding="0" cellspacing="0" class="subtleBtn" style="margin-top: 0;margin-left: auto;margin-right: auto;margin-bottom: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;">		';
   html = html + '	              <tr>		';
   html = html + '	                <td style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 0;padding-top: 16px;padding-bottom: 32px;padding-left: 0;padding-right: 0;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;font-size: 14px;color: #898989;"><a href="" style="padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;color: #898989;"><span style="text-decoration: none;color: #898989;"></span></a></td>		';
@@ -2803,9 +2805,9 @@ exports.sendwelcomeemail = function (req, res, next) {
 
   // setup e-mail data with unicode symbols
   var mailOptions = {
-    from: 'mightymerce | registration <noreply@mightymerce.com>', // sender address
+    from: 'mightymerce | Account erstellt <noreply@mightymerce.com>', // sender address
     to: inputData.usereMail, // list of receivers
-    subject: 'Welcome to mightymerce. Your account is set up. Start selling now!', // Subject line
+    subject: 'Deine Registrierung ist bestätigt. Du bist Teil des Social Commerce! ', // Subject line
     text: '', // plaintext body
     html: html
   };
@@ -2821,7 +2823,7 @@ exports.sendwelcomeemail = function (req, res, next) {
 
   // setup e-mail data with unicode symbols
   var mailOptionsIntern = {
-    from: 'mightymerce | registration <noreply@mightymerce.com>', // sender address
+    from: 'mightymerce | Account erstellt <noreply@mightymerce.com>', // sender address
     to: 'registration@mightymerce.com', // list of receivers
     subject: 'Neuer Nutzer bei Mightymerce', // Subject line
     text: 'Eben hat ' + inputData.usereMail + ' seinen Account aktiviert.' // plaintext body
