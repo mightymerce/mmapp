@@ -9,14 +9,14 @@
 
   <meta name="fragment" content="!">
 
-  <title>Mightymerce - convert followers into customers</title>
-  <meta name="description" content="Looking for an easy way to sell your products. Join Migthymerce and start using your networks to convert your followers into customers.">
+  <title>mightymerce | Social Commerce Shop</title>
+  <meta name="description" content="Mache deine Follower zu Kunden und verkaufe in deinen sozialen Netzwerken. Jetzt kostenlos starten mit deinem Social Commerce Shop.">
+  <meta name="revisit-after" CONTENT="7 days">
+  <meta name="keywords" content="Soziale Netzwerke, Follower, buy button, mit Twitter Geld verdienen, Instagram Geld verdienen, socialmedia, mit Instagram Geld verdienen, Geld verdienen mit Facebook, mit Facebook Geld verdienen, online, Shop, Warenkorb, online verkaufen, Sachen online verkaufen, Produkte verkaufen, Produkte online verkaufen, Artikel online verkaufen">
 
   <!-- Apple META -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta name="keywords" content="">
 
   <!-- Facebook META -->
   <meta property="fb:app_id" content="1679726155619376">
@@ -69,6 +69,24 @@
   <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
 
+  <script type="text/javascript">
+    if (window.location.hash == '#_=_'){
+
+      // Check if the browser supports history.replaceState.
+      if (history.replaceState) {
+
+        // Keep the exact URL up to the hash.
+        var cleanHref = window.location.href.split('#')[0];
+
+        // Replace the URL in the address bar without messing with the back button.
+        history.replaceState(null, null, cleanHref);
+      } else {
+        // Well, you're on an old browser, we can get rid of the _=_ but not the #.
+        window.location.hash = '';
+      }
+    }
+  </script>
+
   <script
     type="text/javascript"
     async defer
@@ -110,7 +128,7 @@
 <div id="fb-root"></div>
 <script>
   window.fbAsyncInit = function() {
-/*
+    /*
     // init the FB JS SDK Migthymerce Dev
     FB.init({
       appId      : '1683578941900764',                        // App ID from the app dashboard
@@ -118,8 +136,8 @@
       version    : 'v2.5',
       xfbml      : true                                  // Look for social plugins on the page
     });
-*/
- /*
+
+
     // init the FB JS SDK Mightymerce Test
     FB.init({
       appId      : '1679730548952270',                        // App ID from the app dashboard
