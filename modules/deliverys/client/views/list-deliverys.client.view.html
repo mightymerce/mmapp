@@ -50,7 +50,7 @@
                   <td><span data-ng-bind="delivery.deliveryTitle"></span></td>
                   <td><span data-ng-bind="delivery.deliveryTime"></span></td>
                   <td><span data-ng-bind="delivery.deliveryCountry"></span></td>
-                  <td><span data-ng-bind="delivery.deliveryCost"></span></td>
+                  <td>{{ delivery.deliveryCost | currency:'€ ' }}</td>
                   <td class="text-right">
                     <div class="btn-group">
                       <a class="btn-white btn-xs" ui-sref="deliverys.edit({deliveryId: delivery._id})">

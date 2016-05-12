@@ -75,10 +75,13 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
 
         // VIEW ----- reset-password-invalid.client.view.html ------
         // LABELS
-        'HEADLINE-SUB-RESETPWD-INVALID':'Es tut uns leid. Es ist momentan aus technischen Gründen nicht möglich, dein Passwort zu ändern. Bitte versuche es später erneut oder schicke uns eine E-Mail an info@mightymerce.com.',
+        'HEADLINE-SUB-RESETPWD-INVALID':'Aus Sicherheitsgründen ist dein Link zum Zurücksetzen des Passwortes nur eine Stunde gültig. Bitte lass dir einen neuen Link zuschicken.',
+
+        // BUTTONS
+        'BUTTON-INVALID-TOKEN-FORGOT-PWD':'Neuen Link zum Zurücksetzen beantragen',
 
         // ERRORS
-        'MESSAGE-ASK-NEW-PASSWORD':'Es tut uns leid. Es ist momentan aus technischen Gründen nicht möglich, dein Passwort zu ändern. Bitte schicke uns eine E-Mail an info@mightymerce.com.',
+        'MESSAGE-ASK-NEW-PASSWORD':'Aus Sicherheitsgründen ist dein Link zum Zurücksetzen des Passwortes nur eine Stunde gültig. Bitte lass dir einen neuen Link zuschicken.',
 
         // VIEW ----- reset-password-success.client.view.html ------
         // LABELS
@@ -822,6 +825,9 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
           // VIEW ----- reset-password-invalid.client.view.html ------
           // LABELS
           'HEADLINE-SUB-RESETPWD-INVALID':'Password reset is invalid',
+
+          // BUTTONS
+          'BUTTON-INVALID-TOKEN-FORGOT-PWD':'Ask for a new password reset',
 
           // ERRORS
           'MESSAGE-ASK-NEW-PASSWORD':'Ask for a new password reset',
