@@ -37,7 +37,8 @@ module.exports = {
         'public/css/style.css',
 
         // Social Media Icon - Shariff
-        'public/lib/plugin/shariff/shariff.min.css'
+        'public/lib/plugin/shariff/shariff.complete.css'
+        //'public/lib/plugin/shariff/shariff.min.css'
         //'public/css/style.min.css',
 
         // Checkout
@@ -145,7 +146,7 @@ module.exports = {
         'public/lib/plugin/checkout/script.js',
 
         // Social Media Icon - Sharrif
-        'public/lib/plugin/shariff/shariff.min.js'
+        'public/lib/plugin/shariff/shariff.complete.js'
 
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']

@@ -70,11 +70,14 @@ module.exports = {
         'public/lib/plugin/cropper/cropper.min.css',
 
         // Cropper
-        'public/lib/cropper/assets/css/font-awesome.min.css'
+        'public/lib/cropper/assets/css/font-awesome.min.css',
         //'public/lib/cropper/assets/css/bootstrap.min.css',
         //'public/lib/cropper/assets/css/tooltip.min.css',
         //'public/lib/cropper/dist/cropper.css',
         //'public/lib/cropper/main.css'
+
+        // Social Media Icon - Shariff
+        'public/lib/plugin/shariff/shariff.complete.css'
 
 
       ],
@@ -181,7 +184,10 @@ module.exports = {
         'public/lib/plugin/jsnumberformatter/jsnumberformatter.locale.decimal.superset.js',
         'public/lib/plugin/checkout/jquery.shorten.js',
         'public/lib/plugin/checkout/validator.min.js',
-        'public/lib/plugin/checkout/script.js'
+        'public/lib/plugin/checkout/script.js',
+
+        // Social Media Icon - Sharrif
+        'public/lib/plugin/shariff/shariff.complete.js'
 
       ]
     },

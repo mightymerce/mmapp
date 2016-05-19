@@ -37,7 +37,7 @@
               <div class="ibox-tools"></div>
             </div>
             <div class="ibox-content">
-              <div class="form-group"><label class="col-sm-2 control-label" translate>LABEL-TAXES-COUNTRY</label>*
+              <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-TAXES-COUNTRY</span> *</label>
                 <div class="col-sm-8">
                   <input type="text" ng-model="taxCountry" id="taxCountry" class="form-control" placeholder="" required></div>
                 <div ng-messages="taxeForm.taxCountry.$error" role="alert">
@@ -46,7 +46,7 @@
                 <div class="col-sm-2">
                 </div>
               </div>
-              <div class="form-group"><label class="col-sm-2 control-label" translate>LABEL-TAXES-TAXRATE</label>*
+              <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-TAXES-TAXRATE</span>(in %) *</label>
                 <div class="col-sm-8">
                   <input type="text" ng-model="taxRate" id="taxRate" class="form-control" placeholder="" required></div>
                 <div ng-messages="taxeForm.taxRate.$error" role="alert">
