@@ -161,6 +161,8 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         'LABEL-STREET-NO':'Hausnummer',
         'LABEL-ZIP-CODE':'PLZ',
         'LABEL-CITY':'Ort',
+        'LABEL-STATE':'Bundesland',
+        'LABEL-COUNTRY':'Land',
 
         // ERROR
         'VALIDATION-COMPANY-NAME-REQ':'Bitte ergänze deine Firma.',
@@ -755,7 +757,28 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         // ERROR
         'ERROR-NOTE-SHIP-CLOUD-INFORMATION-I':'Mit mightymerce kannst du den Service von Shipcloud nutzen.',
         'ERROR-NOTE-SHIP-CLOUD-INFORMATION-II':'Drucke deine Versandetiketten und stelle deinen Kunden eine Sendungsverfolgung zur Verfügung.',
-        'ERROR-NOTE-FURTHER-INFORMATION':'Hier kannst du weitere Informationen für deine Kunden angeben. Wenn du einen eigenen Lieferdienst nutzt, kannst du die URL oder den Code der Sendungsverfolgung ergänzen. Wenn du Shipcloud nutzt, lasse das Feld bitte leer. Wir übernehmen die Daten automatisch.'
+        'ERROR-NOTE-FURTHER-INFORMATION':'Hier kannst du weitere Informationen für deine Kunden angeben. Wenn du einen eigenen Lieferdienst nutzt, kannst du die URL oder den Code der Sendungsverfolgung ergänzen. Wenn du Shipcloud nutzt, lasse das Feld bitte leer. Wir übernehmen die Daten automatisch.',
+
+        // VIEW ----- view-checkout.client.view.html ------
+        // LABELS
+        'LABEL-CHECKOUT-ORDER-NOW':'Deine Bestellung',
+        'LABEL-CHECKOUT-QUANTITY':'Anzahl',
+        'LABEL-CHECKOUT-SUBTOTAL':'Zwischensumme',
+        'LABEL-CHECKOUT-TOTAL':'Summe',
+        'LABEL-CHECKOUT-INCVAT':'inkl. MwSt.',
+
+        // VIEW ----- review-checkout.client.view.html ------
+        // LABELS
+        'LABEL-CHECKOUT-REVIEW-ORDER':'Prüfen sie ihre Angaben',
+        'LABEL-CHECKOUT-BILLING-ADDRESS-IDENTICAL':'Rechnungsadresse entspricht der Lieferadresse',
+        'LABEL-ACCEPT-BY-PLACING-ORDER':'Mit Absenden der Bestellung stimme ich den folgenden Bedingungen zu: ',
+        'LABEL-ACKNOWLEDGE-TO':'Ich habe die folgenden Bedinungen gelesen: ',
+
+        // VIEW ----- success-checkout.client.view.html ------
+        // LABELS
+        'LABEL-CHECKOUT-SUMMARY':'Zusammenfassung der Bestellung',
+        'LABEL-CHECKOUT-THANKS-ORDER':'Vielen Dank für deine Bestellung: ',
+        'LABEL-CHECKOUT-CONFIRMATION-SEND-TO':'Eine Bestellbestätigung wird an die folgende eMail Adresse versendet: '
 
       });
 
@@ -911,6 +934,8 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
           'LABEL-STREET-NO':'Street no',
           'LABEL-ZIP-CODE':'Zip code',
           'LABEL-CITY':'City',
+          'LABEL-STATE':'State',
+          'LABEL-COUNTRY':'Country',
 
           // ERROR
           'VALIDATION-COMPANY-NAME-REQ':'Please enter your company name.',
@@ -1501,8 +1526,28 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
           // ERROR
           'ERROR-NOTE-SHIP-CLOUD-INFORMATION-I':'With mightymerce you are able to use the service of ',
           'ERROR-NOTE-SHIP-CLOUD-INFORMATION-II':' to print your shipping labels and to provide your customers parcel tracking availability.',
-          'ERROR-NOTE-FURTHER-INFORMATION':'Any further information can be provided in this section. If you have your own shipping provider you can paste your URL or tracking code here. If you use shipcloud - please leave the field empty.'
+          'ERROR-NOTE-FURTHER-INFORMATION':'Any further information can be provided in this section. If you have your own shipping provider you can paste your URL or tracking code here. If you use shipcloud - please leave the field empty.',
 
+        // VIEW ----- view-checkout.client.view.html ------
+        // LABELS
+        'LABEL-CHECKOUT-ORDER-NOW':'Order now',
+        'LABEL-CHECKOUT-QUANTITY':'Quantity',
+        'LABEL-CHECKOUT-SUBTOTAL':'Subtotal',
+        'LABEL-CHECKOUT-TOTAL':'Total',
+        'LABEL-CHECKOUT-INCVAT':'incl. VAT',
+
+        // VIEW ----- review-checkout.client.view.html ------
+        // LABELS
+        'LABEL-CHECKOUT-REVIEW-ORDER':'Review your order',
+        'LABEL-CHECKOUT-BILLING-ADDRESS-IDENTICAL':'Billing address is identical',
+        'LABEL-ACCEPT-BY-PLACING-ORDER':'By placing the order I agree to',
+        'LABEL-ACKNOWLEDGE-TO':'I have acknowledged the',
+
+        // VIEW ----- success-checkout.client.view.html ------
+        // LABELS
+        'LABEL-CHECKOUT-SUMMARY':'Summary',
+        'LABEL-CHECKOUT-THANKS-ORDER':'Thank you for your order',
+        'LABEL-CHECKOUT-CONFIRMATION-SEND-TO':'A confirmation of your order will be sent to'
 
   });
 

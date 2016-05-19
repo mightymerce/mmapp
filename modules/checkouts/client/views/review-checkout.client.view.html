@@ -20,7 +20,7 @@
                   <button class="btn m-b-xs w-xs btn-info single-price" ng-bind="paypal.L_PAYMENTREQUEST_0_AMT0" data-value="{{paypal.L_PAYMENTREQUEST_0_AMT0}}"></button>
 
                   <div class="bg-light lter b-b wrapper-md wrapper-p5" id="belowpicture">
-                    <span class="text-muted step-headline">Review your order</span>
+                    <span class="text-muted step-headline" translate>LABEL-CHECKOUT-REVIEW-ORDER</span>
                   </div>
 
                   <div class="panel-body wrapper-md">
@@ -29,7 +29,7 @@
                       <div class="col-lg-8 col-lg-offset-2">
                         <div class="row">
                           <div class="col-xs-12 col-md-12 shipping-address">
-                            <h3>Shipping address</h3>
+                            <h3><span translate>LABEL-SHIPPING-ADDRESS</span></h3>
                             <div class="review-shipping-name">{{paypal.PAYMENTREQUEST_0_SHIPTONAME}}</div>
                             <div class="review-shipping-address">{{paypal.PAYMENTREQUEST_0_SHIPTOSTREET}}</div>
                             <div class="review-shipping-address">{{paypal.PAYMENTREQUEST_0_SHIPTOZIP}}</div>
@@ -40,15 +40,15 @@
                         </div>
                         <div class="row">
                           <div class="col-xs-12 col-md-12">
-                            <h3>Billing address</h3>
+                            <h3><span translate>LABEL-BILLING-ADDRESS</span></h3>
                             <div class="review-billing-name">
                               <label><input type="checkbox" ng-model="addressidentical.value1" name="address-identical" id="address-identical" value="true" class="address-identical" checked>
-                              Billing address is identical</label>
+                              <span translate>LABEL-CHECKOUT-BILLING-ADDRESS-IDENTICAL</span></label>
                             </div>
                             <br>
                             <div class="row">
                               <div class="review-billing-name billing-address">
-                                <label class="col-xs-2 col-md-2 control-label"><span>First Name</span></label>
+                                <label class="col-xs-2 col-md-2 control-label"><span translate>LABEL-FIRST-NAME</span></label>
                                 <div class="col-xs-10 col-md-10">
                                   <input type="text" name="orderBillToFirstName" ng-model="orderBillToFirstName" id="orderBillToFirstName" class="form-control" placeholder="" >
                                 </div>
@@ -56,7 +56,7 @@
                             </div>
                             <div class="row">
                               <div class="review-billing-name billing-address">
-                                <label class="col-xs-2 col-md-2 control-label"><span>Last Name</span></label>
+                                <label class="col-xs-2 col-md-2 control-label"><span translate>LABEL-LAST-NAME</span></label>
                                 <div class="col-xs-10 col-md-10">
                                   <input type="text" name="orderBillToLastName" ng-model="orderBillToLastName" id="orderBillToLastName" class="form-control" placeholder="" >
                                 </div>
@@ -64,7 +64,7 @@
                             </div>
                             <div class="row">
                               <div class="review-billing-address billing-address">
-                                <label class="col-xs-2 col-md-2 control-label"><span>Street</span></label>
+                                <label class="col-xs-2 col-md-2 control-label"><span translate>LABEL-STREET</span></label>
                                 <div class="col-xs-10 col-md-10">
                                   <input type="text" name="orderBillToStreet" ng-model="orderBillToStreet" id="orderBillToStreet" class="form-control" placeholder="" >
                                 </div>
@@ -72,7 +72,7 @@
                             </div>
                             <div class="row">
                               <div class="review-billing-address billing-address form-group">
-                                <label class="col-xs-2 col-md-2 control-label"><span>ZIP</span></label>
+                                <label class="col-xs-2 col-md-2 control-label"><span translate>LABEL-ZIP-CODE</span></label>
                                 <div class="col-xs-10 col-md-10">
                                   <input type="text" name="billingToZip" ng-model="billingToZip" id="billingToZip" class="form-control" placeholder="" >
                                 </div>
@@ -80,7 +80,7 @@
                             </div>
                             <div class="row">
                               <div class="review-billing-address billing-address form-group">
-                                <label class="col-xs-2 col-md-2 control-label"><span>City</span></label>
+                                <label class="col-xs-2 col-md-2 control-label"><span translate>LABEL-CITY</span></label>
                                 <div class="col-xs-10 col-md-10">
                                   <input type="text" name="orderBillToCity" ng-model="orderBillToCity" id="orderBillToCity" class="form-control" placeholder="" >
                                 </div>
@@ -88,7 +88,7 @@
                             </div>
                             <div class="row">
                               <div class="review-billing-address billing-address form-group">
-                                <label class="col-xs-2 col-md-2 control-label"><span>State</span></label>
+                                <label class="col-xs-2 col-md-2 control-label"><span translate>LABEL-STATE</span></label>
                                 <div class="col-xs-10 col-md-10">
                                   <input type="text" name="orderBillToState" ng-model="orderBillToState" id="orderBillToState" class="form-control" placeholder="" >
                                 </div>
@@ -96,7 +96,7 @@
                             </div>
                             <div class="row">
                               <div class="review-billing-address billing-address form-group">
-                                <label class="col-xs-2 col-md-2 control-label"><span>Country</span></label>
+                                <label class="col-xs-2 col-md-2 control-label"><span translate>LABEL-COUNTRY</span></label>
                                 <div class="col-xs-10 col-md-10">
                                   <input type="text" name="orderBillToZip" ng-model="orderBillToZip" id="orderBillToZip" class="form-control" placeholder="Germany" disabled >
                                 </div>
@@ -105,7 +105,7 @@
                           </div>
                         </div>
                         <br>
-                        <h3>Shipping option</h3>
+                        <h3><span translate>LABEL-SHIPPING-OPTION</span></h3>
                         <div class="row">
                           <div class="col-xs-12">
                             <div class="review-shipping-option">{{deliveryTitle}} - {{deliveryTime}}</div>
@@ -114,21 +114,21 @@
                         <div class="row">
                           <div class="col-xs-12">
                             <div class="panel b-a text-center agreement" id="agreement" role="tablist" aria-multiselectable="true">
-                              <p>By placing the order I agree to {{user.displayName}}
-                                <a role="button" data-toggle="collapse" href="#accordion-terms" aria-expanded="false" data-parent="#agreement"  aria-controls="accordion-terms">Terms and Conditions</a>.
-                                I have acknowledged the
-                                <a role="button" data-toggle="collapse" href="#accordion-withdrawal" aria-expanded="false" data-parent="#agreement" aria-controls="accordion-withdrawal">withdrawal conditions</a>.
+                              <p><span translate>LABEL-ACCEPT-BY-PLACING-ORDER</span> {{user.displayName}}
+                                <a role="button" data-toggle="collapse" href="#accordion-terms" aria-expanded="false" data-parent="#agreement"  aria-controls="accordion-terms" translate>LABEL-LEGAL-TERMSANDCONDITIONS</a>.
+                                <span translate>LABEL-ACKNOWLEDGE-TO</span>
+                                <a role="button" data-toggle="collapse" href="#accordion-withdrawal" aria-expanded="false" data-parent="#agreement" aria-controls="accordion-withdrawal" translate>LABEL-LEGAL-RETURNPOLICY</a>.
                               </p>
 
                               <div class="panel">
                                 <div class="collapse topline" id="accordion-terms" role="tabpanel">
-                                  <h4>Terms and Conditions</h4>
+                                  <h4><span translate>LABEL-LEGAL-TERMSANDCONDITIONS</span></h4>
                                   {{legal.legalTermsandConditions}}</div>
                               </div>
 
                               <div class="panel">
                                 <div class="collapse topline" id="accordion-withdrawal" role="tabpanel">
-                                  <h4>Withdrawal Conditions</h4>
+                                  <h4><span translate>LABEL-LEGAL-RETURNPOLICY</span></h4>
                                   {{legal.legalReturnPolicy}}</div>
                               </div>
                             </div>
@@ -147,27 +147,27 @@
                             <table class="table b-light">
                               <tbody>
                               <tr>
-                                <td>Quantity</td>
+                                <td><span translate>LABEL-CHECKOUT-QUANTITY</span></td>
                                 <td><span class="lbl-quantity" ng-bind="paypal.L_PAYMENTREQUEST_0_QTY0" data-value="{{paypal.L_PAYMENTREQUEST_0_QTY0}}"></span><span class="amount" hidden ng-bind="paypal.L_PAYMENTREQUEST_0_QTY0" data-value="paypal.L_PAYMENTREQUEST_0_QTY0"></span></td>
                               </tr>
                               <tr>
-                                <td>Price per item</td>
+                                <td><span translate>LABEL-PRODUCT-PRICE</span></td>
                                 <td><span class="lbl-priceperitem"></span></td>
                               </tr>
                               <tr>
-                                <td>Subtotal</td>
+                                <td><span translate>LABEL-CHECKOUT-SUBTOTAL</span></td>
                                 <td><span class="lbl-subtotal"></span></td>
                               </tr>
                               <tr>
-                                <td>Shipping ({{deliveryTitle}})</td>
+                                <td><span translate>LABEL-SHIPPING-COST</span> ({{deliveryTitle}})</td>
                                 <td><span class="lbl-shipping" ng-bind="paypal.PAYMENTREQUEST_0_SHIPPINGAMT" data-value="{{paypal.PAYMENTREQUEST_0_SHIPPINGAMT}}"></span></td>
                               </tr>
                               <tr class="total">
-                                <td>Total</td>
+                                <td><span translate>LABEL-CHECKOUT-TOTAL</span></td>
                                 <td><span class="lbl-total"></span><span></span></td>
                               </tr>
                               <tr class="small">
-                                <td>incl. VAT</td>
+                                <td><span translate>LABEL-CHECKOUT-INCVAT</span></td>
                                 <td><span class="lbl-vat"></span></td>
                               </tr>
                               </tbody>
@@ -178,7 +178,7 @@
                         <div class="form-group">
                           <div class="row">
                             <div class="col-lg-12">
-                              <button type="button" class="btn btn-info btn-addon btn-lg center-block js-go-to-confirmation" data-ng-click="doPayment()">Buy now</button>
+                              <button type="button" class="btn btn-info btn-addon btn-lg center-block js-go-to-confirmation" data-ng-click="doPayment()" translate>LABEL-BUY-NOW</button>
                             </div>
                           </div>
                         </div>
@@ -208,33 +208,33 @@
 
         <div id="footer-nav" role="tablist" aria-multiselectable="true">
           <ul class="navbar-nav nav">
-            <li><a role="button" data-toggle="collapse" href="#accordion-footer-imprint" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-imprint">Imprint</a></li>
-            <li><a role="button" data-toggle="collapse" href="#accordion-footer-terms" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-terms">Terms &amp; Conditions</a></li>
-            <li><a role="button" data-toggle="collapse" href="#accordion-footer-privacy" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-privacy">Privacy Policy</a></li>
-            <li><a role="button" data-toggle="collapse" href="#accordion-footer-return" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-return">Return Policy</a></li>
+            <li><a role="button" data-toggle="collapse" href="#accordion-footer-imprint" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-imprint" translate>LABEL-LEGAL-IMPRINT</a></li>
+            <li><a role="button" data-toggle="collapse" href="#accordion-footer-terms" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-terms" translate>LABEL-LEGAL-TERMSANDCONDITIONS</a></li>
+            <li><a role="button" data-toggle="collapse" href="#accordion-footer-privacy" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-privacy" translate>LABEL-LEGAL-PRIVACYPOLICY</a></li>
+            <li><a role="button" data-toggle="collapse" href="#accordion-footer-return" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-return" translate>LABEL-LEGAL-RETURNPOLICY</a></li>
           </ul>
 
           <div class="panel m-b-none">
             <div class="collapse" id="accordion-footer-imprint" role="tabpanel">
-              <h4>Imprint</h4>
+              <h4><span translate>LABEL-LEGAL-IMPRINT</span></h4>
               {{legal.legalImprint}}</div>
           </div>
 
           <div class="panel m-b-none">
             <div class="collapse" id="accordion-footer-terms" role="tabpanel">
-              <h4>Terms and Conditions</h4>
+              <h4><span translate>LABEL-LEGAL-TERMSANDCONDITIONS</span></h4>
               {{legal.legalTermsandConditions}}</div>
           </div>
 
           <div class="panel m-b-none">
             <div class="collapse" id="accordion-footer-privacy" role="tabpanel">
-              <h4>Privacy Policy</h4>
+              <h4><span translate>LABEL-LEGAL-PRIVACYPOLICY</span></h4>
               {{legal.legalPrivacyPolicy}}</div>
           </div>
 
           <div class="panel m-b-none">
             <div class="collapse" id="accordion-footer-return" role="tabpanel">
-              <h4>Return Policy</h4>
+              <h4><span translate>LABEL-LEGAL-RETURNPOLICY</span></h4>
               {{legal.legalReturnPolicy}}</div>
           </div>
         </div>

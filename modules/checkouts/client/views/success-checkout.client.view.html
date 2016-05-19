@@ -13,7 +13,7 @@
               <div class="panel b-a">
 
                 <div class="bg-light lter b-b wrapper-md wrapper-p5" id="belowpicture">
-                  <span class="text-muted step-headline">Summary</span>
+                  <span class="text-muted step-headline"><span translate>LABEL-CHECKOUT-SUMMARY</span></span>
                 </div>
                 <button class="single-price" ng-bind="L_PAYMENTREQUEST_0_AMT0" data-value="{{L_PAYMENTREQUEST_0_AMT0}}" hidden></button>
 
@@ -25,14 +25,14 @@
                       <div class="row">
                         <div class="col-xs-12">
                           <div class="panel b-a text-center agreement">
-                            <p><strong>Thank you for your order {{PAYMENTREQUEST_0_INVNUM}}! A confirmation of your order will be sent to {{ordereMAIL}}</strong></p>
+                            <p><strong><span translate>LABEL-CHECKOUT-THANKS-ORDER</span> {{PAYMENTREQUEST_0_INVNUM}}! <span translate>LABEL-CHECKOUT-CONFIRMATION-SEND-TO</span> {{ordereMAIL}}</strong></p>
                           </div>
                         </div>
                       </div>
 
                       <div class="row">
                         <div class="col-xs-12 col-md-6 shipping-address">
-                          <h3>Shipping address</h3>
+                          <h3><span translate>LABEL-SHIPPING-ADDRESS</span></h3>
                           <div class="review-shipping-name">{{PAYMENTREQUEST_0_SHIPTONAME}}</div>
                           <div class="review-shipping-address">{{PAYMENTREQUEST_0_SHIPTOSTREET}}</div>
                           <div class="review-shipping-address">{{PAYMENTREQUEST_0_SHIPTOZIP}}</div>
@@ -41,7 +41,7 @@
                           <div class="review-shipping-address">{{PAYMENTREQUEST_0_SHIPTOCOUNTRYNAME}}</div>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                          <h3>Billing address</h3>
+                          <h3><span translate>LABEL-BILLING-ADDRESS</span></h3>
                           <div class="review-shipping-name">{{orderBillToFirstName}} {{orderBillToLastName}}</div>
                           <div class="review-shipping-address">{{orderBillToStreet}}</div>
                           <div class="review-shipping-address">{{orderBillToZip}}</div>
@@ -51,7 +51,7 @@
                         </div>
                       </div>
                       <br>
-                      <h3>Shipping option</h3>
+                      <h3><span translate>LABEL-SHIPPING-OPTION</span></h3>
                       <div class="row">
                         <div class="col-xs-12">
                           <div class="review-shipping-option">{{deliveryTitle}} - {{deliveryTime}}</div>
@@ -69,28 +69,28 @@
                           <table class="table b-light">
                             <tbody>
                             <tr>
-                              <td>Quantity</td>
+                              <td><span translate>LABEL-CHECKOUT-QUANTITY</span></td>
                               <td><span class="lbl-quantity" ng-bind="L_PAYMENTREQUEST_0_QTY0" data-value="{{L_PAYMENTREQUEST_0_QTY0}}"></span></td>
                             </tr>
                             <tr>
-                              <td>Price per item</td>
-                              <td><span class="lbl-priceperitem" ng-bind="PAYMENTREQUEST_0_ITEMAMT" data-value="{{PAYMENTREQUEST_0_ITEMAMT}}"> €</span></td>
+                              <td><span translate>LABEL-PRODUCT-PRICE</span></td>
+                              <td><span class="lbl-priceperitem" ng-bind="PAYMENTREQUEST_0_ITEMAMT" data-value="{{PAYMENTREQUEST_0_ITEMAMT}}"></span> €</td>
                             </tr>
                             <tr>
-                              <td>Subtotal</td>
-                              <td><span class="lbl-subtotal" ng-bind="subtotal" data-value="{{subtotal}}"> €</span></td>
+                              <td><span translate>LABEL-CHECKOUT-SUBTOTAL</span></td>
+                              <td><span class="lbl-subtotal" ng-bind="subtotal" data-value="{{subtotal}}"></span> €</td>
                             </tr>
                             <tr>
-                              <td>Shipping ({{deliveryTitle}})</td>
-                              <td><span class="lbl-shipping" ng-bind="PAYMENTREQUEST_0_SHIPPINGAMT" data-value="{{PAYMENTREQUEST_0_SHIPPINGAMT}}"> €</span></td>
+                              <td><span translate>LABEL-SHIPPING-COST</span> ({{deliveryTitle}})</td>
+                              <td><span class="lbl-shipping" ng-bind="PAYMENTREQUEST_0_SHIPPINGAMT" data-value="{{PAYMENTREQUEST_0_SHIPPINGAMT}}"></span> €</td>
                             </tr>
                             <tr class="total">
-                              <td>Total</td>
-                              <td><span class="lbl-total" ng-bind="PAYMENTREQUEST_0_AMT" data-value="{{PAYMENTREQUEST_0_AMT}}"> €</span></td>
+                              <td><span translate>LABEL-CHECKOUT-TOTAL</span></td>
+                              <td><span class="lbl-total" ng-bind="PAYMENTREQUEST_0_AMT" data-value="{{PAYMENTREQUEST_0_AMT}}"></span> €</td>
                             </tr>
                             <tr class="small">
-                              <td>incl. VAT</td>
-                              <td><span class="lbl-vat" ng-bind="vat" data-value="{{vat}}"> €</span></td>
+                              <td><span translate>LABEL-CHECKOUT-INCVAT</span></td>
+                              <td><span class="lbl-vat" ng-bind="vat" data-value="{{vat}}"></span> €</td>
                             </tr>
                             </tbody>
                           </table>
@@ -120,33 +120,33 @@
 
       <div id="footer-nav" role="tablist" aria-multiselectable="true">
         <ul class="navbar-nav nav">
-          <li><a role="button" data-toggle="collapse" href="#accordion-footer-imprint" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-imprint">Imprint</a></li>
-          <li><a role="button" data-toggle="collapse" href="#accordion-footer-terms" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-terms">Terms &amp; Conditions</a></li>
-          <li><a role="button" data-toggle="collapse" href="#accordion-footer-privacy" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-privacy">Privacy Policy</a></li>
-          <li><a role="button" data-toggle="collapse" href="#accordion-footer-return" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-return">Return Policy</a></li>
+          <li><a role="button" data-toggle="collapse" href="#accordion-footer-imprint" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-imprint" translate>LABEL-LEGAL-IMPRINT</a></li>
+          <li><a role="button" data-toggle="collapse" href="#accordion-footer-terms" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-terms" translate>LABEL-LEGAL-TERMSANDCONDITIONS</a></li>
+          <li><a role="button" data-toggle="collapse" href="#accordion-footer-privacy" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-privacy" translate>LABEL-LEGAL-PRIVACYPOLICY</a></li>
+          <li><a role="button" data-toggle="collapse" href="#accordion-footer-return" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-return" translate>LABEL-LEGAL-RETURNPOLICY</a></li>
         </ul>
 
         <div class="panel m-b-none">
           <div class="collapse" id="accordion-footer-imprint" role="tabpanel">
-            <h4>Imprint</h4>
+            <h4><span translate>LABEL-LEGAL-IMPRINT</span></h4>
             {{legal.legalImprint}}</div>
         </div>
 
         <div class="panel m-b-none">
           <div class="collapse" id="accordion-footer-terms" role="tabpanel">
-            <h4>Terms and Conditions</h4>
+            <h4><span translate>LABEL-LEGAL-TERMSANDCONDITIONS</span></h4>
             {{legal.legalTermsandConditions}}</div>
         </div>
 
         <div class="panel m-b-none">
           <div class="collapse" id="accordion-footer-privacy" role="tabpanel">
-            <h4>Privacy Policy</h4>
+            <h4><span translate>LABEL-LEGAL-PRIVACYPOLICY</span></h4>
             {{legal.legalPrivacyPolicy}}</div>
         </div>
 
         <div class="panel m-b-none">
           <div class="collapse" id="accordion-footer-return" role="tabpanel">
-            <h4>Return Policy</h4>
+            <h4><span translate>LABEL-LEGAL-RETURNPOLICY</span></h4>
             {{legal.legalReturnPolicy}}</div>
         </div>
       </div>

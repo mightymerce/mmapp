@@ -132,10 +132,10 @@ $(document).ready(function() {
         calculatePrices();
         trimString('.js-headline', 70);
         $('.js-content').shorten({
-            moreText: '(read more)',
-            lessText: '(read less)'
+            moreText: '(mehr)',
+            lessText: '(weniger)'
         });
-    }, 5000);
+    }, 3000);
 
 
     $('.billing-address').hide(400);

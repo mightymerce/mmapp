@@ -37,7 +37,7 @@
                   <button class="btn m-b-xs w-xs btn-info single-price" ng-bind="product.productPrice" data-value="{{product.productPrice}}"></button>
 
                   <div class="bg-light lter b-b wrapper-md wrapper-p5" id="belowpicture">
-                    <span class="text-muted step-headline">Order now</span>
+                    <span class="text-muted step-headline" translate>LABEL-CHECKOUT-ORDER-NOW</span>
                   </div>
                   <div ng-show="error" class="alert alert-danger">
                     <p ng-bind="error"></p>
@@ -57,7 +57,7 @@
                             <div class="row">
                               <form class="form-inline" role="form">
                                 <div class="col-xs-8">
-                                  <label class="col-md-12 control-label">Quantity</label>
+                                  <label class="col-md-12 control-label" translate>LABEL-CHECKOUT-QUANTITY</label>
                                 </div>
                                 <div class="col-xs-4">
                                   <div class="pull-right">
@@ -80,19 +80,19 @@
                                 <table class="table b-light">
                                   <tbody>
                                   <tr>
-                                    <td>Subtotal</td>
+                                    <td><span translate>LABEL-CHECKOUT-SUBTOTAL</span></td>
                                     <td><span class="lbl-subtotal"></span></td>
                                   </tr>
                                   <tr>
-                                    <td>Shipping ({{delivery.deliveryTitle}})</td>
+                                    <td><span translate>LABEL-SHIPPING-COST</span> ({{delivery.deliveryTitle}})</td>
                                     <td><span class="lbl-shipping" data-ng-bind="delivery.deliveryCost" data-value="{{delivery.deliveryCost}}"></span></td>
                                   </tr>
                                   <tr class="total">
-                                    <td>Total</td>
+                                    <td><span translate>LABEL-CHECKOUT-TOTAL</span></td>
                                     <td><span class="lbl-total"></span></td>
                                   </tr>
                                   <tr class="small">
-                                    <td>incl. VAT</td>
+                                    <td><span translate>LABEL-CHECKOUT-INCVAT</span></td>
                                     <td><span class="lbl-vat"></span></td>
                                   </tr>
                                   </tbody>
@@ -104,8 +104,9 @@
                                <img ng-click="checkoutPaypal()" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-medium.png" alt="mightymerce checkout with paypal" />
                               </a>
                             </div>
-                            <div class="shariff"></div>
-                            <div class="shariff" data-services="[&quot;facebook&quot;,&quot;pinterest&quot;,&quot;twitter&quot;,&quot;mail&quot;]" data-theme="standard" data-orientation="horizontal"></div>
+                            <div align="center">
+                              <div class="shariff" data-services="[&quot;facebook&quot;,&quot;pinterest&quot;,&quot;twitter&quot;,&quot;mail&quot;]" data-theme="standard" data-orientation="horizontal"></div>
+                            </div>
                             <input ng-hide="true" type="text" value="0" class="form-control lbl-subtotal-PP" hidden />
                             <input ng-hide="true" type="text" value="0" class="form-control lbl-total-PP" hidden />
                             <input ng-hide="true" type="text" value="0" class="form-control lbl-shipping-PP" hidden />
@@ -139,33 +140,33 @@
 
         <div id="footer-nav" role="tablist" aria-multiselectable="true">
           <ul class="navbar-nav nav">
-            <li><a role="button" data-toggle="collapse" href="#accordion-footer-imprint" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-imprint">Imprint</a></li>
-            <li><a role="button" data-toggle="collapse" href="#accordion-footer-terms" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-terms">Terms &amp; Conditions</a></li>
-            <li><a role="button" data-toggle="collapse" href="#accordion-footer-privacy" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-privacy">Privacy Policy</a></li>
-            <li><a role="button" data-toggle="collapse" href="#accordion-footer-return" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-return">Return Policy</a></li>
+            <li><a role="button" data-toggle="collapse" href="#accordion-footer-imprint" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-imprint" translate>LABEL-LEGAL-IMPRINT</a></li>
+            <li><a role="button" data-toggle="collapse" href="#accordion-footer-terms" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-terms" translate>LABEL-LEGAL-TERMSANDCONDITIONS</a></li>
+            <li><a role="button" data-toggle="collapse" href="#accordion-footer-privacy" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-privacy" translate>LABEL-LEGAL-PRIVACYPOLICY</a></li>
+            <li><a role="button" data-toggle="collapse" href="#accordion-footer-return" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-return" translate>LABEL-LEGAL-RETURNPOLICY</a></li>
           </ul>
 
           <div class="panel m-b-none">
             <div class="collapse" id="accordion-footer-imprint" role="tabpanel">
-              <h4>Imprint</h4>
+              <h4><span translate>LABEL-LEGAL-IMPRINT</span></h4>
               {{legal.legalImprint}}</div>
           </div>
 
           <div class="panel m-b-none">
             <div class="collapse" id="accordion-footer-terms" role="tabpanel">
-              <h4>Terms and Conditions</h4>
+              <h4><span translate>LABEL-LEGAL-TERMSANDCONDITIONS</span></h4>
               {{legal.legalTermsandConditions}}</div>
           </div>
 
           <div class="panel m-b-none">
             <div class="collapse" id="accordion-footer-privacy" role="tabpanel">
-              <h4>Privacy Policy</h4>
+              <h4><span translate>LABEL-LEGAL-PRIVACYPOLICY</span></h4>
               {{legal.legalPrivacyPolicy}}</div>
           </div>
 
           <div class="panel m-b-none">
             <div class="collapse" id="accordion-footer-return" role="tabpanel">
-              <h4>Return Policy</h4>
+              <h4><span translate>LABEL-LEGAL-RETURNPOLICY</span></h4>
               {{legal.legalReturnPolicy}}</div>
           </div>
         </div>
