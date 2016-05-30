@@ -46,7 +46,7 @@
                             <div class="ibox-tools"></div>
                           </div>
                           <div class="ibox-content">
-                            <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-IN-STOCK</span>*</label>
+                            <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-IN-STOCK</span> *</label>
                               <div class="col-sm-8">
                                 <div class="switch">
                                   <div class="onoffswitch">
@@ -59,7 +59,7 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-IN-ID</span>*</label>
+                            <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-IN-ID</span> *</label>
                               <div class="col-sm-8">
                                 <input type="text" ng-model="productId" id="productId" class="form-control" placeholder="" required></div>
                               <div ng-messages="productForm.productId.$error" role="alert">
@@ -71,12 +71,12 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-TITLE</span>*</label>
+                            <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-TITLE</span> *</label>
                               <div class="col-sm-8">
                                 <input type="text" name="productTitle" ng-model="productTitle" id="productTitle" class="form-control" placeholder="" required ng-maxlength="70"></div>
                               <div>
-                                <p class="help-block error-text" ng-show="productForm.productDescription.$touched && productForm.productDescription.$error.required" role="alert"><span translate>VALIDATION-PRODUCT-TITLE-REQ</span></p>
-                                <p class="help-block error-text" ng-show="productForm.productDescription.$touched && productForm.productDescription.$error.maxlength" role="alert"><span translate>VALIDATION-PRODUCT-TITLE-TO-LONG</span></p>
+                                <p class="help-block error-text" ng-show="productForm.productTitle.$touched && productForm.productTitle.$error.required" role="alert"><span translate>VALIDATION-PRODUCT-TITLE-REQ</span></p>
+                                <p class="help-block error-text" ng-show="productForm.productTitle.$touched && productForm.productTitle.$error.maxlength" role="alert"><span translate>VALIDATION-PRODUCT-TITLE-TO-LONG</span></p>
                               </div>
                               <div class="col-sm-2">
                                 <div class="tooltip-demo">
@@ -84,11 +84,16 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-DESCRIPTION</span>*</label>
+                            <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-DESCRIPTION</span> *</label>
                               <div class="col-sm-8"><textarea name="productDescription" ng-model="productDescription" id="productDescription" class="supertext" placeholder="" rows="10" required ng-maxlength="500"></textarea></div>
                               <div >
                                 <p class="help-block error-text" ng-show="productForm.productDescription.$touched && productForm.productDescription.$error.required" role="alert"><span translate>VALIDATION-PRODUCT-DESCRIPTION-REQ</span></p>
                                 <p class="help-block error-text" ng-show="productForm.productDescription.$touched && productForm.productDescription.$error.maxlength" role="alert"><span translate>VALIDATION-PRODUCT-DESCRIPTION-TO-LONG</span></p>
+                              </div>
+                              <div class="col-sm-2">
+                                <div class="tooltip-demo">
+                                  <button type="button" class="btn btn-default" tooltip-placement="top" uib-tooltip="{{'LABEL-TOOLTIP-PRODUCT-DESCRIPTION' | translate}}">i</button>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -102,7 +107,17 @@
                             <div class="ibox-tools"></div>
                           </div>
                           <div class="ibox-content">
-                            <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-PRICE</span>*</label>
+                            <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-CURRENCY</span> *</label>
+                              <div class="col-sm-8">
+                                <select class="form-control" name="productCurrency" id="productCurrency" ng-model="productCurrency" required>
+                                  <option ng-repeat="option in productCurrency" value="{{option._id}}">{{option.currencyCode}}</option>
+                                </select>
+                              </div>
+                              <div ng-messages="productForm.productCurrency.$error" role="alert">
+                                <p class="help-block error-text" ng-message="required"><span translate>VALIDATION-PRODUCT-CURRENCY-REQ</span></p>
+                              </div>
+                            </div>
+                            <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-PRICE</span> *</label>
                               <div class="col-sm-8"><input type="text" pattern="[0-9]+([.][0-9]+)*" class="form-control" ng-model="productPrice" id="productPrice" placeholder="{{'LABEL-PLACEHOLDER-PRODUCT-PRICE' | translate}}" required></div>
                               <div class="col-sm-2">
                                 <div class="tooltip-demo">
@@ -110,7 +125,7 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-TAX</span>*</label>
+                            <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-TAX</span> *</label>
                               <div class="col-sm-8">
                                 <select class="form-control" name="productTax" id="productTax" ng-model="productTax" required>
                                   <option ng-repeat="option in productTax" value="{{option._id}}">{{option.taxRate}} %</option>
@@ -120,16 +135,6 @@
                                 <p class="help-block error-text" ng-message="required"><span translate>VALIDATION-PRODUCT-TAX-REQ</span></p>
                               </div>
                               <div class="col-sm-2"></div>
-                            </div>
-                            <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-CURRENCY</span>*</label>
-                              <div class="col-sm-8">
-                                <select class="form-control" name="productCurrency" id="productCurrency" ng-model="productCurrency" required>
-                                  <option ng-repeat="option in productCurrency" value="{{option._id}}">{{option.currencyCode}}</option>
-                                </select>
-                              </div>
-                              <div ng-messages="productForm.productCurrency.$error" role="alert">
-                                <p class="help-block error-text" ng-message="required"><span translate>VALIDATION-PRODUCT-CURRENCY-REQ</span></p>
-                              </div>
                             </div>
                             <div class="form-group" ng-show="false"><label class="col-sm-2 control-label">Sale Price</label>
                               <div class="col-sm-8"><input type="text" ng-model="productSaleprice" id="productSaleprice" class="form-control" placeholder=""></div>
@@ -162,7 +167,7 @@
                           </div>
                           <div class="ibox-content">
                             <fieldset class="form-horizontal">
-                              <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-SHIPPING-OPTION</span>*</label>
+                              <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-SHIPPING-OPTION</span> *</label>
                                 <div class="col-sm-8">
                                   <select class="form-control" name="productShippingoption" id="productShippingoption" ng-model="productShippingoption" required>
                                     <option ng-repeat="option in productShippingoption" value="{{option._id}}">{{option.deliveryTitle}} - {{option.deliveryTime}}</option>

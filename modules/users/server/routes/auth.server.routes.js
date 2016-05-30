@@ -28,6 +28,9 @@ module.exports = function (app) {
   // Send order eMails
   app.route('/api/auth/sendordersubmit').post(users.sendOrderSubmit);
 
+  // Send invitation marketplace eMails
+  app.route('/api/auth/sendmarketplacerequestemail').post(users.sendmarketplacerequestemail);
+
   // Setting the facebook oauth routes
   app.route('/api/auth/facebook').get(users.oauthCall('facebook', {
     scope: ['email']

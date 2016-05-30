@@ -1,0 +1,105 @@
+<section>
+<div class="inmodal" ng-controller="ProductsController">
+  <div>
+    <div class="modal-content">
+      <form name="postForm" class="form-horizontal" ng-submit="postPost(postForm.$valid)" novalidate>
+        <div class="modal-header">
+          <button type="button" class="close" ng-click="$dismiss()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" translate>LABEL-MIGHTYMERCE-MARKETPLACE</h4>
+          <div>
+            <span><img width="80px" alt="mightymerce.com - social commerce" class="" src="/modules/core/client/img/brand/mm_logo_icon.png"/></span>
+            <span><img width="80px" alt="Pinterest" class="" src="/modules/core/client/img/Pinterest-badge-144px.png"/></span>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div ng-show="error" class="alert alert-danger">
+            <p ng-bind="error"></p>
+          </div>
+          <div ng-show="success" class="alert alert-success">
+            <p ng-bind="success"></p>
+          </div>
+          <div class="spiner-example" ng-hide="hideSpinner">
+            <div class="sk-spinner sk-spinner-fading-circle">
+              <div class="sk-circle1 sk-circle"></div>
+              <div class="sk-circle2 sk-circle"></div>
+              <div class="sk-circle3 sk-circle"></div>
+              <div class="sk-circle4 sk-circle"></div>
+              <div class="sk-circle5 sk-circle"></div>
+              <div class="sk-circle6 sk-circle"></div>
+              <div class="sk-circle7 sk-circle"></div>
+              <div class="sk-circle8 sk-circle"></div>
+              <div class="sk-circle9 sk-circle"></div>
+              <div class="sk-circle10 sk-circle"></div>
+              <div class="sk-circle11 sk-circle"></div>
+              <div class="sk-circle12 sk-circle"></div>
+            </div>
+          </div>
+          <div>
+            <h4><span translate></span></h4>
+          </div>
+          <br>
+          <div ng-show="error" class="alert alert-success">
+            <strong ng-bind="error"></strong>
+          </div>
+          <div>
+            <div>
+              <h3 translate>LABEL-YOU-WOULD-LIKE-TO-SELL-ON-MM-MARKETPLACE</h3>
+            </div>
+            <div>
+              <p class="col-lg-12"><strong translate>LABEL-STEP1</strong>&nbsp;<span translate>LABEL-STEP1-MARKETPLACE-EXPLANATION</span></p>
+            </div>
+            <div>
+              <p class="col-lg-12"><strong translate>LABEL-STEP2</strong>&nbsp;<span translate>LABEL-STEP2-MARKETPLACE-EXPLANATION</span></p>
+            </div>
+            <div>
+              <p class="col-lg-12"><strong translate>LABEL-STEP3</strong>&nbsp;<span translate>LABEL-STEP3-MARKETPLACE-EXPLANATION</span></p>
+            </div>
+            <div>
+              <p class="col-lg-12"><strong translate>LABEL-STEP-FINALLY</strong>&nbsp;<span translate>LABEL-STEP-MARKETPLACE-FINALLY-EXPLANATION</span></p>
+            </div>
+            <br><br>
+            <div>
+              <h4 translate>LABEL-PINTEREST-CATEGORY</h4>
+              <div class="col-lg-6">
+                <input type="checkbox" ng-model="category1"> <label translate>LABEL-CATEGORY-1</label><br>
+                <input type="checkbox" ng-model="category2"> <label translate>LABEL-CATEGORY-2</label><br>
+                <input type="checkbox" ng-model="category3"> <label translate>LABEL-CATEGORY-3</label><br>
+                <input type="checkbox" ng-model="category4"> <label translate>LABEL-CATEGORY-4</label><br>
+                <input type="checkbox" ng-model="category5"> <label translate>LABEL-CATEGORY-5</label><br>
+                <input type="checkbox" ng-model="category6"> <label translate>LABEL-CATEGORY-6</label>
+              </div>
+              <div class="col-lg-6">
+                <input type="checkbox" ng-model="category7"> <label translate>LABEL-CATEGORY-7</label><br>
+                <input type="checkbox" ng-model="category8"> <label translate>LABEL-CATEGORY-8</label><br>
+                <input type="checkbox" ng-model="category9"> <label translate>LABEL-CATEGORY-9</label><br>
+                <input type="checkbox" ng-model="category10"> <label translate>LABEL-CATEGORY-10</label><br>
+                <input type="checkbox" ng-model="category11"> <label translate>LABEL-CATEGORY-11</label><br><br><br>
+              </div>
+            </div>
+            <div class="row col-lg-12">
+              <div class="col-lg-5"><strong translate>LABEL-PINTEREST-USER</strong>
+              </div>
+              <div class="col-lg-7"><input type="text" name="pinterestUser" ng-model="pinterestUser" id="pinterestUser" class="form-control" placeholder="" required><br><br>
+              </div>
+            </div>
+            <div>
+              <button type="button" class="btn btn-block btn-warning" ng-click="sendMarketplaceRequest()" translate>BUTTON-ADD-TO-CATEGORY</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</section>
+
+<script type="text/javascript">
+  (function(d){
+    var f = d.getElementsByTagName('SCRIPT')[0], p = d.createElement('SCRIPT');
+    p.type = 'text/javascript';
+    p.async = true;
+    p.src = '//assets.pinterest.com/js/pinit.js';
+    f.parentNode.insertBefore(p, f);
+  }(document));
+</script>
+

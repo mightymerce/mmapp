@@ -572,6 +572,9 @@ exports.instagramGetMedia = function (req, res) {
   });
 };
 
+
+var GoogleUrl = require( 'google-url' );
+
 /**
  ** Instagram add comment
  */
@@ -579,20 +582,28 @@ exports.instagramPostComment = function (req, res) {
   console.log('users.profile.server.controller - instagramPostComment - start');
 
   var statusTweetURL = req.protocol + "://" + req.get('host') + '/checkouts/' + req.params.productid + '?channel=instagram';
-  var comment = req.params.instagramComment + statusTweetURL;
 
-  ig.use({ access_token: req.params.access_token });
+  var googleUrl = new GoogleUrl( { key: 'AIzaSyCfNzUm830f5cRqiYu9GxtKpUK46OD4uk4' });
+  googleUrl.shorten( statusTweetURL, function( err, shortUrl ) {
 
-  /* OPTIONS: { [count], [min_timestamp], [max_timestamp], [min_id], [max_id] }; */
-  ig.add_comment(req.params.mediaid, comment, function(err, result, remaining, limit) {
-    if (err) {
-      console.log('users.profile.server.controller - instagramPostComment - error: ' + err.body);
-      res.send(err);
-    } else {
-      console.log('users.profile.server.controller - instagramPostComment - success');
-      res.json('success');
-    }
-  });
+    var comment = req.params.instagramComment + shortUrl;
+    //var comment = req.params.instagramComment + statusTweetURL;
+
+    console.log('users.profile.server.controller - instagramPostComment - comment: '+comment);
+
+    ig.use({ access_token: req.params.access_token });
+
+    /* OPTIONS: { [count], [min_timestamp], [max_timestamp], [min_id], [max_id] }; */
+    ig.add_comment(req.params.mediaid, comment, function(err, result, remaining, limit) {
+      if (err) {
+        console.log('users.profile.server.controller - instagramPostComment - error: ' + err.body);
+        res.send(err);
+      } else {
+        console.log('users.profile.server.controller - instagramPostComment - success');
+        res.json('success');
+      }
+    });
+  })
 };
 
 

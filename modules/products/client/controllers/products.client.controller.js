@@ -1,8 +1,8 @@
 'use strict';
 
 // Products controller
-angular.module('products').controller('ProductsController', ['$rootScope','$scope', '$state', '$http', '$timeout', '$window', '$stateParams', '$location', 'Authentication', 'Products', '$uibModal', 'Posts', 'ProductsServices', 'Taxes', 'Currencys', 'Deliverys', 'Users', 'GetDawanda',
-  function ($rootScope, $scope, $state, $http, $timeout, $window, $stateParams, $location, Authentication, Products, $uibModal, Posts, ProductsServices, Taxes, Currencys, Deliverys, Users, GetDawanda) {
+angular.module('products').controller('ProductsController', ['$rootScope','$scope', '$state', '$http', '$timeout', '$window', '$stateParams', '$location', 'Authentication', 'Products', '$uibModal', 'Posts', 'ProductsServices', 'Taxes', 'Currencys', 'Deliverys', 'Users',
+  function ($rootScope, $scope, $state, $http, $timeout, $window, $stateParams, $location, Authentication, Products, $uibModal, Posts, ProductsServices, Taxes, Currencys, Deliverys, Users) {
 
     $scope.authentication = Authentication;
 
@@ -125,7 +125,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       console.log('products.client.controller - start open modal - ModalUpateProductPost');
       if (postChannel === 'Facebook') {
         // Facebook connect
-        var FBConnectStatus = '';
+        var FBAccess_Token = '';
         $scope.varFBConnected = false;
         $scope.hideSpinner = false;
 
@@ -135,10 +135,14 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
           console.log('products.client.controller - modalupdateProductPost - call getLoginStatus()');
           FB.getLoginStatus(function (response) {
             console.log('products.client.controller - modalupdateProductPost - call getLoginStatus() - response: ' +response.status);
+
             if (response.status === 'connected') {
               // Logged into your app and Facebook.
               $scope.varFBConnected = true;
               $scope.hideSpinner = true;
+
+              var uid = response.authResponse.userID;
+              $scope.authentication.user.accessToken = response.authResponse.accessToken;
 
               console.log('products.client.controller - modalupdateProductPost - Facebook connected open modal');
 
@@ -159,8 +163,6 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
                   }
                 }
               });
-              var uid = response.authResponse.userID;
-              var accessToken = response.authResponse.accessToken;
 
             } else if (response.status === 'not_authorized') {
               // The person is logged into Facebook, but not your app.
@@ -173,7 +175,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
               // Note: The call will only work if you accept the permission request
 
               console.log('product.client.controller - Start posting to Facebook');
-              ProductsServices.postToWall($scope.product).then(function(promise) {
+              ProductsServices.postToWall($scope.product, FBAccess_Token).then(function(promise) {
                 $scope.success = promise;
                 $scope.hideSpinner = true;
               });
@@ -251,17 +253,6 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
         ProductsServices.getEtsyOAuth().then(function(promise) {
           console.log('products.client.controller - modalupdateProductPost - getEtsyOAuth - return URL: ' +promise);
           window.open(promise);
-        });
-      }
-
-      if (postChannel === 'Dawanda') {
-        // Etsy connect
-        console.log('products.client.controller - modalupdateProductPost - Start');
-
-        //GetDawanda.query();
-        ProductsServices.getDawandaOAuth().then(function(promise) {
-          console.log('products.client.controller - modalupdateProductPost - getDawandaOAuth - return URL: ' +promise);
-          //window.open(promise);
         });
       }
 
@@ -418,6 +409,27 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
         });
       }
 
+    };
+
+    $scope.modalMarketplace = function (size) {
+
+      console.log('products.client.controller - start open modal - modalMarketplace');
+
+      $scope.modalInstance = $uibModal.open({
+        //animation: $scope.animationsEnabled,
+        templateUrl: 'modules/products/client/views/marketplace.product.modal.view.html',
+        controller: function ($scope) {
+
+        },
+        size: size,
+        resolve: {
+          product: function () {
+            return "";
+          }
+        }
+      });
+
+      console.log('products.client.controller - end open modal - modalMarketplace');
     };
 
     $scope.productCurrency = Currencys.query({
@@ -582,9 +594,6 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       var product = $scope.product;
       product.productItemInStock = $scope.product.productItemInStock;
 
-      console.log('products.client.controller - update - product.productId: ' +product.productId);
-      console.log('products.client.controller - update - product.productItemInStock: ' +$scope.product.productItemInStock);
-
       product.$update(function () {
         $location.path('products/' + product._id + '/edit');
         $scope.success = 'You successfully updated your product data.';
@@ -692,6 +701,29 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
     // ************************************
     // **                                **
+    // **   Send eMail Marketplace       **
+    // **                                **
+    // ************************************
+    //
+    $scope.sendMarketplaceRequest = function (isValid) {
+      $scope.hideSpinner = true;
+
+      console.log('products.client.controller - sendMarketplaceRequest - Start');
+
+      console.log('$scope.category1 :' + $scope.category1);
+
+      ProductsServices.sendMarketplaceRequestemail($scope.authentication.user.displayName, $scope.authentication.user.username, $scope.category1, $scope.category2, $scope.category3, $scope.category4, $scope.category5, $scope.category6, $scope.category7, $scope.category8, $scope.category9, $scope.category10, $scope.category11, $scope.pinterestUser).then(function(promise) {
+        $scope.hideSpinner = false;
+        if (promise) {
+          $scope.success = 'Wir haben deine Nachricht erhalten und werden dir die gewünschten mightymerce Pinterest Marktptlätze umgehend freischalten. Viel Spass beim Verkaufen!';
+          $scope.hideSpinner = true;
+        }
+      });
+    };
+
+
+    // ************************************
+    // **                                **
     // **          Pinterest             **
     // **            modal               **
     // **                                **
@@ -792,7 +824,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       $scope.hideSpinner = false;
 
       console.log('product.client.controller - Start posting to Facebook');
-      ProductsServices.postToWall($scope.product).then(function(promise) {
+      ProductsServices.postToWall($scope.product, $scope.authentication.user.accessToken).then(function(promise) {
         $scope.success = promise;
         $scope.hideSpinner = true;
       });

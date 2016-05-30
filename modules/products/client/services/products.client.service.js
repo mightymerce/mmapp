@@ -122,7 +122,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
           else {
             deferred.reject('There went something wrong connecting to your facebook account or you canceled the action.');
           }
-        },{ scope: 'publish_actions' });
+        },{ scope: 'publish_actions, manage_pages, publish_stream' });
         return deferred.promise;
 
       },
@@ -142,7 +142,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
 
       },
 
-      postToWall: function (product) {
+      postToWall: function (product, short_user_access_token) {
 
         console.log('product.client.service - postToWall - start post to Facebook!');
         var linkUrl = $location.protocol() + '://' + $location.host();
@@ -161,6 +161,8 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
 
         var deferred = $q.defer();
         var params = {};
+        var paramsFanPage = {};
+        var paramsPage = {};
 
         $http.get('/api/currencys/' +product.productCurrency)
 
@@ -172,43 +174,107 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
             console.log('product.client.service - postToWall - currency: ' + response.currencyCode);
 
             params.name = product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode;
-            params.link = linkUrl + product._id + '?channel=facebook';
-            params.picture = linkMainImageUrl + product.productMainImageURLFacebook.substring(1);
-            params.description = product.productDescription.substring(0,220) + ' ' + 'BUY NOW';
-            params.type = 'product';
+            $http.post('https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyBRGpeh01F10Do02XutBStFc-OyYwsuf1Y',{longUrl:linkUrl + product._id + '?channel=facebook'}).success(function(data,status,headers,config){
+              params.link = data.id;
+              //params.link = linkUrl + product._id + '?channel=facebook';
+              params.picture = linkMainImageUrl + product.productMainImageURLFacebook.substring(1);
+              params.description = product.productDescription.substring(0,220) + ' ' + 'BUY NOW';
+              params.type = 'product';
 
-            console.log('product.client.service - postToWall - productMainImageURL ' + params.picture);
+              console.log('product.client.service - postToWall - productMainImageURL ' + params.picture);
+              console.log('product.client.service - postToWall - linkURL ' + params.link);
 
-            var FB = $window.FB;
+              var FB = $window.FB;
 
-            // Make post to facebook and wait for answer
-            FB.api('/me/feed', 'post', params, function (response) {
-              if (!response || response.error) {
-                console.log('product.client.service - postToWall - error occured post to Facebook');
-                deferred.reject('There was an error creating Facebook post. Please try again!');
+
+              // Make post to facebook and wait for answer
+              FB.api('/me/feed', 'post', params, function (response) {
+                if (!response || response.error) {
+                  console.log('product.client.service - postToWall - error occured post to Facebook');
+                  deferred.reject('There was an error creating Facebook post. Please try again!');
+                } else {
+                  // Create new Post object
+                  var post = new Posts({
+                    product: product._id,
+                    channel: '563c7fab09f30c482f304273',
+                    postChannel: 'Facebook',
+                    postId: response.id,
+                    postStatus: 'Active',
+                    postPublicationDate: new Date(),
+                    postExternalPostKey: response.id,
+                    postInformation: ''
+                  });
+
+                  // Save post to MM
+                  post.$save(function (response) {
+                    console.log('product.client.service - postToWall - save post on MM success Post ID: ' + response._id);
+                    deferred.resolve('Success posting to Facebook! - Mightymerce Post-Id: ' +response._id);
+                  }, function (errorResponse) {
+                    console.log('product.client.service - postToWall - save post on MM error: ' + errorResponse);
+                    deferred.reject(errorResponse);
+                  });
+                }
+              });
+
+            }).
+            error(function(data,status,headers,config){
+
+            });
+
+
+            /*
+            var FBFanPage = $window.FB;
+
+            console.log('short_user_access_token: ' +short_user_access_token);
+
+            paramsPage.client_id = '1679726155619376';
+            paramsPage.client_secret = '6049214cc55cfcfba761c2ba2976a1cc';
+            paramsPage.grant_type = 'client_credentials';
+            //paramsPage.response_type = 'token';
+            paramsPage.grant_type = 'fb_exchange_token';
+            paramsPage.fb_exchange_token = short_user_access_token;
+              //paramsPage.fb_exchange_token = 'EAAX3s7jTXDABAMYWBciRdMrPe6KfXRM0UrUFH3vBZBkoWru9qWyV01L1u5nPAKZCUnPZAF7HPlp9sQReo7PcD30gnZCax3YpYod8GHol8KuYWkD6cEw12A5JQHF32DWGVgBH3mBMd6NoYZBqN5QFJP47ZBkU2b0BCQbuAM9ScY7wZDZD';
+            //paramsPage.scope = 'read_stream, manage_pages, publish_stream';
+            //paramsPage.code = short_user_access_token;
+            //paramsPage.redirect_uri = '';
+
+            FBFanPage.api('/oauth/access_token', 'get', paramsPage, function (responseaccounts) {
+              if (!responseaccounts || responseaccounts.error) {
+                console.log('Accounts: ' + JSON.stringify(responseaccounts));
+                console.log('Facebook api accounts response: ' +responseaccounts.access_token);
+                console.log('product.client.service - postToWall - error occured oauth to Facebook');
+                //deferred.reject('There was an error creating Facebook post. Please try again!');
               } else {
-                // Create new Post object
-                var post = new Posts({
-                  product: product._id,
-                  channel: '563c7fab09f30c482f304273',
-                  postChannel: 'Facebook',
-                  postId: response.id,
-                  postStatus: 'Active',
-                  postPublicationDate: new Date(),
-                  postExternalPostKey: response.id,
-                  postInformation: ''
-                });
+                console.log('Accounts: ' + JSON.stringify(responseaccounts));
+                //for (var i=0; i<responseaccounts.data.length; i++)
+                //{
+                paramsFanPage.access_token = responseaccounts.access_token;
+                //  console.log('response access-token: ' +responseaccounts.data[i].access_token);
+                //}
 
-                // Save post to MM
-                post.$save(function (response) {
-                  console.log('product.client.service - postToWall - save post on MM success Post ID: ' + response._id);
-                  deferred.resolve('Success posting to Facebook! - Mightymerce Post-Id: ' +response._id);
-                }, function (errorResponse) {
-                  console.log('product.client.service - postToWall - save post on MM error: ' + errorResponse);
-                  deferred.reject(errorResponse);
+                console.log('Facebook api accounts response: ' +paramsFanPage.access_token);
+                paramsFanPage.name = product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode;
+                paramsFanPage.link = linkUrl + product._id + '?channel=facebook';
+                paramsFanPage.picture = linkMainImageUrl + product.productMainImageURLFacebook.substring(1);
+                paramsFanPage.message = linkMainImageUrl + product.productMainImageURLFacebook.substring(1);
+                paramsFanPage.description = product.productDescription.substring(0,220) + ' ' + 'BUY NOW';
+                paramsFanPage.type = 'product';
+
+                FBFanPage.api('/1807188706168776/feed', 'post', paramsFanPage, function (response) {
+                  if (!response || response.error) {
+                    console.log('Facebook Error: ' +response.error);
+                    console.log('product.client.service - postToWall - error occured post to Fan Facebook');
+                    deferred.reject('There was an error creating Facebook post. Please try again!');
+                  } else {
+
+                  }
                 });
               }
             });
+*/
+
+
+
           })
             .error(function(msg,code) {
             });
@@ -597,6 +663,41 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
 
         return deferred.promise;
 
+      },
+
+      // ************************************
+      // **                                **
+      // **          Invitation            **
+      // **    Pinterest Marketplace       **
+      // **                                **
+      // ************************************
+      //
+      //
+
+      sendMarketplaceRequestemail: function sendMarketplaceRequestemail(userDisplayname, usereMail, pinterestCategory1, pinterestCategory2, pinterestCategory3, pinterestCategory4, pinterestCategory5, pinterestCategory6, pinterestCategory7, pinterestCategory8, pinterestCategory9, pinterestCategory10, pinterestCategory11, pinterestUser){
+        console.log('orders.client.service - Start sendOrderSubmit');
+
+        var promise = $http.post('/api/auth/sendMarketplaceRequestemail', {
+          userDisplayname: userDisplayname,
+          usereMail: usereMail,
+          pinterestCategory1: pinterestCategory1,
+          pinterestCategory2: pinterestCategory2,
+          pinterestCategory3: pinterestCategory3,
+          pinterestCategory4: pinterestCategory4,
+          pinterestCategory5: pinterestCategory5,
+          pinterestCategory6: pinterestCategory6,
+          pinterestCategory7: pinterestCategory7,
+          pinterestCategory8: pinterestCategory8,
+          pinterestCategory9: pinterestCategory9,
+          pinterestCategory10: pinterestCategory10,
+          pinterestCategory11: pinterestCategory11,
+          pinterestUser: pinterestUser
+
+        }).then(function successCallback(response) {
+          console.log('authentication.client.service - sendOrderSubmit - success ');
+          return response.data;
+        });
+        return promise;
       },
 
       // ************************************

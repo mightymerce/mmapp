@@ -306,6 +306,70 @@ exports.updateActivateUser = function (req, res, next) {
   });
 };
 
+/**
+ * Render email and send - for marketplace invitation request
+ */
+exports.sendmarketplacerequestemail = function (req, res) {
+
+  var smtpTransport = nodemailer.createTransport({
+    service: 'gmail',
+    secure: true, // use SSL
+    auth: {
+      user: 'wagner@mightymerce.com',
+      pass: 'pufyeytpdejudtfk'
+    }
+  });
+
+  var inputData = req.body;
+
+  console.log('core.server.controller - sendmarketplacerequestemail start');
+
+  var text = text + '   ' + inputData.userDisplayName + '   \r\n\r\n';
+  text = text + '   ====================\r\n\r\n';
+  text = text + '		\r\n\r\n';
+  text = text + '		\r\n\r\n';
+  text = text + '	Hello Mightymerce-Team\r\n\r\n';
+  text = text + '	Here is a request for marketplace invitation.\r\n\r\n';
+  text = text + '		\r\n\r\n';
+  text = text + '	* Details	' + '\r\n\r\n';
+  text = text + '	  Categroy 1: ' + inputData.pinterestCategory1 + '\r\n\r\n';
+  text = text + '	  Categroy 2: ' + inputData.pinterestCategory2 + '\r\n\r\n';
+  text = text + '	  Categroy 3: ' + inputData.pinterestCategory3 + '\r\n\r\n';
+  text = text + '	  Categroy 4: ' + inputData.pinterestCategory4 + '\r\n\r\n';
+  text = text + '	  Categroy 5: ' + inputData.pinterestCategory5 + '\r\n\r\n';
+  text = text + '	  Categroy 6: ' + inputData.pinterestCategory6 + '\r\n\r\n';
+  text = text + '	  Categroy 7: ' + inputData.pinterestCategory7 + '\r\n\r\n';
+  text = text + '	  Categroy 8: ' + inputData.pinterestCategory8 + '\r\n\r\n';
+  text = text + '	  Categroy 9: ' + inputData.pinterestCategory9 + '\r\n\r\n';
+  text = text + '	  Categroy 10: ' + inputData.pinterestCategory10 + '\r\n\r\n';
+  text = text + '	  Categroy 11: ' + inputData.pinterestCategory11 + '\r\n\r\n';
+  text = text + '		' + '\r\n\r\n';
+  text = text + '	* Pinterest user:	' + '\r\n\r\n';
+  text = text + '	 ' + inputData.pinterestUser + '\r\n\r\n';
+  text = text + '		' + '\r\n\r\n';
+  text = text + '	____________________	' + '\r\n\r\n';
+  text = text + '		' + '\r\n\r\n';
+  text = text + '		' + '\r\n\r\n';
+  text = text + '		' + '\r\n\r\n';
+  text = text + '	powered by mightymermerce - copyright 2016 - all rights reserved	' + '\r\n\r\n';
+
+  // setup e-mail data with unicode symbols
+  var mailOptions = {
+    from: 'Mightymermerce | Request for marketplace invitation <noreply@mightymerce.com>', // sender address
+    to: 'support@mightymerce.com', // list of receivers
+    subject: 'Request by user - ' + inputData.usereMail, // Subject line
+    text: text // plaintext body
+  };
+
+// send mail with defined transport object
+  smtpTransport.sendMail(mailOptions, function(error, info){
+    if(error){
+      return console.log(error);
+    }
+    console.log('Message sent: ' + info.response);
+  });
+};
+
 
 /**
  * Send Order Submitted email

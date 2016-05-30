@@ -318,6 +318,8 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         // VIEW ----- edit-legal-imprint.client.view.html ------
         // LABELS
         'BREADCRUMB-IMPRINT-EDIT':'Impressum bearbeiten',
+        'LABEL-HINT':'Hinweis: ',
+        'LABEL-IMPRINGT-HINT-EU':'Bitte beachtet für euer Impressum, den Hinweis zur Streitbeilegungsplattform der Europäischen Kommission. Weitere Informationen unter ',
 
         // BUTTON
         'BUTTON-UPDATE-IMPRINT':'Daten speichern',
@@ -518,7 +520,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         // VIEW ----- tutorial.client.view.html ------
         // LABELS
         'LABEL-WELCOME':'Willkommen bei mightymerce',
-        'LABEL-ADD-COMPANY-DETAILS':'Verfollständige deine Firmendaten',
+        'LABEL-ADD-COMPANY-DETAILS':'Vervollständige deine Firmendaten',
         'LABEL-ADD-BASICS-COMPANY-DETAILS':'Bitte ergänze deine Firmendaten, damit wir dir monatlich eine Rechnung austellen können.',
         'LABEL-COMPLETED':'Erledigt',
         'LABEL-MAINTAIN-COMPANY-DATA':'Firmendaten pflegen',
@@ -526,10 +528,10 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         'LABEL-NOTE-ADD-TERMS-AND-CONDITIONS':'Bitte ergänze deine Allgemeinen Geschäftsbedingungen, Widerrufsbelehrung, Datenschutzerklärung, Copyright und Impressum. Wir wissen, diese Themen machen keinen Spaß, aber du brauchst diese Angaben aus rechtlichen Gründen, damit deine Kunden bei dir kaufen können.',
         'LABEL-MAINTAIN-LEGAL-DATA':'Rechtstexte pflegen',
         'LABEL-ADD-PAYPAL':'Verknüpfe deinen Paypal Account',
-        'LABEL-NOTE-ADD-PAYPAL':'Verknüpfe deinen Paypal Account, um Zahlungen zu empfangen und den Checkout für deine Kunden so einfach wie möglich zu gestalten.',
+        'LABEL-NOTE-ADD-PAYPAL':'Verknüpfe dein Paypal Konto, um Zahlungen zu empfangen und den Einkauf für deine Kunden so einfach wie möglich zu gestalten.',
         'LABEL-CONNECT-TO-PAYPAL':'PayPal Account verwalten',
         'LABEL-ADD-DELIVERY-OPTION':'Definiere deine Lieferoptionen',
-        'LABEL-NOTE-ADD-DELIVERY-OPTION':'Wir haben eine Standard Lieferung für 3,50 € für dich voreingestellt, damit du schneller loslegen kannst. Wenn dieser Betrag nicht für dich passt, kannst du ihn ganz leicht anpassen. Klicke dazu einfach auf "Lieferoptionen verwalten".',
+        'LABEL-NOTE-ADD-DELIVERY-OPTION':'Wir haben eine Standard Lieferung für 3,50 € für dich voreingestellt, damit du schneller loslegen kannst. Wenn dieser Betrag nicht für dich passt, kannst du ihn ganz leicht anpassen. Klicke dazu einfach auf "Lieferoptionen bearbeiten".',
         'LABEL-NOTE-HINT-ADDED-DELIVERY-OPTION':'Bitte beachte, dass wir derzeit nur eine Lieferoptionen anbieten können. Wir planen, diese Funktionalität auszubauen und dir in Zukunft die Möglichkeit zu geben, weitere Lieferoptionen zu pflegen.',
         'LABEL-VERIFY-DELIVERY-OPTION':'Lieferoptionen bearbeiten',
         'LABEL-MAINTAIN-FIRST-PRODUCT':'Pflege dein erstes Produkt',
@@ -566,6 +568,8 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         'LABEL-IMAGE':'Bild',
         'LABEL-POST-DATE':'Post Datum',
         'LABEL-POST-ACTION':'Aktion',
+        'LABEL-PINTEREST-NOTE-MM-MARKETPLACE':'Du kannst deine Produkte auf dem mightymerce Marktplatz anbieten. Eine Auswahl an Pinterest Boards findest du wenn du auf den Button - mightymerce Marktplatz - drückst.',
+        'LABEL-ADD-IMAGE':'Bild hinzufügen',
 
         // BUTTON
         'BUTTON-CREATE-POST':' Post erstellen',
@@ -576,6 +580,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         'BUTTON-CREATE-POST-DAWANDA':' Dawanda-Post erstellen',
         'BUTTON-CREATE-POST-CODE-SNIPPET':' HTML Widget',
         'BUTTON-REVIEW-POST':'Post überprüfen',
+        'BUTTON-MM-MARKETPLACE':' mightymerce Marktplatz',
 
         // ERROR
         'NOTE-FINALIZE-TUTORIAL':'Bitte schließe alle Schritte im Tutorial ab, bevor du dein erstes Produkt postest! Diese Daten sind notwendig, damit deine Kunden später auch kaufen können.',
@@ -770,15 +775,40 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         // VIEW ----- review-checkout.client.view.html ------
         // LABELS
         'LABEL-CHECKOUT-REVIEW-ORDER':'Prüfen sie ihre Angaben',
-        'LABEL-CHECKOUT-BILLING-ADDRESS-IDENTICAL':'Rechnungsadresse entspricht der Lieferadresse',
-        'LABEL-ACCEPT-BY-PLACING-ORDER':'Mit Absenden der Bestellung stimme ich den folgenden Bedingungen zu: ',
-        'LABEL-ACKNOWLEDGE-TO':'Ich habe die folgenden Bedinungen gelesen: ',
+        'LABEL-CHECKOUT-BILLING-ADDRESS-IDENTICAL':'Rechnungsadresse gleich Lieferadresse',
+        'LABEL-ACCEPT-BY-PLACING-ORDER':'Mit Absenden der Bestellung stimme ich den Allgemeinen Geschäftsbedingungen und der Datenschutzerklärung von Design Tonfiguren zu. ',
+        'LABEL-ACKNOWLEDGE-TO':'Die Widerrufsbelehrung habe ich zu Kenntnis genommen. ',
 
         // VIEW ----- success-checkout.client.view.html ------
         // LABELS
         'LABEL-CHECKOUT-SUMMARY':'Zusammenfassung der Bestellung',
         'LABEL-CHECKOUT-THANKS-ORDER':'Vielen Dank für deine Bestellung: ',
-        'LABEL-CHECKOUT-CONFIRMATION-SEND-TO':'Eine Bestellbestätigung wird an die folgende eMail Adresse versendet: '
+        'LABEL-CHECKOUT-CONFIRMATION-SEND-TO':'Eine Bestellbestätigung wird an die folgende eMail Adresse versendet: ',
+
+        // VIEW ----- marketplace.product.modal.view
+        'LABEL-MIGHTYMERCE-MARKETPLACE':'mightymerce Marktplatz',
+        'LABEL-YOU-WOULD-LIKE-TO-SELL-ON-MM-MARKETPLACE':'Verkaufe deine Produkte auch über den mightymerce Marktplatz auf Pinterest.',
+        'LABEL-STEP1-MARKETPLACE-EXPLANATION':'Wähle die Kategorie-Boards aus, auf die du in Zukunft auch pinnen möchtest',
+        'LABEL-STEP2-MARKETPLACE-EXPLANATION':'Trage deinen Pinterest Benutzernamen ein',
+        'LABEL-STEP3-MARKETPLACE-EXPLANATION':'Absenden',
+        'LABEL-STEP-MARKETPLACE-FINALLY-EXPLANATION':'Wie geht es weiter: Wir schalten dich für die mightymerce Kategorie-Boards frei - das passiert momentan noch manuell. Anschließend kannst du beim Erstellen eines Pins neben deinen eigenen Boards auch die mightymerce Boards auswählen.',
+
+        'LABEL-PINTEREST-CATEGORY':'Verfügbare Kategorie-Boards auf Pinterest: ',
+        'LABEL-CATEGORY-1':'Wohnen & Einrichten',
+        'LABEL-CATEGORY-2':'Heimwerk & Garten',
+        'LABEL-CATEGORY-3':'Gesundheit & Wohlbefinden',
+        'LABEL-CATEGORY-4':'Kosmetik & Beauty',
+        'LABEL-CATEGORY-5':'Bekleidung & Schuhe',
+        'LABEL-CATEGORY-6':'Uhren & Schmuck',
+        'LABEL-CATEGORY-7':'Freizeit & Outdoor',
+        'LABEL-CATEGORY-8':'Sport & Fitness',
+        'LABEL-CATEGORY-9':'Spielzeug & Baby',
+        'LABEL-CATEGORY-10':'Essen & Trinken',
+        'LABEL-CATEGORY-11':'Elektronik & Computer',
+        'LABEL-PINTEREST-USER':'Dein Pinterest Benutzer:',
+
+        // BUTTON
+        'BUTTON-ADD-TO-CATEGORY':'Schaltet mir die mightymerce Kategorie-Boards frei'
 
       });
 
@@ -1091,6 +1121,8 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
           // VIEW ----- edit-legal-imprint.client.view.html ------
           // LABELS
           'BREADCRUMB-IMPRINT-EDIT':'Edit imprint',
+          'LABEL-HINT':'Notice: ',
+          'LABEL-IMPRINGT-HINT-EU':'Please consider a note concerning the Online Dispute Resolution provided by the European Commission. For more information please visit ',
 
           // BUTTON
           'BUTTON-UPDATE-IMPRINT':'Update imprint',
@@ -1337,6 +1369,8 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
           'LABEL-IMAGE':'Image',
           'LABEL-POST-DATE':'Post date',
           'LABEL-POST-ACTION':'Action',
+          'LABEL-PINTEREST-NOTE-MM-MARKETPLACE':'Sell your products on mightymerce marketplace. Your will find different marketplaces by click the button - mightymerce marketplace.',
+          'LABEL-ADD-IMAGE':'Add image',
 
           // BUTTON
           'BUTTON-CREATE-POST':' Create post',
@@ -1347,6 +1381,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
           'BUTTON-CREATE-POST-DAWANDA':' Create Dawanda post',
           'BUTTON-CREATE-POST-CODE-SNIPPET':' Code snippet',
           'BUTTON-REVIEW-POST':'Review post',
+          'BUTTON-MM-MARKETPLACE':' mightymerce marketplace',
 
           // ERROR
           'NOTE-FINALIZE-TUTORIAL':'Please finalize the tutorial before you post your first product! This data is essential, to enable customers to buy your products.',
@@ -1545,9 +1580,29 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
 
         // VIEW ----- success-checkout.client.view.html ------
         // LABELS
-        'LABEL-CHECKOUT-SUMMARY':'Summary',
-        'LABEL-CHECKOUT-THANKS-ORDER':'Thank you for your order',
-        'LABEL-CHECKOUT-CONFIRMATION-SEND-TO':'A confirmation of your order will be sent to'
+        'LABEL-MIGHTYMERCE-MARKETPLACE':'mightymerce marketplace',
+        'LABEL-YOU-WOULD-LIKE-TO-SELL-ON-MM-MARKETPLACE':'Sell your products via the mightymerce marketplace on Pinterest.',
+        'LABEL-STEP1-MARKETPLACE-EXPLANATION':'Select the category boards that you would like to use additionally for future pins',
+        'LABEL-STEP2-MARKETPLACE-EXPLANATION':'Enter your Pinterest user name',
+        'LABEL-STEP3-MARKETPLACE-EXPLANATION':'Submit',
+        'LABEL-STEP-MARKETPLACE-FINALLY-EXPLANATION':'Next steps: We will manually activate the mightymerce category boards for you. After activation you will be able to select your own boards as well as the mightymerce boards to pin your product.',
+
+        'LABEL-PINTEREST-CATEGORY':'Available category boards on Pinterest:´',
+        'LABEL-CATEGORY-1':'Furniture & Décor',
+        'LABEL-CATEGORY-2':'DIY & Garden',
+        'LABEL-CATEGORY-3':'Health & Wellness',
+        'LABEL-CATEGORY-4':'Cosmetics & Beauty',
+        'LABEL-CATEGORY-5':'Apparel & Shoes',
+        'LABEL-CATEGORY-6':'Watches & Jewelry',
+        'LABEL-CATEGORY-7':'Leisure & Outdoor',
+        'LABEL-CATEGORY-8':'Sports & Fitness',
+        'LABEL-CATEGORY-9':'Toys & Baby',
+        'LABEL-CATEGORY-10':'Food & Beverage',
+        'LABEL-CATEGORY-11':'Elektronics & Computer',
+        'LABEL-PINTEREST-USER':'Your Pinterest user:',
+
+        // BUTTON
+        'BUTTON-ADD-TO-CATEGORY':'Add me to mightymerce category boards'
 
   });
 
