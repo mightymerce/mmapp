@@ -355,7 +355,8 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
         }
         $scope.linkMainImageUrl = linkMainImageUrl;
 
-        var price = $scope.product.productPrice + ' ' + $scope.currency.currencyCode;
+        var price = $scope.product.productPrice + ' EUR';
+        //var price = $scope.product.productPrice + ' ' + $scope.currency.currencyCode;
         $scope.price = price;
 
         $scope.modalInstance = $uibModal.open({
@@ -379,14 +380,14 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
                             '<div class="col-md-12 col-xs-12">' +
                               '<h3>' + $scope.product.productTitle + '</h3>' +
                             '</div>' +
-                            '<div>' +
+                            '<div class="col-md-12 col-xs-12">' +
                               '<label>' + price + '</label>' +
                             '</div>' +
                           '</div>' +
                           '<p>' + $scope.product.productDescription + '</p>' +
                           '<div class="row">' +
                             '<div class="col-md-6">' +
-                              '<a href="' + linkUrl + '" class="btn btn-warning btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Buy now!</a>' +
+                              '<a href="' + linkUrl + '" class="btn btn-warning btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Jetzt kaufen!</a>' +
                             '</div>' +
                           '</div>' +
                           '<p> </p>' +
