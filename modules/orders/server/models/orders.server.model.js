@@ -30,23 +30,28 @@ var OrderSchema = new Schema({
   orderShippingCost: {
     type: String,
     default: '',
+    trim: true
+  },
+  orderShippingTime: {
+    type: String,
     trim: true,
+    default: ''
   },
   orderChannel: {
     type: String,
     default: '',
-    trim: true,
+    trim: true
   },
   orderTransactionID: {
     type: String,
     default: '',
-    trim: true,
+    trim: true
   },
 
   orderCustomer: {
     type: String,
     default: '',
-    trim: true,
+    trim: true
   },
   orderPaymentStatus: {
     type: String,

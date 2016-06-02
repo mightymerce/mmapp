@@ -216,6 +216,7 @@ angular.module('checkouts').factory('ChoutServices', ['$http', '$q',
 
           // Price information
           orderShippingCost: data.orderShippingCost,
+          orderShippingTime: data.orderShippingTime,
           orderShipToTotalAmount: data.orderShipToTotalAmount,
           orderShipToSubtotalAmount: data.orderShipToSubtotalAmount,
           orderShipToCurrencyCode: data.orderShipToCurrencyCode,
@@ -229,6 +230,7 @@ angular.module('checkouts').factory('ChoutServices', ['$http', '$q',
           orderProductPrice: data.orderProductPrice,
 
           // Legal information
+          orderLegalImprint: data.legal.legalImprint,
           orderLegalTermsandConditions: data.legal.legalTermsandConditions,
           orderLegalReturnPolicy: data.legal.legalReturnPolicy
 

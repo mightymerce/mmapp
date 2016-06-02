@@ -243,7 +243,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
           $cookieStore.put('paypal.product.productDescription', $scope.product.productDescription);
           $cookieStore.put('paypal.product.productPrice', $scope.product.productPrice);
           $cookieStore.put('paypal.delivery.deliveryTitle', $scope.delivery.deliveryTitle);
-          $cookieStore.put('paypal.delivery.productPrice', $scope.delivery.deliveryTime);
+          $cookieStore.put('paypal.delivery.deliveryTime', $scope.delivery.deliveryTime);
           $cookieStore.put('paypal.order.vat', $('.lbl-vat-PP').val());
           $cookieStore.put('paypal.order.subtotal', $('.lbl-subtotal-PP').val());
 
@@ -320,7 +320,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
             $scope.productTitle = $cookieStore.get('paypal.product.productTitle');
             $scope.productDescription = $cookieStore.get('paypal.product.productDescription');
             $scope.deliveryTitle = $cookieStore.get('paypal.delivery.deliveryTitle');
-            $scope.deliveryTime = $cookieStore.get('paypal.delivery.productPrice');
+            $scope.deliveryTime = $cookieStore.get('paypal.delivery.deliveryTime');
             $scope.vat = $cookieStore.get('paypal.order.vat');
 
             // Put values to store in next step to cookieStore
@@ -398,6 +398,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
           $scope.orderId = data.PAYMENTREQUEST_0_INVNUM;
           $scope.orderDate = data.TIMESTAMP;
           $scope.orderShippingCost = $cookieStore.get('paypal.PAYMENTREQUEST_0_SHIPPINGAMT');
+          $scope.orderShippingTime = $cookieStore.get('paypal.delivery.deliveryTime');
           $scope.orderChannel = $cookieStore.get('order.channel');
           $scope.orderTransactionID = data.PAYMENTREQUEST_0_INVNUM;
           $scope.orderCustomer = $cookieStore.get('paypal.FIRSTNAME') + ' ' + $cookieStore.get('paypal.LASTNAME');
@@ -469,6 +470,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
             orderId: $scope.orderId,
             orderDate: $scope.orderDate,
             orderShippingCost: $scope.orderShippingCost,
+            orderShippingTime: $scope.orderShippingTime,
             orderChannel: $scope.orderChannel,
             orderTransactionID: $scope.orderTransactionID,
             orderCustomer: $scope.orderCustomer,
@@ -559,7 +561,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
       $scope.productTitle = $cookieStore.get('paypal.product.productTitle');
       $scope.productDescription = $cookieStore.get('paypal.product.productDescription');
       $scope.deliveryTitle = $cookieStore.get('paypal.delivery.deliveryTitle');
-      $scope.deliveryTime = $cookieStore.get('paypal.delivery.productPrice');
+      $scope.deliveryTime = $cookieStore.get('paypal.delivery.deliveryTime');
       $scope.PAYMENTREQUEST_0_INVNUM = $cookieStore.get('paypal.PAYMENTREQUEST_0_INVNUM');
 
       $scope.PAYMENTREQUEST_0_HANDLINGAMT = $cookieStore.get('paypal.PAYMENTREQUEST_0_HANDLINGAMT');
