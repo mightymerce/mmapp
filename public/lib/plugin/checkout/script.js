@@ -55,7 +55,7 @@ function calculatePrices() {
 
     var subtotal = amount * singlePrice;
     var total = subtotal + shipping;
-    var vat = total * 19 / 100;
+    var vat = total / 119 * 19;
     //console.log('Amount: ' +amount);
     //console.log('singlePrice: ' +singlePrice);
     //console.log('Subtotal: ' +subtotal);
