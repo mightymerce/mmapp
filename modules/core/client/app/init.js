@@ -40,7 +40,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         // VIEW ----- signup.client.view.html ------
         // LABELS
         'HEADLINE-SIGNUP':'mightymerce Registrierung',
-        'HEADLINE-SUB-SIGNUP-WELCOME':'Verkaufe deine Produkte ganz einfach über die sozialen Kanäle und Marktplätze. Und das alles über eine zentrale Stelle. Ganz einfach. Versprochen.',
+        'HEADLINE-SUB-SIGNUP-WELCOME':'Verkaufe deine Produkte ganz einfach über soziale Kanäle. Und das alles über eine zentrale Stelle. Ganz einfach. Versprochen.',
         'PLACEHOLDER-LABEL-SHOPNAME':'Firma',
         'LABEL-OR':'oder',
 
@@ -843,7 +843,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
           // VIEW ----- signup.client.view.html ------
           // LABELS
           'HEADLINE-SIGNUP':'mightymerce registration ',
-          'HEADLINE-SUB-SIGNUP-WELCOME':'Sell your products via social media channels and marketplaces. It is so easy with mightymerce.',
+          'HEADLINE-SUB-SIGNUP-WELCOME':'Sell your products via social media channels. It is so easy with mightymerce.',
           'PLACEHOLDER-LABEL-SHOPNAME':'shopname',
           'LABEL-OR':'or',
 
