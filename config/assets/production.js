@@ -10,11 +10,12 @@ module.exports = {
 
         // Font Awsome
         'public/lib/font-awesome/css/*.css',
+
         // Metis Menu
         'public/lib/plugin/metisMenu/metisMenu.min.css',
+
         // Footable
         'public/lib/css/plugins/footable/footable.core.css',
-
 
         // Image cropper
         //'public/lib/plugin/cropper/cropper.min.css',
@@ -39,6 +40,9 @@ module.exports = {
 
         // Checkout
         //'modules/checkouts/client/css/*.css',
+
+        // Social Media Icon - Shariff
+        //'public/lib/plugin/shariff/shariff.min.css'
       ],
       js: [
         // JQuery
@@ -136,6 +140,9 @@ module.exports = {
         'public/lib/plugin/checkout/jquery.shorten.js',
         'public/lib/plugin/checkout/validator.min.js',
         'public/lib/plugin/checkout/script.js'
+
+        // Social Media Icon - Sharrif
+        //'public/lib/plugin/shariff/shariff.min.js'
       ]
     },
     css:

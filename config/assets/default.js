@@ -4,6 +4,7 @@ module.exports = {
   client: {
     lib: {
       css: [
+
         // Bootstrap
         'public/lib/bootstrap/dist/css/bootstrap.css',
         //'public/lib/bootstrap/dist/css/bootstrap.min.css',
@@ -32,17 +33,22 @@ module.exports = {
         // iCheck
         'public/lib/plugin/iCheck/custom.css',
 
+        // Sweet Alert
+        'public/lib/plugin/sweetalert/sweetalert.css',
+
         // Inspinia
         'public/css/animate.css',
-        'public/css/style.css',
+        'public/css/style.css'
 
-        // Social Media Icon - Shariff
-        'public/lib/plugin/shariff/shariff.complete.css'
+
         //'public/lib/plugin/shariff/shariff.min.css'
         //'public/css/style.min.css',
 
         // Checkout
         //'modules/checkouts/client/css/*.css',
+
+        // Social Media Icon - Shariff
+        //'public/lib/plugin/shariff/shariff.min.css'
 
       ],
       js: [
@@ -98,8 +104,8 @@ module.exports = {
         // iCheck
         'public/lib/plugin/iCheck/icheck.min.js',
 
-        // Sweet Aöer
-        'public/lib/plugin/iCheck/icheck.min.js',
+        // Sweet Alert
+        'public/lib/plugin/sweetalert/sweetalert.min.js',
 
         // Footable
         'public/lib/css/plugins/footable/footable.all.min.js',
@@ -143,10 +149,10 @@ module.exports = {
         'public/lib/plugin/jsnumberformatter/jsnumberformatter.locale.decimal.superset.js',
         'public/lib/plugin/checkout/jquery.shorten.js',
         'public/lib/plugin/checkout/validator.min.js',
-        'public/lib/plugin/checkout/script.js',
+        'public/lib/plugin/checkout/script.js'
 
         // Social Media Icon - Sharrif
-        'public/lib/plugin/shariff/shariff.complete.js'
+        //'public/lib/plugin/shariff/shariff.min.js'
 
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
