@@ -35,6 +35,7 @@
                   </div>
                   <img ng-src="{{product.productMainImageURL}}" class="teaser-img" alt="{{product.productMainImageAlt}}"/>
                   <button class="btn m-b-xs w-xs btn-info single-price" ng-bind="product.productPrice" data-value="{{product.productPrice}}"></button>
+                  <button class="btn m-b-xs w-xs btn-info product-currency" ng-hide="true" ng-bind="currency.currencyCode" data-value="{{currency.currencyCode}}"></button>
 
                   <div class="bg-light lter b-b wrapper-md wrapper-p5" id="belowpicture">
                     <span class="text-muted step-headline" translate>LABEL-CHECKOUT-ORDER-NOW</span>
@@ -81,19 +82,19 @@
                                   <tbody>
                                   <tr>
                                     <td><span translate>LABEL-CHECKOUT-SUBTOTAL</span></td>
-                                    <td><span class="lbl-subtotal"></span></td>
+                                    <td><span class="lbl-subtotal"></span> {{currency.currencyCode}}</td>
                                   </tr>
                                   <tr>
-                                    <td><span translate>LABEL-SHIPPING-COST</span> ({{delivery.deliveryTitle}})</td>
-                                    <td><span class="lbl-shipping" data-ng-bind="delivery.deliveryCost" data-value="{{delivery.deliveryCost}}"></span></td>
+                                    <td><span translate>LABEL-SHIPPING-COST</span> ({{delivery.deliveryTime}})</td>
+                                    <td><span class="lbl-shipping" data-ng-bind="delivery.deliveryCost" data-value="{{delivery.deliveryCost}}"></span> {{currency.currencyCode}}</td>
                                   </tr>
                                   <tr class="total">
                                     <td><span translate>LABEL-CHECKOUT-TOTAL</span></td>
-                                    <td><span class="lbl-total"></span></td>
+                                    <td><span class="lbl-total"></span> {{currency.currencyCode}}</td>
                                   </tr>
                                   <tr class="small">
-                                    <td><span translate>LABEL-CHECKOUT-INCVAT</span></td>
-                                    <td><span class="lbl-vat"></span></td>
+                                    <td><span translate>LABEL-CHECKOUT-INCVAT</span> (<span class="lbl-vat-percent" ng-bind="tax.taxRate" data-value="{{tax.taxRate}}">{{tax.taxRate}}</span> %)</td>
+                                    <td><span class="lbl-vat"></span> {{currency.currencyCode}}</td>
                                   </tr>
                                   </tbody>
                                 </table>
@@ -104,9 +105,30 @@
                                <img ng-click="checkoutPaypal()" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-medium.png" alt="mightymerce checkout with paypal" />
                               </a>
                             </div>
-                            <div align="center">
-                              <div class="shariff" data-services="[&quot;facebook&quot;,&quot;pinterest&quot;,&quot;twitter&quot;,&quot;mail&quot;]" data-theme="standard" data-orientation="horizontal"></div>
+                            <br><br><br>
+                            <div class="shariff clear" data-services="[&quot;facebook&quot;,&quot;twitter&quot;,&quot;googleplus&quot;,&quot;mail&quot;,&quot;info&quot;]" data-theme="standard" data-orientation="horizontal">
+                              <ul class="theme-color orientation-horizontal col-5">
+                                <li class="shariff-button facebook">
+                                  <a href="https://www.facebook.com/sharer/sharer.php?u={{shareURL}}" data-rel="popup" title="Bei Facebook teilen" role="button" aria-label="Bei Facebook teilen">
+                                    <span class="fa fa-facebook"></span>
+                                    <span class="share_text">Produkt post</span>&nbsp;
+                                  </a>
+                                </li>
+                                <li class="shariff-button pinterest">
+                                  <a href="http://pinterest.com/pin/create/button/?url={{shareURL}}" data-rel="popup" title="Bei Pinterest teilen" role="button" aria-label="Bei Pinterest teilen">
+                                    <span class="fa fa-pinterest"></span>
+                                    <span class="share_text">Produkt pin</span>&nbsp;
+                                  </a>
+                                </li>
+                                <li class="shariff-button twitter">
+                                  <a href="https://twitter.com/intent/tweet?url={{shareURL}}" data-rel="popup" title="Bei Twitter teilen" role="button" aria-label="Bei Twitter teilen">
+                                    <span class="fa fa-twitter"></span>
+                                    <span class="share_text">Produkt tweet</span>&nbsp;
+                                  </a>
+                                </li>
+                              </ul>
                             </div>
+                            <br><br>
                             <input ng-hide="true" type="text" value="0" class="form-control lbl-subtotal-PP" hidden />
                             <input ng-hide="true" type="text" value="0" class="form-control lbl-total-PP" hidden />
                             <input ng-hide="true" type="text" value="0" class="form-control lbl-shipping-PP" hidden />
