@@ -18,6 +18,7 @@
                   </div>
                   <img ng-src="{{productMainImageURL}}" class="teaser-img" />
                   <button class="btn m-b-xs w-xs btn-info single-price" ng-bind="paypal.L_PAYMENTREQUEST_0_AMT0" data-value="{{paypal.L_PAYMENTREQUEST_0_AMT0}}"></button>
+                  <button class="btn m-b-xs w-xs btn-info product-currency" ng-hide="true" ng-bind="currencyCode" data-value="{{currencyCode}}"></button>
 
                   <div class="bg-light lter b-b wrapper-md wrapper-p5" id="belowpicture">
                     <span class="text-muted step-headline" translate>LABEL-CHECKOUT-REVIEW-ORDER</span>
@@ -152,23 +153,23 @@
                               </tr>
                               <tr>
                                 <td><span translate>LABEL-PRODUCT-PRICE</span></td>
-                                <td><span class="lbl-priceperitem"></span></td>
+                                <td><span class="lbl-priceperitem"></span> {{currencyCode}}</td>
                               </tr>
                               <tr>
                                 <td><span translate>LABEL-CHECKOUT-SUBTOTAL</span></td>
-                                <td><span class="lbl-subtotal"></span></td>
+                                <td><span class="lbl-subtotal"></span> {{currencyCode}}</td>
                               </tr>
                               <tr>
-                                <td><span translate>LABEL-SHIPPING-COST</span> ({{deliveryTitle}})</td>
-                                <td><span class="lbl-shipping" ng-bind="paypal.PAYMENTREQUEST_0_SHIPPINGAMT" data-value="{{paypal.PAYMENTREQUEST_0_SHIPPINGAMT}}"></span></td>
+                                <td><span translate>LABEL-SHIPPING-COST</span> ({{deliveryTime}})</td>
+                                <td><span class="lbl-shipping" ng-bind="paypal.PAYMENTREQUEST_0_SHIPPINGAMT" data-value="{{paypal.PAYMENTREQUEST_0_SHIPPINGAMT}}"></span> {{currencyCode}}</td>
                               </tr>
                               <tr class="total">
                                 <td><span translate>LABEL-CHECKOUT-TOTAL</span></td>
-                                <td><span class="lbl-total"></span><span></span></td>
+                                <td><span class="lbl-total"></span> {{currencyCode}}</td>
                               </tr>
                               <tr class="small">
-                                <td><span translate>LABEL-CHECKOUT-INCVAT</span></td>
-                                <td><span class="lbl-vat"></span></td>
+                                <td><span translate>LABEL-CHECKOUT-INCVAT</span> (<span class="lbl-vat-percent" ng-bind="tax.taxRate" data-value="{{tax.taxRate}}">{{tax.taxRate}}</span> %)</td>
+                                <td><span class="lbl-vat"></span> {{currencyCode}}</td>
                               </tr>
                               </tbody>
                             </table>

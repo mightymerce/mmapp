@@ -140,6 +140,22 @@ angular.module('checkouts').factory('ChoutServices', ['$http', '$q',
         });
         return promise;
       },
+      getTax: function getTax(id) {
+        var promise = $http({
+          method: 'GET',
+          url: '/api/taxes/' +id
+        }).then(function successCallback(response) {
+          // this callback will be called asynchronously
+          // when the response is available
+          console.log('checkouts.client.service.js - GetTax - Success');
+          // The return value gets picked up by the then in the controller.
+          return response.data;
+        }, function errorCallback(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+        });
+        return promise;
+      },
       getLegal: function getLegal(id) {
         var promise = $http({
           method: 'GET',

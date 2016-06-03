@@ -16,6 +16,7 @@
                   <span class="text-muted step-headline"><span translate>LABEL-CHECKOUT-SUMMARY</span></span>
                 </div>
                 <button class="single-price" ng-bind="L_PAYMENTREQUEST_0_AMT0" data-value="{{L_PAYMENTREQUEST_0_AMT0}}" hidden></button>
+                <button class="btn m-b-xs w-xs btn-info product-currency" ng-hide="true" ng-bind="currencyCode" data-value="{{currencyCode}}"></button>
 
                 <div class="panel-body wrapper-md">
 
@@ -74,28 +75,52 @@
                             </tr>
                             <tr>
                               <td><span translate>LABEL-PRODUCT-PRICE</span></td>
-                              <td><span class="lbl-priceperitem" ng-bind="PAYMENTREQUEST_0_ITEMAMT" data-value="{{PAYMENTREQUEST_0_ITEMAMT}}"></span> €</td>
+                              <td><span class="lbl-priceperitem" ng-bind="PAYMENTREQUEST_0_ITEMAMT" data-value="{{PAYMENTREQUEST_0_ITEMAMT}}"></span> {{currencyCode}}</td>
                             </tr>
                             <tr>
                               <td><span translate>LABEL-CHECKOUT-SUBTOTAL</span></td>
-                              <td><span class="lbl-subtotal" ng-bind="subtotal" data-value="{{subtotal}}"></span> €</td>
+                              <td><span class="lbl-subtotal" ng-bind="subtotal" data-value="{{subtotal}}"></span> {{currencyCode}}</td>
                             </tr>
                             <tr>
                               <td><span translate>LABEL-SHIPPING-COST</span> ({{deliveryTitle}})</td>
-                              <td><span class="lbl-shipping" ng-bind="PAYMENTREQUEST_0_SHIPPINGAMT" data-value="{{PAYMENTREQUEST_0_SHIPPINGAMT}}"></span> €</td>
+                              <td><span class="lbl-shipping" ng-bind="PAYMENTREQUEST_0_SHIPPINGAMT" data-value="{{PAYMENTREQUEST_0_SHIPPINGAMT}}"></span> {{currencyCode}}</td>
                             </tr>
                             <tr class="total">
                               <td><span translate>LABEL-CHECKOUT-TOTAL</span></td>
-                              <td><span class="lbl-total" ng-bind="PAYMENTREQUEST_0_AMT" data-value="{{PAYMENTREQUEST_0_AMT}}"></span> €</td>
+                              <td><span class="lbl-total" ng-bind="PAYMENTREQUEST_0_AMT" data-value="{{PAYMENTREQUEST_0_AMT}}"></span> {{currencyCode}}</td>
                             </tr>
                             <tr class="small">
-                              <td><span translate>LABEL-CHECKOUT-INCVAT</span></td>
-                              <td><span class="lbl-vat" ng-bind="vat" data-value="{{vat}}"></span> €</td>
+                              <td><span translate>LABEL-CHECKOUT-INCVAT</span> (<span class="lbl-vat-percent" ng-bind="tax.taxRate" data-value="{{tax.taxRate}}">{{tax.taxRate}}</span> %)</td>
+                              <td><span class="lbl-vat" ng-bind="vat" data-value="{{vat}}"></span> {{currencyCode}}</td>
                             </tr>
                             </tbody>
                           </table>
                         </div>
                       </div>
+                      <br><br><br>
+                      <div class="shariff clear" data-services="[&quot;facebook&quot;,&quot;twitter&quot;,&quot;googleplus&quot;,&quot;mail&quot;,&quot;info&quot;]" data-theme="standard" data-orientation="horizontal">
+                        <ul class="theme-color orientation-horizontal col-5">
+                          <li class="shariff-button facebook">
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{shareURL}}" data-rel="popup" title="Bei Facebook teilen" role="button" aria-label="Bei Facebook teilen">
+                              <span class="fa fa-facebook"></span>
+                              <span class="share_text">Produkt post</span>&nbsp;
+                            </a>
+                          </li>
+                          <li class="shariff-button pinterest">
+                            <a href="http://pinterest.com/pin/create/button/?url={{shareURL}}" data-rel="popup" title="Bei Pinterest teilen" role="button" aria-label="Bei Pinterest teilen">
+                              <span class="fa fa-pinterest"></span>
+                              <span class="share_text">Produkt pin</span>&nbsp;
+                            </a>
+                          </li>
+                          <li class="shariff-button twitter">
+                            <a href="https://twitter.com/intent/tweet?url={{shareURL}}" data-rel="popup" title="Bei Twitter teilen" role="button" aria-label="Bei Twitter teilen">
+                              <span class="fa fa-twitter"></span>
+                              <span class="share_text">Produkt tweet</span>&nbsp;
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                      <br><br>
                     </div>
                   </div>
                   <!-- /confirmation -->

@@ -187,7 +187,7 @@
             <div class="panel panel-default">
               <div class="panel-body">
                 <p><img ng-src="{{product.productMainImageURLFacebook}}" alt="{{product.productMainImageAlt}}"></p>
-                <h2 style="font-family: Georgia, serif;"><span ng-bind="product.productTitle"></span>&nbsp;<span translate>LABEL-FOR</span>&nbsp;<span ng-bind="product.productPrice"></span></h2>
+                <h2 style="font-family: Georgia, serif;"><span ng-bind="product.productTitle"></span>&nbsp;<span translate>LABEL-FOR</span>&nbsp;<span ng-bind="product.productPrice"></span>&nbsp;<span ng-bind="currency.currencyCode"></span></h2>
                 <p><span ng-bind="product.productDescription"></span> </p>
                 <p><a href="#"><span ng-bind="authentication.user.displayName"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span translate>LABEL-BUY-NOW</span></a></p>
               </div>
@@ -197,7 +197,7 @@
             <p><strong translate>LABEL-PREVIEW-PIN</strong>&nbsp;<i translate>NOTE-NOT-FINAL-LOOK-OF-PIN</i></p>
             <div class="pin">
               <p><strong><span ng-bind="authentication.user.displayName"></span></strong></p>
-              <p><strong><span ng-bind="product.productPrice"></span></strong></p>
+              <p><strong><span ng-bind="product.productPrice"></span>&nbsp;<span ng-bind="currency.currencyCode"></span></strong></p>
               <p><strong><span ng-bind="product.productTitle"></span></strong></p>
               <br>
               <img ng-src="{{product.productMainImageURLPinterest}}" alt="{{product.productMainImageAlt}}">
@@ -212,7 +212,7 @@
             <p><strong translate>LABEL-PREVIEW-TWEET</strong>&nbsp;<i translate>NOTE-NOT-FINAL-LOOK-OF-TWEET</i></p>
             <div class="panel panel-default">
               <div class="panel-body">
-                <h2 style="font-family: Georgia, serif;"><span ng-bind="product.productTitle"></span>&nbsp;<span translate>LABEL-FOR</span>&nbsp;<span ng-bind="product.productPrice"></span></h2>
+                <h2 style="font-family: Georgia, serif;"><span ng-bind="product.productTitle"></span>&nbsp;<span translate>LABEL-FOR</span>&nbsp;<span ng-bind="product.productPrice"></span>&nbsp;<span ng-bind="currency.currencyCode"></span></h2>
                 <p><img ng-src="{{product.productMainImageURLFacebook}}" alt="{{product.productMainImageAlt}}"></p>
                 <p><span ng-bind="product.productDescription"></span> </p>
                 <p><a href="#"><span ng-bind="authentication.user.displayName"></span></a></p>

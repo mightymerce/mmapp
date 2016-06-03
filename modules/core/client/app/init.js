@@ -223,6 +223,10 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         'LABEL-CURRENCY-CODE-TABLE-HEADER':'Code',
         'LABEL-CURRENCY-VALUE-TABLE-HEADER':'Wert',
 
+        // BUTTON
+        'BUTTON-EDIT-CURRENCY-OPTION':'Währung bearbeiten',
+        'BUTTON-ADD-NEW-CURRENCY':'Neue Währung hinzufügen',
+
         // ERROR
         'MESSAGE-NO-CURRENCY':'Es ist noch keine Währung gepflegt. Leg jetzt eine an.',
         'MESSAGE-NO-CREATE-ONE':'Jetzt anlegen',
@@ -1025,6 +1029,10 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
           'TEXT-CURRENCY-NOTE':'NOTE: You will be able to add more currencies soon. At that point of time only EUR is available.',
           'LABEL-CURRENCY-CODE-TABLE-HEADER':'Code',
           'LABEL-CURRENCY-VALUE-TABLE-HEADER':'Value',
+
+          // BUTTON
+          'BUTTON-EDIT-CURRENCY-OPTION':'Edit currency option',
+          'BUTTON-ADD-NEW-CURRENCY':'Add new currency option',
 
           // ERROR
           'MESSAGE-NO-CURRENCY':'No currency yet, why dont you',

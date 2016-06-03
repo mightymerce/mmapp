@@ -37,10 +37,14 @@ exports.read = function (req, res) {
  * Update a currency
  */
 exports.update = function (req, res) {
+
+  console.log('currencys.server.controller - update - start');
+
+
   var currency = req.currency;
 
-  currency.title = req.body.title;
-  currency.content = req.body.content;
+  currency.currencyCode = req.body.currencyCode;
+  currency.currencyValue = req.body.currencyValue;
 
   currency.save(function (err) {
     if (err) {

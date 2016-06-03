@@ -1,8 +1,8 @@
 'use strict';
 
 // Products controller
-angular.module('products').controller('ProductsController', ['$rootScope','$scope', '$state', '$http', '$timeout', '$window', '$stateParams', '$location', 'Authentication', 'Products', '$uibModal', 'Posts', 'ProductsServices', 'Taxes', 'Currencys', 'Deliverys', 'Users',
-  function ($rootScope, $scope, $state, $http, $timeout, $window, $stateParams, $location, Authentication, Products, $uibModal, Posts, ProductsServices, Taxes, Currencys, Deliverys, Users) {
+angular.module('products').controller('ProductsController', ['$rootScope','$scope', '$state', '$http', '$timeout', '$window', '$stateParams', '$location', 'Authentication', 'Products', '$uibModal', 'Posts', 'ProductsServices', 'Taxes', 'Currencys', 'Deliverys', 'Users', 'ChoutServices',
+  function ($rootScope, $scope, $state, $http, $timeout, $window, $stateParams, $location, Authentication, Products, $uibModal, Posts, ProductsServices, Taxes, Currencys, Deliverys, Users, ChoutServices) {
 
     $scope.authentication = Authentication;
 
@@ -146,23 +146,26 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
               console.log('products.client.controller - modalupdateProductPost - Facebook connected open modal');
 
-              // OPEN MODAL
-              $scope.modalInstance = $uibModal.open({
-                //animation: $scope.animationsEnabled,
-                templateUrl: 'modules/products/client/views/post.product.modal.view.html',
-                controller: function ($scope, product) {
-                  $scope.product = product;
-                  $scope.varPostStatus = postStatus;
-                  $scope.varPostPublicationDate = postPublicationDate;
-                  $scope.varPostChannel = postChannel;
-                },
-                size: size,
-                resolve: {
-                  product: function () {
-                    return selectedProduct;
+              ChoutServices.getCurrency($scope.product.productCurrency).then(function (Currencys){
+                $scope.modalInstance = $uibModal.open({
+                  //animation: $scope.animationsEnabled,
+                  templateUrl: 'modules/products/client/views/post.product.modal.view.html',
+                  controller: function ($scope, product) {
+                    $scope.product = product;
+                    $scope.varPostStatus = postStatus;
+                    $scope.varPostPublicationDate = postPublicationDate;
+                    $scope.varPostChannel = postChannel;
+                    $scope.currency = Currencys;
+                  },
+                  size: size,
+                  resolve: {
+                    product: function () {
+                      return selectedProduct;
+                    }
                   }
-                }
+                });
               });
+              // OPEN MODAL
 
             } else if (response.status === 'not_authorized') {
               // The person is logged into Facebook, but not your app.
@@ -226,22 +229,24 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
           // session has been set
           // OPEN MODAL
-          console.log('');
-          $scope.modalInstance = $uibModal.open({
-            //animation: $scope.animationsEnabled,
-            templateUrl: 'modules/products/client/views/post.product.modal.view.html',
-            controller: function ($scope, product) {
-              $scope.product = product;
-              $scope.varPostStatus = postStatus;
-              $scope.varPostPublicationDate = postPublicationDate;
-              $scope.varPostChannel = postChannel;
-            },
-            size: size,
-            resolve: {
-              product: function () {
-                return selectedProduct;
+          ChoutServices.getCurrency($scope.product.productCurrency).then(function (Currencys){
+            $scope.modalInstance = $uibModal.open({
+              //animation: $scope.animationsEnabled,
+              templateUrl: 'modules/products/client/views/post.product.modal.view.html',
+              controller: function ($scope, product) {
+                $scope.product = product;
+                $scope.varPostStatus = postStatus;
+                $scope.varPostPublicationDate = postPublicationDate;
+                $scope.varPostChannel = postChannel;
+                $scope.currency = Currencys;
+              },
+              size: size,
+              resolve: {
+                product: function () {
+                  return selectedProduct;
+                }
               }
-            }
+            });
           });
         }
       }
@@ -277,21 +282,24 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
             if (response === 'valid') {
               // user is valid Twitter User
               // OPEN MODAL
-              $scope.modalInstance = $uibModal.open({
-                //animation: $scope.animationsEnabled,
-                templateUrl: 'modules/products/client/views/post.product.modal.view.html',
-                controller: function ($scope, product) {
-                  $scope.product = product;
-                  $scope.varPostStatus = postStatus;
-                  $scope.varPostPublicationDate = postPublicationDate;
-                  $scope.varPostChannel = postChannel;
-                },
-                size: size,
-                resolve: {
-                  product: function () {
-                    return selectedProduct;
+              ChoutServices.getCurrency($scope.product.productCurrency).then(function (Currencys){
+                $scope.modalInstance = $uibModal.open({
+                  //animation: $scope.animationsEnabled,
+                  templateUrl: 'modules/products/client/views/post.product.modal.view.html',
+                  controller: function ($scope, product) {
+                    $scope.product = product;
+                    $scope.varPostStatus = postStatus;
+                    $scope.varPostPublicationDate = postPublicationDate;
+                    $scope.varPostChannel = postChannel;
+                    $scope.currency = Currencys;
+                  },
+                  size: size,
+                  resolve: {
+                    product: function () {
+                      return selectedProduct;
+                    }
                   }
-                }
+                });
               });
             }
 
@@ -335,79 +343,78 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
         console.log('products.client.controller - modalupdateProductPost - Code - open modal');
 
-        $scope.currency = Currencys.query({
-          _id: $scope.product.productCurrency
-        });
-
-        var linkUrl = $location.protocol() + '://' + $location.host();
-        if($location.host() === 'localhost'){
-          linkUrl = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/checkouts/' + $scope.product._id + '?channel=code';
-        } else {
-          linkUrl = $location.protocol() + '://' + $location.host() + '/checkouts/' + $scope.product._id + '?channel=code';
-        }
-        $scope.linkUrl = linkUrl;
-
-        var linkMainImageUrl = $location.protocol() + '://' + $location.host();
-        if($location.host() === 'localhost'){
-          linkMainImageUrl = $location.protocol() + '://' + $location.host() + ':' + $location.port() + $scope.product.productMainImageURLFacebook.substring(1);
-        } else {
-          linkMainImageUrl = $location.protocol() + '://' + $location.host() + $scope.product.productMainImageURLFacebook.substring(1);
-        }
-        $scope.linkMainImageUrl = linkMainImageUrl;
-
-        var price = $scope.product.productPrice + ' EUR';
-        //var price = $scope.product.productPrice + ' ' + $scope.currency.currencyCode;
-        $scope.price = price;
-
-        $scope.modalInstance = $uibModal.open({
-          //animation: $scope.animationsEnabled,
-          templateUrl: 'modules/products/client/views/post.product.modal.view.html',
-          controller: function ($scope, product) {
-
-            $scope.product = product;
-            $scope.varPostStatus = postStatus;
-            $scope.varPostPublicationDate = postPublicationDate;
-            $scope.varPostChannel = postChannel;
-            $scope.varPostComment = postComment;
-            $scope.copycode = '<div class="container">' +
-                '<div class="row">' +
-                  '<div class="col-md-12">' +
-                    '<div class="col-sm-6 col-md-4">' +
-                      '<div class="thumbnail" >' +
-                        '<img src="' + linkMainImageUrl + '" class="img-responsive">' +
-                        '<div class="caption">' +
-                          '<div class="row">' +
-                            '<div class="col-md-12 col-xs-12">' +
-                              '<h3>' + $scope.product.productTitle + '</h3>' +
-                            '</div>' +
-                            '<div class="col-md-12 col-xs-12">' +
-                              '<label>' + price + '</label>' +
-                            '</div>' +
-                          '</div>' +
-                          '<p>' + $scope.product.productDescription + '</p>' +
-                          '<div class="row">' +
-                            '<div class="col-md-6">' +
-                              '<a href="' + linkUrl + '" class="btn btn-warning btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Jetzt kaufen!</a>' +
-                            '</div>' +
-                          '</div>' +
-                          '<p> </p>' +
-                        '</div>' +
-                      '</div>' +
-                    '</div>' +
-                  '</div>' +
-                '</div>' +
-                '</div>' +
-                '<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">' +
-                '<!-- Optionales Theme -->' +
-                '<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">';
-          },
-          size: size,
-          resolve: {
-            product: function () {
-              return selectedProduct;
-            }
+        ChoutServices.getCurrency($scope.product.productCurrency).then(function (Currencys){
+          var linkUrl = $location.protocol() + '://' + $location.host();
+          if($location.host() === 'localhost'){
+            linkUrl = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/checkouts/' + $scope.product._id + '?channel=code';
+          } else {
+            linkUrl = $location.protocol() + '://' + $location.host() + '/checkouts/' + $scope.product._id + '?channel=code';
           }
+          $scope.linkUrl = linkUrl;
+
+          var linkMainImageUrl = $location.protocol() + '://' + $location.host();
+          if($location.host() === 'localhost'){
+            linkMainImageUrl = $location.protocol() + '://' + $location.host() + ':' + $location.port() + $scope.product.productMainImageURLFacebook.substring(1);
+          } else {
+            linkMainImageUrl = $location.protocol() + '://' + $location.host() + $scope.product.productMainImageURLFacebook.substring(1);
+          }
+          $scope.linkMainImageUrl = linkMainImageUrl;
+
+          //var price = $scope.product.productPrice + ' EUR';
+          var price = $scope.product.productPrice + ' ' + Currencys.currencyCode;
+          $scope.price = price;
+
+          $scope.modalInstance = $uibModal.open({
+            //animation: $scope.animationsEnabled,
+            templateUrl: 'modules/products/client/views/post.product.modal.view.html',
+            controller: function ($scope, product) {
+
+              $scope.product = product;
+              $scope.varPostStatus = postStatus;
+              $scope.varPostPublicationDate = postPublicationDate;
+              $scope.varPostChannel = postChannel;
+              $scope.varPostComment = postComment;
+              $scope.copycode = '<div class="container">' +
+                  '<div class="row">' +
+                  '<div class="col-md-12">' +
+                  '<div class="col-sm-6 col-md-4">' +
+                  '<div class="thumbnail" >' +
+                  '<img src="' + linkMainImageUrl + '" class="img-responsive">' +
+                  '<div class="caption">' +
+                  '<div class="row">' +
+                  '<div class="col-md-12 col-xs-12">' +
+                  '<h3>' + $scope.product.productTitle + '</h3>' +
+                  '</div>' +
+                  '<div class="col-md-12 col-xs-12">' +
+                  '<label>' + price + '</label>' +
+                  '</div>' +
+                  '</div>' +
+                  '<p>' + $scope.product.productDescription + '</p>' +
+                  '<div class="row">' +
+                  '<div class="col-md-6">' +
+                  '<a href="' + linkUrl + '" class="btn btn-warning btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Jet!</a>' +
+                  '</div>' +
+                  '</div>' +
+                  '<p> </p>' +
+                  '</div>' +
+                  '</div>' +
+                  '</div>' +
+                  '</div>' +
+                  '</div>' +
+                  '</div>' +
+                  '<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">' +
+                  '<!-- Optionales Theme -->' +
+                  '<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">';
+            },
+            size: size,
+            resolve: {
+              product: function () {
+                return selectedProduct;
+              }
+            }
+          });
         });
+
       }
 
     };

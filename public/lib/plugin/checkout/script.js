@@ -53,29 +53,29 @@ function calculatePrices() {
         amount = $('.lbl-quantity').data('value');
     }
 
+    var vat = $('.lbl-vat-percent').data('value');
     var subtotal = amount * singlePrice;
     var total = subtotal + shipping;
-    var vat = total / 119 * 19;
+    var vat = total / (100 + vat) * vat;
     //console.log('Amount: ' +amount);
     //console.log('singlePrice: ' +singlePrice);
     //console.log('Subtotal: ' +subtotal);
     //console.log('Total: ' +total);
 
-
-    $('.single-price').text(parseCurrency(parseFloat(singlePrice)) + ' €');
-    $('.highlight-price').text(parseCurrency(parseFloat(singlePrice)) + ' €');
-    $('.lbl-priceperitem').text(parseCurrency(parseFloat(singlePrice)) + ' €');
+    $('.single-price').text(parseCurrency(parseFloat(singlePrice)) + ' ' + $('.product-currency').data('value'));
+    $('.highlight-price').text(parseCurrency(parseFloat(singlePrice)));
+    $('.lbl-priceperitem').text(parseCurrency(parseFloat(singlePrice)));
     $('.lbl-quantity').text(amount);
-    $('.lbl-shipping').text(parseCurrency(parseFloat(shipping)) + ' €');
-    $('.lbl-subtotal').text(parseCurrency(parseFloat(subtotal)) + ' €');
+    $('.lbl-shipping').text(parseCurrency(parseFloat(shipping)));
+    $('.lbl-subtotal').text(parseCurrency(parseFloat(subtotal)));
     $('#PAYMENTREQUEST_0_ITEMAMT').val(parseCurrencyForPP(parseFloat(subtotal)));
-    $('.lbl-total').text(parseCurrency(parseFloat(total)) + ' €');
+    $('.lbl-total').text(parseCurrency(parseFloat(total)));
     $('.lbl-total-PP').val(parseCurrencyForPP(total));
     $('.lbl-shipping-PP').val(parseCurrencyForPP(shipping));
     $('.lbl-itemprice-PP').val(parseCurrencyForPP(singlePrice));
     $('.lbl-subtotal-PP').val(parseCurrencyForPP(subtotal));
     $('.lbl-vat-PP').val(parseCurrencyForPP(vat));
-    $('.lbl-vat').text(parseCurrency(parseFloat(vat)) + ' €');
+    $('.lbl-vat').text(parseCurrency(parseFloat(vat)));
 }
 
 function scrollToDiv(element, offset){

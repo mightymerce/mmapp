@@ -12,6 +12,10 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
 
       $scope.itemOutofStock = false;
 
+      var shareURL = encodeURIComponent($location.absUrl());
+      $scope.shareURL = shareURL;
+      $cookieStore.put('shareURL', shareURL);
+
       // Call getSelected Product service
       var searchObject = $stateParams.checkoutId;
       console.log('checkouts.client.controller - findOne - checkoutId: ' +searchObject);
@@ -28,6 +32,12 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
         // Get Delivery option information for product
         ChoutServices.getDelivery($scope.product.productShippingoption).then(function (Delivery){
           $scope.delivery = Delivery;
+        });
+
+        // Get Tax option information for product
+        ChoutServices.getTax($scope.product.productTax).then(function (Tax){
+          $scope.tax = Tax;
+          $cookieStore.put('product.taxes', Tax);
         });
 
         // Get Delivery option information for product
@@ -47,6 +57,8 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
         $cookieStore.put('order.channel', $location.search().channel);
 
         ChoutServices.getCurrency($scope.product.productCurrency).then(function (Currencys){
+
+          $scope.currency = Currencys;
 
           // Set Metatags
           var linkUrl = $location.protocol() + '://' + $location.host();
@@ -220,7 +232,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
           productItemAmount: $('.lbl-itemprice-PP').val(),
           cartSubtotalAmount: $('.lbl-subtotal-PP').val(),
           buyerMail: '@',
-          productCurrency: 'EUR'
+          productCurrency: $scope.currency.currencyCode
         }, function(data) {
 
           /*
@@ -242,6 +254,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
           $cookieStore.put('paypal.product.productTitle', $scope.product.productTitle);
           $cookieStore.put('paypal.product.productDescription', $scope.product.productDescription);
           $cookieStore.put('paypal.product.productPrice', $scope.product.productPrice);
+          $cookieStore.put('paypal.product.productCurrency', $scope.currency.currencyCode);
           $cookieStore.put('paypal.delivery.deliveryTitle', $scope.delivery.deliveryTitle);
           $cookieStore.put('paypal.delivery.deliveryTime', $scope.delivery.deliveryTime);
           $cookieStore.put('paypal.order.vat', $('.lbl-vat-PP').val());
@@ -322,6 +335,8 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
             $scope.deliveryTitle = $cookieStore.get('paypal.delivery.deliveryTitle');
             $scope.deliveryTime = $cookieStore.get('paypal.delivery.deliveryTime');
             $scope.vat = $cookieStore.get('paypal.order.vat');
+            $scope.currencyCode = $cookieStore.get('paypal.product.productCurrency');
+            $scope.tax = $cookieStore.get('product.taxes');
 
             // Put values to store in next step to cookieStore
             $cookieStore.put('paypal.data', data);
@@ -436,6 +451,9 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
           $scope.legal = $cookieStore.get('user.legals');
 
           $scope.useremail = $cookieStore.get('paypal.user.email');
+
+          $scope.currencyCode = $cookieStore.get('paypal.product.productCurrency');
+          $scope.tax = $cookieStore.get('product.taxes');
 
 
           // If billing address same as shipping address checked
@@ -592,6 +610,11 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
       $scope.orderBillToState = $cookieStore.get('orderBillToState');
       $scope.orderBillToZip = $cookieStore.get('orderBillToZip');
       $scope.orderBillToCntryName = $cookieStore.get('orderBillToCntryName');
+
+      $scope.currencyCode = $cookieStore.get('paypal.product.productCurrency');
+      $scope.tax = $cookieStore.get('product.taxes');
+
+      $scope.shareURL = $cookieStore.get('shareURL');
 
     };
 

@@ -23,7 +23,8 @@ angular.module('currencys').controller('CurrencysController', ['$scope', '$state
 
       // Redirect after save
       currency.$save(function (response) {
-        $location.path('currencys/' + response._id);
+        $scope.success = 'You successfully created a currency option.';
+        $location.path('currencys/' + response._id + '/edit');
 
         // Clear form fields
         $scope.currencyCode = '';
@@ -62,8 +63,12 @@ angular.module('currencys').controller('CurrencysController', ['$scope', '$state
 
       var currency = $scope.currency;
 
+      currency.currencyCode = $scope.currency.currencyCode;
+      currency.currencyValue = $scope.currency.currencyValue;
+
       currency.$update(function () {
-        $location.path('currencys/' + currency._id);
+        $scope.success = 'You successfully updated your currency option.';
+
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });

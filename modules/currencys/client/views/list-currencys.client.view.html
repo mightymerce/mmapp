@@ -7,7 +7,7 @@
           <span translate>HEADLINE-ACCOUNT-AREA</span>
         </li>
         <li>
-          <strong translate>BREADCRUMB-SETTINGS</strong>
+          <span translate>BREADCRUMB-SETTINGS</span>
         </li>
         <li class="active">
           <strong translate>BREADCRUMB-CURRENCY</strong>
@@ -34,10 +34,6 @@
               <div class="ibox-tools"></div>
             </div>
             <div class="ibox-content">
-              <div>
-                <p class="" translate>TEXT-CURRENCY-NOTE
-                </p>
-              </div>
               <table class="table table-hover">
                 <thead>
                 <tr>
@@ -49,13 +45,25 @@
                 <tr>
                   <td><span data-ng-bind="currency.currencyCode"></span></td>
                   <td><span data-ng-bind="currency.currencyValue"></span></td>
+                  <td class="text-right">
+                    <div class="btn-group">
+                      <a class="btn-white btn-xs" ui-sref="currencys.edit({currencyId: currency._id})">
+                        <i class="fa fa-cogs"></i> <span translate>BUTTON-EDIT-CURRENCY-OPTION</span>
+                      </a>
+                    </div>
+                  </td>
                 </tr>
                 </tbody>
               </table>
               <div class="alert alert-warning text-center" ng-if="currencys.$resolved && !currencys.length" translate>
-                No currency yet, why don't you <a ui-sref="currencys.create" translate>MESSAGE-NO-CREATE-ONE</a>?
+                MESSAGE-NO-CURRENCY <a ui-sref="currencys.create" translate>MESSAGE-NO-CREATE-ONE</a>?
               </div>
             </div>
+          </div>
+          <div align="right">
+            <a class="btn btn-w-m btn-warning" ui-sref="currencys.create" translate>
+              BUTTON-ADD-NEW-CURRENCY
+            </a>
           </div>
         </div>
       </div>
