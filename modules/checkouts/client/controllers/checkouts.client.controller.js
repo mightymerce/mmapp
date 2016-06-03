@@ -118,6 +118,8 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
 
       });
       console.log('checkouts.client.controller - init - end');
+
+      $window.prerenderReady = true;
     };
 
 
