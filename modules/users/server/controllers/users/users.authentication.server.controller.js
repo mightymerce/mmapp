@@ -343,6 +343,7 @@ exports.sendmarketplacerequestemail = function (req, res) {
   text = text + '	  Categroy 9: ' + inputData.pinterestCategory9 + '\r\n\r\n';
   text = text + '	  Categroy 10: ' + inputData.pinterestCategory10 + '\r\n\r\n';
   text = text + '	  Categroy 11: ' + inputData.pinterestCategory11 + '\r\n\r\n';
+  text = text + '	  Categroy 12: ' + inputData.pinterestCategory12 + '\r\n\r\n';
   text = text + '		' + '\r\n\r\n';
   text = text + '	* Pinterest user:	' + '\r\n\r\n';
   text = text + '	 ' + inputData.pinterestUser + '\r\n\r\n';

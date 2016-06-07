@@ -674,7 +674,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
       //
       //
 
-      sendMarketplaceRequestemail: function sendMarketplaceRequestemail(userDisplayname, usereMail, pinterestCategory1, pinterestCategory2, pinterestCategory3, pinterestCategory4, pinterestCategory5, pinterestCategory6, pinterestCategory7, pinterestCategory8, pinterestCategory9, pinterestCategory10, pinterestCategory11, pinterestUser){
+      sendMarketplaceRequestemail: function sendMarketplaceRequestemail(userDisplayname, usereMail, pinterestCategory1, pinterestCategory2, pinterestCategory3, pinterestCategory4, pinterestCategory5, pinterestCategory6, pinterestCategory7, pinterestCategory8, pinterestCategory9, pinterestCategory10, pinterestCategory11, pinterestCategory12, pinterestUser){
         console.log('orders.client.service - Start sendOrderSubmit');
 
         var promise = $http.post('/api/auth/sendMarketplaceRequestemail', {
@@ -691,6 +691,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
           pinterestCategory9: pinterestCategory9,
           pinterestCategory10: pinterestCategory10,
           pinterestCategory11: pinterestCategory11,
+          pinterestCategory12: pinterestCategory12,
           pinterestUser: pinterestUser
 
         }).then(function successCallback(response) {

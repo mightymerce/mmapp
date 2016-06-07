@@ -809,6 +809,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         'LABEL-CATEGORY-9':'Spielzeug & Baby',
         'LABEL-CATEGORY-10':'Essen & Trinken',
         'LABEL-CATEGORY-11':'Elektronik & Computer',
+        'LABEL-CATEGORY-12':'Papier & Handwerk',
         'LABEL-PINTEREST-USER':'Dein Pinterest Benutzer:',
 
         // BUTTON
@@ -1607,6 +1608,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         'LABEL-CATEGORY-9':'Toys & Baby',
         'LABEL-CATEGORY-10':'Food & Beverage',
         'LABEL-CATEGORY-11':'Elektronics & Computer',
+        'LABEL-CATEGORY-12':'Paper & Handmade',
         'LABEL-PINTEREST-USER':'Your Pinterest user:',
 
         // BUTTON

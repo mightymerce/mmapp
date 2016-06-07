@@ -720,7 +720,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
       console.log('$scope.category1 :' + $scope.category1);
 
-      ProductsServices.sendMarketplaceRequestemail($scope.authentication.user.displayName, $scope.authentication.user.username, $scope.category1, $scope.category2, $scope.category3, $scope.category4, $scope.category5, $scope.category6, $scope.category7, $scope.category8, $scope.category9, $scope.category10, $scope.category11, $scope.pinterestUser).then(function(promise) {
+      ProductsServices.sendMarketplaceRequestemail($scope.authentication.user.displayName, $scope.authentication.user.username, $scope.category1, $scope.category2, $scope.category3, $scope.category4, $scope.category5, $scope.category6, $scope.category7, $scope.category8, $scope.category9, $scope.category10, $scope.category11, $scope.category12, $scope.pinterestUser).then(function(promise) {
         $scope.hideSpinner = false;
         if (promise) {
           $scope.success = 'Wir haben deine Nachricht erhalten und werden dir die gewünschten mightymerce Pinterest Marktptlätze umgehend freischalten. Viel Spass beim Verkaufen!';
