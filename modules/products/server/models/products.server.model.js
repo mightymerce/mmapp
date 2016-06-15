@@ -293,6 +293,14 @@ var ProductSchema = new Schema({
     type: String,
     default: ''
   },
+  productImport: {
+    type: String,
+    default: ''
+  },
+  productImportURL: {
+    type: String,
+    default: ''
+  },
   user: {
     type: Schema.ObjectId,
     ref: 'User'

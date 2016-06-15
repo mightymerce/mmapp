@@ -31,6 +31,8 @@ module.exports = function (app) {
   app.route('/api/users/dawanda/dawandaGetOAuthToken/:productId').get(users.dawandaGetOAuthToken);
   app.route('/api/users/dawanda/dawandaGetAccessToken/:oauth_verifier/:oauth_token').get(users.dawandaGetAccessToken);
   app.route('/api/users/dawanda/dawandaGetMyProducts/:oauth_AccessToken/:oauth_AccessTokenSecret').get(users.dawandaGetMyProducts);
+  app.route('/api/users/dawanda/dawandaGetSelectedProduct/:dawandaproductId').get(users.dawandaGetSelectedProduct);
+
 
   // Twitter connection routes
   app.route('/api/users/twitter/twitterGetOAuthToken/:productId').get(users.twitterGetOAuthToken);

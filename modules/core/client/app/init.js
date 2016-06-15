@@ -617,9 +617,17 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         'LABEL-BUY-NOW':'Jetzt kaufen',
         'LABEL-FOR':'für',
         'LABEL-SOLD-BY':'Verkauft von',
+        'LABEL-FACEBOOK-CATEGORY':'mightymerce Marktplätze auf Facebook: ',
+        'LABEL-FACEBOOK-CATEGORY-HINT':'Ich möchte mein Produkt auch auf folgenden mightymerce Marktplätzen posten: ',
+        'LABEL-FACEBOOK-OWN-WALL':'Wo möchtest du dein Produkt verkaufen?',
+        'LABEL-FACEBOOK-OWN-WALL-CHECKBOX':'Ich möchte an meine Facebookseite posten',
+        'LABEL-FACEBOOK-OWN-WALL-HINT':'(Hinweis: Die Seite an der du akutell angemeldet bist)',
+        'LABEL-FACEBOOK-HOW-TO-SELL':'Wie möchtest du dein Produkt verkaufen?',
+        'LABEL-FACEBOOK-HOW-TO-SELL-CHECKBOX':'Ich möchte über Dawanda verkaufen',
+        'LABEL-FACEBOOK-HOW-TO-SELL-HINT':'(Hinweis: Du hast dein Produkt über Dawanda importiert. Dein Post, Pin, Tweet kann aus diesem Grund auch auf Dawanda verweisen.)',
 
         // ERROR
-        'NOTE-CURRENTLY-NO-UPDATE-FACEBOOK-POST':'Gut zu wissen: Deinen Facebook-Post kann aktuell nicht verändert werden, nachdem er veröffentlicht wurde.',
+        'NOTE-CURRENTLY-NO-UPDATE-FACEBOOK-POST':'Gut zu wissen: Dein Facebook-Post kann aktuell nicht verändert werden, nachdem er veröffentlicht wurde.',
         'NOTE-ACCESS-TOKEN-EXPIRED-FACEBOOK':'Es tut uns leid. Dein Facebook Profil konnte nicht geladen werden. Bitte schließe das Fenster und klicke erneut auf den Button "Post erstellen".',
         'NOTE-POST-WILL-AUTOMATICALLY-BE-UPDATED':'Gut zu wissen: Dein Post wird automatisch aktualisiert, wenn du dein Produkt nach dem Post editierst und speicherst.',
         'NOTE-CURRENTLY-NO-UPDATE-TWITTER-POST':'Gut zu wissen: Deinen Twitter-Tweet kann aktuell nicht verändert werden, nachdem er veröffentlicht wurde.',
@@ -671,7 +679,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         'LABEL-TOOLTIP-PRODUCT-TITLE':'Ergänze Informationen zu Marke, Farbe oder Größe zum Titel zB. kommasepariert. Bitte beachte, dass du diese Zeichen nicht verwendest: /[^\{}]/. Und diese max. je einmal: % : & + .',
         'LABEL-TOOLTIP-PRODUCT-DESCRIPTION':'Die Produktbeschreibung ist limitiert auf 1000 Zeichen. Achtung: Für Twitter gilt ein Zeichenlimit von 140 Zeichen (inkl. Titel und Preis). Für Instagram gilt ein Zeichenlimit von 200 Zeichen.',
         'LABEL-TOOLTIP-PRODUCT-PRICE':'Bitte pflege Preise im Format 12.40 oder 2314.05 - Es sind keine Kommas möglich.',
-        'LABEL-SET-PRICE-PRODUCT':'Pflege den',
+        'LABEL-SET-PRICE-PRODUCT':'Pflege den Preis',
         'LABEL-SELECT-SHIPPING-OPTION':'Wähle die Versandoption für dein Produkt',
 
         // ERROR
@@ -692,12 +700,15 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         // LABELS
         'BREADCRUMB-CREATE-PRODUCT':'Produkt hinzufügen',
         'LABEL-PLACEHOLDER-PRODUCT-PRICE':'Preis im Format 1234.00 mit Punkt angeben',
+        'LABEL-PRODUCT-IMPORT':'Importiere ein Produkt',
+        'LABEL-PRODUCT-IMPORT-HINT':'Du kannst ganz einfach ein Produkt aus Dawanda importieren. Kopiere hierführ die URL deines Produktes im Dawanda Shop und clicke auf Importiere dein Produkt. Ergänze nur noch Steuersatz und Lieferoption. Danach dein Produktbild für die sozialen Kanäle optimieren - fertig.',
 
         // ERROR
         'VALIDATION-PRODUCT-CURRENCY-REQ':'Bitte ergänze die Währung.',
 
         // BUTTON
         'BUTTON-CREATE-PRODUCT':'Produkt hinzufügen',
+        'BUTTON-IMPORT-PRODUCT':'Importiere dein Produkt',
 
         // VIEW ----- edit-media-product.client.view.html ------
         // LABELS
@@ -1423,6 +1434,14 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
           'LABEL-BUY-NOW':'BUY NOW',
           'LABEL-FOR':'for',
           'LABEL-SOLD-BY':'Sold by',
+          'LABEL-FACEBOOK-CATEGORY':'Available category marketplaces on Facebook: ',
+          'LABEL-FACEBOOK-CATEGORY-HINT':'I would like to post my product to the follow mightymerce marketplaces: ',
+          'LABEL-FACEBOOK-OWN-WALL':'Where would you like to sell your product?',
+          'LABEL-FACEBOOK-OWN-WALL-CHECKBOX':'I would like to post to my business or personal Facebook wall',
+          'LABEL-FACEBOOK-OWN-WALL-HINT':'(Note: The one you are currently loged in)',
+          'LABEL-FACEBOOK-HOW-TO-SELL':'How would you like to sell your product?',
+          'LABEL-FACEBOOK-HOW-TO-SELL-CHECKBOX':'I would like to sell using Dawanda marketplace',
+          'LABEL-FACEBOOK-HOW-TO-SELL-HINT':'(Note: You have imported your product from Dawanda. Your post, pin, tweet can be sold using Dawanda marketplace..)',
 
           // ERROR
           'NOTE-CURRENTLY-NO-UPDATE-FACEBOOK-POST':'Please note: There is currently no update functionality available for Facebook posts.',
@@ -1498,12 +1517,16 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
           // LABELS
           'BREADCRUMB-CREATE-PRODUCT':'Create Product',
           'LABEL-PLACEHOLDER-PRODUCT-PRICE':'Enter price in the format eg 23.00 or 134.53',
+          'LABEL-PRODUCT-IMPORT':'Import a product',
+          'LABEL-PRODUCT-IMPORT-HINT':'You can very easy import your product data from your Dawanda Shop. Just copy the URL of your product in the Dawanda Shop and click on Import product. Add tax and delivery option. And finally you can adjust your product image to optimize for the social media channels.',
 
-          // ERROR
+
+        // ERROR
           'VALIDATION-PRODUCT-CURRENCY-REQ':'Please select the currency.',
 
           // BUTTON
           'BUTTON-CREATE-PRODUCT':'Create product',
+          'BUTTON-IMPORT-PRODUCT':'Import product',
 
           // VIEW ----- edit-media-product.client.view.html ------
           // LABELS
@@ -1596,7 +1619,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         'LABEL-STEP3-MARKETPLACE-EXPLANATION':'Submit',
         'LABEL-STEP-MARKETPLACE-FINALLY-EXPLANATION':'Next steps: We will manually activate the mightymerce category boards for you. After activation you will be able to select your own boards as well as the mightymerce boards to pin your product.',
 
-        'LABEL-PINTEREST-CATEGORY':'Available category boards on Pinterest:´',
+        'LABEL-PINTEREST-CATEGORY':'Available category boards on Pinterest: ',
         'LABEL-CATEGORY-1':'Furniture & Décor',
         'LABEL-CATEGORY-2':'DIY & Garden',
         'LABEL-CATEGORY-3':'Health & Wellness',

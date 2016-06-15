@@ -736,6 +736,65 @@ exports.dawandaGetMyProducts = function (req, res) {
 };
 
 /**
+ * Dawanda getSelectedProduct
+ */
+exports.dawandaGetSelectedProduct = function (req, res) {
+  console.log('users.profile.server.controller - dawandaGetSelectedProduct - start');
+
+  var request = require('request');
+  var qs = require('querystring');
+  var timestampValue = Math.floor(new Date() / 1000);
+  var oauth =
+  {
+    //consumer_key: req.params.oauth_AccessToken,
+    consumer_key: req.params.dawandaproductId,
+    nonce: timestampValue,
+    timestamp: timestampValue,
+    version:1.1
+  };
+
+
+  var url = 'http://en.dawanda.com/api/v1/products/' + req.params.dawandaproductId + '.json?api_key=be2f1b59af546199f79d63b1e1f3018301f5cdc5';
+  //var url = 'https://dawanda.com/seller_api/45041458?v=1.1';
+
+
+  var params =
+  {
+    signature_method: 'HMAC-SHA1',
+    offset: 0,
+    limit: 200,
+    'X-Dawanda-Auth': 'be2f1b59af546199f79d63b1e1f3018301f5cdc5'
+  };
+
+  request.get({
+    url: url,
+    headers:params,
+    oauth: oauth
+  }, function (error, r, body) {
+
+    // Ideally, you would take the body in the response
+    // and construct a URL that a user clicks on (like a sign in button).
+    // The verifier is only available in the response after a user has
+    // verified with twitter that they are authorizing your app.
+    if(error){
+      return console.log('Error:', error);
+    }
+
+    //Check for right status code
+    if(r.statusCode !== 200){
+      console.log('Invalid Status Code Returned:', r.statusCode + ' ' + r);
+    }
+
+    //var req_data = qs.parse(body);
+    //console.log('body: ' + body);
+    //console.log('qs.parse(body): ' + qs.parse(body));
+    //console.log('json: ' + body.JSON);
+    res.json(body);
+  });
+
+};
+
+/**
  * Etsy get oauthtoken
  */
 exports.etsyGetOAuthToken = function (req, res) {

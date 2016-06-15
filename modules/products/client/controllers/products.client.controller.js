@@ -8,6 +8,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
     var PDK = $window.PDK;
     $scope.hideSpinner = true;
+    $scope.merchantFBWall = true;
 
     // If user is signed in then redirect back home
     if (!$scope.authentication.user) {
@@ -156,6 +157,11 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
                     $scope.varPostPublicationDate = postPublicationDate;
                     $scope.varPostChannel = postChannel;
                     $scope.currency = Currencys;
+                    $scope.productImport = false;
+                    if ($scope.product.productImport === 'Dawanda')
+                    {
+                      $scope.productImport = true;
+                    }
                   },
                   size: size,
                   resolve: {
@@ -239,6 +245,10 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
                 $scope.varPostPublicationDate = postPublicationDate;
                 $scope.varPostChannel = postChannel;
                 $scope.currency = Currencys;
+                if ($scope.product.productImport === 'Dawanda')
+                {
+                  $scope.productImport = true;
+                }
               },
               size: size,
               resolve: {
@@ -292,6 +302,10 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
                     $scope.varPostPublicationDate = postPublicationDate;
                     $scope.varPostChannel = postChannel;
                     $scope.currency = Currencys;
+                    if ($scope.product.productImport === 'Dawanda')
+                    {
+                      $scope.productImport = true;
+                    }
                   },
                   size: size,
                   resolve: {
@@ -329,6 +343,10 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
             $scope.varPostStatus = postStatus;
             $scope.varPostPublicationDate = postPublicationDate;
             $scope.varPostChannel = postChannel;
+            if ($scope.product.productImport === 'Dawanda')
+            {
+              $scope.productImport = true;
+            }
           },
           size: size,
           resolve: {
@@ -538,7 +556,9 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
         instagramImagesLow_resolutionUrl: this.instagramImagesLow_resolutionUrl,
         instagramImagesStandard_resolutionUrl: this.instagramImagesStandard_resolutionUrl,
         instagramImagesThumbnailUrl: this.instagramImagesThumbnailUrl,
-        productCheckoutURL: linkUrl
+        productCheckoutURL: linkUrl,
+        productImport: this.productImport,
+        productImportURL: this.productImportURL
       });
 
       // Redirect after save
@@ -832,7 +852,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       $scope.hideSpinner = false;
 
       console.log('product.client.controller - Start posting to Facebook');
-      ProductsServices.postToWall($scope.product, $scope.authentication.user.accessToken).then(function(promise) {
+      ProductsServices.postToWall($scope.product, $scope.authentication.user.accessToken, $scope.category1, $scope.category2, $scope.category3, $scope.category4, $scope.category5, $scope.category6, $scope.category7, $scope.category8, $scope.category9, $scope.category10, $scope.category11, $scope.category12, $scope.merchantFBWall, $scope.merchantDawanda).then(function(promise) {
         $scope.success = promise;
         $scope.hideSpinner = true;
       });
@@ -849,7 +869,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       $scope.hideSpinner = false;
 
       console.log('products.client.controller - postPostPinterest - Start');
-      ProductsServices.postToPinterest($scope.product).then(function(promise) {
+      ProductsServices.postToPinterest($scope.product, $scope.merchantDawanda).then(function(promise) {
         $scope.success = promise;
         $scope.hideSpinner = true;
       });
@@ -865,7 +885,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       $scope.hideSpinner = false;
 
       console.log('products.client.controller - postPostTwitter - Start');
-      ProductsServices.postToTwitter($scope.product, $scope.authentication.user.twitterAccessToken, $scope.authentication.user.twitterAccessTokenSecret).then(function(promise) {
+      ProductsServices.postToTwitter($scope.product, $scope.authentication.user.twitterAccessToken, $scope.authentication.user.twitterAccessTokenSecret, $scope.merchantDawanda).then(function(promise) {
         $scope.success = promise;
         $scope.hideSpinner = true;
       });
@@ -882,7 +902,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       $scope.hideSpinner = false;
 
       console.log('products.client.controller - postPostInstagram - Start');
-      ProductsServices.instagramPostComment($scope.product, $scope.authentication.user).then(function(promise) {
+      ProductsServices.instagramPostComment($scope.product, $scope.authentication.user, $scope.merchantDawanda).then(function(promise) {
         $scope.success = promise;
         $scope.hideSpinner = true;
       });
@@ -914,6 +934,57 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
     $scope.getEtsyOAuth = function (isValid) {
 
 
+    };
+
+
+    // ************************************
+    // **                                **
+    // **     Import from Dawanda        **
+    // **                                **
+    // ************************************
+    //
+
+
+    $scope.getDawandaProduct = function (isValid) {
+
+      var parsedURL = new URL($scope.importURL);
+      console.log(parsedURL.hash);
+      console.log(parsedURL.protocol);
+      console.log(parsedURL.host);
+
+      var array = parsedURL.pathname.split('/');
+      var dawandaProductIdarray = array[2].split('-');
+      var dawandaProductId = dawandaProductIdarray[0];
+
+      console.log('dawandaProductId: ' + dawandaProductId);
+
+      ProductsServices.dawandaGetSelectedProduct(dawandaProductId).then(function(promiseProduct) {
+
+        //console.log('promiseProduct: ' + promiseProduct);
+
+        var jsonResponse = JSON.parse(promiseProduct);
+        console.log('promiseProduct.response: ' +  jsonResponse.response.result.product.description);
+
+        $scope.productId = jsonResponse.response.result.product.id;
+        $scope.productTitle = jsonResponse.response.result.product.name;
+        $scope.productDescription = jsonResponse.response.result.product.description + '\r\n' +
+            jsonResponse.response.result.product.size_description  + '\r\n' +
+            jsonResponse.response.result.product.individualisation_description;
+        $scope.productPrice = jsonResponse.response.result.product.price.cents.toString().substring(1,jsonResponse.response.result.product.price.cents.length-2) + '.' + jsonResponse.response.result.product.price.cents.toString().substring(jsonResponse.response.result.product.price.cents.toString().length-2);
+        //$scope.productCurrency = jsonResponse.response.result.product.price.currency_code.iso_code;
+        $scope.productItemInStock = 1;
+        $scope.productImport = 'Dawanda';
+        $scope.productImportURL = jsonResponse.response.result.product.product_url;
+        $scope.productMainImageURL = jsonResponse.response.result.product.default_image.full;
+        $scope.productMainImageURLFacebook = jsonResponse.response.result.product.default_image.product_l;
+        $scope.productMainImageURLTwitter = jsonResponse.response.result.product.default_image.product_l;
+        $scope.productMainImageURLPinterest = jsonResponse.response.result.product.default_image.big;
+        $scope.productMainImageURLEtsy = jsonResponse.response.result.product.default_image.full;
+        $scope.productMainImageURLDawanda = jsonResponse.response.result.product.default_image.full;
+        $scope.productMainImageURLCode = jsonResponse.response.result.product.default_image.product_l;
+        $scope.productMainImageAlt = jsonResponse.response.result.product.name;
+
+      });
     };
 
 

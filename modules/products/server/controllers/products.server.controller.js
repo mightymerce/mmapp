@@ -106,6 +106,9 @@ exports.update = function (req, res) {
   product.instagramImagesLow_resolutionUrl = req.body.instagramImagesLow_resolutionUrl;
   product.instagramImagesStandard_resolutionUrl = req.body.instagramImagesStandard_resolutionUrl;
   product.instagramImagesThumbnailUrl = req.body.instagramImagesThumbnailUrl;
+  product.productImport = req.body.productImport;
+  product.productImportURL = req.body.productImportURL;
+
 
   product.save(function (err) {
     if (err) {

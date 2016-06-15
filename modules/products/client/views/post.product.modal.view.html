@@ -92,6 +92,16 @@
           <div ng-show="varPostChannel === 'Pinterest'  && varPostStatus === 'New'">
             <span translate>NOTE-POST-WILL-AUTOMATICALLY-BE-UPDATED</span>
           </div>
+          <div ng-show="productImport && varPostChannel === 'Pinterest'  && varPostStatus === 'New'">
+            <br><br>
+            <h4 translate>LABEL-FACEBOOK-HOW-TO-SELL</h4>
+            <div class="col-lg-12">
+              <input type="checkbox" ng-model="merchantDawanda"> <label translate>LABEL-FACEBOOK-HOW-TO-SELL-CHECKBOX</label>
+            </div>
+            <div class="col-lg-12">
+              <span translate>LABEL-FACEBOOK-HOW-TO-SELL-HINT</span><br><br><br>
+            </div>
+          </div>
           <div ng-show="varPostChannel === 'Twitter'  && varPostStatus === 'Wait'">
             <span>Please note: TBD.</span>
           </div>
@@ -150,9 +160,6 @@
           <div ng-show="varPostChannel === 'Twitter' && varPostStatus === 'Wait'">
             <button type="button" class="btn btn-warning" ng-click="postPostTwitter()" translate>BUTTON-TRY-TWEET-AGAIN</button>
           </div>
-          <div ng-show="varPostChannel === 'Facebook' && varPostStatus === 'New'">
-            <button type="submit" ng-show="hideSpinner" class="btn btn-block btn-warning" translate>BUTTON-POST-PRODUCT-TO-FACEBOOK</button>
-          </div>
           <div ng-show="varPostChannel === 'Pinterest' && varPostStatus === 'New'">
             <button type="button" class="btn btn-block btn-warning" ng-click="postPostPinterest()" translate>BUTTON-PIN-PRODUCT-TO-PINTEREST</button>
             <!-- <a data-pin-do="buttonPin" href="https://www.pinterest.com/pin/create/button/?url=http://localhost:3000/checkouts/{{ product._id }}&media={{ product.productMainImageURL }}&description={{ product.productDescription }}" data-pin-height="28"></a> -->
@@ -183,6 +190,49 @@
         </div>
         <div class="modal-body-white">
           <div ng-show="varPostChannel === 'Facebook'">
+            <div ng-show="productImport">
+              <h4 translate>LABEL-FACEBOOK-HOW-TO-SELL</h4>
+              <div class="col-lg-12">
+                <input type="checkbox" ng-model="merchantDawanda"> <label translate>LABEL-FACEBOOK-HOW-TO-SELL-CHECKBOX</label>
+              </div>
+              <div class="col-lg-12">
+                <span translate>LABEL-FACEBOOK-HOW-TO-SELL-HINT</span><br><br><br>
+              </div>
+            </div>
+            <div>
+              <h4 translate>LABEL-FACEBOOK-OWN-WALL</h4>
+              <div class="col-lg-12">
+                <input type="checkbox" checked ng-model="merchantFBWall"> <label translate>LABEL-FACEBOOK-OWN-WALL-CHECKBOX</label>
+              </div>
+              <div class="col-lg-12">
+                <span translate>LABEL-FACEBOOK-OWN-WALL-HINT</span><br><br><br>
+              </div>
+            </div>
+            <div>
+              <!-- <h4 translate>LABEL-FACEBOOK-CATEGORY</h4> -->
+              <div class="col-lg-12">
+                <label translate>LABEL-FACEBOOK-CATEGORY-HINT</label><br><br>
+              </div>
+              <div class="col-lg-6">
+                <input type="checkbox" ng-model="category1"> <label translate>LABEL-CATEGORY-1</label><br>
+                <input type="checkbox" ng-model="category2"> <label translate>LABEL-CATEGORY-2</label><br>
+                <input type="checkbox" ng-model="category3"> <label translate>LABEL-CATEGORY-3</label><br>
+                <input type="checkbox" ng-model="category4"> <label translate>LABEL-CATEGORY-4</label><br>
+                <input type="checkbox" ng-model="category5"> <label translate>LABEL-CATEGORY-5</label><br>
+                <input type="checkbox" ng-model="category6"> <label translate>LABEL-CATEGORY-6</label>
+              </div>
+              <div class="col-lg-6">
+                <input type="checkbox" ng-model="category7"> <label translate>LABEL-CATEGORY-7</label><br>
+                <input type="checkbox" ng-model="category8"> <label translate>LABEL-CATEGORY-8</label><br>
+                <input type="checkbox" ng-model="category9"> <label translate>LABEL-CATEGORY-9</label><br>
+                <input type="checkbox" ng-model="category10"> <label translate>LABEL-CATEGORY-10</label><br>
+                <input type="checkbox" ng-model="category11"> <label translate>LABEL-CATEGORY-11</label><br>
+                <input type="checkbox" ng-model="category12"> <label translate>LABEL-CATEGORY-12</label><br><br>
+              </div>
+            </div>
+            <div ng-show="varPostChannel === 'Facebook' && varPostStatus === 'New'">
+              <button type="submit" ng-show="hideSpinner" class="btn btn-block btn-warning" translate>BUTTON-POST-PRODUCT-TO-FACEBOOK</button><br><br>
+            </div>
             <p><strong translate>LABEL-PREVIEW-POST</strong><i translate>NOTE-NOT-FINAL-LOOK-OF-POST</i></p>
             <div class="panel panel-default">
               <div class="panel-body">
