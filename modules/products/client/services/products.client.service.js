@@ -301,13 +301,13 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                       //'&description=Einladungskarte%20zur%20Konfirmation%20oder%20Kommunion.%20Die%20Klappkarte%20kann%20selbst%20beschriftet%20werden%20oder%20nach%20Wunsch%20k%C3%B6nnen%20wir%20auch%20gerne%20einen%20Einladungstext%20eindrucken%20-%20was%20dann%200%2C25%20Euro%20pro%20K%C3%A4rtchen%20mehr%20kostet.%20%0A%0AGr%C3%B6%C3%9Fe%20BUY%20NOW' +
                     '&description=' + product.productDescription.substring(0,220) + ' ' + 'BUY NOW' +
                       //'&link=http%3A%2F%2Flocalhost%3A3000%2Fcheckouts%2F56ab49dec096d02740cf94d8%3Fchannel%3Dfacebook' +
-                    '&link=' + linkUrl + product._id + '?channel=facebook' +
+                    '&link=' + linkUrl +
                       //'&message=http%3A%2F%2Flocalhost%3A3000%2Fmodules%2Fproducts%2Fclient%2Fimg%2Fproducts%2Fuploads%2Fproduct-da6f4809.png' +
                     '&method=post' +
                       //'&name=Einladungskarten%20Kommunion%20%C2%AA%C2%A9%20f%C3%BCr%203.60%20EUR' +
                     '&name=' + product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode +
                       //'&picture=http%3A%2F%2Flocalhost%3A3000%2Fmodules%2Fproducts%2Fclient%2Fimg%2Fproducts%2Fuploads%2Fproduct-da6f4809.png' +
-                    '&picture=' + linkMainImageUrl + product.productMainImageURLFacebook.substring(1) +
+                    '&picture=' + linkMainImageUrl +
                     '&pretty=0&sdk=joey&type=product')
                   .success(function (response) {
                     // Create new Post object
@@ -349,13 +349,13 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                       //'&description=Einladungskarte%20zur%20Konfirmation%20oder%20Kommunion.%20Die%20Klappkarte%20kann%20selbst%20beschriftet%20werden%20oder%20nach%20Wunsch%20k%C3%B6nnen%20wir%20auch%20gerne%20einen%20Einladungstext%20eindrucken%20-%20was%20dann%200%2C25%20Euro%20pro%20K%C3%A4rtchen%20mehr%20kostet.%20%0A%0AGr%C3%B6%C3%9Fe%20BUY%20NOW' +
                     '&description=' + product.productDescription.substring(0,220) + ' ' + 'BUY NOW' +
                       //'&link=http%3A%2F%2Flocalhost%3A3000%2Fcheckouts%2F56ab49dec096d02740cf94d8%3Fchannel%3Dfacebook' +
-                    '&link=' + linkUrl + product._id + '?channel=facebook' +
+                    '&link=' + linkUrl +
                       //'&message=http%3A%2F%2Flocalhost%3A3000%2Fmodules%2Fproducts%2Fclient%2Fimg%2Fproducts%2Fuploads%2Fproduct-da6f4809.png' +
                     '&method=post' +
                       //'&name=Einladungskarten%20Kommunion%20%C2%AA%C2%A9%20f%C3%BCr%203.60%20EUR' +
                     '&name=' + product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode +
                       //'&picture=http%3A%2F%2Flocalhost%3A3000%2Fmodules%2Fproducts%2Fclient%2Fimg%2Fproducts%2Fuploads%2Fproduct-da6f4809.png' +
-                    '&picture=' + linkMainImageUrl + product.productMainImageURLFacebook.substring(1) +
+                    '&picture=' + linkMainImageUrl +
                     '&pretty=0&sdk=joey&type=product');
 
                 console.log('products.client.service - postToWall - Fanpage: xxx - mightymerce - Marktplatz');
@@ -375,13 +375,13 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                       //'&description=Einladungskarte%20zur%20Konfirmation%20oder%20Kommunion.%20Die%20Klappkarte%20kann%20selbst%20beschriftet%20werden%20oder%20nach%20Wunsch%20k%C3%B6nnen%20wir%20auch%20gerne%20einen%20Einladungstext%20eindrucken%20-%20was%20dann%200%2C25%20Euro%20pro%20K%C3%A4rtchen%20mehr%20kostet.%20%0A%0AGr%C3%B6%C3%9Fe%20BUY%20NOW' +
                     '&description=' + product.productDescription.substring(0,220) + ' ' + 'BUY NOW' +
                       //'&link=http%3A%2F%2Flocalhost%3A3000%2Fcheckouts%2F56ab49dec096d02740cf94d8%3Fchannel%3Dfacebook' +
-                    '&link=' + linkUrl + product._id + '?channel=facebook' +
+                    '&link=' + linkUrl +
                       //'&message=http%3A%2F%2Flocalhost%3A3000%2Fmodules%2Fproducts%2Fclient%2Fimg%2Fproducts%2Fuploads%2Fproduct-da6f4809.png' +
                     '&method=post' +
                       //'&name=Einladungskarten%20Kommunion%20%C2%AA%C2%A9%20f%C3%BCr%203.60%20EUR' +
                     '&name=' + product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode +
                       //'&picture=http%3A%2F%2Flocalhost%3A3000%2Fmodules%2Fproducts%2Fclient%2Fimg%2Fproducts%2Fuploads%2Fproduct-da6f4809.png' +
-                    '&picture=' + linkMainImageUrl + product.productMainImageURLFacebook.substring(1) +
+                    '&picture=' + linkMainImageUrl +
                     '&pretty=0&sdk=joey&type=product');
 
                 console.log('products.client.service - postToWall - Fanpage: xxx - mightymerce - Marktplatz');
@@ -401,13 +401,13 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                       //'&description=Einladungskarte%20zur%20Konfirmation%20oder%20Kommunion.%20Die%20Klappkarte%20kann%20selbst%20beschriftet%20werden%20oder%20nach%20Wunsch%20k%C3%B6nnen%20wir%20auch%20gerne%20einen%20Einladungstext%20eindrucken%20-%20was%20dann%200%2C25%20Euro%20pro%20K%C3%A4rtchen%20mehr%20kostet.%20%0A%0AGr%C3%B6%C3%9Fe%20BUY%20NOW' +
                     '&description=' + product.productDescription.substring(0,220) + ' ' + 'BUY NOW' +
                       //'&link=http%3A%2F%2Flocalhost%3A3000%2Fcheckouts%2F56ab49dec096d02740cf94d8%3Fchannel%3Dfacebook' +
-                    '&link=' + linkUrl + product._id + '?channel=facebook' +
+                    '&link=' + linkUrl +
                       //'&message=http%3A%2F%2Flocalhost%3A3000%2Fmodules%2Fproducts%2Fclient%2Fimg%2Fproducts%2Fuploads%2Fproduct-da6f4809.png' +
                     '&method=post' +
                       //'&name=Einladungskarten%20Kommunion%20%C2%AA%C2%A9%20f%C3%BCr%203.60%20EUR' +
                     '&name=' + product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode +
                       //'&picture=http%3A%2F%2Flocalhost%3A3000%2Fmodules%2Fproducts%2Fclient%2Fimg%2Fproducts%2Fuploads%2Fproduct-da6f4809.png' +
-                    '&picture=' + linkMainImageUrl + product.productMainImageURLFacebook.substring(1) +
+                    '&picture=' + linkMainImageUrl +
                     '&pretty=0&sdk=joey&type=product');
 
                 console.log('products.client.service - postToWall - Fanpage: xxx - mightymerce - Marktplatz');
@@ -427,13 +427,13 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                       //'&description=Einladungskarte%20zur%20Konfirmation%20oder%20Kommunion.%20Die%20Klappkarte%20kann%20selbst%20beschriftet%20werden%20oder%20nach%20Wunsch%20k%C3%B6nnen%20wir%20auch%20gerne%20einen%20Einladungstext%20eindrucken%20-%20was%20dann%200%2C25%20Euro%20pro%20K%C3%A4rtchen%20mehr%20kostet.%20%0A%0AGr%C3%B6%C3%9Fe%20BUY%20NOW' +
                     '&description=' + product.productDescription.substring(0,220) + ' ' + 'BUY NOW' +
                       //'&link=http%3A%2F%2Flocalhost%3A3000%2Fcheckouts%2F56ab49dec096d02740cf94d8%3Fchannel%3Dfacebook' +
-                    '&link=' + linkUrl + product._id + '?channel=facebook' +
+                    '&link=' + linkUrl +
                       //'&message=http%3A%2F%2Flocalhost%3A3000%2Fmodules%2Fproducts%2Fclient%2Fimg%2Fproducts%2Fuploads%2Fproduct-da6f4809.png' +
                     '&method=post' +
                       //'&name=Einladungskarten%20Kommunion%20%C2%AA%C2%A9%20f%C3%BCr%203.60%20EUR' +
                     '&name=' + product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode +
                       //'&picture=http%3A%2F%2Flocalhost%3A3000%2Fmodules%2Fproducts%2Fclient%2Fimg%2Fproducts%2Fuploads%2Fproduct-da6f4809.png' +
-                    '&picture=' + linkMainImageUrl + product.productMainImageURLFacebook.substring(1) +
+                    '&picture=' + linkMainImageUrl +
                     '&pretty=0&sdk=joey&type=product');
 
                 console.log('products.client.service - postToWall - Fanpage: xxx - mightymerce - Marktplatz');
@@ -453,13 +453,13 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                       //'&description=Einladungskarte%20zur%20Konfirmation%20oder%20Kommunion.%20Die%20Klappkarte%20kann%20selbst%20beschriftet%20werden%20oder%20nach%20Wunsch%20k%C3%B6nnen%20wir%20auch%20gerne%20einen%20Einladungstext%20eindrucken%20-%20was%20dann%200%2C25%20Euro%20pro%20K%C3%A4rtchen%20mehr%20kostet.%20%0A%0AGr%C3%B6%C3%9Fe%20BUY%20NOW' +
                     '&description=' + product.productDescription.substring(0,220) + ' ' + 'BUY NOW' +
                       //'&link=http%3A%2F%2Flocalhost%3A3000%2Fcheckouts%2F56ab49dec096d02740cf94d8%3Fchannel%3Dfacebook' +
-                    '&link=' + linkUrl + product._id + '?channel=facebook' +
+                    '&link=' + linkUrl +
                       //'&message=http%3A%2F%2Flocalhost%3A3000%2Fmodules%2Fproducts%2Fclient%2Fimg%2Fproducts%2Fuploads%2Fproduct-da6f4809.png' +
                     '&method=post' +
                       //'&name=Einladungskarten%20Kommunion%20%C2%AA%C2%A9%20f%C3%BCr%203.60%20EUR' +
                     '&name=' + product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode +
                       //'&picture=http%3A%2F%2Flocalhost%3A3000%2Fmodules%2Fproducts%2Fclient%2Fimg%2Fproducts%2Fuploads%2Fproduct-da6f4809.png' +
-                    '&picture=' + linkMainImageUrl + product.productMainImageURLFacebook.substring(1) +
+                    '&picture=' + linkMainImageUrl +
                     '&pretty=0&sdk=joey&type=product');
 
                 console.log('products.client.service - postToWall - Fanpage: xxx - mightymerce - Marktplatz');
@@ -479,13 +479,13 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                       //'&description=Einladungskarte%20zur%20Konfirmation%20oder%20Kommunion.%20Die%20Klappkarte%20kann%20selbst%20beschriftet%20werden%20oder%20nach%20Wunsch%20k%C3%B6nnen%20wir%20auch%20gerne%20einen%20Einladungstext%20eindrucken%20-%20was%20dann%200%2C25%20Euro%20pro%20K%C3%A4rtchen%20mehr%20kostet.%20%0A%0AGr%C3%B6%C3%9Fe%20BUY%20NOW' +
                     '&description=' + product.productDescription.substring(0,220) + ' ' + 'BUY NOW' +
                       //'&link=http%3A%2F%2Flocalhost%3A3000%2Fcheckouts%2F56ab49dec096d02740cf94d8%3Fchannel%3Dfacebook' +
-                    '&link=' + linkUrl + product._id + '?channel=facebook' +
+                    '&link=' + linkUrl +
                       //'&message=http%3A%2F%2Flocalhost%3A3000%2Fmodules%2Fproducts%2Fclient%2Fimg%2Fproducts%2Fuploads%2Fproduct-da6f4809.png' +
                     '&method=post' +
                       //'&name=Einladungskarten%20Kommunion%20%C2%AA%C2%A9%20f%C3%BCr%203.60%20EUR' +
                     '&name=' + product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode +
                       //'&picture=http%3A%2F%2Flocalhost%3A3000%2Fmodules%2Fproducts%2Fclient%2Fimg%2Fproducts%2Fuploads%2Fproduct-da6f4809.png' +
-                    '&picture=' + linkMainImageUrl + product.productMainImageURLFacebook.substring(1) +
+                    '&picture=' + linkMainImageUrl +
                     '&pretty=0&sdk=joey&type=product');
 
                 console.log('products.client.service - postToWall - Fanpage: xxx - mightymerce - Marktplatz');
@@ -505,13 +505,13 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                       //'&description=Einladungskarte%20zur%20Konfirmation%20oder%20Kommunion.%20Die%20Klappkarte%20kann%20selbst%20beschriftet%20werden%20oder%20nach%20Wunsch%20k%C3%B6nnen%20wir%20auch%20gerne%20einen%20Einladungstext%20eindrucken%20-%20was%20dann%200%2C25%20Euro%20pro%20K%C3%A4rtchen%20mehr%20kostet.%20%0A%0AGr%C3%B6%C3%9Fe%20BUY%20NOW' +
                     '&description=' + product.productDescription.substring(0,220) + ' ' + 'BUY NOW' +
                       //'&link=http%3A%2F%2Flocalhost%3A3000%2Fcheckouts%2F56ab49dec096d02740cf94d8%3Fchannel%3Dfacebook' +
-                    '&link=' + linkUrl + product._id + '?channel=facebook' +
+                    '&link=' + linkUrl +
                       //'&message=http%3A%2F%2Flocalhost%3A3000%2Fmodules%2Fproducts%2Fclient%2Fimg%2Fproducts%2Fuploads%2Fproduct-da6f4809.png' +
                     '&method=post' +
                       //'&name=Einladungskarten%20Kommunion%20%C2%AA%C2%A9%20f%C3%BCr%203.60%20EUR' +
                     '&name=' + product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode +
                       //'&picture=http%3A%2F%2Flocalhost%3A3000%2Fmodules%2Fproducts%2Fclient%2Fimg%2Fproducts%2Fuploads%2Fproduct-da6f4809.png' +
-                    '&picture=' + linkMainImageUrl + product.productMainImageURLFacebook.substring(1) +
+                    '&picture=' + linkMainImageUrl +
                     '&pretty=0&sdk=joey&type=product');
 
                 console.log('products.client.service - postToWall - Fanpage: xxx - mightymerce - Marktplatz');
@@ -531,13 +531,13 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                       //'&description=Einladungskarte%20zur%20Konfirmation%20oder%20Kommunion.%20Die%20Klappkarte%20kann%20selbst%20beschriftet%20werden%20oder%20nach%20Wunsch%20k%C3%B6nnen%20wir%20auch%20gerne%20einen%20Einladungstext%20eindrucken%20-%20was%20dann%200%2C25%20Euro%20pro%20K%C3%A4rtchen%20mehr%20kostet.%20%0A%0AGr%C3%B6%C3%9Fe%20BUY%20NOW' +
                     '&description=' + product.productDescription.substring(0,220) + ' ' + 'BUY NOW' +
                       //'&link=http%3A%2F%2Flocalhost%3A3000%2Fcheckouts%2F56ab49dec096d02740cf94d8%3Fchannel%3Dfacebook' +
-                    '&link=' + linkUrl + product._id + '?channel=facebook' +
+                    '&link=' + linkUrl +
                       //'&message=http%3A%2F%2Flocalhost%3A3000%2Fmodules%2Fproducts%2Fclient%2Fimg%2Fproducts%2Fuploads%2Fproduct-da6f4809.png' +
                     '&method=post' +
                       //'&name=Einladungskarten%20Kommunion%20%C2%AA%C2%A9%20f%C3%BCr%203.60%20EUR' +
                     '&name=' + product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode +
                       //'&picture=http%3A%2F%2Flocalhost%3A3000%2Fmodules%2Fproducts%2Fclient%2Fimg%2Fproducts%2Fuploads%2Fproduct-da6f4809.png' +
-                    '&picture=' + linkMainImageUrl + product.productMainImageURLFacebook.substring(1) +
+                    '&picture=' + linkMainImageUrl +
                     '&pretty=0&sdk=joey&type=product');
 
                 console.log('products.client.service - postToWall - Fanpage: xxx - mightymerce - Marktplatz');
@@ -557,13 +557,13 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                       //'&description=Einladungskarte%20zur%20Konfirmation%20oder%20Kommunion.%20Die%20Klappkarte%20kann%20selbst%20beschriftet%20werden%20oder%20nach%20Wunsch%20k%C3%B6nnen%20wir%20auch%20gerne%20einen%20Einladungstext%20eindrucken%20-%20was%20dann%200%2C25%20Euro%20pro%20K%C3%A4rtchen%20mehr%20kostet.%20%0A%0AGr%C3%B6%C3%9Fe%20BUY%20NOW' +
                     '&description=' + product.productDescription.substring(0,220) + ' ' + 'BUY NOW' +
                       //'&link=http%3A%2F%2Flocalhost%3A3000%2Fcheckouts%2F56ab49dec096d02740cf94d8%3Fchannel%3Dfacebook' +
-                    '&link=' + linkUrl + product._id + '?channel=facebook' +
+                    '&link=' + linkUrl +
                       //'&message=http%3A%2F%2Flocalhost%3A3000%2Fmodules%2Fproducts%2Fclient%2Fimg%2Fproducts%2Fuploads%2Fproduct-da6f4809.png' +
                     '&method=post' +
                       //'&name=Einladungskarten%20Kommunion%20%C2%AA%C2%A9%20f%C3%BCr%203.60%20EUR' +
                     '&name=' + product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode +
                       //'&picture=http%3A%2F%2Flocalhost%3A3000%2Fmodules%2Fproducts%2Fclient%2Fimg%2Fproducts%2Fuploads%2Fproduct-da6f4809.png' +
-                    '&picture=' + linkMainImageUrl + product.productMainImageURLFacebook.substring(1) +
+                    '&picture=' + linkMainImageUrl +
                     '&pretty=0&sdk=joey&type=product');
 
                 console.log('products.client.service - postToWall - Fanpage: xxx - mightymerce - Marktplatz');
@@ -583,13 +583,13 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                       //'&description=Einladungskarte%20zur%20Konfirmation%20oder%20Kommunion.%20Die%20Klappkarte%20kann%20selbst%20beschriftet%20werden%20oder%20nach%20Wunsch%20k%C3%B6nnen%20wir%20auch%20gerne%20einen%20Einladungstext%20eindrucken%20-%20was%20dann%200%2C25%20Euro%20pro%20K%C3%A4rtchen%20mehr%20kostet.%20%0A%0AGr%C3%B6%C3%9Fe%20BUY%20NOW' +
                     '&description=' + product.productDescription.substring(0,220) + ' ' + 'BUY NOW' +
                       //'&link=http%3A%2F%2Flocalhost%3A3000%2Fcheckouts%2F56ab49dec096d02740cf94d8%3Fchannel%3Dfacebook' +
-                    '&link=' + linkUrl + product._id + '?channel=facebook' +
+                    '&link=' + linkUrl +
                       //'&message=http%3A%2F%2Flocalhost%3A3000%2Fmodules%2Fproducts%2Fclient%2Fimg%2Fproducts%2Fuploads%2Fproduct-da6f4809.png' +
                     '&method=post' +
                       //'&name=Einladungskarten%20Kommunion%20%C2%AA%C2%A9%20f%C3%BCr%203.60%20EUR' +
                     '&name=' + product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode +
                       //'&picture=http%3A%2F%2Flocalhost%3A3000%2Fmodules%2Fproducts%2Fclient%2Fimg%2Fproducts%2Fuploads%2Fproduct-da6f4809.png' +
-                    '&picture=' + linkMainImageUrl + product.productMainImageURLFacebook.substring(1) +
+                    '&picture=' + linkMainImageUrl +
                     '&pretty=0&sdk=joey&type=product');
 
                 console.log('products.client.service - postToWall - Fanpage: xxx - mightymerce - Marktplatz');
@@ -609,13 +609,13 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                       //'&description=Einladungskarte%20zur%20Konfirmation%20oder%20Kommunion.%20Die%20Klappkarte%20kann%20selbst%20beschriftet%20werden%20oder%20nach%20Wunsch%20k%C3%B6nnen%20wir%20auch%20gerne%20einen%20Einladungstext%20eindrucken%20-%20was%20dann%200%2C25%20Euro%20pro%20K%C3%A4rtchen%20mehr%20kostet.%20%0A%0AGr%C3%B6%C3%9Fe%20BUY%20NOW' +
                     '&description=' + product.productDescription.substring(0,220) + ' ' + 'BUY NOW' +
                       //'&link=http%3A%2F%2Flocalhost%3A3000%2Fcheckouts%2F56ab49dec096d02740cf94d8%3Fchannel%3Dfacebook' +
-                    '&link=' + linkUrl + product._id + '?channel=facebook' +
+                    '&link=' + linkUrl +
                       //'&message=http%3A%2F%2Flocalhost%3A3000%2Fmodules%2Fproducts%2Fclient%2Fimg%2Fproducts%2Fuploads%2Fproduct-da6f4809.png' +
                     '&method=post' +
                       //'&name=Einladungskarten%20Kommunion%20%C2%AA%C2%A9%20f%C3%BCr%203.60%20EUR' +
                     '&name=' + product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode +
                       //'&picture=http%3A%2F%2Flocalhost%3A3000%2Fmodules%2Fproducts%2Fclient%2Fimg%2Fproducts%2Fuploads%2Fproduct-da6f4809.png' +
-                    '&picture=' + linkMainImageUrl + product.productMainImageURLFacebook.substring(1) +
+                    '&picture=' + linkMainImageUrl +
                     '&pretty=0&sdk=joey&type=product').success(function (response) {
                       // Create new Post object
                       var post = new Posts({
