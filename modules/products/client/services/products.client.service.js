@@ -308,31 +308,9 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                     '&name=' + product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode +
                       //'&picture=http%3A%2F%2Flocalhost%3A3000%2Fmodules%2Fproducts%2Fclient%2Fimg%2Fproducts%2Fuploads%2Fproduct-da6f4809.png' +
                     '&picture=' + linkMainImageUrl +
-                    '&pretty=0&sdk=joey&type=product')
-                  .success(function (response) {
-                    // Create new Post object
-                    var post = new Posts({
-                      product: product._id,
-                      channel: '563c7fab09f30c482f304273',
-                      postChannel: 'Facebook',
-                      postId: response.id,
-                      postStatus: 'Active',
-                      postPublicationDate: new Date(),
-                      postExternalPostKey: response.id,
-                      postInformation: ''
-                    });
+                    '&pretty=0&sdk=joey&type=product');
 
-                    // Save post to MM
-                    post.$save(function (response) {
-                      console.log('product.client.service - postToWall - save post on MM success Post ID: ' + response._id);
-                      deferred.resolve('Success posting to mightymerce Marketplace - Wohnen & Einrichten! - Mightymerce Post-Id: ' +response._id);
-                    }, function (errorResponse) {
-                      console.log('product.client.service - postToWall - save post on MM error: ' + errorResponse);
-                      deferred.reject(errorResponse);
-                    });
-                  })
-                  .error(function(msg,code) {
-                });
+                  deferred.resolve('Success posting to mightymerce Marketplace - Wohnen & Einrichten!');
               }
 
               // Fanpage Heimwerk & Garten - mightymerce - Marktplatz
@@ -358,7 +336,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                     '&picture=' + linkMainImageUrl +
                     '&pretty=0&sdk=joey&type=product');
 
-                console.log('products.client.service - postToWall - Fanpage: xxx - mightymerce - Marktplatz');
+                  deferred.resolve('Success posting to mightymerce Marketplace - Heimwerk & Garten!');
               }
 
               // Fanpage Gesundheit & Wohlbefinden - mightymerce - Marktplatz
@@ -384,7 +362,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                     '&picture=' + linkMainImageUrl +
                     '&pretty=0&sdk=joey&type=product');
 
-                console.log('products.client.service - postToWall - Fanpage: xxx - mightymerce - Marktplatz');
+                  deferred.resolve('Success posting to mightymerce Marketplace - Gesundheit & Wohlbefinden!');
               }
 
               // Fanpage Kosmetik & Beauty - mightymerce - Marktplatz
@@ -410,7 +388,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                     '&picture=' + linkMainImageUrl +
                     '&pretty=0&sdk=joey&type=product');
 
-                console.log('products.client.service - postToWall - Fanpage: xxx - mightymerce - Marktplatz');
+                  deferred.resolve('Success posting to mightymerce Marketplace - Kosmetik & Beauty!');
               }
 
               // Fanpage Bekleidung & Schuhe - mightymerce - Marktplatz
@@ -436,7 +414,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                     '&picture=' + linkMainImageUrl +
                     '&pretty=0&sdk=joey&type=product');
 
-                console.log('products.client.service - postToWall - Fanpage: xxx - mightymerce - Marktplatz');
+                  deferred.resolve('Success posting to mightymerce Marketplace - Bekleidung & Schuhe!');
               }
 
               // Fanpage Uhren & Schmuck - mightymerce - Marktplatz
@@ -462,7 +440,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                     '&picture=' + linkMainImageUrl +
                     '&pretty=0&sdk=joey&type=product');
 
-                console.log('products.client.service - postToWall - Fanpage: xxx - mightymerce - Marktplatz');
+                  deferred.resolve('Success posting to mightymerce Marketplace - Uhren & Schmuck!');
               }
 
               // Fanpage Freizeit & Outdoor - mightymerce - Marktplatz
@@ -488,7 +466,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                     '&picture=' + linkMainImageUrl +
                     '&pretty=0&sdk=joey&type=product');
 
-                console.log('products.client.service - postToWall - Fanpage: xxx - mightymerce - Marktplatz');
+                  deferred.resolve('Success posting to mightymerce Marketplace - Freizeit & Outdoor!');
               }
 
               // Fanpage Sport & Fitness - mightymerce - Marktplatz
@@ -514,7 +492,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                     '&picture=' + linkMainImageUrl +
                     '&pretty=0&sdk=joey&type=product');
 
-                console.log('products.client.service - postToWall - Fanpage: xxx - mightymerce - Marktplatz');
+                  deferred.resolve('Success posting to mightymerce Marketplace - Sport & Fitness!');
               }
 
               // Fanpage Spielzeug & Baby - mightymerce - Marktplatz
@@ -540,7 +518,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                     '&picture=' + linkMainImageUrl +
                     '&pretty=0&sdk=joey&type=product');
 
-                console.log('products.client.service - postToWall - Fanpage: xxx - mightymerce - Marktplatz');
+                  deferred.resolve('Success posting to mightymerce Marketplace - Spielzeug & Baby!');
               }
 
               // Fanpage Essen & Trinken - mightymerce - Marktplatz
@@ -566,7 +544,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                     '&picture=' + linkMainImageUrl +
                     '&pretty=0&sdk=joey&type=product');
 
-                console.log('products.client.service - postToWall - Fanpage: xxx - mightymerce - Marktplatz');
+                  deferred.resolve('Success posting to mightymerce Marketplace - Essen & Trinken!');
               }
 
               // Fanpage Elektronik & Computer - mightymerce - Marktplatz
@@ -592,7 +570,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                     '&picture=' + linkMainImageUrl +
                     '&pretty=0&sdk=joey&type=product');
 
-                console.log('products.client.service - postToWall - Fanpage: xxx - mightymerce - Marktplatz');
+                  deferred.resolve('Success posting to mightymerce Marketplace - Elektronik & Computer!');
               }
 
               // Fanpage Papier und Handwerk - mightymerce - Marktplatz
@@ -616,30 +594,10 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                     '&name=' + product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode +
                       //'&picture=http%3A%2F%2Flocalhost%3A3000%2Fmodules%2Fproducts%2Fclient%2Fimg%2Fproducts%2Fuploads%2Fproduct-da6f4809.png' +
                     '&picture=' + linkMainImageUrl +
-                    '&pretty=0&sdk=joey&type=product').success(function (response) {
-                      // Create new Post object
-                      var post = new Posts({
-                        product: product._id,
-                        channel: '563c7fab09f30c482f304273',
-                        postChannel: 'Facebook',
-                        postId: response.id,
-                        postStatus: 'Active',
-                        postPublicationDate: new Date(),
-                        postExternalPostKey: response.id,
-                        postInformation: ''
-                      });
+                    '&pretty=0&sdk=joey&type=product');
 
-                      // Save post to MM
-                      post.$save(function (response) {
-                        console.log('product.client.service - postToWall - save post on MM success Post ID: ' + response._id);
-                        deferred.resolve('Success posting to mightymerce Marketplace - Papier und Handwerk! - Mightymerce Post-Id: ' +response._id);
-                      }, function (errorResponse) {
-                        console.log('product.client.service - postToWall - save post on MM error: ' + errorResponse);
-                        deferred.reject(errorResponse);
-                      });
-                    })
-                    .error(function(msg,code) {
-                    });
+                deferred.resolve('Success posting to mightymerce Marketplace - Papier und Handwerk!');
+
               }
 
 
