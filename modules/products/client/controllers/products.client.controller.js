@@ -948,29 +948,21 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
     $scope.getDawandaProduct = function (isValid) {
 
       var parsedURL = new URL($scope.importURL);
-      console.log(parsedURL.hash);
-      console.log(parsedURL.protocol);
-      console.log(parsedURL.host);
 
       var array = parsedURL.pathname.split('/');
       var dawandaProductIdarray = array[2].split('-');
       var dawandaProductId = dawandaProductIdarray[0];
 
-      console.log('dawandaProductId: ' + dawandaProductId);
-
       ProductsServices.dawandaGetSelectedProduct(dawandaProductId).then(function(promiseProduct) {
 
-        //console.log('promiseProduct: ' + promiseProduct);
-
         var jsonResponse = JSON.parse(promiseProduct);
-        console.log('promiseProduct.response: ' +  jsonResponse.response.result.product.description);
 
         $scope.productId = jsonResponse.response.result.product.id;
         $scope.productTitle = jsonResponse.response.result.product.name;
         $scope.productDescription = jsonResponse.response.result.product.description + '\r\n' +
             jsonResponse.response.result.product.size_description  + '\r\n' +
             jsonResponse.response.result.product.individualisation_description;
-        $scope.productPrice = jsonResponse.response.result.product.price.cents.toString().substring(1,jsonResponse.response.result.product.price.cents.length-2) + '.' + jsonResponse.response.result.product.price.cents.toString().substring(jsonResponse.response.result.product.price.cents.toString().length-2);
+        $scope.productPrice = jsonResponse.response.result.product.price.cents.toString().substring(0,jsonResponse.response.result.product.price.cents.toString().length-2) + '.' + jsonResponse.response.result.product.price.cents.toString().substring(jsonResponse.response.result.product.price.cents.toString().length-2);
         //$scope.productCurrency = jsonResponse.response.result.product.price.currency_code.iso_code;
         $scope.productItemInStock = 1;
         $scope.productImport = 'Dawanda';
