@@ -159,10 +159,18 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
 
         var linkMainImageUrl;
         if (merchantDawanda) {
-          linkMainImageUrl = 'http:' + product.productMainImageURLFacebook;
+            if(product.productMainImageURLFacebook.toString().substring(0,5) === 'http:') {
+                linkMainImageUrl = product.productMainImageURLFacebook;
+            } else {
+                linkMainImageUrl = 'http:' + product.productMainImageURLFacebook;
+            }
         } else {
           if (product.productImport === 'Dawanda') {
-            linkMainImageUrl = 'http:' + product.productMainImageURLPinterest;
+            if(product.productMainImageURLFacebook.toString().substring(0,5) === 'http:') {
+              linkMainImageUrl = product.productMainImageURLPinterest;
+            } else {
+              linkMainImageUrl = 'http:' + product.productMainImageURLPinterest;
+            }
           } else {
             if ($location.host() === 'localhost') {
               linkMainImageUrl = $location.protocol() + '://' + $location.host() + ':' + $location.port() + product.productMainImageURLFacebook.substring(1);
