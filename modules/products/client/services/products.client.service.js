@@ -142,11 +142,11 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
 
       },
 
-      postToWall: function (product, short_user_access_token, facebookCategory1, facebookCategory2, facebookCategory3, facebookCategory4, facebookCategory5, facebookCategory6, facebookCategory7, facebookCategory8, facebookCategory9, facebookCategory10, facebookCategory11, facebookCategory12, merchantFBWall, merchantDawanda) {
+      postToWall: function (product, short_user_access_token, facebookCategory1, facebookCategory2, facebookCategory3, facebookCategory4, facebookCategory5, facebookCategory6, facebookCategory7, facebookCategory8, facebookCategory9, facebookCategory10, facebookCategory11, facebookCategory12, merchantFBWall, merchantDawanda, merchantEtsy) {
 
         console.log('product.client.service - postToWall - start post to Facebook!');
         var linkUrl;
-        if (merchantDawanda) {
+        if (merchantDawanda || merchantEtsy) {
           linkUrl = product.productImportURL;
         }
         else {
@@ -158,18 +158,18 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
         }
 
         var linkMainImageUrl;
-        if (merchantDawanda) {
-            if(product.productMainImageURLFacebook.toString().substring(0,5) === 'http:') {
+        if (merchantDawanda || merchantEtsy) {
+            if(product.productMainImageURLFacebook.toString().substring(0,5) === 'http:' || product.productMainImageURLFacebook.toString().substring(0,6) === 'https:') {
                 linkMainImageUrl = product.productMainImageURLFacebook;
             } else {
                 linkMainImageUrl = 'http:' + product.productMainImageURLFacebook;
             }
         } else {
-          if (product.productImport === 'Dawanda') {
-            if(product.productMainImageURLFacebook.toString().substring(0,5) === 'http:') {
-              linkMainImageUrl = product.productMainImageURLPinterest;
+          if (product.productImport === 'Dawanda' || product.productImport === 'Etsy') {
+            if(product.productMainImageURLFacebook.toString().substring(0,5) === 'http:' || product.productMainImageURLFacebook.toString().substring(0,6) === 'https:') {
+              linkMainImageUrl = product.productMainImageURLFacebook;
             } else {
-              linkMainImageUrl = 'http:' + product.productMainImageURLPinterest;
+              linkMainImageUrl = 'http:' + product.productMainImageURLFacebook;
             }
           } else {
             if ($location.host() === 'localhost') {
@@ -690,13 +690,13 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
         });
       },
 
-      postToPinterest: function (product, merchantDawanda) {
+      postToPinterest: function (product, merchantDawanda, merchantEtsy) {
 
         console.log('products.client.service - postToPinterest - Start post to Pinterest');
         var deferred = $q.defer();
 
         var linkUrl;
-        if (merchantDawanda) {
+        if (merchantDawanda || merchantEtsy) {
           linkUrl = product.productImportURL;
         }
         else {
@@ -708,11 +708,19 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
         }
 
         var linkMainImageUrl;
-        if (merchantDawanda) {
-          linkMainImageUrl = 'http:' + product.productMainImageURLPinterest;
-        } else {
-          if (product.productImport === 'Dawanda') {
+        if (merchantDawanda || merchantEtsy) {
+          if(product.productMainImageURLPinterest.toString().substring(0,5) === 'http:' || product.productMainImageURLPinterest.toString().substring(0,6) === 'https:') {
+            linkMainImageUrl = product.productMainImageURLPinterest;
+          } else {
             linkMainImageUrl = 'http:' + product.productMainImageURLPinterest;
+          }
+        } else {
+          if (product.productImport === 'Dawanda' || product.productImport === 'Etsy') {
+            if(product.productMainImageURLPinterest.toString().substring(0,5) === 'http:' || product.productMainImageURLPinterest.toString().substring(0,6) === 'https:') {
+              linkMainImageUrl = product.productMainImageURLPinterest;
+            } else {
+              linkMainImageUrl = 'http:' + product.productMainImageURLPinterest;
+            }
           } else {
             if($location.host() === 'localhost'){
               linkMainImageUrl = $location.protocol() + '://' + $location.host() + ':' + $location.port() + product.productMainImageURLPinterest.substring(1);
@@ -1103,6 +1111,26 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
         var url = '/api/users/etsy/etsyGetMyProducts/' +oauth_AccessToken + '/' +oauth_AccessTokenSecret;
         return $http.get(url).then(function (response) {
           console.log('product.client.service - etsyGetMyProducts - return value: ' +response.data);
+          return response.data;
+        });
+      },
+
+      etsyGetSelectedProduct: function(productId) {
+        console.log('product.client.service - etsyGetSelectedProduct - start');
+
+        var url = '/api/users/etsy/etsyGetSelectedProduct/' + productId;
+        return $http.get(url).then(function (response) {
+          //console.log('product.client.service - etsyGetSelectedProduct - return value: ' +response.data);
+          return response.data;
+        });
+      },
+
+      etsyGetSelectedProductImages: function(productId) {
+        console.log('product.client.service - etsyGetSelectedProductImages - start');
+
+        var url = '/api/users/etsy/etsyGetSelectedProductImages/' + productId;
+        return $http.get(url).then(function (response) {
+          //console.log('product.client.service - etsyGetSelectedProductImages - return value: ' +response.data);
           return response.data;
         });
       },

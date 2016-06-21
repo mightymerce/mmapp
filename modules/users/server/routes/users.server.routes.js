@@ -26,6 +26,8 @@ module.exports = function (app) {
   app.route('/api/users/etsy/etsyGetOAuthToken/:productId').get(users.etsyGetOAuthToken);
   app.route('/api/users/etsy/etsyGetAccessToken/:oauth_verifier/:oauth_token/:oauth_token_secret').get(users.etsyGetAccessToken);
   app.route('/api/users/etsy/etsyGetMyProducts/:oauth_AccessToken/:oauth_AccessTokenSecret').get(users.etsyGetMyProducts);
+  app.route('/api/users/etsy/etsyGetSelectedProduct/:etsyproductId').get(users.etsyGetSelectedProduct);
+  app.route('/api/users/etsy/etsyGetSelectedProductImages/:etsyproductId').get(users.etsyGetSelectedProductImages);
 
   // Dawanda connection routes
   app.route('/api/users/dawanda/dawandaGetOAuthToken/:productId').get(users.dawandaGetOAuthToken);

@@ -623,8 +623,10 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         'LABEL-FACEBOOK-OWN-WALL-CHECKBOX':'Ich möchte an meine Facebookseite posten',
         'LABEL-FACEBOOK-OWN-WALL-HINT':'(Hinweis: Die Seite an der du akutell angemeldet bist)',
         'LABEL-FACEBOOK-HOW-TO-SELL':'Wie möchtest du dein Produkt verkaufen?',
-        'LABEL-FACEBOOK-HOW-TO-SELL-CHECKBOX':'Ich möchte über Dawanda verkaufen',
-        'LABEL-FACEBOOK-HOW-TO-SELL-HINT':'(Hinweis: Du hast dein Produkt über Dawanda importiert. Dein Post, Pin, Tweet kann aus diesem Grund auch auf Dawanda verweisen.)',
+        'LABEL-FACEBOOK-HOW-TO-SELL-CHECKBOX-DAWANDA':'Ich möchte über Dawanda verkaufen',
+        'LABEL-FACEBOOK-HOW-TO-SELL-HINT-DAWANDA':'(Hinweis: Du hast dein Produkt über Dawanda importiert. Dein Post, Pin, Tweet kann aus diesem Grund auch auf deinen Dawanda-Shop verweisen.)',
+        'LABEL-FACEBOOK-HOW-TO-SELL-CHECKBOX-ETSY':'Ich möchte über Etsy verkaufen',
+        'LABEL-FACEBOOK-HOW-TO-SELL-HINT-ETSY':'(Hinweis: Du hast dein Produkt über Etsy importiert. Dein Post, Pin, Tweet kann aus diesem Grund auch auf deinen Etsy-Shop verweisen.)',
 
         // ERROR
         'NOTE-CURRENTLY-NO-UPDATE-FACEBOOK-POST':'Gut zu wissen: Dein Facebook-Post kann aktuell nicht verändert werden, nachdem er veröffentlicht wurde.',
@@ -701,7 +703,8 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         'BREADCRUMB-CREATE-PRODUCT':'Produkt hinzufügen',
         'LABEL-PLACEHOLDER-PRODUCT-PRICE':'Preis im Format 1234.00 mit Punkt angeben',
         'LABEL-PRODUCT-IMPORT':'Importiere ein Produkt',
-        'LABEL-PRODUCT-IMPORT-HINT':'Du kannst ganz einfach ein Produkt aus Dawanda importieren. Kopiere hierführ die URL deines Produktes im Dawanda Shop und clicke auf Importiere dein Produkt. Ergänze nur noch Steuersatz und Lieferoption. Danach dein Produktbild für die sozialen Kanäle optimieren - fertig.',
+        'LABEL-PRODUCT-IMPORT-HINT':'Kopiere die URL deines Produktes im Etsy oder Dawanda Shop und clicke auf Importiere dein Produkt. Ergänze nur noch Steuersatz und Lieferoption. Dein Standardbild wird automatisch importiert - und poste sofort in deinen sozialen Medien oder auf dem mightymerce Marktplatz.',
+        'LABEL-PRODUCT-IMPORT-FROM-HINT':'Importiere aus den folgenden Platformen: ',
 
         // ERROR
         'VALIDATION-PRODUCT-CURRENCY-REQ':'Bitte ergänze die Währung.',
@@ -1440,8 +1443,10 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
           'LABEL-FACEBOOK-OWN-WALL-CHECKBOX':'I would like to post to my business or personal Facebook wall',
           'LABEL-FACEBOOK-OWN-WALL-HINT':'(Note: The one you are currently loged in)',
           'LABEL-FACEBOOK-HOW-TO-SELL':'How would you like to sell your product?',
-          'LABEL-FACEBOOK-HOW-TO-SELL-CHECKBOX':'I would like to sell using Dawanda marketplace',
-          'LABEL-FACEBOOK-HOW-TO-SELL-HINT':'(Note: You have imported your product from Dawanda. Your post, pin, tweet can be sold using Dawanda marketplace..)',
+          'LABEL-FACEBOOK-HOW-TO-SELL-CHECKBOX-DAWANDA':'I would like to sell using Dawanda marketplace',
+          'LABEL-FACEBOOK-HOW-TO-SELL-HINT-DAWANDA':'(Note: You have imported your product from Dawanda. Your post, pin, tweet can be sold using Dawanda marketplace..)',
+          'LABEL-FACEBOOK-HOW-TO-SELL-CHECKBOX-ETSY':'I would like to sell using Etsy marketplace',
+          'LABEL-FACEBOOK-HOW-TO-SELL-HINT-ETSY':'(Note: You have imported your product from Etsy. Your post, pin, tweet can be sold using Etsy marketplace..)',
 
           // ERROR
           'NOTE-CURRENTLY-NO-UPDATE-FACEBOOK-POST':'Please note: There is currently no update functionality available for Facebook posts.',
@@ -1518,7 +1523,8 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
           'BREADCRUMB-CREATE-PRODUCT':'Create Product',
           'LABEL-PLACEHOLDER-PRODUCT-PRICE':'Enter price in the format eg 23.00 or 134.53',
           'LABEL-PRODUCT-IMPORT':'Import a product',
-          'LABEL-PRODUCT-IMPORT-HINT':'You can very easy import your product data from your Dawanda Shop. Just copy the URL of your product in the Dawanda Shop and click on Import product. Add tax and delivery option. And finally you can adjust your product image to optimize for the social media channels.',
+          'LABEL-PRODUCT-IMPORT-HINT':'You can very easy import your product data from your Etsy or Dawanda Shop. Just copy the URL of your product in the Etsy or Dawanda Shop and click on Import product. Add tax and delivery option. Your standard product image will be imported as well. If you would like you can adjust your product image to optimize for the social media channels.',
+          'LABEL-PRODUCT-IMPORT-FROM-HINT':'Import from the following platforms: ',
 
 
         // ERROR

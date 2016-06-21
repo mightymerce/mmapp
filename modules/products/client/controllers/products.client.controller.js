@@ -157,10 +157,15 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
                     $scope.varPostPublicationDate = postPublicationDate;
                     $scope.varPostChannel = postChannel;
                     $scope.currency = Currencys;
-                    $scope.productImport = false;
+                    $scope.productImportDawanda = false;
+                    $scope.productImportEtsy = false;
                     if ($scope.product.productImport === 'Dawanda')
                     {
-                      $scope.productImport = true;
+                      $scope.productImportDawanda = true;
+                    }
+                    if ($scope.product.productImport === 'Etsy')
+                    {
+                      $scope.productImportEtsy = true;
                     }
                   },
                   size: size,
@@ -247,7 +252,11 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
                 $scope.currency = Currencys;
                 if ($scope.product.productImport === 'Dawanda')
                 {
-                  $scope.productImport = true;
+                  $scope.productImportDawanda = true;
+                }
+                if ($scope.product.productImport === 'Etsy')
+                {
+                  $scope.productImportEtsy = true;
                 }
               },
               size: size,
@@ -852,7 +861,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       $scope.hideSpinner = false;
 
       console.log('product.client.controller - Start posting to Facebook');
-      ProductsServices.postToWall($scope.product, $scope.authentication.user.accessToken, $scope.category1, $scope.category2, $scope.category3, $scope.category4, $scope.category5, $scope.category6, $scope.category7, $scope.category8, $scope.category9, $scope.category10, $scope.category11, $scope.category12, $scope.merchantFBWall, $scope.merchantDawanda).then(function(promise) {
+      ProductsServices.postToWall($scope.product, $scope.authentication.user.accessToken, $scope.category1, $scope.category2, $scope.category3, $scope.category4, $scope.category5, $scope.category6, $scope.category7, $scope.category8, $scope.category9, $scope.category10, $scope.category11, $scope.category12, $scope.merchantFBWall, $scope.merchantDawanda, $scope.merchantEtsy).then(function(promise) {
         $scope.success = promise;
         $scope.hideSpinner = true;
       });
@@ -869,7 +878,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       $scope.hideSpinner = false;
 
       console.log('products.client.controller - postPostPinterest - Start');
-      ProductsServices.postToPinterest($scope.product, $scope.merchantDawanda).then(function(promise) {
+      ProductsServices.postToPinterest($scope.product, $scope.merchantDawanda, $scope.merchantEtsy).then(function(promise) {
         $scope.success = promise;
         $scope.hideSpinner = true;
       });
@@ -940,45 +949,84 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
     // ************************************
     // **                                **
     // **     Import from Dawanda        **
+    // **         or Etsy                **
     // **                                **
     // ************************************
     //
 
 
-    $scope.getDawandaProduct = function (isValid) {
+    $scope.getProductImport = function (isValid) {
 
       var parsedURL = new URL($scope.importURL);
-
       var array = parsedURL.pathname.split('/');
-      var dawandaProductIdarray = array[2].split('-');
-      var dawandaProductId = dawandaProductIdarray[0];
 
-      ProductsServices.dawandaGetSelectedProduct(dawandaProductId).then(function(promiseProduct) {
+      if (parsedURL.hostname === 'www.etsy.com') {
 
-        var jsonResponse = JSON.parse(promiseProduct);
+        var etsyProductId = array[3];
+        var etsyArray;
+        var etsyArrayImages;
 
-        $scope.productId = jsonResponse.response.result.product.id;
-        $scope.productTitle = jsonResponse.response.result.product.name;
-        $scope.productDescription = jsonResponse.response.result.product.description + '\r\n' +
-            jsonResponse.response.result.product.size_description  + '\r\n' +
-            jsonResponse.response.result.product.individualisation_description;
-        $scope.productPrice = jsonResponse.response.result.product.price.cents.toString().substring(0,jsonResponse.response.result.product.price.cents.toString().length-2) + '.' + jsonResponse.response.result.product.price.cents.toString().substring(jsonResponse.response.result.product.price.cents.toString().length-2);
-        //$scope.productCurrency = jsonResponse.response.result.product.price.currency_code.iso_code;
-        $scope.productItemInStock = 1;
-        $scope.productImport = 'Dawanda';
-        $scope.productImportURL = jsonResponse.response.result.product.product_url;
-        $scope.productMainImageURL = jsonResponse.response.result.product.default_image.full;
-        $scope.productMainImageURLFacebook = jsonResponse.response.result.product.default_image.product_l;
-        $scope.productMainImageURLTwitter = jsonResponse.response.result.product.default_image.product_l;
-        $scope.productMainImageURLPinterest = jsonResponse.response.result.product.default_image.big;
-        $scope.productMainImageURLEtsy = jsonResponse.response.result.product.default_image.full;
-        $scope.productMainImageURLDawanda = jsonResponse.response.result.product.default_image.full;
-        $scope.productMainImageURLCode = jsonResponse.response.result.product.default_image.product_l;
-        $scope.productMainImageAlt = jsonResponse.response.result.product.name;
+        ProductsServices.etsyGetSelectedProduct(etsyProductId).then(function(promiseProduct) {
 
-      });
+          //console.log(promiseProduct.body);
+          etsyArray = JSON.parse(promiseProduct.body);
+
+          ProductsServices.etsyGetSelectedProductImages(etsyProductId).then(function(promiseProductImages) {
+            etsyArrayImages = JSON.parse(promiseProductImages.body);
+            console.dir(etsyArrayImages);
+
+            $scope.productId = etsyArray.results[0].listing_id;
+            $scope.productTitle = etsyArray.results[0].title;
+            $scope.productDescription = etsyArray.results[0].description;
+            $scope.productPrice = etsyArray.results[0].price;
+            //$scope.productCurrency = etsyArray.results.currency_code;
+            $scope.productItemInStock = 1;
+            $scope.productImport = 'Etsy';
+            $scope.productImportURL = etsyArray.results[0].url;
+            $scope.productMainImageURL = etsyArrayImages.results[0].url_fullxfull;
+            $scope.productMainImageURLFacebook = etsyArrayImages.results[0].url_fullxfull;
+            $scope.productMainImageURLTwitter = etsyArrayImages.results[0].url_fullxfull;
+            $scope.productMainImageURLPinterest = etsyArrayImages.results[0].url_fullxfull;
+            $scope.productMainImageURLEtsy = etsyArrayImages.results[0].url_fullxfull;
+            $scope.productMainImageURLDawanda = etsyArrayImages.results[0].url_fullxfull;
+            $scope.productMainImageURLCode = etsyArrayImages.results[0].url_fullxfull;
+            $scope.productMainImageAlt = etsyArray.results[0].title;
+          });
+        });
+
+      } else if (parsedURL.hostname === 'de.dawanda.com') {
+
+        var dawandaProductIdarray = array[2].split('-');
+        var dawandaProductId = dawandaProductIdarray[0];
+
+        ProductsServices.dawandaGetSelectedProduct(dawandaProductId).then(function(promiseProduct) {
+
+          var jsonResponse = JSON.parse(promiseProduct);
+
+          $scope.productId = jsonResponse.response.result.product.id;
+          $scope.productTitle = jsonResponse.response.result.product.name;
+          $scope.productDescription = jsonResponse.response.result.product.description + '\r\n' +
+              jsonResponse.response.result.product.size_description  + '\r\n' +
+              jsonResponse.response.result.product.individualisation_description;
+          $scope.productPrice = jsonResponse.response.result.product.price.cents.toString().substring(0,jsonResponse.response.result.product.price.cents.toString().length-2) + '.' + jsonResponse.response.result.product.price.cents.toString().substring(jsonResponse.response.result.product.price.cents.toString().length-2);
+          //$scope.productCurrency = jsonResponse.response.result.product.price.currency_code.iso_code;
+          $scope.productItemInStock = 1;
+          $scope.productImport = 'Dawanda';
+          $scope.productImportURL = jsonResponse.response.result.product.product_url;
+          $scope.productMainImageURL = jsonResponse.response.result.product.default_image.full;
+          $scope.productMainImageURLFacebook = jsonResponse.response.result.product.default_image.product_l;
+          $scope.productMainImageURLTwitter = jsonResponse.response.result.product.default_image.product_l;
+          $scope.productMainImageURLPinterest = jsonResponse.response.result.product.default_image.big;
+          $scope.productMainImageURLEtsy = jsonResponse.response.result.product.default_image.full;
+          $scope.productMainImageURLDawanda = jsonResponse.response.result.product.default_image.full;
+          $scope.productMainImageURLCode = jsonResponse.response.result.product.default_image.product_l;
+          $scope.productMainImageAlt = jsonResponse.response.result.product.name;
+
+        });
+      } else {
+        $scope.error = 'Deine eingegebene URL ist leider nicht von Etsy oder Dawanda. Bitte teile uns gerne mit von welcher Plattform du Produkte importieren möchtest. So können wir unseren Service stetig für dich verbessern.'
+      }
     };
-
 
     // Close Modal
     $scope.cancelModal = function () {

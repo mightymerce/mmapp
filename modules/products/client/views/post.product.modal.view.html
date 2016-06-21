@@ -92,14 +92,24 @@
           <div ng-show="varPostChannel === 'Pinterest'  && varPostStatus === 'New'">
             <span translate>NOTE-POST-WILL-AUTOMATICALLY-BE-UPDATED</span>
           </div>
-          <div ng-show="productImport && varPostChannel === 'Pinterest'  && varPostStatus === 'New'">
+          <div ng-show="productImportDawanda && varPostChannel === 'Pinterest'  && varPostStatus === 'New'">
             <br><br>
             <h4 translate>LABEL-FACEBOOK-HOW-TO-SELL</h4>
             <div class="col-lg-12">
-              <input type="checkbox" ng-model="merchantDawanda"> <label translate>LABEL-FACEBOOK-HOW-TO-SELL-CHECKBOX</label>
+              <input type="checkbox" ng-model="merchantDawanda"> <label translate>LABEL-FACEBOOK-HOW-TO-SELL-CHECKBOX-DAWANDA</label>
             </div>
             <div class="col-lg-12">
-              <span translate>LABEL-FACEBOOK-HOW-TO-SELL-HINT</span><br><br><br>
+              <span translate>LABEL-FACEBOOK-HOW-TO-SELL-HINT-DAWANDA</span><br><br><br>
+            </div>
+          </div>
+          <div ng-show="productImportEtsy && varPostChannel === 'Pinterest'  && varPostStatus === 'New'">
+            <br><br>
+            <h4 translate>LABEL-FACEBOOK-HOW-TO-SELL</h4>
+            <div class="col-lg-12">
+              <input type="checkbox" ng-model="merchantEtsy"> <label translate>LABEL-FACEBOOK-HOW-TO-SELL-CHECKBOX-ETSY</label>
+            </div>
+            <div class="col-lg-12">
+              <span translate>LABEL-FACEBOOK-HOW-TO-SELL-HINT-ETSY</span><br><br><br>
             </div>
           </div>
           <div ng-show="varPostChannel === 'Twitter'  && varPostStatus === 'Wait'">
@@ -190,13 +200,22 @@
         </div>
         <div class="modal-body-white">
           <div ng-show="varPostChannel === 'Facebook'">
-            <div ng-show="productImport">
+            <div ng-show="productImportDawanda">
               <h4 translate>LABEL-FACEBOOK-HOW-TO-SELL</h4>
               <div class="col-lg-12">
-                <input type="checkbox" ng-model="merchantDawanda"> <label translate>LABEL-FACEBOOK-HOW-TO-SELL-CHECKBOX</label>
+                <input type="checkbox" ng-model="merchantDawanda"> <label translate>LABEL-FACEBOOK-HOW-TO-SELL-CHECKBOX-DAWANDA</label>
               </div>
               <div class="col-lg-12">
-                <span translate>LABEL-FACEBOOK-HOW-TO-SELL-HINT</span><br><br><br>
+                <span translate>LABEL-FACEBOOK-HOW-TO-SELL-HINT-DAWANDA</span><br><br><br>
+              </div>
+            </div>
+            <div ng-show="productImportEtsy">
+              <h4 translate>LABEL-FACEBOOK-HOW-TO-SELL</h4>
+              <div class="col-lg-12">
+                <input type="checkbox" ng-model="merchantEtsy"> <label translate>LABEL-FACEBOOK-HOW-TO-SELL-CHECKBOX-ETSY</label>
+              </div>
+              <div class="col-lg-12">
+                <span translate>LABEL-FACEBOOK-HOW-TO-SELL-HINT-ETSY</span><br><br><br>
               </div>
             </div>
             <div>
