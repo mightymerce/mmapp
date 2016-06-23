@@ -106,28 +106,88 @@
                               </a>
                             </div>
                             <br><br><br>
-                            <div ng-show="false" class="shariff clear" data-services="[&quot;facebook&quot;,&quot;twitter&quot;,&quot;googleplus&quot;,&quot;mail&quot;,&quot;info&quot;]" data-theme="standard" data-orientation="horizontal">
-                              <ul class="theme-color orientation-horizontal col-5">
-                                <li class="shariff-button facebook">
-                                  <a href="https://www.facebook.com/sharer/sharer.php?u={{shareURL}}" data-rel="popup" title="Bei Facebook teilen" role="button" aria-label="Bei Facebook teilen">
-                                    <span class="fa fa-facebook"></span>
-                                    <span class="share_text">Produkt post</span>&nbsp;
-                                  </a>
-                                </li>
-                                <li class="shariff-button pinterest">
-                                  <a href="http://pinterest.com/pin/create/button/?url={{shareURL}}" data-rel="popup" title="Bei Pinterest teilen" role="button" aria-label="Bei Pinterest teilen">
-                                    <span class="fa fa-pinterest"></span>
-                                    <span class="share_text">Produkt pin</span>&nbsp;
-                                  </a>
-                                </li>
-                                <li class="shariff-button twitter">
-                                  <a href="https://twitter.com/intent/tweet?url={{shareURL}}" data-rel="popup" title="Bei Twitter teilen" role="button" aria-label="Bei Twitter teilen">
-                                    <span class="fa fa-twitter"></span>
-                                    <span class="share_text">Produkt tweet</span>&nbsp;
-                                  </a>
-                                </li>
-                              </ul>
+                            <div class="row">
+                              <div class="col-lg-2">
+                                <a class="azm-social azm-size-48 azm-r-square azm-facebook"
+                                        socialshare
+                                        socialshare-provider="facebook"
+                                        socialshare-type="feed"
+                                        socialshare-via="1679726155619376"
+                                        socialshare-media="{{linkMainImageUrlFacebook}}"
+                                        socialshare-text="{{product.productTitle}}"
+                                        socialshare-description="{{product.productDescription}}"
+                                        socialshare-caption="{{user.displayName}}"
+                                        socialshare-url="{{linkUrlSocialShareFacebook}}"
+                                        socialshare-redirect-uri="{{linkUrlSocialShareFacebook}}"
+                                        socialshare-popup-height="400"
+                                        socialshare-popup-width="500"
+                                        socialshare-trigger="click" >
+                                  <i class="fa fa-facebook"></i>
+                                </a>
+                              </div>
+                              <div class="col-lg-2">
+                                <a class="azm-social  azm-size-48 azm-r-square azm-pinterest"
+                                        socialshare
+                                        socialshare-media="{{linkMainImageUrlPinterest}}"
+                                        socialshare-provider="pinterest"
+                                        socialshare-text="{{product.productDescription}}"
+                                        socialshare-url="{{linkMainImageUrlPinterest}}"
+                                        socialshare-popup-height="400"
+                                        socialshare-popup-width="500"
+                                        socialshare-trigger="click" >
+                                  <i class="fa fa-pinterest"></i>
+                                </a>
+                              </div>
+                              <div class="col-lg-2">
+                                <a class="azm-social  azm-size-48 azm-r-square azm-twitter"
+                                        socialshare
+                                        socialshare-provider="twitter"
+                                        socialshare-hashtags="mightymerce, {{product.productTitle}}, {{user.displayName}}"
+                                        socialshare-via="twitter"
+                                        socialshare-text="{{product.productTitle}}"
+                                        socialshare-url="{{linkUrlSocialShareTwitter}}"
+                                        socialshare-popup-height="400"
+                                        socialshare-popup-width="500"
+                                        socialshare-trigger="click">
+                                  <i class="fa fa-twitter"></i>
+                                </a>
+                              </div>
+                              <div class="col-lg-2">
+                                <a class="azm-social  azm-size-48 azm-r-square azm-email-1"
+                                        socialshare
+                                        socialshare-provider="email"
+                                        socialshare-body="{{product.productDescription}}"
+                                        socialshare-to="eingabe@email.ing"
+                                        socialshare-media="{{linkMainImageUrlFacebook}}"
+                                        socialshare-subject="{{product.productTitle}}"
+                                        socialshare-popup-height="400"
+                                        socialshare-popup-width="500">
+                                  <i class="fa fa-envelope"></i>
+                                </a>
+                              </div>
+                              <div class="col-lg-2">
+                                <a class="azm-social azm-size-48 azm-r-square azm-skype"
+                                        socialshare
+                                        socialshare-provider="skype"
+                                        socialshare-url="{{linkUrlSocialShareSkype}}"
+                                        socialshare-text="{{product.productTitle}}"
+                                        socialshare-popup-height="800"
+                                        socialshare-popup-width="400"
+                                        socialshare-trigger="click" >
+                                  <i class="fa fa-skype"></i>
+                                </a>
+                              </div>
+                              <div class="col-lg-2">
+                                <a class="azm-social azm-size-48 azm-r-square azm-whatsapp"
+                                   socialshare
+                                   socialshare-provider="whatsapp"
+                                   socialshare-url="{{linkUrlSocialShareWhatsapp}}"
+                                   socialshare-text="{{product.productTitle}}" >
+                                  <i class="fa fa-whatsapp"></i>
+                                </a>
+                              </div>
                             </div>
+                            <p>* Whatsapp teilen nur auf iOS oder Android</p>
                             <br><br>
                             <input ng-hide="true" type="text" value="0" class="form-control lbl-subtotal-PP" hidden />
                             <input ng-hide="true" type="text" value="0" class="form-control lbl-total-PP" hidden />

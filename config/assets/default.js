@@ -149,10 +149,13 @@ module.exports = {
         'public/lib/plugin/jsnumberformatter/jsnumberformatter.locale.decimal.superset.js',
         'public/lib/plugin/checkout/jquery.shorten.js',
         'public/lib/plugin/checkout/validator.min.js',
-        'public/lib/plugin/checkout/script.js'
+        'public/lib/plugin/checkout/script.js',
 
         // Social Media Icon - Sharrif
         //'public/lib/plugin/shariff/shariff.min.js'
+
+        // Social Share
+        'public/lib/angular-socialshare/dist/angular-socialshare.js'
 
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']

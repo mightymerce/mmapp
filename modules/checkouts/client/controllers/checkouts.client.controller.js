@@ -1,8 +1,8 @@
 'use strict';
 
 // Checkouts controller
-angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$window', '$state', '$scope', '$stateParams', '$location', '$http', 'Authentication', 'Checkouts', 'ChoutServices', 'PaypalServicesSetExpressCheckout', 'PaypalServicesGetExpressCheckoutDetails', 'Products', 'Users', 'Orders', 'Legals', '$cookieStore', 'Currencys',
-  function ($rootScope, $window, $state, $scope, $stateParams, $location, $http, Authentication, Checkouts, ChoutServices, PaypalServicesSetExpressCheckout, PaypalServicesGetExpressCheckoutDetails, Products, Users, Orders, Legals, $cookieStore, Currencys) {
+angular.module('checkouts').controller('CheckoutsController', ['$rootElement', '$rootScope', '$window', '$state', '$scope', '$stateParams', '$location', '$http', 'Authentication', 'Checkouts', 'ChoutServices', 'PaypalServicesSetExpressCheckout', 'PaypalServicesGetExpressCheckoutDetails', 'Products', 'Users', 'Orders', 'Legals', '$cookieStore', 'Currencys', 'Socialshare',
+  function ($rootElement, $rootScope, $window, $state, $scope, $stateParams, $location, $http, Authentication, Checkouts, ChoutServices, PaypalServicesSetExpressCheckout, PaypalServicesGetExpressCheckoutDetails, Products, Users, Orders, Legals, $cookieStore, Currencys, Socialshare) {
     $scope.authentication = Authentication;
     $scope.totalPrice = '';
 
@@ -74,6 +74,18 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootScope', '$w
           } else {
             linkMainImageUrl = $location.protocol() + '://' + $location.host();
           }
+
+          $scope.linkUrlSocialShareFacebook = linkUrl + $scope.product._id + '?channel=facebook';
+          $scope.linkUrlSocialShareTwitter = linkUrl + $scope.product._id + '?channel=twitter';
+          $scope.linkUrlSocialSharePinterest = linkUrl + $scope.product._id + '?channel=pinterest';
+          $scope.linkUrlSocialShareCode = linkUrl + $scope.product._id + '?channel=code';
+          $scope.linkUrlSocialShareXing = linkUrl + $scope.product._id + '?channel=xing';
+          $scope.linkUrlSocialShareWordpress = linkUrl + $scope.product._id + '?channel=wordpress';
+          $scope.linkUrlSocialShareWhatsapp = linkUrl + $scope.product._id + '?channel=whatsapp';
+          $scope.linkUrlSocialShareSkype = linkUrl + $scope.product._id + '?channel=skype';
+          $scope.linkMainImageUrlFacebook = linkMainImageUrl + $scope.product.productMainImageURLFacebook.substring(1);
+          $scope.linkMainImageUrlTwitter = linkMainImageUrl + $scope.product.productMainImageURLTwitter.substring(1);
+          $scope.linkMainImageUrlPinterest = linkMainImageUrl + $scope.product.productMainImageURLPinterest.substring(1);
 
           $(document).ready(function($) {
             // todo - wie need channel Pinterest in URL. Can't distinguish at the moment
