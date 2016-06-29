@@ -459,6 +459,7 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootElement', '
           $scope.ordereMailCustomerShipMessage = '';
           $scope.userId = $cookieStore.get('paypal.user.userId');
           $scope.orderCustomerPayerMessage = $cookieStore.get('paypal.PAYMENTREQUEST_0_NOTETEXT');
+          $scope.orderSellereMail = $scope.user.username;
 
           $scope.orderProductPrice = $cookieStore.get('paypal.product.productPrice');
 
