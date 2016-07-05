@@ -208,7 +208,7 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
 
               if(merchantFBWall) {
                 var FB = $window.FB;
-
+/*
                 // Make post to facebook and wait for answer
                 FB.api('/me/feed', 'post', params, function (response) {
                   if (!response || response.error) {
@@ -237,6 +237,41 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                     });
                   }
                 });
+*/
+                  FB.ui({
+                      method: 'feed',
+                      display: 'popup',
+                      link: data.id,
+                      picture: linkMainImageUrl,
+                      name: product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode,
+                      description: product.productDescription.substring(0,220) + ' ' + 'BUY NOW',
+                      type: 'product'
+                  }, function(response){if (!response || response.error) {
+                      console.log('product.client.service - postToWall - error occured post to Facebook');
+                      deferred.reject('There was an error creating Facebook post. Please try again!');
+                  } else {
+                      // Create new Post object
+                      var post = new Posts({
+                          product: product._id,
+                          channel: '563c7fab09f30c482f304273',
+                          postChannel: 'Facebook',
+                          postId: response.id,
+                          postStatus: 'Active',
+                          postPublicationDate: new Date(),
+                          postExternalPostKey: response.id,
+                          postInformation: ''
+                      });
+
+                      // Save post to MM
+                      post.$save(function (response) {
+                          console.log('product.client.service - postToWall - save post on MM success Post ID: ' + response._id);
+                          deferred.resolve('Success posting to Facebook! - Mightymerce Post-Id: ' +response._id);
+                      }, function (errorResponse) {
+                          console.log('product.client.service - postToWall - save post on MM error: ' + errorResponse);
+                          deferred.reject(errorResponse);
+                      });
+                  }
+                  });
               }
 
               var FBPageId1 = '';
