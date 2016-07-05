@@ -1216,7 +1216,7 @@ a.text-#000000:hover {
   margin: 0 auto;
   display: block;
   position: relative;
-  max-height: 180px;
+  max-height: 230px;
 }
 
 @media (max-width: 480px) {

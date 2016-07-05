@@ -239,26 +239,30 @@ angular.module('products').factory('ProductsServices', ['$http', '$q', 'Posts', 
                 });
 */
                   FB.ui({
-                      method: 'feed',
+                      method: 'share',
+
+
                       display: 'popup',
-                      link: data.id,
+                      href: data.id,
                       picture: linkMainImageUrl,
-                      name: product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode,
+                      title: product.productTitle + ' für ' + product.productPrice + ' ' + response.currencyCode,
                       description: product.productDescription.substring(0,220) + ' ' + 'BUY NOW',
                       type: 'product'
-                  }, function(response){if (!response || response.error) {
+
+                  }, function(response){
+                    if (!response || response.error_message) {
                       console.log('product.client.service - postToWall - error occured post to Facebook');
                       deferred.reject('There was an error creating Facebook post. Please try again!');
-                  } else {
+                    } else {
                       // Create new Post object
                       var post = new Posts({
                           product: product._id,
                           channel: '563c7fab09f30c482f304273',
                           postChannel: 'Facebook',
-                          postId: response.id,
+                          postId: response.post_id,
                           postStatus: 'Active',
                           postPublicationDate: new Date(),
-                          postExternalPostKey: response.id,
+                          postExternalPostKey: response.post_id,
                           postInformation: ''
                       });
 
