@@ -7,6 +7,14 @@
  *
 */
 
+
+.error-text {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: red;
+}
+
 .pin {
     display: inline-block;
     background: #FEFEFE;
@@ -577,7 +585,7 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
     margin-left: 0 !important;
 }
 .top-navigation .wrapper.wrapper-content {
-    padding: 40px;
+    padding: 10px;
 }
 .top-navigation.body-small .wrapper.wrapper-content,
 .body-small .top-navigation .wrapper.wrapper-content {
@@ -1973,13 +1981,13 @@ a.DTTT_button:hover:not(.DTTT_disabled) {
     box-sizing: border-box;
 }
 .onoffswitch-inner:before {
-    content: "ON";
+    content: "JA";
     padding-left: 7px;
     background-color: #1AB394;
     color: #FFFFFF;
 }
 .onoffswitch-inner:after {
-    content: "OFF";
+    content: "NEIN";
     padding-right: 7px;
     background-color: #FFFFFF;
     color: #919191;
@@ -3448,10 +3456,10 @@ video {
     overflow-x: hidden;
 }
 .wrapper {
-    padding: 0 20px;
+    padding: 0 0px;
 }
 .wrapper-content {
-    padding: 20px 10px 40px;
+    padding: 0px 0px 0px;
 }
 #page-wrapper {
     padding: 0 15px;
@@ -4471,7 +4479,7 @@ body.mini-navbar.fixed-sidebar .logo-element {
     font-size: 170px;
 }
 .wrapper .middle-box {
-    margin-top: 140px;
+    margin-top: 40px;
 }
 .lock-word {
     z-index: 10;

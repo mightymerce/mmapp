@@ -2,23 +2,37 @@
 
 
   <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
+
+    <div class="col-lg-4">
       <h2 translate>BREADCRUMB-YOUR-PRODUCTS</h2>
+    </div>
+    <div class="col-lg-8" align="right">
+      <br><br>
       <ol class="breadcrumb">
-        <li>
-          <a href="dashboard" translate>LABEL-HEADER-DASHBOARD</a>
-        </li>
         <li class="active">
           <strong translate>BREADCRUMB-PRODUCTS</strong>
         </li>
       </ol>
     </div>
-    <div class="col-lg-2"></div>
   </div>
+
 
 
     <!-- <div class="pull-right" ng-show="authentication.user._id == product.user._id"> -->
       <div class="wrapper wrapper-content animated fadeInRight ecommerce">
+        <br>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+              <div align="right">
+                <a class="btn btn-w-m btn-warning" ui-sref="subscription" ng-hide="showAddProduct"><span translate>BUTTON-UPGRADE-ACCOUNT</span>&nbsp;<i class="fa fa-angle-double-right"></i></a>
+                <button type="button" class="btn btn-w-m btn-warning btn-lg btn-block" ui-sref="products.create" ng-show="showAddProduct"><span translate>BUTTON-ADD-PRODUCT</span>&nbsp;<i class="fa fa-angle-double-right"></i></button>
+              </div>
+              <br>
+            </div>
+          </div>
+        </div>
+
         <div class="ibox-content m-b-sm border-bottom" ng-show="false">
           <div class="row">
             <div class="col-sm-4">
@@ -72,7 +86,7 @@
                           <a class="btn btn-warning btn-sm" ui-sref="products.view({productId: product._id})">
                             <i class="fa fa-cloud-upload"></i><span translate>BUTTON-CREATE-POST</span>
                           </a>
-                          <a class="btn btn-default btn-outline btn-sm" ui-sref="products.edit({productId: product._id})">
+                          <a class="btn btn-primary btn-outline btn-sm" ui-sref="products.edit({productId: product._id})">
                             <i class="fa fa-cogs"></i><span translate>BUTTON-EDIT-PRODUCT</span>
                           </a>
                         <!--  <button class="btn btn-default btn-outline btn-sm demo4">
@@ -92,6 +106,7 @@
                 <a class="btn btn-w-m btn-warning" ui-sref="subscription" ng-hide="showAddProduct"><span translate>BUTTON-UPGRADE-ACCOUNT</span>&nbsp;<i class="fa fa-angle-double-right"></i></a>
                 <button type="button" class="btn btn-w-m btn-warning" ui-sref="products.create" ng-show="showAddProduct"><span translate>BUTTON-ADD-PRODUCT</span>&nbsp;<i class="fa fa-angle-double-right"></i></button>
               </div>
+              <br><br>
             </div>
           </div>
         </div>

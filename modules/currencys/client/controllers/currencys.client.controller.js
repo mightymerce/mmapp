@@ -18,7 +18,8 @@ angular.module('currencys').controller('CurrencysController', ['$scope', '$state
       // Create new Currency object
       var currency = new Currencys({
         currencyCode: this.currencyCode,
-        currencyValue: this.currencyValue
+        currencyValue: this.currencyValue,
+        currencyStandard: this.currencyStandard
       });
 
       // Redirect after save
@@ -65,6 +66,7 @@ angular.module('currencys').controller('CurrencysController', ['$scope', '$state
 
       currency.currencyCode = $scope.currency.currencyCode;
       currency.currencyValue = $scope.currency.currencyValue;
+      currency.currencyStandard = $scope.currency.currencyStandard;
 
       currency.$update(function () {
         $scope.success = 'You successfully updated your currency option.';
@@ -79,6 +81,21 @@ angular.module('currencys').controller('CurrencysController', ['$scope', '$state
       $scope.currencys = Currencys.query({
         'user': $scope.authentication.user._id
       });
+
+      Currencys.query({
+        'user': $scope.authentication.user._id
+      }, function(currency) {
+
+        $scope.currencys = currency;
+
+        angular.forEach(currency,function(value,index){
+
+          if (value.currencyStandard === true){
+            $scope.currencyStandard = value;
+          }
+
+        });
+      });
     };
 
     // Find existing Currency
@@ -86,6 +103,43 @@ angular.module('currencys').controller('CurrencysController', ['$scope', '$state
       $scope.currency = Currencys.get({
         currencyId: $stateParams.currencyId
       });
+
+    };
+
+    $scope.updateCurrencyStandard = function () {
+      $scope.error = null;
+
+      var currency = {};
+
+      angular.forEach($scope.currencys,function(value,index){
+
+        if (value === $scope.currencyStandard){
+
+          currency = $scope.currencyStandard;
+          currency.currencyStandard = true;
+
+          currency.$update(function () {
+            $scope.success = 'You successfully updated your currency option.';
+
+          }, function (errorResponse) {
+            $scope.error = errorResponse.data.message;
+          });
+        } else {
+
+          currency = value;
+          currency.currencyStandard = false;
+
+          currency.$update(function () {
+            $scope.success = 'You successfully updated your currency option.';
+
+          }, function (errorResponse) {
+            $scope.error = errorResponse.data.message;
+          });
+        }
+
+      });
+
+
     };
   }
 ]);

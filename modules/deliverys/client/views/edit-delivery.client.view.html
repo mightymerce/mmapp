@@ -70,7 +70,13 @@
                 </div>
               </div>
               <div class="form-group"><label class="col-sm-3 control-label"><span translate>LABEL-CURRENCY</span> *</label>
-                <div class="col-sm-7"><input id="deliveryCurrency" class="form-control" placeholder="EUR" disabled></div>
+                <div class="col-sm-7"><input type="text" ng-model="currency.currencyCode" id="currencyCode" class="form-control" placeholder="" disabled></div>
+              </div>
+              <div class="form-group"><label class="col-sm-3 control-label"><span translate>LABEL-STANDARD</span></label>
+                <div class="col-sm-7">
+                  <input type="checkbox" ng-model="delivery.deliveryStandard" id="deliveryStandard" class="form-control"></div>
+                <div class="col-sm-2">
+                </div>
               </div>
             </div>
           </div>

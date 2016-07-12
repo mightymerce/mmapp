@@ -1,8 +1,8 @@
 'use strict';
 
 // Deliverys controller
-angular.module('deliverys').controller('DeliverysController', ['$scope', '$stateParams', '$location', 'Authentication', 'Deliverys', 'Users',
-  function ($scope, $stateParams, $location, Authentication, Deliverys, Users) {
+angular.module('deliverys').controller('DeliverysController', ['$scope', '$stateParams', '$location', 'Authentication', 'Deliverys', 'Users', 'Currencys',
+  function ($scope, $stateParams, $location, Authentication, Deliverys, Users, Currencys) {
     $scope.authentication = Authentication;
 
     // check if all tutorial fields are set
@@ -16,6 +16,18 @@ angular.module('deliverys').controller('DeliverysController', ['$scope', '$state
     } else {
       $scope.basicData = false;
     }
+
+    Currencys.query({
+      'user': $scope.authentication.user._id
+    }, function(currency) {
+      //$scope.productCurrency = currency;
+
+      angular.forEach(currency,function(value,index){
+        if (value.currencyStandard === true){
+          $scope.currency = value;
+        }
+      });
+    });
 
     // Create new Delivery
     $scope.create = function (isValid) {
@@ -32,7 +44,8 @@ angular.module('deliverys').controller('DeliverysController', ['$scope', '$state
         deliveryTitle: this.deliveryTitle,
         deliveryTime: this.deliveryTime,
         deliveryCountry: this.deliveryCountry,
-        deliveryCost: this.deliveryCost
+        deliveryCost: this.deliveryCost,
+        deliveryStandard: this.deliveryStandard
       });
 
       // Redirect after save
@@ -92,6 +105,7 @@ angular.module('deliverys').controller('DeliverysController', ['$scope', '$state
       delivery.deliveryTime = $scope.delivery.deliveryTime;
       delivery.deliveryCountry = $scope.delivery.deliveryCountry;
       delivery.deliveryCost = $scope.delivery.deliveryCost;
+      delivery.deliveryStandard = $scope.delivery.deliveryStandard;
 
       console.log('delivery.client.controller - update - scope deliver object: ' +$scope.delivery.deliveryTitle);
 
@@ -113,6 +127,18 @@ angular.module('deliverys').controller('DeliverysController', ['$scope', '$state
     $scope.findOne = function () {
       $scope.delivery = Deliverys.get({
         deliveryId: $stateParams.deliveryId
+      });
+
+      Currencys.query({
+        'user': $scope.authentication.user._id
+      }, function(currency) {
+        //$scope.productCurrency = currency;
+
+        angular.forEach(currency,function(value,index){
+          if (value.currencyStandard === true){
+            $scope.currency = value;
+          }
+        });
       });
     };
   }

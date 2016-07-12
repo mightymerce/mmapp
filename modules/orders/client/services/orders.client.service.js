@@ -129,7 +129,7 @@ angular.module('orders').factory('OrdersServices',
 
         var promise = $http.post('/api/auth/sendordersubmit', {
           userDisplayName: userDisplayname,
-          ordereMail: 'mywagi@gmail.com',
+          ordereMail: order.ordereMail,
           //ordereMail: order.ordereMail,
           orderName: order.orderPayerFirstName + ' ' + order.orderPayerLastName,
           orderStreet: order.orderShipToStreet,

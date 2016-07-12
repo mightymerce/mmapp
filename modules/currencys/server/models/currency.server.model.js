@@ -24,6 +24,11 @@ var CurrencySchema = new Schema({
     trim: true,
     default: ''
   },
+  currencyStandard: {
+    type: Boolean,
+    trim: true,
+    default: false
+  },
   currencyActive: {
     type: String,
     trim: true,

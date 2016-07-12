@@ -34,6 +34,11 @@ var DeliverySchema = new Schema({
     trim: true,
     default: ''
   },
+  deliveryStandard: {
+    type: Boolean,
+    trim: true,
+    default: false
+  },
   user: {
     type: Schema.ObjectId,
     ref: 'User'

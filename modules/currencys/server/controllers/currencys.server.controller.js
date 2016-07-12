@@ -45,6 +45,7 @@ exports.update = function (req, res) {
 
   currency.currencyCode = req.body.currencyCode;
   currency.currencyValue = req.body.currencyValue;
+  currency.currencyStandard = req.body.currencyStandard;
 
   currency.save(function (err) {
     if (err) {

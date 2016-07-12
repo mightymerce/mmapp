@@ -46,6 +46,7 @@ exports.update = function (req, res) {
   delivery.deliveryTime = req.body.deliveryTime;
   delivery.deliveryCountry = req.body.deliveryCountry;
   delivery.deliveryCost = req.body.deliveryCost;
+  delivery.deliveryStandard = req.body.deliveryStandard;
 
   delivery.save(function (err) {
     if (err) {

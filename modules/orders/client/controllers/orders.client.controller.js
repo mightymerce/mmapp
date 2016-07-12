@@ -198,14 +198,32 @@ angular.module('orders')
     // Find existing Order for logged in User
     $scope.find = function () {
 
+      $scope.orderShipped = [];
+      $scope.orderReturned = [];
+      $scope.orderCreated = [];
+
       // If user is signed in then redirect back home
       if (!$scope.authentication.user) {
         // And redirect to the previous or home page
         $state.go('home', $state.previous.params);
       }
       else {
-        $scope.orders = Orders.query({
+        Orders.query({
           'user': $scope.authentication.user._id
+        }, function(orders) {
+          $scope.orders = orders;
+
+          angular.forEach(orders,function(value,index){
+            if (value.orderStatus === 'CREATED'){
+              $scope.orderCreated.push(value);
+            }
+            if (value.orderStatus === 'SHIPPED'){
+              $scope.orderShipped.push(value);
+            }
+            if (value.orderStatus === 'RETURNED'){
+              $scope.orderReturned.push(value);
+            }
+          });
         });
       }
     };

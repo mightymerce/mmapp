@@ -34,8 +34,8 @@
               <div class="ibox-tools"></div>
             </div>
             <div class="ibox-content">
-              <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-DELIVERY-TITLE</span> *</label>
-                <div class="col-sm-8">
+              <div class="form-group"><label class="col-sm-3 control-label"><span translate>LABEL-DELIVERY-TITLE</span> *</label>
+                <div class="col-sm-7">
                   <input type="text" ng-model="deliveryTitle" id="deliveryTitle" class="form-control" placeholder="" required></div>
                 <div ng-messages="deliveryForm.deliveryTitle.$error" role="alert">
                   <p class="help-block error-text" ng-message="required" translate>VALIDATION-DELIVERY-TITLE</p>
@@ -43,8 +43,8 @@
                 <div class="col-sm-2">
                 </div>
               </div>
-              <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-DELIVERY-DURATION</span> *</label>
-                <div class="col-sm-8">
+              <div class="form-group"><label class="col-sm-3 control-label"><span translate>LABEL-DELIVERY-DURATION</span> *</label>
+                <div class="col-sm-7">
                   <input type="text" ng-model="deliveryTime" id="deliveryTime" class="form-control" placeholder="" required></div>
                 <div ng-messages="deliveryForm.deliveryTime.$error" role="alert">
                   <p class="help-block error-text" ng-message="required" translate>VALIDATION-DELIVERY-DURATION</p>
@@ -52,14 +52,14 @@
                 <div class="col-sm-2">
                 </div>
               </div>
-              <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-DELIVERY-COUNTRY</span> *</label>
-                <div class="col-sm-8"><input ng-model="deliveryCountry" id="deliveryCountry" class="form-control" placeholder="" required></div>
+              <div class="form-group"><label class="col-sm-3 control-label"><span translate>LABEL-DELIVERY-COUNTRY</span> *</label>
+                <div class="col-sm-7"><input ng-model="deliveryCountry" id="deliveryCountry" class="form-control" placeholder="" required></div>
                 <div ng-messages="deliveryForm.deliveryCountry.$error" role="alert">
                   <p class="help-block error-text" ng-message="required" translate>VALIDATION-DELIVERY-COUNTRY</p>
                 </div>
               </div>
-              <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-DELIVERY-COST</span> *</label>
-                <div class="col-sm-8"><input ng-model="deliveryCost" type="text" pattern="[0-9]+([.][0-9]+)*" id="deliveryCost" class="form-control" placeholder="" required></div>
+              <div class="form-group"><label class="col-sm-3 control-label"><span translate>LABEL-DELIVERY-COST</span> *</label>
+                <div class="col-sm-7"><input ng-model="deliveryCost" type="text" pattern="[0-9]+([.][0-9]+)*" id="deliveryCost" class="form-control" placeholder="" required></div>
                 <div class="col-sm-2">
                   <div class="tooltip-demo">
                     <button type="button" class="btn btn-default" tooltip-placement="top" uib-tooltip="{{'LABEL-TOOLTIP-COST-FORMAT' | translate}}">i</button>
@@ -70,7 +70,13 @@
                 </div>
               </div>
               <div class="form-group"><label class="col-sm-3 control-label"><span translate>LABEL-CURRENCY</span> *</label>
-                <div class="col-sm-7"><input id="deliveryCurrency" class="form-control" placeholder="EUR" disabled></div>
+                <div class="col-sm-7"><input type="text" ng-model="currency.currencyCode" id="currencyCode" class="form-control" placeholder="" disabled></div>
+              </div>
+              <div class="form-group"><label class="col-sm-3 control-label"><span translate>LABEL-STANDARD</span></label>
+                <div class="col-sm-7">
+                  <input type="checkbox" ng-model="delivery.deliveryStandard" id="deliveryStandard" class="form-control"></div>
+                <div class="col-sm-2">
+                </div>
               </div>
             </div>
           </div>

@@ -1,13 +1,14 @@
 <section ng-controller="ProductsController">
+
   <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-4">
       <h2 translate>BREADCRUMB-PRODUCTS</h2>
+    </div>
+    <div class="col-lg-8" align="right">
+      <br><br>
       <ol class="breadcrumb">
         <li>
-          <a href="dashboard" translate>LABEL-HEADER-DASHBOARD</a>
-        </li>
-        <li>
-          <strong translate>BREADCRUMB-PRODUCTS</strong>
+          <a href="products" translate>BREADCRUMB-PRODUCTS</a>
         </li>
         <li class="active">
           <strong translate>BREADCRUMB-CREATE-PRODUCT</strong>
@@ -15,53 +16,58 @@
       </ol>
     </div>
   </div>
-  <div class="wrapper wrapper-content animated fadeInRight ecommerce">
-    <div class="ibox-content m-b-sm border-bottom">
-      <h3 translate>LABEL-PRODUCT-IMPORT</h3>
-      <div class="row">
-        <div class="col-lg-12">
-          <div>
-            <br><span translate>LABEL-PRODUCT-IMPORT-FROM-HINT</span><img width="20px" alt="" class="" src="/modules/core/client/img/etsy-icon.jpeg"/> <img width="20px" alt="" class="" src="/modules/core/client/img/dawanda-icon.png"/><br><br>
-          </div>
+  <br><br>
+  <div class="row wrapper wrapper-content animated fadeInRight ecommerce">
+
+      <div class="col-lg-4">
+        <a class="btn btn-primary btn-outline btn-block" style="border-width: 2px" translate>BUTTON-TAB-MAIN-DATA</a>
+      </div>
+      <div class="col-lg-4">
+        <a class="btn btn-default btn-outline btn-block" translate>BUTTON-TAB-IMAGES</a>
+      </div>
+      <div class="col-lg-4">
+        <a class="btn btn-default btn-outline btn-block" translate>BUTTON-TAB-POSTS</a>
+      </div>
+
+  </div>
+  <div class=" wrapper wrapper-content animated fadeInRight ecommerce">
+
+
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5 translate>LABEL-PRODUCT-IMPORT</h5>
+        <div class="ibox-tools">
+          <a class="fa fa-chevron-up" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"></a>
         </div>
-        <div class="col-lg-12">
-          <div>
-            <div class="col-sm-8">
-              <input type="text" ng-model="importURL" id="importURL" class="form-control" placeholder="http://">
-            </div>
-            <div class="col-sm-4">
-              <div>
-                <a class="btn btn-w-m btn-warning" ng-click="getProductImport()"><span translate>BUTTON-IMPORT-PRODUCT</span></a>
+      </div>
+      <div class="ibox-content">
+        <div class="collapse" id="collapseExample">
+          <div class="card card-block">
+            <span translate>LABEL-PRODUCT-IMPORT-FROM-HINT</span><br><br>
+            <div class="row">
+              <div class="col-sm-8">
+                <input type="text" ng-model="importURL" id="importURL" class="form-control" placeholder="http://">
+              </div>
+              <div class="col-sm-4">
+                <div>
+                  <a class="btn btn-w-m btn-warning" ng-click="getProductImport()"><span translate>BUTTON-IMPORT-PRODUCT</span></a>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="col-lg-12">
-          <div>
-            <br><i class="fa fa-bell"></i> <span translate>LABEL-PRODUCT-IMPORT-HINT</span>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="wrapper wrapper-content">
-      <div class="col-lg-12">
-        <div class="tabs-container">
-          <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" translate>BUTTON-TAB-MAIN-DATA</a></li>
-            <li class=""><a translate>BUTTON-TAB-IMAGES</a></li>
-            <li class="" ng-hide="true"><a translate>BUTTON-TAB-DAWANDA-PRODUCT</a></li>
-            <li class=""><a><span translate>BREADCRUMB-POSTS</span> &nbsp;&nbsp;&nbsp;<span class="label label-warning" translate>BUTTON-TAB-NEW</span></a></li>
-          </ul>
-          <div class="tab-content">
-            <div id="tab-1" class="tab-pane active">
-              <div class="panel-body">
+
+
+  <div class="wrapper wrapper-content animated fadeInRight ecommerce">
+
+
+
                 <form name="productForm" class="form-horizontal" ng-submit="create(productForm.$valid)">
 
-                  <div class="row">
-                    <div class="wrapper wrapper-content">
-                      <div class="col-lg-12">
+
                         <div ng-show="error" class="alert alert-danger">
                           <p ng-bind="error"></p>
                         </div>
@@ -78,12 +84,17 @@
                               <div class="col-sm-8">
                                 <div class="switch">
                                   <div class="onoffswitch">
-                                    <input type="checkbox" class="onoffswitch-checkbox" id="productItemInStock" ng-model="product.productItemInStock" ng-true-value="1" ng-false-value="0">
+                                    <input type="checkbox" class="onoffswitch-checkbox" id="productItemInStock" ng-model="productItemInStock" ng-true-value="1" ng-false-value="0">
                                     <label class="onoffswitch-label" for="productItemInStock">
                                       <span class="onoffswitch-inner"></span>
                                       <span class="onoffswitch-switch"></span>
                                     </label>
                                   </div>
+                                </div>
+                              </div>
+                              <div class="col-sm-2">
+                                <div class="tooltip-demo">
+                                  <button type="button" class="btn btn-default" tooltip-placement="top" uib-tooltip="{{'LABEL-TOOLTIP-ITEM-NO-LONGER-IN-STOCK' | translate}}">i</button>
                                 </div>
                               </div>
                             </div>
@@ -93,15 +104,10 @@
                               <div ng-messages="productForm.productId.$error" role="alert">
                                 <p class="help-block error-text" ng-message="required"><span translate>VALIDATION-PRODUCT-ID-REQ</span></p>
                               </div>
-                              <div class="col-sm-2">
-                                <div class="tooltip-demo">
-                                  <button type="button" class="btn btn-default" tooltip-placement="top" uib-tooltip="{{'LABEL-TOOLTIP-ITEM-NO-LONGER-IN-STOCK' | translate}}">i</button>
-                                </div>
-                              </div>
                             </div>
                             <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-TITLE</span> *</label>
                               <div class="col-sm-8">
-                                <input type="text" name="productTitle" ng-model="productTitle" id="productTitle" class="form-control" placeholder="" required ng-maxlength="70"></div>
+                                <input type="text" name="productTitle" ng-model="productTitle" id="productTitle" class="form-control" placeholder="" required ng-maxlength="{{ maxLengthTitle }}"></div>
                               <div>
                                 <p class="help-block error-text" ng-show="productForm.productTitle.$touched && productForm.productTitle.$error.required" role="alert"><span translate>VALIDATION-PRODUCT-TITLE-REQ</span></p>
                                 <p class="help-block error-text" ng-show="productForm.productTitle.$touched && productForm.productTitle.$error.maxlength" role="alert"><span translate>VALIDATION-PRODUCT-TITLE-TO-LONG</span></p>
@@ -110,47 +116,62 @@
                                 <div class="tooltip-demo">
                                   <button type="button" class="btn btn-default" tooltip-placement="top" uib-tooltip="{{'LABEL-TOOLTIP-PRODUCT-TITLE' | translate}}">i</button>
                                 </div>
+                                <div ng-show="charCorrectTitle">
+                                  <span>Zeichen verfügbar: {{ remainingTitle() }}</span>
+                                </div>
+                                <div ng-hide="charCorrectTitle">
+                                  <span class="error-text">Zeichen verfügbar: {{ remainingTitle() }}</span>
+                                </div>
                               </div>
                             </div>
                             <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-DESCRIPTION</span> *</label>
-                              <div class="col-sm-8"><textarea name="productDescription" ng-model="productDescription" id="productDescription" class="supertext" placeholder="" rows="10" required ng-maxlength="1000"></textarea></div>
+                              <div class="col-sm-8"><textarea name="productDescription" ng-model="productDescription" id="productDescription" class="supertext" placeholder="" rows="10" required ng-maxlength="{{ maxLengthDescription }}"></textarea></div>
                               <div >
-                                <p class="help-block error-text" ng-show="productForm.productDescription.$touched && productForm.productDescription.$error.required" role="alert"><span translate>VALIDATION-PRODUCT-DESCRIPTION-REQ</span></p>
-                                <p class="help-block error-text" ng-show="productForm.productDescription.$touched && productForm.productDescription.$error.maxlength" role="alert"><span translate>VALIDATION-PRODUCT-DESCRIPTION-TO-LONG</span></p>
+                                <p class="error-text" ng-show="productForm.productDescription.$touched && productForm.productDescription.$error.required" role="alert"><span translate>VALIDATION-PRODUCT-DESCRIPTION-REQ</span></p>
+                                <p class="error-text" ng-show="productForm.productDescription.$touched && productForm.productDescription.$error.maxlength" role="alert"><span translate>VALIDATION-PRODUCT-DESCRIPTION-TO-LONG</span></p>
                               </div>
                               <div class="col-sm-2">
                                 <div class="tooltip-demo">
                                   <button type="button" class="btn btn-default" tooltip-placement="top" uib-tooltip="{{'LABEL-TOOLTIP-PRODUCT-DESCRIPTION' | translate}}">i</button>
                                 </div>
+                                <div ng-show="charCorrectDescription">
+                                  <span>Zeichen verfügbar: {{ remaining() }}</span>
+                                </div>
+                                <div ng-hide="charCorrectDescription">
+                                  <span class="error-text">Zeichen verfügbar: {{ remaining() }}</span>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
 
-                      <div class="col-lg-12">
+
+
                         <div class="ibox float-e-margins">
                           <div class="ibox-title">
                             <h3 translate>LABEL-SET-PRICE-PRODUCT</h3>
                             <div class="ibox-tools"></div>
                           </div>
                           <div class="ibox-content">
-                            <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-CURRENCY</span> *</label>
-                              <div class="col-sm-8">
-                                <select class="form-control" name="productCurrency" id="productCurrency" ng-model="productCurrency" required>
-                                  <option ng-repeat="option in productCurrency" value="{{option._id}}">{{option.currencyCode}}</option>
-                                </select>
-                              </div>
-                              <div ng-messages="productForm.productCurrency.$error" role="alert">
-                                <p class="help-block error-text" ng-message="required"><span translate>VALIDATION-PRODUCT-CURRENCY-REQ</span></p>
-                              </div>
-                            </div>
                             <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-PRICE</span> *</label>
-                              <div class="col-sm-8"><input type="text" pattern="[0-9]+([.][0-9]+)*" class="form-control" ng-model="productPrice" id="productPrice" placeholder="{{'LABEL-PLACEHOLDER-PRODUCT-PRICE' | translate}}" required></div>
+                              <div class="col-sm-8"><input type="text" pattern="[0-9]+([,][0-9]+)*" class="form-control" ng-model="productPrice" id="productPrice" placeholder="{{'LABEL-PLACEHOLDER-PRODUCT-PRICE' | translate}}" required></div>
                               <div class="col-sm-2">
                                 <div class="tooltip-demo">
                                   <button type="button" class="btn btn-default" tooltip-placement="top" uib-tooltip="{{'LABEL-TOOLTIP-PRODUCT-PRICE' | translate}}">i</button>
                                 </div>
+                              </div>
+                            </div>
+                            <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-CURRENCY</span> *</label>
+                              <div class="col-sm-8">
+                                <input type="text" ng-model="productCurrency.currencyCode" ng-value="productCurrency._id" id="productCurrency" class="form-control" placeholder="" disabled></div>
+                              <!--
+                              <div class="col-sm-8">
+                                <select class="form-control" name="productCurrency" id="productCurrency" ng-model="productCurrency" required>
+                                  <option ng-repeat="option in productCurrency" value="{{option._id}}">{{option.currencyCode}}</option>
+                                </select>
+                              </div> -->
+                              <div ng-messages="productForm.productCurrency.$error" role="alert">
+                                <p class="help-block error-text" ng-message="required"><span translate>VALIDATION-PRODUCT-CURRENCY-REQ</span></p>
                               </div>
                             </div>
                             <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-TAX</span> *</label>
@@ -185,9 +206,7 @@
                             </div>
                           </div>
                         </div>
-                      </div>
 
-                      <div class="col-lg-12">
                         <div class="ibox float-e-margins">
                           <div class="ibox-title">
                             <h3 translate>LABEL-SELECT-SHIPPING-OPTION</h3>
@@ -197,8 +216,8 @@
                             <fieldset class="form-horizontal">
                               <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-SHIPPING-OPTION</span> *</label>
                                 <div class="col-sm-8">
-                                  <select class="form-control" name="productShippingoption" id="productShippingoption" ng-model="productShippingoption" required>
-                                    <option ng-repeat="option in productShippingoption" value="{{option._id}}">{{option.deliveryTitle}} - {{option.deliveryTime}}</option>
+                                  <select class="form-control" name="productShippingoption" id="productShippingoption" ng-model="productShippingoption" ng-options="item.deliveryTitle for item in items" required>
+                                    <!-- <option ng-repeat="option in productShippingoption">{{option.deliveryTitle}} - {{option.deliveryTime}}</option> -->
                                   </select>
                                 </div>
                                 <div ng-messages="productForm.productShippingoption.$error" role="alert">
@@ -209,24 +228,22 @@
                             </fieldset>
                           </div>
                         </div>
+                  <div class="wrapper wrapper-content animated fadeInRight ecommerce">
+                    <div class="ibox float-e-margins">
+                      <div class="col-lg-6" align="left">
+                        <a href="products" class="btn btn-w-m btn-primary btn-outline"><i class="fa fa-arrow-left"></i>&nbsp;<span translate>BUTTON-BACK-PRODUCT-OVERVIEW</span></a>
                       </div>
-                      <div class="col-lg-12">
-                        <div class="ibox float-e-margins">
-                          <div align="right">
-                            <a ng-hide="basicData" ui-sref="tutorial" class="btn btn-w-m btn-warning btn-outline" translate>BUTTON-BACK-TUTORIAL</a>
-                            <button type="submit" class="btn btn-w-m btn-warning" value="Create product" translate>BUTTON-CREATE-PRODUCT</button>
-                          </div>
-                        </div>
+                      <div class="col-lg-6" align="right">
+                        <a ng-hide="basicData" ui-sref="tutorial" class="btn btn-w-m btn-warning btn-outline" translate>BUTTON-BACK-TUTORIAL</a>
+                        <button type="submit" class="btn btn-w-m btn-primary" value="Create product"><span translate>BUTTON-CREATE-PRODUCT</span>&nbsp;<i class="fa fa-arrow-right"></i></button>
                       </div>
                     </div>
                   </div>
+
                 </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+
+
   </div>
+
 <br><br><br><br><br><br>
 </section>

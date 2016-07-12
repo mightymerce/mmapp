@@ -101,11 +101,31 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
         productId: $stateParams.productId
       });
 
+      $scope.imagesMaintained = false;
+
+      Products.get({
+        productId: $stateParams.productId
+      }, function(products) {
+
+        $scope.product = products;
+
+        if($scope.product.productMainImageURL === '') {
+          $scope.product.productMainImageURL = '../../../../modules/products/client/img/photo_not_available.png';
+          $scope.product.productMainImageURLFacebook = '../../../../modules/products/client/img/photo_not_available.png';
+          $scope.product.productMainImageURLPinterest = '../../../../modules/products/client/img/photo_not_available.png';
+          $scope.product.productMainImageURLTwitter = '../../../../modules/products/client/img/photo_not_available.png';
+          $scope.product.productMainImageURLCode = '../../../../modules/products/client/img/photo_not_available.png';
+        } else {
+          $scope.imagesMaintained = true;
+        }
+      });
+
       ProductsServices.getPosts($stateParams.productId).then(function (Posts) {
         $scope.posts = Posts;
       });
 
       $scope.selectImage = true;
+      $scope.errorpicture = 'Bitte lade zunächst in Schritt 1 ein Bild hoch, um es dann zuschneiden und abspeichern zu können.';
     };
 
     // ************************************
@@ -259,76 +279,96 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
       },
 
 
-
       onCompleteItem: function (item, response, status, headers) {
 
 
-        $scope.successpicture = false;
+        $scope.errorpicture = false;
         console.log('products.client.controller - image uploader - onCompleteItem - start');
 
         // Update product Main ImageURLs
         var product = $scope.product;
 
         if ($scope.insertFurtherImage1 === true){
-          if(item.name.substring(0,4) === 'crop')
+          if(item.name.substring(0,4) === 'crop') {
+            $scope.product.productFurtherImage1URL = response;
             product.productFurtherImage1URL = response;
+          }
           if(item.name === 'facebook') {
+            $scope.product.productFurtherImage1URLFacebook = response;
+            $scope.product.productFurtherImage1URLCode = response;
             product.productFurtherImage1URLFacebook = response;
             product.productFurtherImage1URLCode = response;
           }
-          if(item.name === 'pinterest') {
-            product.productFurtherImage1URLPinterest = response;
-          }
           if(item.name === 'twitter') {
+            $scope.product.productFurtherImage1URLTwitter = response;
             product.productFurtherImage1URLTwitter = response;
           }
+          if(item.name === 'pinterest') {
+            $scope.product.productFurtherImage1URLPinterest = response;
+            product.productFurtherImage1URLPinterest = response;
+          }
+
 
           product.productFurtherImage1Alt = $scope.productMainImageAlt;
         }
         else if ($scope.insertFurtherImage2 === true) {
           if(item.name.substring(0,4) === 'crop')
+            $scope.product.productFurtherImage2URL = response;
             product.productFurtherImage2URL = response;
           if(item.name === 'facebook') {
+            $scope.product.productFurtherImage2URLFacebook = response;
+            $scope.product.productFurtherImage2URLCode = response;
             product.productFurtherImage2URLFacebook = response;
             product.productFurtherImage2URLCode = response;
           }
           if(item.name === 'pinterest') {
+            $scope.product.productFurtherImage2URLPinterest = response;
             product.productFurtherImage2URLPinterest = response;
           }
           if(item.name === 'twitter') {
+            $scope.product.productFurtherImage2URLTwitter = response;
             product.productFurtherImage2URLTwitter = response;
           }
 
           product.productFurtherImage2Alt = $scope.productMainImageAlt;
         }
         else {
-          if(item.name.substring(0,4) === 'crop')
+          if(item.name.substring(0,4) === 'crop') {
+            $scope.product.productMainImageURL = response;
             product.productMainImageURL = response;
+          }
           if(item.name === 'facebook') {
+            $scope.product.productMainImageURLFacebook = response;
+            $scope.product.productMainImageURLCode = response;
             product.productMainImageURLFacebook = response;
             product.productMainImageURLCode = response;
           }
-          if(item.name === 'pinterest') {
-            product.productMainImageURLPinterest = response;
-          }
           if(item.name === 'twitter') {
+            $scope.product.productMainImageURLTwitter = response;
             product.productMainImageURLTwitter = response;
+            $timeout(callAtTimeout(product), 1000);
+          }
+          if(item.name === 'pinterest') {
+            $scope.product.productMainImageURLPinterest = response;
+            product.productMainImageURLPinterest = response;
+            alert($scope.product.productMainImageURLPinterest);
+            alert(product.productMainImageURLPinterest);
+            $timeout(callAtTimeout(product), 4000);
           }
 
           product.productMainImageAlt = $scope.productMainImageAlt;
         }
 
-        $scope.productMainImageURL = response;
-
-        // Update path in MM DB
-        product.$update(function () {
-          $scope.success = 'Successfully changed product media data';
-        }, function (errorResponse) {
-          $scope.error = errorResponse.data.message;
-        });
-        console.log('products.client.controller - image uploader - onCompleteItem - update - end');
+        // $scope.productMainImageURL = response;
 
 
+      }
+    });
+
+    // Update path in MM DB
+    function callAtTimeout(product) {
+      product.$update(function (res) {
+        $scope.success = 'Successfully changed product media data';
         if ($scope.insertFurtherImage1 === true){
           $scope.successpicturemsg = 'Further product image 1 uploaded successfully.';
         }
@@ -336,16 +376,24 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
           $scope.successpicturemsg = 'Further product image 2 uploaded successfully.';
         }
         else {
-          $scope.successpicturemsg = 'Main product image uploaded successfully.';
+          $scope.successpicturemsg = 'Deine Bildausschnitte wurden gespeichert.';
         }
 
         // Show success message
         $scope.successpicture = true;
 
-        console.log('products.client.controller - image uploader - onCompleteItem - end');
+        console.log('products.client.controller - image uploader - onCompleteItem - update - end');
 
-      }
-    });
+      }, function (errorResponse) {
+        $scope.error = errorResponse.data.message;
+      });
+
+      console.log('products.client.controller - image uploader - onCompleteItem - end');
+    }
+
+
+
+
 
     console.log('New instance FileUploader!');
 
@@ -362,6 +410,7 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
     uploader.onAfterAddingFile = function (fileItem) {
       console.log('products.client.controller - image uploader - onAfterAddingFile start ');
       $scope.successpicture = false;
+      $scope.errorpicture = '';
 
 
       if ($window.FileReader) {

@@ -42,6 +42,7 @@
                   <th data-toggle="true" translate>LABEL-TABLE-HEADER-DELIVERY-WITHIN</th>
                   <th data-hide="phone" translate>LABEL-TABLE-HEADER-DELIVERY-COUNTRY</th>
                   <th data-toggle="true" translate>LABEL-TABLE-HEADER-DELIVERY-COSTS</th>
+                  <th data-toggle="true" translate>LABEL-STANDARD</th>
                   <th class="text-right" data-sort-ignore="true"></th>
                 </tr>
                 </thead>
@@ -51,6 +52,7 @@
                   <td><span data-ng-bind="delivery.deliveryTime"></span></td>
                   <td><span data-ng-bind="delivery.deliveryCountry"></span></td>
                   <td><span data-ng-bind="delivery.deliveryCost"></span>{{ product.price | currency:'€' }} €</td>
+                  <td><span data-ng-bind="delivery.deliveryStandard"></span></td>
                   <td class="text-right">
                     <div class="btn-group">
                       <a class="btn-white btn-xs" ui-sref="deliverys.edit({deliveryId: delivery._id})">

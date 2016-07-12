@@ -207,6 +207,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         'LABEL-CURRENCY-OPTION':'Währungsoption',
         'LABEL-CURRENCY-CODE':'Währungscode',
         'LABEL-CURRENCY-VALUE':'Wert',
+        'LABEL-STANDARD':'Standard',
 
         // ERROR
         'VALIDATION-CURRENCY-CODE':'Bitte gib den Währungscode ein (z.B. EUR).',
@@ -226,6 +227,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         // BUTTON
         'BUTTON-EDIT-CURRENCY-OPTION':'Währung bearbeiten',
         'BUTTON-ADD-NEW-CURRENCY':'Neue Währung hinzufügen',
+        'BUTTON-UPDATE-CURRENCY-STANDARD':'Standardwährung festlegen',
 
         // ERROR
         'MESSAGE-NO-CURRENCY':'Es ist noch keine Währung gepflegt. Leg jetzt eine an.',
@@ -466,6 +468,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         // VIEW ----- list-post.client.view.html ------
         // LABELS
         'BREADCRUMB-POSTS-OVERVIEW':'Übersicht Posts',
+        'LABEL-POSTS':'Posts',
         'LABEL-POST-YOUR':'Deine Posts',
         'LABEL-POST-CHANNEL':'Kanal',
         'LABEL-POST-PUBLICATION-DATE':'Veröffentlicht am',
@@ -565,8 +568,9 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         'BREADCRUMB-EDIT-PRODUCTS':'Produkt editieren',
         'BREADCRUMB-POSTS':'Posts',
         'BREADCRUMB-MAIN-DATA':'Produktdetails',
-        'BUTTON-TAB-MAIN-DATA':' Produktdetails',
-        'BUTTON-TAB-IMAGES':'Bilder',
+        'BUTTON-TAB-MAIN-DATA':'1 | Produktdaten pflegen',
+        'BUTTON-TAB-IMAGES':'2 | Bilder hochladen',
+        'BUTTON-TAB-POSTS':'3 | Überprüfen und veröffentlichen',
         'BUTTON-TAB-DAWANDA-PRODUCT':'Dawanda Produkt',
         'BUTTON-TAB-NEW':'NEU',
         'LABEL-IMAGE':'Bild',
@@ -574,6 +578,8 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         'LABEL-POST-ACTION':'Aktion',
         'LABEL-PINTEREST-NOTE-MM-MARKETPLACE':'Du kannst deine Produkte auf dem mightymerce Marktplatz anbieten. Eine Auswahl an Pinterest Boards findest du wenn du auf den Button - mightymerce Marktplatz - drückst.',
         'LABEL-ADD-IMAGE':'Bild hinzufügen',
+        'LABEL-YOUR-SELECTED-PRODUCT':'Dein ausgewähltes Produkt',
+        'LABEL-YOUR-PRODUCT-POSTED':'Dein Posts zum ausgewählten Produkt',
 
         // BUTTON
         'BUTTON-CREATE-POST':' Post erstellen',
@@ -668,8 +674,8 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         // VIEW ----- edit-product.client.view.html ------
         // LABELS
         'LABEL-PRODUCT-ACTIVE-ON':'Dein Produkt ist aktiv auf: ',
-        'LABEL-DESCRIBE-YOUR-PRODUCT':'Beschreibe dein Produkt',
-        'LABEL-IN-STOCK':'Ist verfügbar',
+        'LABEL-DESCRIBE-YOUR-PRODUCT':'Produktbeschreibung',
+        'LABEL-IN-STOCK':'Auf Lager',
         'LABEL-IN-ID':'Produktnummer',
         'LABEL-TITLE':'Titel',
         'LABEL-DESCRIPTION':'Beschreibung',
@@ -680,7 +686,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         'LABEL-TOOLTIP-ITEM-NO-LONGER-IN-STOCK':'Wenn dein Produkt gerade nicht verfügbar ist, kannst du den Verkauf stoppen. Das Produkt wird in den geposteten Kanälen noch sichtbar sein, kann aber nicht mehr gekauft werden. Sobald es wieder verfügbar ist, kannst du es z.B. erneut posten (Facebook) oder einen Hinweis in Titel oder Beschreibung geben (Pinterest).',
         'LABEL-TOOLTIP-PRODUCT-TITLE':'Ergänze Informationen zu Marke, Farbe oder Größe zum Titel zB. kommasepariert. Bitte beachte, dass du diese Zeichen nicht verwendest: /[^\{}]/. Und diese max. je einmal: % : & + .',
         'LABEL-TOOLTIP-PRODUCT-DESCRIPTION':'Die Produktbeschreibung ist limitiert auf 1000 Zeichen. Achtung: Für Twitter gilt ein Zeichenlimit von 140 Zeichen (inkl. Titel und Preis). Für Instagram gilt ein Zeichenlimit von 200 Zeichen.',
-        'LABEL-TOOLTIP-PRODUCT-PRICE':'Bitte pflege Preise im Format 12.40 oder 2314.05 - Es sind keine Kommas möglich.',
+        'LABEL-TOOLTIP-PRODUCT-PRICE':'Preise im Format 12,00 oder 4,99 - Es muss ein Komma enthalten sein.',
         'LABEL-SET-PRICE-PRODUCT':'Pflege den Preis',
         'LABEL-SELECT-SHIPPING-OPTION':'Wähle die Versandoption für dein Produkt',
 
@@ -701,16 +707,17 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         // VIEW ----- create-product.client.view.html ------
         // LABELS
         'BREADCRUMB-CREATE-PRODUCT':'Produkt hinzufügen',
-        'LABEL-PLACEHOLDER-PRODUCT-PRICE':'Preis im Format 1234.00 mit Punkt angeben',
-        'LABEL-PRODUCT-IMPORT':'Importiere ein Produkt',
-        'LABEL-PRODUCT-IMPORT-HINT':'Kopiere die URL deines Produktes im Etsy oder Dawanda Shop und clicke auf Importiere dein Produkt. Ergänze nur noch Steuersatz und Lieferoption. Dein Standardbild wird automatisch importiert - und poste sofort in deinen sozialen Medien oder auf dem mightymerce Marktplatz.',
-        'LABEL-PRODUCT-IMPORT-FROM-HINT':'Importiere aus den folgenden Platformen: ',
+        'LABEL-PLACEHOLDER-PRODUCT-PRICE':'z.B. im Format 12,99',
+        'LABEL-PRODUCT-IMPORT':'Produkt von Dawanda oder Etsy importieren',
+        'LABEL-PRODUCT-IMPORT-HINT':'Kopiere einfach die URL von deinem Produkt aus Dawanda oder Etsy. Die Daten werden automatisch übernommen. Überprüfen. Fertig.',
+        'LABEL-PRODUCT-IMPORT-FROM-HINT':'Kopiere einfach die URL von deinem Produkt aus Dawanda oder Etsy. Die Daten werden automatisch übernommen. Überprüfen. Fertig.',
 
         // ERROR
         'VALIDATION-PRODUCT-CURRENCY-REQ':'Bitte ergänze die Währung.',
 
         // BUTTON
-        'BUTTON-CREATE-PRODUCT':'Produkt hinzufügen',
+        'BUTTON-CREATE-PRODUCT':'Weiter zu Bilder hochladen',
+        'BUTTON-BACK-PRODUCT-OVERVIEW':'zurück zur Übersicht',
         'BUTTON-IMPORT-PRODUCT':'Importiere dein Produkt',
 
         // VIEW ----- edit-media-product.client.view.html ------
@@ -722,20 +729,22 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         'LABEL-PRODUCT-IMAGES':'Produktbilder',
         'LABEL-MAINTAIN-PRODUCTS-TODO':'So pflegst du deine Produktbilder',
         'LABEL-STEP1':'Schritt 1:',
-        'LABEL-STEP1-EXPLANATION':'Lade ein Bild hoch durch Klick auf "Bild hochladen"',
+        'LABEL-STEP1-EXPLANATION':'Neues Bild hochladen',
         'LABEL-STEP2':'Schritt 2:',
-        'LABEL-STEP2-EXPLANATION':'Überprüfe alle Bildausschnitte',
+        'LABEL-STEP2-EXPLANATION':'Bildausschnitte überprüfen',
         'LABEL-STEP2-EXPLANATION-LONG':'Bei Bedarf kannst du den Ausschnitt für jeden Verkaufskanal verändern.',
         'LABEL-STEP3':'Schritt 3:',
-        'LABEL-STEP3-EXPLANATION':'Pflege den Alt-Text für dein Produktbild',
-        'LABEL-STEP-FINALLY':'Und zum Schluss:',
-        'LABEL-STEP-FINALLY-EXPLANATION':'Klicke auf "Bild speichern"',
+        'LABEL-STEP3-EXPLANATION':'Alt-Text pflegen',
+        'LABEL-STEP4':'Schritt 4:',
+        'LABEL-STEP4-EXPLANATION':'Bildausschnitte speichern',
+        'LABEL-STEP-FINALLY':'Fertig:',
+        'LABEL-STEP-FINALLY-EXPLANATION':'Deine Bildausschnitte',
         'LABEL-MAINTAIN-FACEBOOK-IMAGE':'Facebook-Bild pflegen',
-        'LABEL-BEST-FIT-FACEBOOK':'Gut zu wissen: Das beste Seitenverhältnis für Bilder auf Facebook ist 1200px / 627px',
+        'LABEL-BEST-FIT-FACEBOOK':'(1200px / 627px)',
         'LABEL-MAINTAIN-PINTEREST-IMAGE':'Pinterest-Bild pflegen',
-        'LABEL-BEST-FIT-PINTEREST':'Gut zu wissen: Das beste Seitenverhältnis für Bilder auf Pinterest ist 736px / 1104px',
+        'LABEL-BEST-FIT-PINTEREST':'(736px / 1104px)',
         'LABEL-MAINTAIN-TWITTER-IMAGE':'Twitter-Bild pflegen',
-        'LABEL-BEST-FIT-TWITTER':'Gut zu wissen: Das beste Seitenverhältnis für Bilder auf Twitter ist 1024px / 512px',
+        'LABEL-BEST-FIT-TWITTER':'(1024px / 512px)',
         'LABEL-ALT-TEXT':'Alt-Text',
         'LABEL-ORIGINAL-FILE-NAME':'Dateiname',
         'LABEL-FILE-SIZE':'Größe',
@@ -759,7 +768,9 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         'BUTTON-UPLOAD-ALL-MAIN-IMAGES':'Alle Hauptbilder uploaden',
         'BUTTON-STOP-UPLOAD':'Upload stoppen',
         'BUTTON-REMOVE-FROM-UPLOAD-LIST':'Von Uploadliste entfernen',
-        'BUTTON-SAVE-IMAGES':'Bilder speichern',
+        'BUTTON-SAVE-IMAGES':'Bildausschnitte speichern',
+        'BUTTON-BACK-PRODUCT-MAINTAIN':'Zurück zu Produktdaten pflegen',
+        'BUTTON-CONTINUE-PRODUCT-POST':'Weiter zu überprüfen und veröffentlichen',
 
 
 
@@ -1029,6 +1040,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
           'LABEL-CURRENCY-OPTION':'Currency option',
           'LABEL-CURRENCY-CODE':'Currency code',
           'LABEL-CURRENCY-VALUE':'Currency value',
+          'LABEL-STANDARD':'Standard',
 
           // ERROR
           'VALIDATION-CURRENCY-CODE':'Please enter a currency code.',
@@ -1048,6 +1060,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
           // BUTTON
           'BUTTON-EDIT-CURRENCY-OPTION':'Edit currency option',
           'BUTTON-ADD-NEW-CURRENCY':'Add new currency option',
+          'BUTTON-UPDATE-CURRENCY-STANDARD':'Update currency standard',
 
           // ERROR
           'MESSAGE-NO-CURRENCY':'No currency yet, why dont you',
@@ -1287,6 +1300,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
           // VIEW ----- list-post.client.view.html ------
           // LABELS
           'BREADCRUMB-POSTS-OVERVIEW':'Post overview',
+          'LABEL-POSTS':'Posts',
           'LABEL-POST-YOUR':'Your posts',
           'LABEL-POST-CHANNEL':'Post channel',
           'LABEL-POST-PUBLICATION-DATE':'Publication date',
@@ -1388,12 +1402,15 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
           'BUTTON-TAB-MAIN-DATA':' Main data',
           'BUTTON-TAB-IMAGES':'Images',
           'BUTTON-TAB-DAWANDA-PRODUCT':'Dawanda product',
+          'BUTTON-TAB-POSTS':'Posts',
           'BUTTON-TAB-NEW':'NEW',
           'LABEL-IMAGE':'Image',
           'LABEL-POST-DATE':'Post date',
           'LABEL-POST-ACTION':'Action',
           'LABEL-PINTEREST-NOTE-MM-MARKETPLACE':'Sell your products on mightymerce marketplace. Your will find different marketplaces by click the button - mightymerce marketplace.',
           'LABEL-ADD-IMAGE':'Add image',
+          'LABEL-YOUR-SELECTED-PRODUCT':'Your selected product',
+          'LABEL-YOUR-PRODUCT-POSTED':'Your posts for the selected product',
 
           // BUTTON
           'BUTTON-CREATE-POST':' Create post',
@@ -1532,6 +1549,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
 
           // BUTTON
           'BUTTON-CREATE-PRODUCT':'Create product',
+          'BUTTON-BACK-PRODUCT-OVERVIEW':'Back to product overview',
           'BUTTON-IMPORT-PRODUCT':'Import product',
 
           // VIEW ----- edit-media-product.client.view.html ------
@@ -1543,20 +1561,22 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
           'LABEL-PRODUCT-IMAGES':'Product Images',
           'LABEL-MAINTAIN-PRODUCTS-TODO':'how to maintain your product images',
           'LABEL-STEP1':'Step 1:',
-          'LABEL-STEP1-EXPLANATION':'Upload an image by clicking "Select image"',
+          'LABEL-STEP1-EXPLANATION':'Upload new image',
           'LABEL-STEP2':'Step 2:',
-          'LABEL-STEP2-EXPLANATION':'Verify all cropping areas of your image',
+          'LABEL-STEP2-EXPLANATION':'Verify image cropping',
           'LABEL-STEP2-EXPLANATION-LONG':'Verify and change the image section for each channel',
           'LABEL-STEP3':'Step 3:',
           'LABEL-STEP3-EXPLANATION':'Maintain alt text for your product image',
+          'LABEL-STEP4':'Step 4:',
+          'LABEL-STEP4-EXPLANATION':'Save cropped images',
           'LABEL-STEP-FINALLY':'Finally:',
-          'LABEL-STEP-FINALLY-EXPLANATION':'Click "Save images"',
+          'LABEL-STEP-FINALLY-EXPLANATION':'Your cropped images',
           'LABEL-MAINTAIN-FACEBOOK-IMAGE':'Maintain Facebook image',
-          'LABEL-BEST-FIT-FACEBOOK':'Note: Best fit for Facebook image 1200px / 627px',
+          'LABEL-BEST-FIT-FACEBOOK':'(1200px / 627px)',
           'LABEL-MAINTAIN-PINTEREST-IMAGE':'Maintain Pinterest image',
-          'LABEL-BEST-FIT-PINTEREST':'Note: Best fit for Pinterest image 736px / 1104px',
+          'LABEL-BEST-FIT-PINTEREST':'(736px / 1104px)',
           'LABEL-MAINTAIN-TWITTER-IMAGE':'Maintain Twitter image',
-          'LABEL-BEST-FIT-TWITTER':'Note: Best fit for Twitter image 1024px / 512px',
+          'LABEL-BEST-FIT-TWITTER':'(1024px / 512px)',
           'LABEL-ALT-TEXT':'Alt text',
           'LABEL-ORIGINAL-FILE-NAME':'Original file name',
           'LABEL-FILE-SIZE':'Size',
@@ -1581,6 +1601,8 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
           'BUTTON-STOP-UPLOAD':'Stop upload',
           'BUTTON-REMOVE-FROM-UPLOAD-LIST':'Remove from upload list',
           'BUTTON-SAVE-IMAGES':'Save images',
+          'BUTTON-BACK-PRODUCT-MAINTAIN':'Back to maintain product data',
+          'BUTTON-CONTINUE-PRODUCT-POST':'Continue to product post',
 
 
           // NEWNEW

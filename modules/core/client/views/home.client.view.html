@@ -37,6 +37,10 @@
               </tr>
               </tbody>
             </table>
+            <div class="alert alert-warning text-center" ng-if="!noOpenOrders === 0" translate>
+              MESSAGE-NO-ORDERS-PLACED
+            </div>
+            <br><br>
             <div>
               <a class="btn btn-warning btn-outline" ui-sref="orders.list">
                 <span translate>BUTTON-ALL-ORDERS</span> ...

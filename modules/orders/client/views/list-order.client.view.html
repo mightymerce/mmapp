@@ -2,18 +2,17 @@
 
 
   <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
+    <div class="col-lg-4">
       <h2 translate>BREADCRUMB-ORDER</h2>
+    </div>
+    <div class="col-lg-8" align="right">
+      <br><br>
       <ol class="breadcrumb">
-        <li>
-          <a ui-sref="dashboard" translate>BREADCRUMB-HOME</a>
-        </li>
         <li class="active">
           <strong translate>BREADCRUMB-ORDER</strong>
         </li>
       </ol>
     </div>
-    <div class="col-lg-2"></div>
   </div>
 
 
@@ -73,7 +72,7 @@
                     </tr>
                   </tbody>
                 </table>
-                <div class="alert alert-warning text-center" ng-if="orders.$resolved && !orders.length" translate>
+                <div class="alert alert-warning text-center" ng-if="orderCreated.length === 0" translate>
                   MESSAGE-NO-ORDERS-PLACED
                 </div>
               </div>
@@ -95,7 +94,7 @@
                     <th class="text-right" data-sort-ignore="true"></th>
                   </tr>
                   </thead>
-                  <tbody data-ng-repeat="order in orders | orderBy:'-created' | filter: {orderStatus: 'SHIPPED'}">
+                  <tbody data-ng-repeat="order in orderShipped | orderBy:'-created' | filter: {orderStatus: 'SHIPPED'}">
                   <tr>
                     <td><span data-ng-bind="order.orderId" ui-sref="orders.view({orderId: order._id})"></span></td>
                     <td><span ng-bind="order.orderDate | date:'mediumDate'"></span></td>
@@ -124,7 +123,7 @@
                   </tr>
                   </tbody>
                 </table>
-                <div class="alert alert-warning text-center" ng-if="orders.$resolved && !orders.length" translate>
+                <div class="alert alert-warning text-center" ng-if="orderShipped.length === 0" translate>
                   MESSAGE-NO-ORDERS-SHIPPED
                 </div>
               </div>
@@ -146,7 +145,7 @@
                     <th class="text-right" data-sort-ignore="true"></th>
                   </tr>
                   </thead>
-                  <tbody data-ng-repeat="order in orders | orderBy:'-created' | filter: {orderStatus: 'RETURNED'}">
+                  <tbody data-ng-repeat="order in orderReturned | orderBy:'-created' | filter: {orderStatus: 'RETURNED'}">
                   <tr>
                     <td><span data-ng-bind="order.orderId" ui-sref="orders.view({orderId: order._id})"></span></td>
                     <td><span ng-bind="order.orderDate | date:'mediumDate'"></span></td>
@@ -175,11 +174,12 @@
                   </tr>
                   </tbody>
                 </table>
-                <div class="alert alert-warning text-center" ng-if="orders.$resolved && !orders.length" translate>
+                <div class="alert alert-warning text-center" ng-if="orderReturned.length === 0" translate>
                   MESSAGE-NO-ORDERS-RETURNED
                 </div>
               </div>
             </div>
+            <br><br><br>
           </div>
         </div>
       </div>

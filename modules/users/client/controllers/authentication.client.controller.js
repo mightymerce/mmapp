@@ -137,7 +137,8 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
         // Create new Currency object
         var currency = new Currencys({
           currencyCode: 'EUR',
-          currencyValue: 'Euro'
+          currencyValue: 'Euro',
+          currencyStandard: true
         });
 
         // save
@@ -151,7 +152,8 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
           deliveryTitle: 'Standard',
           deliveryTime: '3-5 working days',
           deliveryCountry: 'Germany',
-          deliveryCost: '3.50'
+          deliveryCost: '3.50',
+          deliveryStandard: true
         });
 
         // save

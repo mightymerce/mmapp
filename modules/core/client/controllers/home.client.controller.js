@@ -37,6 +37,7 @@ angular.module('core').controller('HomeController', ['$scope', '$route', '$locat
 
         $http.get('/api/orders?user=' +$scope.authentication.user._id).success(function (response) {
           console.log('home.client.controller - initDashboard - getOrders' +response);
+
           $scope.orders = response;
           $scope.ordersForCalcs = response;
 

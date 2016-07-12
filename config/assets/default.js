@@ -86,6 +86,9 @@ module.exports = {
         'public/lib/bootstrap/dist/js/bootstrap.js',
         'public/lib/bootstrap/dist/js/bootstrap.min.js',
 
+        // i18n Formatting on locales
+        'public/lib/angular-i18n/angular-locale_de-de.js',
+
         // SlimScroll
         'public/lib/plugin/slimscroll/jquery.slimscroll.min.js',
 

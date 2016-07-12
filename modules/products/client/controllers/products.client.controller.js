@@ -388,7 +388,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
           $scope.linkMainImageUrl = linkMainImageUrl;
 
           //var price = $scope.product.productPrice + ' EUR';
-          var price = $scope.product.productPrice + ' ' + Currencys.currencyCode;
+          var price = $scope.product.productPrice.replace(".", ",") + ' ' + Currencys.currencyCode;
           $scope.price = price;
 
           $scope.modalInstance = $uibModal.open({
@@ -467,16 +467,44 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       console.log('products.client.controller - end open modal - modalMarketplace');
     };
 
-    $scope.productCurrency = Currencys.query({
+    Currencys.query({
       'user': $scope.authentication.user._id
+    }, function(currency) {
+      $scope.productCurrency = {};
+
+      angular.forEach(currency,function(value,index){
+        if (value.currencyStandard === true){
+          $scope.productCurrency = value;
+          $scope.currencyCodeStandard = value.currencyCode;
+        }
+      });
     });
 
-    $scope.productTax = Taxes.query({
+
+
+    Taxes.query({
       'user': $scope.authentication.user._id
+    }, function(taxe) {
+      $scope.productTax = taxe;
+
+      angular.forEach($scope.productTax,function(value,index){
+
+      });
     });
 
-    $scope.productShippingoption = Deliverys.query({
+
+    Deliverys.query({
       'user': $scope.authentication.user._id
+    }, function(delivery) {
+
+      $scope.items = delivery;
+      angular.forEach(delivery,function(value,index){
+
+        if (value.deliveryStandard === true){
+          $scope.productShippingoption = value;
+        }
+
+      });
     });
 
     // Create new Product
@@ -505,13 +533,13 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
         productId: this.productId,
         productTitle: this.productTitle,
         productDescription: this.productDescription,
-        productPrice: this.productPrice,
+        productPrice: this.productPrice.replace(",", "."),
         productTax: this.productTax,
-        productCurrency: this.productCurrency,
+        productCurrency: this.productCurrency._id,
         productSaleprice: this.productSaleprice,
         productSalepricefrom: this.productSalepricefrom,
         productSalepriceuntil: this.productSalepriceuntil,
-        productShippingoption: this.productShippingoption,
+        productShippingoption: this.productShippingoption._id,
         productItemInStock: this.productItemInStock,
         productMainImageURL: this.productMainImageURL,
         productMainImageURLFacebook: this.productMainImageURLFacebook,
@@ -630,10 +658,12 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
       var product = $scope.product;
       product.productItemInStock = $scope.product.productItemInStock;
+      product.productPrice = $scope.product.productPrice.replace(",", ".");
 
       product.$update(function () {
         $location.path('products/' + product._id + '/edit');
-        $scope.success = 'You successfully updated your product data.';
+        $scope.success = 'Deine Produktdaten wurden aktualisiert.';
+        $scope.product.productPrice = $scope.product.productPrice.replace(".", ",");
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
@@ -676,6 +706,35 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
         {
           $scope.instagramImageSet = true;
         }
+
+        Currencys.query({
+          'user': $scope.authentication.user._id
+        }, function(currency) {
+          //$scope.productCurrency = currency;
+
+          angular.forEach(currency,function(value,index){
+            if (value._id === $scope.product.productCurrency){
+              $scope.productCurrency = value;
+            }
+          });
+        });
+
+        Deliverys.query({
+          'user': $scope.authentication.user._id
+        }, function(delivery) {
+
+          $scope.items = delivery;
+          angular.forEach(delivery,function(valueShipping,index){
+
+            if (valueShipping._id === $scope.product.productShippingoption){
+              $scope.productShippingoption = valueShipping;
+            }
+
+          });
+        });
+
+        $scope.product.productPrice = product.productPrice.replace(".", ",");
+
       });
 
       $scope.productSelectId = $stateParams.productId;
@@ -698,6 +757,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       var varTwitterPosts = 0;
       var varInstagramPosts = 0;
 
+      $scope.minOnePost = false;
       ProductsServices.getPosts($scope.authentication.user._id,$stateParams.productId).then(function (Posts) {
         $scope.posts = Posts;
         for (var i in Posts) {
@@ -729,6 +789,10 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
         $scope.twitterPostsNo = varTwitterPosts;
         $scope.instagramPostsNo = varInstagramPosts;
 
+
+        if(varFacebookPosts > 0 || varPinterestPosts > 0 || varCodeSnippetPosts > 0 || varTwitterPosts > 0 || varInstagramPosts > 0) {
+          $scope.minOnePost = true;
+        }
 
         console.log('products.client.controller - findone() - instagramImageSet: ' +$scope.instagramImageSet);
       });
@@ -1024,13 +1088,43 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
         });
       } else {
-        $scope.error = 'Deine eingegebene URL ist leider nicht von Etsy oder Dawanda. Bitte teile uns gerne mit von welcher Plattform du Produkte importieren möchtest. So können wir unseren Service stetig für dich verbessern.'
+        $scope.error = 'Deine eingegebene URL ist leider nicht von Etsy oder Dawanda. Bitte teile uns gerne mit von welcher Plattform du Produkte importieren möchtest. So können wir unseren Service stetig für dich verbessern.';
       }
     };
 
     // Close Modal
     $scope.cancelModal = function () {
       $scope.modalInstance.$dismiss();
+    };
+
+    $scope.productItemInStock = 1;
+
+    $scope.maxLengthDescription = 1000;
+    $scope.charCorrectDescription = true;
+
+    // Counter for textarea
+    $scope.remaining = function() {
+      if ($scope.maxLengthDescription - angular.element(document).find('textarea')[0].value.length > 0) {
+        $scope.charCorrectDescription = true;
+        return $scope.maxLengthDescription - angular.element(document).find('textarea')[0].value.length;
+      } else {
+        $scope.charCorrectDescription = false;
+        return $scope.maxLengthDescription - angular.element(document).find('textarea')[0].value.length;
+      }
+    };
+
+    $scope.maxLengthTitle = 70;
+    $scope.charCorrectTitle = true;
+
+    // Counter for input Title
+    $scope.remainingTitle = function() {
+      if ($scope.maxLengthTitle - angular.element(document).find('input')[3].value.length > 0) {
+        $scope.charCorrectTitle = true;
+        return $scope.maxLengthTitle - angular.element(document).find('input')[3].value.length;
+      } else {
+        $scope.charCorrectTitle = false;
+        return $scope.maxLengthTitle - angular.element(document).find('input')[3].value.length;
+      }
     };
   }
 ]);

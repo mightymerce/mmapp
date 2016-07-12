@@ -54,7 +54,7 @@ body {
 .img-preview-facebook,
 .img-preview-twitter{
   background-color: #f7f7f7;
-  width: 70%;
+  width: 100%;
   text-align: center;
 }
 
@@ -85,16 +85,19 @@ body {
 }
 
 .docs-preview {
-  margin-right: -15px;
+  margin-right: 0px;
 }
 
 .img-preview,
 .img-preview-facebook,
 .img-preview-twitter{
+  background-color: #d50920;
   float: left;
-  margin-right: 10px;
   margin-bottom: 10px;
   overflow: hidden;
+  border-style: solid;
+  border-color: #b1b1b1;
+  border-width: 1px;
 }
 
 .img-preview > img {
@@ -102,8 +105,8 @@ body {
 }
 
 .preview-lg {
-  width: 263px;
-  height: 148px;
+  width: 100%;
+  height: 162px;
 }
 
 .preview-md {

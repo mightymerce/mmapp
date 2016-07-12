@@ -2,207 +2,212 @@
   <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-4">
       <h2 translate>BREADCRUMB-EDIT-PRODUCTS</h2>
+    </div>
+    <div class="col-lg-8" align="right">
+      <br><br>
       <ol class="breadcrumb">
-        <li>
-          <a href="dashboard" translate>LABEL-HEADER-DASHBOARD</a>
-        </li>
         <li>
           <a href="products" translate>BREADCRUMB-PRODUCTS</a>
         </li>
-        <li>
-          <a href="" translate>BREADCRUMB-EDIT-PRODUCTS</a>
-        </li>
         <li class="active">
-          <strong translate>BUTTON-TAB-MAIN-DATA</strong>
+          <strong translate>BREADCRUMB-EDIT-PRODUCTS</strong>
         </li>
       </ol>
     </div>
   </div>
 
+  <br><br>
+  <div class="row wrapper wrapper-content animated fadeInRight ecommerce">
 
-  <div class="row">
-    <div class="wrapper wrapper-content">
-      <div class="col-lg-12">
-        <div class="tabs-container">
-          <ul class="nav nav-tabs">
-            <li class=""><a data-toggle="tab" ui-sref="products.edit({productId: product._id})" translate>BUTTON-TAB-MAIN-DATA</a></li>
-            <li class=""><a data-toggle="tab" ui-sref="products.editmedia({productId: product._id})" translate>BUTTON-TAB-IMAGES</a></li>
-            <li class="" ng-hide="true"><a data-toggle="tab" ui-sref="products.editchannel({productId: product._id})" translate>BUTTON-TAB-DAWANDA-PRODUCT</a></li>
-            <li class="active"><a data-toggle="tab"><span translate>BREADCRUMB-POSTS</span><span> &nbsp;&nbsp;&nbsp;</span><span class="label label-warning" translate>BUTTON-TAB-NEW</span></a></li>
-          </ul>
-          <div class="tab-content">
-            <div id="tab-1" class="tab-pane active">
-              <div class="panel-body">
-                <form name="productForm" class="form-horizontal" ng-submit="update(productForm.$valid)" novalidate>
+    <div class="col-lg-4">
+      <a class="btn btn-primary btn-outline btn-block" ui-sref="products.edit({productId: product._id})" translate>BUTTON-TAB-MAIN-DATA</a>
+    </div>
+    <div class="col-lg-4">
+      <a class="btn btn-primary btn-outline btn-block" ui-sref="products.editmedia({productId: product._id})" translate>BUTTON-TAB-IMAGES</a>
+    </div>
+    <div class="col-lg-4">
+      <a class="btn btn-primary btn-outline btn-block" style="border-width: 2px" translate>BUTTON-TAB-POSTS</a>
+    </div>
 
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <div ng-show="error" class="alert alert-danger">
-                        <p ng-bind="error"></p>
-                      </div>
-                      <div ng-show="success" class="alert alert-success">
-                        <p ng-bind="success"></p>
-                      </div>
-                      <div class="ibox float-e-margins">
-                        <div class="ibox-content">
-                          <table class="table table-hover">
-                            <thead>
-                            <tr>
-                              <th data-toggle="true" translate>LABEL-IMAGE</th>
-                              <th data-toggle="true" translate>LABEL-PRODUCT-NO</th>
-                              <th data-hide="phone" translate>LABEL-PRODUCT-TITLE</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                              <td><img ng-src="{{product.productMainImageURL}}" class="product-images-list"></td>
-                              <td><span data-ng-bind="product.productId"></span></td>
-                              <td><span ng-bind="product.productTitle"></span></td>
-                            </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+  </div>
 
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <div class="ibox float-e-margins">
-                        <div class="ibox-content">
-                          <div ng-hide="basicData">
-                            <div class="alert alert-danger">
-                              <p translate>NOTE-FINALIZE-TUTORIAL</p>
-                            </div>
-                            <a class="btn btn-w-m btn-default"><i class="fa fa-facebook"></i><span translate>BUTTON-CREATE-POST</span></a>
-                            <a class="btn btn-w-m btn-default"><i class="fa fa-pinterest"></i><span translate>BUTTON-CREATE-PIN</span></a>
-                            <a class="btn btn-w-m btn-default"><i class="fa fa-twitter"></i><span translate>BUTTON-CREATE-TWEET</span></a>
-                            <a class="btn btn-w-m btn-default"><i class="fa fa-instagram"></i><span translate>BUTTON-CREATE-COMMENT</span></a>
-                            <a class="btn btn-w-m btn-default"><i class="fa fa-google-plus"></i><span translate>BUTTON-CREATE-POST</span></a>
-                            <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i><span translate>BUTTON-CREATE-POST-ETSY</span></a>
-                            <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i><span translate>BUTTON-CREATE-POST-DAWANDA</span></a>
-                            <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i><span translate>BUTTON-CREATE-POST</span></a>
-                            <a class="btn btn-w-m btn-default"><i class="fa fa-amazon"></i><span translate>BUTTON-CREATE-POST</span></a>
-                          </div>
+  <div class=" wrapper wrapper-content animated fadeInRight ecommerce">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h3 translate>LABEL-YOUR-SELECTED-PRODUCT</h3>
+      </div>
+      <div class="ibox-content">
+        <div class="container">
 
-                            <div ng-show="basicData">
-                              <strong><p translate>NOTE-YOUR-SALES-CHANNELS</p></strong>
-                              <table class="table">
-                                <tbody>
-                                <tr>
-                                  <td width="20%">
-                                    <div class="panel panel-default">
-                                      <div class="panel-heading">
-                                        <i class="fa fa-facebook fa-2x"></i>
-                                      </div>
-                                      <div class="panel-body">
-                                        <a class="btn btn-w-m btn-warning" style="width: 100%" ng-click="modalupdateProductPost('md', product, 'Facebook', 'New', '00.00.0000')"><i class="fa fa-facebook"></i><span translate>BUTTON-CREATE-POST</span></a>
-                                        <br><br><br><br><br><br><br><br><br><br><br><br><br>
-                                      </div>
-                                    </div>
-                                  </td>
-                                  <td width="20%">
-                                    <div class="panel panel-default">
-                                      <div class="panel-heading">
-                                        <i class="fa fa-pinterest fa-2x"></i>
-                                      </div>
-                                      <div class="panel-body">
-                                        <a class="btn btn-w-m btn-warning" style="width: 100%" ng-click="modalupdateProductPost('md', product, 'Pinterest', 'New', '00.00.0000')"><i class="fa fa-pinterest"></i><span translate>BUTTON-CREATE-PIN</span></a>
-                                        <br><br><div><i class="fa fa-bell"></i> <span translate>LABEL-PINTEREST-NOTE-MM-MARKETPLACE</span></div>
-                                        <br><a class="btn btn-sm btn-outline btn-primary" style="width: 100%" ng-click="modalMarketplace('md')"><i class="fa fa-pinterest"></i><span translate>BUTTON-MM-MARKETPLACE</span></a>
-                                      </div>
-                                    </div>
-                                  </td>
-                                  <td width="20%">
-                                    <div class="panel panel-default">
-                                      <div class="panel-heading">
-                                        <i class="fa fa-twitter fa-2x"></i>
-                                      </div>
-                                      <div class="panel-body">
-                                        <a class="btn btn-w-m btn-warning" style="width: 100%" ng-click="modalupdateProductPost('md', product, 'Twitter', 'New', '00.00.0000')"><i class="fa fa-twitter"></i><span translate>BUTTON-CREATE-TWEET</span></a>
-                                        <br><br><br><br><br><br><br><br><br><br><br><br><br>
-                                      </div>
-                                    </div>
-                                  </td>
-                                  <td width="20%">
-                                    <div class="panel panel-default">
-                                      <div class="panel-heading">
-                                        <i class="fa fa-instagram fa-2x"></i>
-                                      </div>
-                                      <div class="panel-body">
-                                        <a ng-hide="instagramImageSet" style="width: 100%" class="btn btn-w-m btn-default" ><i class="fa fa-instagram"></i> <span translate>LABEL-ADD-IMAGE</span></a>
-                                        <div><a ng-show="instagramImageSet" style="width: 100%" class="btn btn-w-m btn-warning" ng-click="modalupdateProductPost('md', product, 'Instagram', 'New', '00.00.0000')"><i class="fa fa-instagram"></i><span translate>BUTTON-CREATE-COMMENT</span></a><br><br><br><br>
-                                        <br><i ng-hide="instagramImageSet" class="fa fa-info-circle"></i> <span ng-hide="instagramImageSet" translate>NOTE-ADD-IMAGES-FIRST</span>
-                                          <br><br><br><br><br><br><br><br>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </td>
-                                  <td width="20%">
-                                    <div class="panel panel-default">
-                                      <div class="panel-heading">
-                                        <i class="fa fa-code fa-2x"></i>
-                                      </div>
-                                      <div class="panel-body">
-                                        <a class="btn btn-w-m btn-warning" style="width: 100%" ng-click="modalupdateProductPost('md', product, 'Code', 'New', '00.00.0000')"><i class="fa fa-code"></i><span translate>BUTTON-CREATE-POST-CODE-SNIPPET</span></a>
-                                        <br><br><br><br><br><br><br><br><br><br><br><br><br>
-                                      </div>
-                                    </div>
-                                  </td>
-                                </tr>
-                                </tbody>
-                              </table>
-                            </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <div class="ibox float-e-margins">
-                        <div class="ibox-content">
-                          <table class="table table-hover">
-                            <thead>
-                            <tr>
-                              <th data-hide="phone" translate>LABEL-POST-DATE</th>
-                              <th data-hide="phone" translate>LABEL-POST-CHANNEL</th>
-                              <th data-hide="phone" translate>LABEL-POST-STATUS</th>
-                              <th data-hide="phone" translate>LABEL-POST-ACTION</th>
-                            </tr>
-                            </thead>
-                            <tbody data-ng-repeat="post in posts | filter: {product: productSelectId }">
-                            <tr>
-                              <td><span ng-bind="post.postPublicationDate | date:'mediumDate'"></span></td>
-                              <td><span ng-bind="post.postChannel"></span></td>
-                              <td><span ng-bind="post.postStatus"></span></td>
-                              <td>
-                                <div ng-show="post.postStatus === 'Active'">
-                                  <a class="btn btn-primary btn-outline btn-sm" ng-click="modalupdateProductPost('md', product, post.postChannel, post.postStatus, post.postPublicationDate, post.postInformation)"><i class="fa fa-check"></i><span translate>BUTTON-VIEW-POST</span></a>
-                                </div>
-                                <div ng-show="post.postStatus === 'Wait'">
-                                  <a class="btn btn-warning btn-outline btn-sm" ng-click="modalupdateProductPost('md', product, post.postChannel, post.postStatus, post.postPublicationDate, post.postInformation)"><i class="fa fa-warning"></i><span translate>BUTTON-REVIEW-POST</span></a>
-                                </div>
-                                <div ng-show="post.postStatus === 'Error'">
-                                  <a class="btn btn-danger btn-outline btn-sm" ng-click="modalupdateProductPost('md', product, post.postChannel, post.postStatus, post.postPublicationDate, post.postInformation)"><i class="fa fa-pencil"></i><span translate>BUTTON-REVIEW-POST</span></a>
-                                </div>
-                              </td>
-                            </tr>
-                            </tbody>
-                          </table>
-                          <div class="alert alert-warning text-center" ng-if="posts.$resolved && !posts.length" translate>
-                            NOTE-NOT-POSTED-PRODUCT-SO-FAR
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
+          <div ng-show="error" class="alert alert-danger">
+            <p ng-bind="error"></p>
           </div>
+          <div ng-show="success" class="alert alert-success">
+            <p ng-bind="success"></p>
+          </div>
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th data-toggle="true" translate>LABEL-IMAGE</th>
+              <th data-toggle="true" translate>LABEL-PRODUCT-NO</th>
+              <th data-hide="phone" translate>LABEL-PRODUCT-TITLE</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td><img ng-src="{{product.productMainImageURL}}" class="product-images-list"></td>
+              <td><span data-ng-bind="product.productId"></span></td>
+              <td><span ng-bind="product.productTitle"></span></td>
+            </tr>
+            </tbody>
+          </table>
+
         </div>
       </div>
     </div>
   </div>
-  <br><br><br><br><br><br>
+
+  <div class=" wrapper wrapper-content animated fadeInRight ecommerce">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h3 translate>NOTE-YOUR-SALES-CHANNELS</h3>
+      </div>
+      <div class="ibox-content">
+        <div class="container">
+
+
+              <div ng-hide="basicData">
+                <div class="alert alert-danger">
+                  <p translate>NOTE-FINALIZE-TUTORIAL</p>
+                </div>
+                <a class="btn btn-w-m btn-default"><i class="fa fa-facebook"></i><span translate>BUTTON-CREATE-POST</span></a>
+                <a class="btn btn-w-m btn-default"><i class="fa fa-pinterest"></i><span translate>BUTTON-CREATE-PIN</span></a>
+                <a class="btn btn-w-m btn-default"><i class="fa fa-twitter"></i><span translate>BUTTON-CREATE-TWEET</span></a>
+                <a class="btn btn-w-m btn-default"><i class="fa fa-instagram"></i><span translate>BUTTON-CREATE-COMMENT</span></a>
+                <a class="btn btn-w-m btn-default"><i class="fa fa-google-plus"></i><span translate>BUTTON-CREATE-POST</span></a>
+                <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i><span translate>BUTTON-CREATE-POST-ETSY</span></a>
+                <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i><span translate>BUTTON-CREATE-POST-DAWANDA</span></a>
+                <a class="btn btn-w-m btn-default"><i class="fa fa-angle-double-right"></i><span translate>BUTTON-CREATE-POST</span></a>
+                <a class="btn btn-w-m btn-default"><i class="fa fa-amazon"></i><span translate>BUTTON-CREATE-POST</span></a>
+              </div>
+
+              <div ng-show="basicData">
+                <table class="table">
+                  <tbody>
+                  <tr>
+                    <td width="20%">
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                          <i class="fa fa-facebook fa-2x"></i>
+                        </div>
+                        <div class="panel-body">
+                          <a class="btn btn-w-m btn-warning" style="width: 100%" ng-click="modalupdateProductPost('md', product, 'Facebook', 'New', '00.00.0000')"><i class="fa fa-facebook"></i><span translate>BUTTON-CREATE-POST</span></a>
+                          <br><br><br><br><br><br><br><br><br><br><br><br>
+                        </div>
+                      </div>
+                    </td>
+                    <td width="20%">
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                          <i class="fa fa-pinterest fa-2x"></i>
+                        </div>
+                        <div class="panel-body">
+                          <a class="btn btn-w-m btn-warning" style="width: 100%" ng-click="modalupdateProductPost('md', product, 'Pinterest', 'New', '00.00.0000')"><i class="fa fa-pinterest"></i><span translate>BUTTON-CREATE-PIN</span></a>
+                          <br><br><div><i class="fa fa-bell"></i> <span translate>LABEL-PINTEREST-NOTE-MM-MARKETPLACE</span></div>
+                          <br><a class="btn btn-sm btn-outline btn-primary" style="width: 100%" ng-click="modalMarketplace('md')"><i class="fa fa-pinterest"></i><span translate>BUTTON-MM-MARKETPLACE</span></a>
+                        </div>
+                      </div>
+                    </td>
+                    <td width="20%">
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                          <i class="fa fa-twitter fa-2x"></i>
+                        </div>
+                        <div class="panel-body">
+                          <a class="btn btn-w-m btn-warning" style="width: 100%" ng-click="modalupdateProductPost('md', product, 'Twitter', 'New', '00.00.0000')"><i class="fa fa-twitter"></i><span translate>BUTTON-CREATE-TWEET</span></a>
+                          <br><br><br><br><br><br><br><br><br><br><br><br>
+                        </div>
+                      </div>
+                    </td>
+                    <td width="20%">
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                          <i class="fa fa-instagram fa-2x"></i>
+                        </div>
+                        <div class="panel-body">
+                          <a ng-hide="instagramImageSet" style="width: 100%" class="btn btn-w-m btn-default" ><i class="fa fa-instagram"></i> <span translate>LABEL-ADD-IMAGE</span></a>
+                          <div><a ng-show="instagramImageSet" style="width: 100%" class="btn btn-w-m btn-warning" ng-click="modalupdateProductPost('md', product, 'Instagram', 'New', '00.00.0000')"><i class="fa fa-instagram"></i><span translate>BUTTON-CREATE-COMMENT</span></a><br><br><br>
+                            <br><i ng-hide="instagramImageSet" class="fa fa-info-circle"></i> <span ng-hide="instagramImageSet" translate>NOTE-ADD-IMAGES-FIRST</span>
+                            <br><br><br><br><br>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td width="20%">
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                          <i class="fa fa-code fa-2x"></i>
+                        </div>
+                        <div class="panel-body">
+                          <a class="btn btn-w-m btn-warning" style="width: 100%" ng-click="modalupdateProductPost('md', product, 'Code', 'New', '00.00.0000')"><i class="fa fa-code"></i><span translate>BUTTON-CREATE-POST-CODE-SNIPPET</span></a>
+                          <br><br><br><br><br><br><br><br><br><br><br><br>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class=" wrapper wrapper-content animated fadeInRight ecommerce">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h3 translate>LABEL-YOUR-PRODUCT-POSTED</h3>
+      </div>
+      <div class="ibox-content">
+        <div class="container">
+
+              <table class="table table-hover">
+                <thead>
+                <tr>
+                  <th data-hide="phone" translate>LABEL-POST-DATE</th>
+                  <th data-hide="phone" translate>LABEL-POST-CHANNEL</th>
+                  <th data-hide="phone" translate>LABEL-POST-STATUS</th>
+                  <th data-hide="phone" translate>LABEL-POST-ACTION</th>
+                </tr>
+                </thead>
+                <tbody data-ng-repeat="post in posts | filter: {product: productSelectId }">
+                <tr>
+                  <td><span ng-bind="post.postPublicationDate | date:'mediumDate'"></span></td>
+                  <td><span ng-bind="post.postChannel"></span></td>
+                  <td><span ng-bind="post.postStatus"></span></td>
+                  <td>
+                    <div ng-show="post.postStatus === 'Active'">
+                      <a class="btn btn-primary btn-outline btn-sm" ng-click="modalupdateProductPost('md', product, post.postChannel, post.postStatus, post.postPublicationDate, post.postInformation)"><i class="fa fa-check"></i><span translate>BUTTON-VIEW-POST</span></a>
+                    </div>
+                    <div ng-show="post.postStatus === 'Wait'">
+                      <a class="btn btn-warning btn-outline btn-sm" ng-click="modalupdateProductPost('md', product, post.postChannel, post.postStatus, post.postPublicationDate, post.postInformation)"><i class="fa fa-warning"></i><span translate>BUTTON-REVIEW-POST</span></a>
+                    </div>
+                    <div ng-show="post.postStatus === 'Error'">
+                      <a class="btn btn-danger btn-outline btn-sm" ng-click="modalupdateProductPost('md', product, post.postChannel, post.postStatus, post.postPublicationDate, post.postInformation)"><i class="fa fa-pencil"></i><span translate>BUTTON-REVIEW-POST</span></a>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              <div class="alert alert-warning text-center" ng-if="!minOnePost" translate>
+                NOTE-NOT-POSTED-PRODUCT-SO-FAR
+              </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br><br><br><br><br>
 </section>

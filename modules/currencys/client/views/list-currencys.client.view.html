@@ -17,7 +17,7 @@
     <div class="col-lg-2"></div>
   </div>
 
-  <form name="currencyForm" class="form-horizontal" ng-submit="updateCurrencyDetails(currencyForm.$valid)">
+  <form name="currencyForm" class="form-horizontal" ng-submit="updateCurrencyStandard()">
 
     <div class="row">
       <div class="wrapper wrapper-content">
@@ -47,7 +47,7 @@
                   <td><span data-ng-bind="currency.currencyValue"></span></td>
                   <td class="text-right">
                     <div class="btn-group">
-                      <a class="btn-white btn-xs" ui-sref="currencys.edit({currencyId: currency._id})">
+                      <a class="btn btn-primary btn-outline btn-xs" ui-sref="currencys.edit({currencyId: currency._id})">
                         <i class="fa fa-cogs"></i> <span translate>BUTTON-EDIT-CURRENCY-OPTION</span>
                       </a>
                     </div>
@@ -68,7 +68,34 @@
         </div>
       </div>
     </div>
-
+    <br><br>
+    <div class="row">
+      <div class="wrapper wrapper-content animated fadeInRight ecommerce">
+        <div class="col-lg-12">
+          <div class="ibox float-e-margins">
+            <div class="ibox-title">
+              <h5 translate>LABEL-STANDARD</h5>
+              <div class="ibox-tools"></div>
+            </div>
+            <div class="ibox-content">
+              <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-STANDARD</span> *</label>
+                <div class="col-sm-7">
+                  <select class="form-control" name="currencyStandard" id="currencyStandard" ng-model="currencyStandard" ng-options="currency.currencyCode for currency in currencys" required>
+                  </select>
+                </div>
+                <div class="col-sm-3"  align="right">
+                  <button type="submit" class="btn btn-w-m btn-warning" translate>
+                    BUTTON-UPDATE-CURRENCY-STANDARD
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+      </div>
+    </div>
+<br><br>
     <div class="row">
       <div class="wrapper wrapper-content animated fadeInRight ecommerce">
         <div class="col-lg-12">
