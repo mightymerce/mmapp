@@ -5,6 +5,7 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
   function ($rootScope, $scope, $state, $http, $timeout, $window, $stateParams, $location, Authentication, Products, $uibModal, Posts, ProductsServices, FileUploader) {
 
     $scope.authentication = Authentication;
+    $scope.imagesMaintained = false;
 
     // If user is signed in then redirect back home
     if (!$scope.authentication.user) {
@@ -124,7 +125,7 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
       ProductsServices.getPosts($stateParams.productId).then(function (Posts) {
         $scope.posts = Posts;
       });
-
+      
       $scope.selectImage = true;
       $scope.errorpicture = 'Bitte lade zunächst in Schritt 1 ein Bild hoch, um es dann zuschneiden und abspeichern zu können.';
     };

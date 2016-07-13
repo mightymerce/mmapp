@@ -26,16 +26,16 @@
     <div class="col-lg-4">
       <a class="btn btn-primary btn-block btn-outline" style="border-width: 2px" translate>BUTTON-TAB-IMAGES</a>
     </div>
-    <div class="col-lg-4" ng-show="{{imagesMaintained}}">
+    <div class="col-lg-4" ng-hide="imagesMaintained">
       <a class="btn btn-default btn-outline btn-block" translate>BUTTON-TAB-POSTS</a>
     </div>
-    <div class="col-lg-4" ng-hide="{{imagesMaintained}}">
+    <div class="col-lg-4" ng-show="imagesMaintained">
       <a class="btn btn-primary btn-outline btn-block" ui-sref="products.view({productId: product._id})" translate>BUTTON-TAB-POSTS</a>
     </div>
 
   </div>
 
-  <div class=" wrapper wrapper-content animated fadeInRight ecommerce" ng-hide="{{imagesMaintained}}">
+  <div class=" wrapper wrapper-content animated fadeInRight ecommerce" ng-show="imagesMaintained">
     <div class="ibox float-e-margins">
       <div class="ibox-title">
         <h3><span translate>LABEL-STEP-FINALLY-EXPLANATION</span></h3>
