@@ -115,7 +115,8 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
           $scope.product.productMainImageURLPinterest = '../../../../modules/products/client/img/photo_not_available.png';
           $scope.product.productMainImageURLTwitter = '../../../../modules/products/client/img/photo_not_available.png';
           $scope.product.productMainImageURLCode = '../../../../modules/products/client/img/photo_not_available.png';
-        } else {
+          $scope.imagesMaintained = false;
+        } else if ($scope.product.productMainImageURL !== '' && $scope.product.productMainImageURL !== '../../../../modules/products/client/img/photo_not_available.png') {
           $scope.imagesMaintained = true;
         }
       });
@@ -351,8 +352,6 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
           if(item.name === 'pinterest') {
             $scope.product.productMainImageURLPinterest = response;
             product.productMainImageURLPinterest = response;
-            alert($scope.product.productMainImageURLPinterest);
-            alert(product.productMainImageURLPinterest);
             $timeout(callAtTimeout(product), 4000);
           }
 
