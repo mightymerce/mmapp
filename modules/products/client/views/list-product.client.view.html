@@ -97,6 +97,9 @@
                     </tr>
                   </tbody>
                 </table>
+                <div class="alert alert-danger text-center" ng-if="products.$resolved && !products.length" translate>
+                  MESSAGE-NO-PRODUCTS-YET
+                </div>
               </div>
             </div>
           </div>

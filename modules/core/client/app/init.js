@@ -543,7 +543,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         'LABEL-VERIFY-DELIVERY-OPTION':'Lieferoptionen bearbeiten',
         'LABEL-MAINTAIN-FIRST-PRODUCT':'Pflege dein erstes Produkt',
         'LABEL-NOTE-MAINTAIN-FIRST-PRODUCT':'Pflege Titel, Beschreibung und Preis. Dann lade ein Produktbild hoch, dass die Aufmerksamkeit deiner Kunden weckt. Und los geht es!',
-        'LABEL-MAINTAIN-PRODUCT':'Maintain product',
+        'LABEL-MAINTAIN-PRODUCT':'Produkt anlegen',
 
         // ERROR
         'MESSAGE-EXPLAIN-TUTORIAL':'Unser Tutorial hilft dir mit diesen 5 Schritten, dein erstes Produkt auf deinem bevorzugten Social Media Kanal zu posten.',
@@ -689,6 +689,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         'LABEL-TOOLTIP-PRODUCT-PRICE':'Preise im Format 12,00 oder 4,99 - Es muss ein Komma enthalten sein.',
         'LABEL-SET-PRICE-PRODUCT':'Pflege den Preis',
         'LABEL-SELECT-SHIPPING-OPTION':'Wähle die Versandoption für dein Produkt',
+        'MESSAGE-NO-PRODUCTS-YET':'Du hast derzeit noch kein Produkt angelegt.',
 
         // ERROR
         'VALIDATION-PRODUCT-ID-REQ':'Bitte ergänze die Produktnummer.',
@@ -1520,6 +1521,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
           'LABEL-TOOLTIP-PRODUCT-DESCRIPTION':'The description is limited to 1000 characters. Be aware that Twitter: limit is 140 characters (incl. title and price). Instagram: limit is 200 characters.',
           'LABEL-SET-PRICE-PRODUCT':'Set the price of your product',
           'LABEL-SELECT-SHIPPING-OPTION':'Select the applicable shipping option for your product',
+          'MESSAGE-NO-PRODUCTS-YET':'Maintain your first product now.',
 
           // ERROR
           'VALIDATION-PRODUCT-ID-REQ':'Please enter the product ID.',
