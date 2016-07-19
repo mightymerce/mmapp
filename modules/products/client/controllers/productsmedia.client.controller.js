@@ -125,7 +125,7 @@ angular.module('products').controller('ProductsMediaController', ['$rootScope','
       ProductsServices.getPosts($stateParams.productId).then(function (Posts) {
         $scope.posts = Posts;
       });
-      
+
       $scope.selectImage = true;
       $scope.errorpicture = 'Bitte lade zunächst in Schritt 1 ein Bild hoch, um es dann zuschneiden und abspeichern zu können.';
     };

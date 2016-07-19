@@ -327,6 +327,99 @@ exports.stripeCancelSubscription = function (req, res) {
 };
 
 /**
+ * Stripe create cc token
+ */
+exports.stripeCreateCCToken = function (req, res) {
+  console.log('users.profile.server.controller - stripeCreateCCToken - start');
+
+  var stripe = require('stripe')('sk_test_AYQBhWDR55fPPfUnYCqa9hSm');
+
+// (Assuming you're using express - expressjs.com)
+// Get the credit card details submitted by the form
+  var stripeToken = req.body.stripeToken;
+
+  stripe.customers.create({
+    source: stripeToken,
+    description: 'Sie haben ihre Informationen bei mightymerce eingegeben.'
+  }).then(function(customer) {
+    return stripe.charges.create({
+      amount: 0, // amount in cents, again
+      currency: 'eur',
+      customer: customer.id
+    });
+  }).then(function(charge) {
+    // YOUR CODE: Save the customer ID and other info in a database for later!
+    //console.log(JSON.stringify(charge));
+
+    var user = req.user;
+
+    if (user) {
+      // Merge existing user
+      user = _.extend(user, req.body);
+      user.customerIdSt = charge.customer.id;
+
+      user.updated = Date.now();
+      // user.displayName = user.firstName + ' ' + user.lastName;
+
+      console.log('users.profile.server.controller - update - user exist: ' +user._id);
+      user.save(function (err) {
+        if (err) {
+          return res.status(400).send({
+            message: errorHandler.getErrorMessage(err)
+          });
+        } else {
+          console.log('users.profile.server.controller - update - success update');
+          req.login(user, function (err) {
+            if (err) {
+              res.status(400).send(err);
+            } else {
+              res.json(user);
+            }
+          });
+        }
+      });
+    } else {
+      res.status(400).send({
+        message: 'User is not signed in'
+      });
+    }
+  });
+
+// YOUR CODE: When it's time to charge the customer again, retrieve the customer ID!
+
+  /*
+  stripe.charges.create({
+    amount: 100, // amount in cents, again
+    currency: "eur",
+    customer: customerId // Previously stored, then retrieved
+  });
+  */
+};
+
+
+/**
+ * Stripe create cc token
+ */
+exports.stripeCreateMonthlyDebit = function (req, res) {
+  console.log('users.profile.server.controller - stripeCreateMonthlyDebit - start');
+
+  var stripe = require('stripe')('sk_test_AYQBhWDR55fPPfUnYCqa9hSm');
+
+// (Assuming you're using express - expressjs.com)
+// Get the credit card details submitted by the form
+  var charge = req.params.CHARGE;
+  var customerId = req.params.CUSID;
+
+  // YOUR CODE: When it's time to charge the customer again, retrieve the customer ID!
+
+  stripe.charges.create({
+    amount: charge, // amount in cents, again
+    currency: "eur",
+    customer: customerId // Previously stored, then retrieved
+  });
+};
+
+/**
  * Twitter get OAuthToken
  */
 exports.twitterGetOAuthToken = function (req, res) {

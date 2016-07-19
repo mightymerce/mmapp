@@ -39,7 +39,8 @@
             <div class="ibox-content">
               <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-LEGAL-COPYRIGHT</span> *</label>
                 <div class="col-sm-8">
-                  <textarea rows="15" ng-model="legal.legalCopyright" id="legalCopyright" class="supertext" placeholder="" required></textarea></div>
+                  <text-angular ng-model="legal.legalCopyright" id="legalCopyright" class="supertext" ng-required="true"></text-angular>
+                </div>
                 <div ng-messages="legalForm.legalCopyright.$error" role="alert">
                   <p class="help-block error-text" ng-message="required">VALIDATION-COPYRIGHT-REQ</p>
                 </div>

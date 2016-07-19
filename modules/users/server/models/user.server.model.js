@@ -213,6 +213,10 @@ var UserSchema = new Schema({
     type: String,
     default: ''
   },
+  customerIdSt: {
+    type: String,
+    default: ''
+  },
   userStatus: {
     type: String,
     default: '0'

@@ -59,3 +59,19 @@ angular.module('users').factory('stripeCancelSubscription', ['$resource',
     });
   }
 ]);
+
+angular.module('users').factory('stripeCreateCCToken', ['$resource',
+  function($resource) {
+    return $resource('/api/users/stripeCreateCCToken', {}, {
+      query: { method: 'GET', isArray: false }
+    });
+  }
+]);
+
+angular.module('users').factory('stripeCreateMonthlyDebit', ['$resource',
+  function($resource) {
+    return $resource('/api/users/stripeCreateMonthlyDebit/:CUSID/:CHARGE', {}, {
+      query: { method: 'GET', isArray: false }
+    });
+  }
+]);

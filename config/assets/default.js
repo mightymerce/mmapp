@@ -38,7 +38,10 @@ module.exports = {
 
         // Inspinia
         'public/css/animate.css',
-        'public/css/style.css'
+        'public/css/style.css',
+
+        // textAngular - wysywig
+        'public/lib/textAngular/dist/textAngular.css'
 
 
         //'public/lib/plugin/shariff/shariff.min.css'
@@ -158,8 +161,12 @@ module.exports = {
         //'public/lib/plugin/shariff/shariff.min.js'
 
         // Social Share
-        'public/lib/angular-socialshare/dist/angular-socialshare.js'
+        'public/lib/angular-socialshare/dist/angular-socialshare.js',
 
+        // textAngular - wysywig
+        'public/lib/textAngular/dist/textAngular-rangy.min.js',
+        'public/lib/textAngular/dist/textAngular-sanitize.min.js',
+        'public/lib/textAngular/dist/textAngular.min.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

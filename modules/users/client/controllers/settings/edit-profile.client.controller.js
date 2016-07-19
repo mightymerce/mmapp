@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('users').controller('EditProfileController', ['$scope', '$http', '$location', 'Users', 'Deliverys', 'Authentication', 'stripeCreateSubscription', 'stripeUpdateSubscription', 'stripeCancelSubscription',
-  function ($scope, $http, $location, Users, Deliverys, Authentication, stripeCreateSubscription, stripeUpdateSubscription, stripeCancelSubscription) {
+angular.module('users').controller('EditProfileController', ['$scope', '$http', '$location', 'Users', 'Deliverys', 'Authentication', 'stripeCreateSubscription', 'stripeUpdateSubscription', 'stripeCancelSubscription', 'stripeCreateCCToken',
+  function ($scope, $http, $location, Users, Deliverys, Authentication, stripeCreateSubscription, stripeUpdateSubscription, stripeCancelSubscription, stripeCreateCCToken) {
     console.log('edit-profile.client.controller - load - start');
     $scope.authentication = Authentication;
     $scope.user = Authentication.user;
@@ -435,5 +435,21 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
 
         });
     };
+
+    // Call Stripe cancel subscription
+    $scope.createStripeCCToken = function () {
+      console.log('edit-profile.client.controller - createStripeCCToken - start');
+
+      // Verify is it an upgrade / downgrade or new subscription
+
+      stripeCreateCCToken.query({
+
+      }, function(charge) {
+
+        console.log('edit-profile.client.controller - createStripeCCToken - end');
+
+      });
+    };
+
   }
 ]);

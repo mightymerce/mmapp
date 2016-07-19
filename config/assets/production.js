@@ -35,7 +35,11 @@ module.exports = {
 
         // Inspinia
         'public/css/animate.css',
-        'public/css/style.css'
+        'public/css/style.css',
+
+        // textAngular - wysywig
+        'public/lib/textAngular/dist/textAngular.css'
+
         //'public/css/style.min.css',
 
         // Checkout
@@ -144,7 +148,12 @@ module.exports = {
         // Social Media Icon - Sharrif
         //'public/lib/plugin/shariff/shariff.min.js'
 
-        'public/lib/angular-socialshare/dist/angular-socialshare.js'
+        'public/lib/angular-socialshare/dist/angular-socialshare.js',
+
+        // textAngular - wysywig
+        'public/lib/textAngular/dist/textAngular-rangy.min.js',
+        'public/lib/textAngular/dist/textAngular-sanitize.min.js',
+        'public/lib/textAngular/dist/textAngular.min.js'
       ]
     },
     css:

@@ -515,7 +515,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'productForm');
-        console.log('Error!');
+        $scope.productDescriptionReq = true;
 
         return false;
       }
@@ -652,7 +652,6 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
       if (!isValid) {
         console.log('products.client.controller - update - productForm not valid');
         $scope.$broadcast('show-errors-check-validity', 'productForm');
-
         return false;
       }
 
@@ -1117,13 +1116,24 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
     $scope.charCorrectTitle = true;
 
     // Counter for input Title
-    $scope.remainingTitle = function() {
+    $scope.remainingTitleCreateProduct = function() {
       if ($scope.maxLengthTitle - angular.element(document).find('input')[3].value.length > 0) {
         $scope.charCorrectTitle = true;
         return $scope.maxLengthTitle - angular.element(document).find('input')[3].value.length;
       } else {
         $scope.charCorrectTitle = false;
         return $scope.maxLengthTitle - angular.element(document).find('input')[3].value.length;
+      }
+    };
+
+    // Counter for input Title
+    $scope.remainingTitleEditProduct = function() {
+      if ($scope.maxLengthTitle - angular.element(document).find('input')[2].value.length > 0) {
+        $scope.charCorrectTitle = true;
+        return $scope.maxLengthTitle - angular.element(document).find('input')[2].value.length;
+      } else {
+        $scope.charCorrectTitle = false;
+        return $scope.maxLengthTitle - angular.element(document).find('input')[2].value.length;
       }
     };
   }

@@ -39,9 +39,10 @@
             <div class="ibox-content">
               <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-LEGAL-IMPRINT</span> *</label>
                 <div class="col-sm-8">
-                  <textarea rows="15" ng-model="legal.legalImprint" id="legalImprint" class="supertext" placeholder="" required></textarea></div>
-                <div ng-messages="legalForm.legalImprint.$error" role="alert">
-                  <p class="help-block error-text" ng-message="required" translate>VALIDATION-IMRPINT-REQ</p>
+                  <text-angular ng-model="legal.legalImprint" id="legalImprint" class="supertext" required></text-angular>
+                </div>
+                <div >
+                  <p class="error-text" ng-show="legalForm.legalImprint.$touched && legalForm.legalImprint.$error.required" role="alert"><span translate>VALIDATION-IMRPINT-REQ</span></p>
                 </div>
                 <div class="col-sm-2">
                 </div>

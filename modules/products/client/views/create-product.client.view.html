@@ -117,15 +117,16 @@
                                   <button type="button" class="btn btn-default" tooltip-placement="top" uib-tooltip="{{'LABEL-TOOLTIP-PRODUCT-TITLE' | translate}}">i</button>
                                 </div>
                                 <div ng-show="charCorrectTitle">
-                                  <span>Zeichen verfügbar: {{ remainingTitle() }}</span>
+                                  <span>Zeichen verfügbar: {{ remainingTitleCreateProduct() }}</span>
                                 </div>
                                 <div ng-hide="charCorrectTitle">
-                                  <span class="error-text">Zeichen verfügbar: {{ remainingTitle() }}</span>
+                                  <span class="error-text">Zeichen verfügbar: {{ remainingTitleCreateProduct() }}</span>
                                 </div>
                               </div>
                             </div>
                             <div class="form-group"><label class="col-sm-2 control-label"><span translate>LABEL-DESCRIPTION</span> *</label>
-                              <div class="col-sm-8"><textarea name="productDescription" ng-model="productDescription" id="productDescription" class="supertext" placeholder="" rows="10" required ng-maxlength="{{ maxLengthDescription }}"></textarea></div>
+                              <div class="col-sm-8"><textarea name="productDescription" ng-model="productDescription" id="productDescription" class="supertext" placeholder="" rows="10" required ng-maxlength="{{ maxLengthDescription }}"></textarea>
+                              </div>
                               <div >
                                 <p class="error-text" ng-show="productForm.productDescription.$touched && productForm.productDescription.$error.required" role="alert"><span translate>VALIDATION-PRODUCT-DESCRIPTION-REQ</span></p>
                                 <p class="error-text" ng-show="productForm.productDescription.$touched && productForm.productDescription.$error.maxlength" role="alert"><span translate>VALIDATION-PRODUCT-DESCRIPTION-TO-LONG</span></p>
@@ -228,6 +229,12 @@
                             </fieldset>
                           </div>
                         </div>
+                  <div ng-show="error" class="alert alert-danger">
+                    <p ng-bind="error"></p>
+                  </div>
+                  <div ng-show="success" class="alert alert-success">
+                    <p ng-bind="success"></p>
+                  </div>
                   <div class="wrapper wrapper-content animated fadeInRight ecommerce">
                     <div class="ibox float-e-margins">
                       <div class="col-lg-6" align="left">

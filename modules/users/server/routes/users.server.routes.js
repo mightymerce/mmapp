@@ -22,6 +22,10 @@ module.exports = function (app) {
   app.route('/api/users/stripeUpdateSubscription/:CUSID/:SUBID/:PLAN').get(users.stripeUpdateSubscription);
   app.route('/api/users/stripeCancelSubscription/:CUSID/:SUBID').get(users.stripeCancelSubscription);
 
+  // Stripe add credit card token
+  app.route('/api/users/stripeCreateCCToken').get(users.stripeCreateCCToken);
+  app.route('/api/users/stripeCreateMonthlyDebit/:CUSID/:CHARGE').get(users.stripeCreateMonthlyDebit);
+
   // Etsy connection routes
   app.route('/api/users/etsy/etsyGetOAuthToken/:productId').get(users.etsyGetOAuthToken);
   app.route('/api/users/etsy/etsyGetAccessToken/:oauth_verifier/:oauth_token/:oauth_token_secret').get(users.etsyGetAccessToken);
