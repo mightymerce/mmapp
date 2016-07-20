@@ -100,9 +100,10 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootElement', '
             $("meta[property='og:image']").attr('content', linkMainImageUrl + $scope.product.productMainImageURLFacebook.substring(1));
 
             // PINTEREST (additional to Facebook)
-            $("meta[property='og:price:amount']").attr('content', $scope.product.productPrice);
-            $("meta[property='og:price:currency']").attr('content', Currencys.currencyCode);
-            $("meta[property='og:availability']").attr('content', 'in stock');
+            $("meta[property='product:price:amount']").attr('content', $scope.product.productPrice);
+            $("meta[property='product:price:currency']").attr('content', Currencys.currencyCode);
+            $("meta[property='availability']").attr('content', 'instock');
+            $("meta[property='og:brand']").attr('content', $scope.user.displayName);
 
             // TWITTER
             $("meta[name='twitter:site']").attr('content', 'www.shopmightymerce.com');
