@@ -836,7 +836,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
         'LABEL-CATEGORY-10':'Essen & Trinken',
         'LABEL-CATEGORY-11':'Elektronik & Computer',
         'LABEL-CATEGORY-12':'Papier & Handwerk',
-        'LABEL-PINTEREST-USER':'Dein Pinterest Benutzer:',
+        'LABEL-PINTEREST-USER':'Deine Pinterest E-Mail-Adresse:',
 
         // BUTTON
         'BUTTON-ADD-TO-CATEGORY':'Schaltet mir die mightymerce Kategorie-Boards frei'
