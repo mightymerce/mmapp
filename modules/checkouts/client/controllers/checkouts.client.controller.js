@@ -87,6 +87,18 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootElement', '
           $scope.linkMainImageUrlTwitter = linkMainImageUrl + $scope.product.productMainImageURLTwitter.substring(1);
           $scope.linkMainImageUrlPinterest = linkMainImageUrl + $scope.product.productMainImageURLPinterest.substring(1);
 
+          $cookieStore.put('linkUrlSocialShareFacebook', $scope.linkUrlSocialShareFacebook);
+          $cookieStore.put('linkUrlSocialShareTwitter', $scope.linkUrlSocialShareTwitter);
+          $cookieStore.put('linkUrlSocialSharePinterest', $scope.linkUrlSocialSharePinterest);
+          $cookieStore.put('linkUrlSocialShareCode', $scope.linkUrlSocialShareCode);
+          $cookieStore.put('linkUrlSocialShareXing', $scope.linkUrlSocialShareXing);
+          $cookieStore.put('linkUrlSocialShareWordpress', $scope.linkUrlSocialShareWordpress);
+          $cookieStore.put('linkUrlSocialShareWhatsapp', $scope.linkUrlSocialShareWhatsapp);
+          $cookieStore.put('linkUrlSocialShareSkype', $scope.linkUrlSocialShareSkype);
+          $cookieStore.put('linkMainImageUrlFacebook', $scope.linkMainImageUrlFacebook);
+          $cookieStore.put('linkMainImageUrlTwitter', $scope.linkMainImageUrlTwitter);
+          $cookieStore.put('linkMainImageUrlPinterest', $scope.linkMainImageUrlPinterest);
+
           $(document).ready(function($) {
             // todo - wie need channel Pinterest in URL. Can't distinguish at the moment
 
@@ -631,6 +643,18 @@ angular.module('checkouts').controller('CheckoutsController', ['$rootElement', '
       $scope.tax = $cookieStore.get('product.taxes');
 
       $scope.shareURL = $cookieStore.get('shareURL');
+
+      $scope.linkUrlSocialShareFacebook = $cookieStore.get('linkUrlSocialShareFacebook');
+      $scope.linkUrlSocialShareTwitter = $cookieStore.put('linkUrlSocialShareTwitter');
+      $scope.linkUrlSocialSharePinterest = $cookieStore.put('linkUrlSocialSharePinterest');
+      $scope.linkUrlSocialShareCode = $cookieStore.put('linkUrlSocialShareCode');
+      $scope.linkUrlSocialShareXing = $cookieStore.put('linkUrlSocialShareXing');
+      $scope.linkUrlSocialShareWordpress = $cookieStore.put('linkUrlSocialShareWordpress');
+      $scope.linkUrlSocialShareWhatsapp = $cookieStore.put('linkUrlSocialShareWhatsapp');
+      $scope.linkUrlSocialShareSkype = $cookieStore.put('linkUrlSocialShareSkype');
+      $scope.linkMainImageUrlFacebook = $cookieStore.put('linkMainImageUrlFacebook');
+      $scope.linkMainImageUrlTwitter = $cookieStore.put('linkMainImageUrlTwitter');
+      $scope.linkMainImageUrlPinterest = $cookieStore.put('linkMainImageUrlPinterest');
 
     };
 
