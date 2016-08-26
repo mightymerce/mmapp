@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-<head ng-app="mean">
+<head>
   <meta charset="utf-8">
   <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -92,7 +92,31 @@ Artikel online verkaufen">
   <link href="{{favicon}}" rel="shortcut icon" type="image/x-icon">
 
   <!-- Application CSS Files -->
-  {% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %}
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+  <!-- Morris -->
+  <link href="css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
+  <link href="lib/css/plugins/footable/footable.core.css" rel="stylesheet"> <!-- FooTable for responsive tables -->
+  <link href="lib/css/plugins/footable/footable.core.css" rel="stylesheet"> <!-- FooTable for responsive tables -->
+
+  <!-- Cropper -->
+  <link href="modules/products/client/cropper/dist/cropper.css" rel="stylesheet">
+  <link href="modules/products/client/cropper/main.css" rel="stylesheet">
+
+
+  <link href="lib/css/plugins/footable/footable.core.css" rel="stylesheet"> <!-- FooTable for responsive tables -->
+  <link href="lib/plugin/sweetalert/sweetalert.css" rel="stylesheet">
+  <link href="lib/textAngular/dist/textAngular.css" rel="stylesheet"> <!-- Wysiwyg editor -->
+  <link href="css/login/form-elements.css" rel="stylesheet"> <!-- Login -->
+  <link href="css/login/style.css" rel="stylesheet"> <!-- Login -->
+
+  <link href="css/animate.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+
+
+  <!-- {% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %} -->
 
   <!-- HTML5 Shim -->
   <!--[if lt IE 9]>
@@ -158,11 +182,11 @@ Artikel online verkaufen">
 
 </head>
 
-<body class="top-navigation">
+<body>
 <div id="fb-root"></div>
 <script>
   window.fbAsyncInit = function() {
-    /*
+/*
     // init the FB JS SDK Migthymerce Dev
     FB.init({
       appId      : '1683578941900764',                        // App ID from the app dashboard
@@ -222,21 +246,42 @@ Artikel online verkaufen">
 </script>
 
 
-<div id="wrapper">
-  <!-- Page wraper -->
-  <div id="page-wrapper" class="gray-bg">
+<div id="wrapper" ng-controller="HeaderController">
 
-    <!-- Page wrapper -->
-    <div ng-hide="navHide"  ng-include="'/modules/core/client/views/header.client.view.html'"></div>
+  <div ng-hide="!authentication.user" ng-include="'/modules/core/client/views/navigation.client.view.html'"></div>
 
-    <!-- Main view  -->
+  <div ng-hide="!authentication.user" id="page-wrapper" class="gray-bg">
+    <!-- <div class="row border-bottom" ng-hide="navHide"  ng-include="'/modules/core/client/views/header.client.view.html'"></div> -->
+
     {% block content %}{% endblock %}
 
-    <!-- Footer -->
+
+  </div>
+
+  <div ng-hide="authentication.user">
+    <div class="gray-bg">
+      <!-- <div class="row border-bottom" ng-hide="navHide"  ng-include="'/modules/core/client/views/header.client.view.html'"></div> -->
+
+      {% block content %}{% endblock %}
+
+    </div>
+  </div>
+</div>
+
+<!--
+<div id="wrapper">
+
+  <div id="page-wrapper" class="gray-bg">
+
+    <div ng-hide="navHide"  ng-include="'/modules/core/client/views/header.client.view.html'"></div>
+
+    {% block content %}{% endblock %}
+
     <div ng-include="'/modules/core/client/views/footer.client.view.html'"></div>
   </div>
-  <!-- End page wrapper-->
 </div>
+
+-->
 
   <!--Embedding The User Object-->
   <script type="text/javascript">
@@ -255,7 +300,6 @@ Artikel online verkaufen">
 
 
   {% endif %}
-
 
 
 </body>

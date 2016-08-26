@@ -1,22 +1,13 @@
 <section ng-controller="CurrencysController" ng-init="find()">
   <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
-      <h2 translate>BREADCRUMB-SHOP-SETTINGS</h2>
-      <ol class="breadcrumb">
-        <li>
-          <span translate>HEADLINE-ACCOUNT-AREA</span>
-        </li>
-        <li>
-          <span translate>BREADCRUMB-SETTINGS</span>
-        </li>
-        <li class="active">
+    <div class="h3">
+      <span translate>BREADCRUMB-SHOP-SETTINGS</span> /
+        <span>
           <strong translate>BREADCRUMB-CURRENCY</strong>
-        </li>
-      </ol>
+        </span>
     </div>
-    <div class="col-lg-2"></div>
   </div>
-
+<br>
   <form name="currencyForm" class="form-horizontal" ng-submit="updateCurrencyStandard()">
 
     <div class="row">
@@ -55,15 +46,15 @@
                 </tr>
                 </tbody>
               </table>
+              <div align="right">
+                <a class="btn btn-w-m btn-warning" ui-sref="currencys.create" translate>
+                  BUTTON-ADD-NEW-CURRENCY
+                </a>
+              </div>
               <div class="alert alert-warning text-center" ng-if="currencys.$resolved && !currencys.length" translate>
                 MESSAGE-NO-CURRENCY <a ui-sref="currencys.create" translate>MESSAGE-NO-CREATE-ONE</a>?
               </div>
             </div>
-          </div>
-          <div align="right">
-            <a class="btn btn-w-m btn-warning" ui-sref="currencys.create" translate>
-              BUTTON-ADD-NEW-CURRENCY
-            </a>
           </div>
         </div>
       </div>
@@ -117,4 +108,5 @@
     </div>
 
   </form>
+  <div class="footer" ng-include="'/modules/core/client/views/footer.client.view.html'"></div>
 </section>

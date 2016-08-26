@@ -1,18 +1,11 @@
 <section ng-controller="ProductsController" ng-init="findOne()">
   <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-4">
-      <h2 translate>BREADCRUMB-EDIT-PRODUCTS</h2>
-    </div>
-    <div class="col-lg-8" align="right">
-      <br><br>
-      <ol class="breadcrumb">
-        <li>
-          <a href="products" translate>BREADCRUMB-PRODUCTS</a>
-        </li>
-        <li class="active">
+
+    <div class="h3">
+      <span translate>BREADCRUMB-PRODUCTS</span> /
+        <span>
           <strong translate>BREADCRUMB-EDIT-PRODUCTS</strong>
-        </li>
-      </ol>
+        </span>
     </div>
   </div>
 <br><br>
@@ -280,5 +273,6 @@
 </form>
 
   <br><br><br><br><br><br>
+  <div class="footer" ng-include="'/modules/core/client/views/footer.client.view.html'"></div>
 
 </section>

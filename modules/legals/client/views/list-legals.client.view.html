@@ -1,22 +1,14 @@
 <section ng-controller="LegalsController" ng-init="find()">
 
   <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
-      <h2 translate>BREADCRUMB-SHOP-SETTINGS</h2>
-      <ol class="breadcrumb">
-        <li>
-          <span translate>HEADLINE-ACCOUNT-AREA</span>
-        </li>
-        <li>
-          <strong translate>BREADCRUMB-SETTINGS</strong>
-        </li>
-        <li class="active">
+    <div class="h3">
+      <span translate>BREADCRUMB-SHOP-SETTINGS</span> /
+        <span>
           <strong translate>BREADCRUMB-LEGAL</strong>
-        </li>
-      </ol>
+        </span>
     </div>
-    <div class="col-lg-2"></div>
   </div>
+  <br>
 
   <form name="legalForm" class="form-horizontal" ng-submit="createLegalDetails(legalForm.$valid)">
 
@@ -128,4 +120,6 @@
     </div>
 
   </form>
+  <br>
+  <div class="footer" ng-include="'/modules/core/client/views/footer.client.view.html'"></div>
 </section>

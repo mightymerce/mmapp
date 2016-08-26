@@ -7,7 +7,6 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
     $scope.authentication = Authentication;
     $scope.popoverMsg = PasswordValidator.getPopoverMsg();
     $scope.navHide = true;
-    $scope.footHide = false;
 
     // Get an eventual error defined in the URL query string:
     $scope.error = $location.search().err;
@@ -22,7 +21,6 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
       $scope.authentication = null;
       $scope.user = null;
       $scope.navHide = true;
-      $scope.footHide = false;
 
       // activation call
       var activationId = $location.search().id;
@@ -57,7 +55,6 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
               $scope.authentication = null;
               $scope.user = null;
               $scope.navHide = true;
-              $scope.footHide = false;
 
               $timeout(function() {
                 $state.go('authentication.signin', $state.previous.params);
@@ -71,7 +68,6 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
                 $scope.authentication = null;
                 $scope.user = null;
                 $scope.navHide = true;
-                $scope.footHide = false;
 
                 // send welcome message
                 console.log('authentication.client.controller - load - sendwelcomeemail - success');
@@ -111,7 +107,6 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
     $scope.signup = function (isValid) {
       console.log('authentication.client.controller - sign up - start');
       $scope.navHide = true;
-      $scope.footHide = false;
       $scope.error = null;
 
       if (!isValid) {
@@ -206,7 +201,6 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
               $scope.authentication.user = null;
               $scope.user = null;
               $scope.navHide = true;
-              $scope.footHide = false;
               $scope.success = 'You successfully signed up at mightymerce. Please check your eMail account - we just send you a verification eMail.';
 
             }).error(function (response) {
@@ -216,7 +210,6 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
                 $scope.authentication.user = null;
                 $scope.user = null;
                 $scope.navHide = true;
-                $scope.footHide = false;
               }).error(function (response) {
                 $scope.error = response.message;
               });
@@ -230,7 +223,6 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
               $scope.authentication.user = null;
               $scope.user = null;
               $scope.navHide = true;
-              $scope.footHide = false;
             }).error(function (response) {
               $scope.error = response.message;
             });
@@ -243,7 +235,6 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
 
       $scope.authentication.user = null;
       $scope.navHide = true;
-      $scope.footHide = false;
 
     };
 
@@ -275,7 +266,6 @@ angular.module('users').controller('AuthenticationController', ['$route', '$scop
             console.log('authentication.client.controller - signin - logged out user because not activated yet');
             $scope.authentication = null;
             $scope.navHide = true;
-            $scope.footHide = false;
             $scope.error = 'You have not activate your account yet. Please verify your eMail for activation information.';
           }).error(function (response) {
             $scope.error = response.message;

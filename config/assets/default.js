@@ -4,55 +4,6 @@ module.exports = {
   client: {
     lib: {
       css: [
-
-        // Bootstrap
-        'public/lib/bootstrap/dist/css/bootstrap.css',
-        //'public/lib/bootstrap/dist/css/bootstrap.min.css',
-
-        // Font Awsome
-        'public/lib/font-awesome/css/*.css',
-        // Metis Menu
-        'public/lib/plugin/metisMenu/metisMenu.min.css',
-        // Footable
-        'public/lib/css/plugins/footable/footable.core.css',
-
-
-        // Image cropper
-        //'public/lib/plugin/cropper/cropper.min.css',
-
-        // Login
-        'public/css/login/*.css',
-
-        // Cropper
-        'public/lib/cropper/assets/css/font-awesome.min.css',
-        //'public/lib/cropper/assets/css/bootstrap.min.css',
-        'public/lib/cropper/assets/css/tooltip.min.css',
-        'public/lib/cropper/dist/cropper.css',
-        'public/lib/cropper/main.css',
-
-        // iCheck
-        'public/lib/plugin/iCheck/custom.css',
-
-        // Sweet Alert
-        'public/lib/plugin/sweetalert/sweetalert.css',
-
-        // Inspinia
-        'public/css/animate.css',
-        'public/css/style.css',
-
-        // textAngular - wysywig
-        'public/lib/textAngular/dist/textAngular.css'
-
-
-        //'public/lib/plugin/shariff/shariff.min.css'
-        //'public/css/style.min.css',
-
-        // Checkout
-        //'modules/checkouts/client/css/*.css',
-
-        // Social Media Icon - Shariff
-        //'public/lib/plugin/shariff/shariff.min.css'
-
       ],
       js: [
         // JQuery
@@ -86,7 +37,7 @@ module.exports = {
         'public/lib/angular-css/angular-css.min.js',
 
         // Bootstrap
-        'public/lib/bootstrap/dist/js/bootstrap.js',
+        //'public/lib/bootstrap/dist/js/bootstrap.js',
         'public/lib/bootstrap/dist/js/bootstrap.min.js',
 
         // i18n Formatting on locales
@@ -148,9 +99,6 @@ module.exports = {
 
         // Checkout
         'public/lib/plugin/jsnumberformatter/jsnumberformatter.js',
-
-        // Checkout
-        'public/lib/plugin/jsnumberformatter/jsnumberformatter.js',
         'public/lib/plugin/jsnumberformatter/jsnumberformatter.locale.js',
         'public/lib/plugin/jsnumberformatter/jsnumberformatter.locale.decimal.superset.js',
         'public/lib/plugin/checkout/jquery.shorten.js',
@@ -167,6 +115,7 @@ module.exports = {
         'public/lib/textAngular/dist/textAngular-rangy.min.js',
         'public/lib/textAngular/dist/textAngular-sanitize.min.js',
         'public/lib/textAngular/dist/textAngular.min.js'
+
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

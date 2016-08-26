@@ -66,9 +66,14 @@ body {
   margin-bottom: 20px;
 }
 
-@media (min-width: 468px) {
+.img-container-logo{
+  min-height: 286px;
+  max-height: 316px;
+}
+
+@media (min-width: 408px) {
   .img-container-logo{
-    min-height: 316px;
+    min-height: 286px;
   }
 }
 

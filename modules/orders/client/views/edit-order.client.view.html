@@ -1,20 +1,12 @@
 <section ng-controller="OrdersController" ng-init="findOne()">
   <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-4">
-      <h2 translate>BREADCRUMB-ORDER</h2>
-    </div>
-    <div class="col-lg-8" align="right">
-      <br><br>
-      <ol class="breadcrumb">
-        <li>
-          <a ui-sref="orders.list" translate>BREADCRUMB-ORDER</a>
-        </li>
-        <li class="active">
+    <div class="h3">
+      <span translate>BREADCRUMB-ORDER</span> /
+        <span>
           <strong translate>BREADCRUMB-ORDER-DETAIL</strong>
-        </li>
-      </ol>
+        </span>
     </div>
-  </div>
+  </div><br>
 
   <div class="wrapper wrapper-content animated fadeInRight ecommerce">
     <form name="orderForm" class="form-horizontal" ng-submit="update(orderForm.$valid)" novalidate>
@@ -271,10 +263,10 @@
         <div class="row">
           <div class="col-lg-4">
             <div>
+              <button type="button" class="btn btn-outline btn-primary" ui-sref="orders.list" translate>BUTTON-BACK-ORDER-OVERVIEW</button>
               <a class="btn btn-outline btn-default" ng-click="modalcancelOrder('md', order)" translate>
                 BUTTON-CANCEL-ORDER
               </a>
-              <button type="button" class="btn btn-outline btn-default" ui-sref="orders.list" translate>BUTTON-BACK-ORDER-OVERVIEW</button>
             </div>
           </div>
           <div class="col-lg-8" align="right">
@@ -286,7 +278,7 @@
           </div>
         </div>
       </div>
-      <br><br>
-    </form>
+    </form><br><br><br><br><br><br>
   </div>
+  <div class="footer" ng-include="'/modules/core/client/views/footer.client.view.html'"></div>
 </section>

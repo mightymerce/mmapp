@@ -1,21 +1,13 @@
 <section ng-controller="ChangeProfilePictureController" id="profilePictureControllerID" uploader="uploader">
   <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
-      <h2>User</h2>
-      <ol class="breadcrumb">
-        <li>
-          <a ui-sref="dashboard" translate>BREADCRUMB-HOME</a>
-        </li>
-        <li>
-          <span ng-bind="authentication.user.displayName"></span>
-        </li>
-        <li class="active">
+    <div class="h3">
+      <span><span ng-bind="authentication.user.displayName"></span> /
+        <span>
           <strong translate>BREADCRUMB-LOGO</strong>
-        </li>
-      </ol>
+        </span>
+      </span>
     </div>
-    <div class="col-lg-2"></div>
-  </div>
+  </div><br>
 
   <form name="profileLogoForm" class="form-horizontal">
 
@@ -52,12 +44,10 @@
                   <div class="col-lg-3">
                     <div>
                       <h2 translate>LABEL-PREVIEW-IMAGE</h2>
-                      <p translate>LABEL-NOTE-BEST-FIT-LOGO</p>
-                      <br>
                     </div>
                     <!-- <h3 class="page-header">Preview:</h3> -->
                     <div class="docs-preview clearfix">
-                      <div class="img-preview preview-lg"></div>
+                      <div class="img-preview preview-md"></div>
                       <div ng-hide="true" class="img-preview preview-md"></div>
                       <div ng-hide="true" class="img-preview preview-sm"></div>
                       <div ng-hide="true" class="img-preview preview-xs"></div>
@@ -69,58 +59,24 @@
                     <!-- <h3 class="page-header">Toolbar:</h3> -->
                     <div class="btn-group">
                       <button type="button" class="btn btn-default btn-outline" data-method="zoom" data-option="0.1" title="Zoom In">
-                                  <span class="docs-tooltip" data-toggle="tooltip" title="cropper.zoom(0.1)">
+                                  <span class="docs-tooltip" data-toggle="tooltip" title="Zoom in">
                                     <span class="fa fa-search-plus"></span>
                                   </span>
                       </button>
                       <button type="button" class="btn btn-default btn-outline" data-method="zoom" data-option="-0.1" title="Zoom Out">
-                                  <span class="docs-tooltip" data-toggle="tooltip" title="cropper.zoom(-0.1)">
+                                  <span class="docs-tooltip" data-toggle="tooltip" title="Zoom out">
                                     <span class="fa fa-search-minus"></span>
                                   </span>
                       </button>
                     </div>
                     <div class="btn-group">
-                      <button type="button" class="btn btn-default btn-outline" data-method="move" data-option="-10" data-second-option="0" title="Move Left">
-                                  <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(-10, 0)">
-                                    <span class="fa fa-arrow-left"></span>
-                                  </span>
-                      </button>
-                      <button type="button" class="btn btn-default btn-outline" data-method="move" data-option="10" data-second-option="0" title="Move Right">
-                                  <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(10, 0)">
-                                    <span class="fa fa-arrow-right"></span>
-                                  </span>
-                      </button>
-                      <button type="button" class="btn btn-default btn-outline" data-method="move" data-option="0" data-second-option="-10" title="Move Up">
-                                  <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(0, -10)">
-                                    <span class="fa fa-arrow-up"></span>
-                                  </span>
-                      </button>
-                      <button type="button" class="btn btn-default btn-outline" data-method="move" data-option="0" data-second-option="10" title="Move Down">
-                                  <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(0, 10)">
-                                    <span class="fa fa-arrow-down"></span>
-                                  </span>
-                      </button>
-                    </div>
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-default btn-outline" data-method="rotate" data-option="-45" title="Rotate Left"><span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(-45)">
+                      <button type="button" class="btn btn-default btn-outline" data-method="rotate" data-option="-45" title="Rotate Left"><span class="docs-tooltip" data-toggle="tooltip" title="drehen links">
                                     <span class="fa fa-rotate-left"></span>
                                 </span>
                       </button>
                       <button type="button" class="btn btn-default btn-outline" data-method="rotate" data-option="45" title="Rotate Right">
-                                  <span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(45)">
+                                  <span class="docs-tooltip" data-toggle="tooltip" title="drehen rechts">
                                     <span class="fa fa-rotate-right"></span>
-                                  </span>
-                      </button>
-                    </div>
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-default btn-outline" data-flip="horizontal" data-method="scaleX" data-option="-1" title="Flip Horizontal">
-                                  <span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleX(-1)">
-                                    <span class="fa fa-arrows-h"></span>
-                                  </span>
-                      </button>
-                      <button type="button" class="btn btn-default btn-outline" data-flip="vertical" data-method="scaleY" data-option="-1" title="Flip Vertical">
-                                  <span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleY(-1)">
-                                    <span class="fa fa-arrows-v"></span>
                                   </span>
                       </button>
                     </div>
@@ -185,6 +141,8 @@
       </div>
     </div>
   </form>
+<br><br>
+  <div class="footer" ng-include="'/modules/core/client/views/footer.client.view.html'"></div>
 
   <script src="../../../../../modules/products/client/cropper/dist/cropper.js"></script>
 

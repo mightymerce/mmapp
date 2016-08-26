@@ -84,6 +84,8 @@ angular.module('core').service('Menus', [
       // Validate that the menu exists
       this.validateMenuExistance(menuId);
 
+      //console.log('options.title: ' +options.title);
+
       // Push new menu item
       this.menus[menuId].items.push({
         title: options.title || '',

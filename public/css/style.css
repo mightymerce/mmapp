@@ -221,7 +221,7 @@ h5 {
 }
 .nav-header {
     padding: 33px 25px;
-    background: url("patterns/header-profile.png") no-repeat;
+    background: url("patterns/header-profile.png") repeat;
 }
 .pace-done .nav-header {
     transition: all 0.5s;
@@ -3507,6 +3507,16 @@ ol.unstyled {
     padding: 10px 20px;
     position: absolute;
     right: 0;
+}
+.footerlogin {
+    background: none repeat scroll 0 0 #15A881;
+    border-top: 1px solid #15A881;
+    bottom: 0;
+    left: 0;
+    padding: 10px 20px;
+    position: fixed;
+    right: 0;
+    color: #ffffff;
 }
 .footer.fixed_full {
     position: fixed;

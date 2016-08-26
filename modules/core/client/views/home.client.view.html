@@ -1,4 +1,10 @@
 <section id="HomeController" data-ng-controller="HomeController" ng-init="initHome()">
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="h3">
+      <span translate>LABEL-HEADER-DASHBOARD</span>
+    </div>
+  </div>
+  <br>
   <div class="gray-bg">
   <div class="wrapper wrapper-content" data-ng-controller="HomeController">
     <div class="row">
@@ -298,7 +304,7 @@
       </div>
     </div>
   </div>
-
+  <div class="footer" ng-include="'/modules/core/client/views/footer.client.view.html'"></div>
   <script>
 
     $(document).ready(function () {

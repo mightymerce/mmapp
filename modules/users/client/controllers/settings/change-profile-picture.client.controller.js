@@ -2,6 +2,7 @@
 
 angular.module('users').controller('ChangeProfilePictureController', ['$scope', '$timeout', '$window', 'Authentication', 'FileUploader',
   function ($scope, $timeout, $window, Authentication, FileUploader) {
+    $scope.authentication = Authentication;
     $scope.user = Authentication.user;
     $scope.imageURL = $scope.user.profileImageURL;
 

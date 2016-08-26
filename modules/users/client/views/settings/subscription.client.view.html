@@ -1,21 +1,13 @@
 <section ng-controller="EditProfileController" id="EditProfileControllerID">
 
   <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
-      <h2 translate>HEADLINE-ACCOUNT-AREA</h2>
-      <ol class="breadcrumb">
-        <li>
-          <a ui-sref="dashboard" translate>BREADCRUMB-HOME</a>
-        </li>
-        <li>
-          <span ng-bind="authentication.user.displayName"></span>
-        </li>
-        <li class="active">
+    <div class="h3">
+      <span><span ng-bind="authentication.user.displayName"></span> /
+        <span>
           <strong translate>HEADLINE-SUB-SUBSCRIPTION</strong>
-        </li>
-      </ol>
+        </span>
+      </span>
     </div>
-    <div class="col-lg-2"></div>
   </div>
 
 
@@ -301,6 +293,6 @@
       </div>
     </div>
   </form>
-
+  <div class="footer" ng-include="'/modules/core/client/views/footer.client.view.html'"></div>
 
 </section>
