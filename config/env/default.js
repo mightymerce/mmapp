@@ -48,38 +48,6 @@ module.exports = {
   assets: {
     lib: {
       css: [
-        // Bootstrap
-        'public/lib/bootstrap/dist/css/bootstrap.css',
-        //'public/lib/bootstrap/dist/css/bootstrap.min.css',
-        'public/lib/bootstrap/dist/css/bootstrap-theme.css',
-        // Font Awsome
-        'public/lib/font-awesome/css/*.css',
-        // Metis Menu
-        'public/lib/plugin/metisMenu/metisMenu.min.css',
-        // Footable
-        'public/lib/css/plugins/footable/footable.core.css',
-
-        // Inspinia
-        'public/css/style.css',
-        //'public/css/style.min.css',
-
-        // Checkout
-        //'public/css/core.css',
-
-        // Image cropper
-        'public/lib/plugin/cropper/cropper.min.css',
-
-        // Cropper
-        'public/lib/cropper/assets/css/font-awesome.min.css'
-        //'public/lib/cropper/assets/css/bootstrap.min.css',
-        //'public/lib/cropper/assets/css/tooltip.min.css',
-        //'public/lib/cropper/dist/cropper.css',
-        //'public/lib/cropper/main.css'
-
-        // Social Media Icon - Shariff
-        //'public/lib/plugin/shariff/shariff.min.css'
-
-
       ],
       js: [
         // JQuery
